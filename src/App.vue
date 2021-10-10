@@ -1,24 +1,24 @@
 <template>
-  <!-- <router-link to="/home"></router-link> -->
-  <!-- <router-link to="/navbar"> Navbar </router-link> -->
-
-  <router-view />
-
-  <!-- <router-view v-slot="{ Component }">
-    <keep-alive>
-      <component :is="Component" />
-    </keep-alive>
-  </router-view> -->
+  <router-view v-if="authenticated" />
+  <Login v-else />
+  <Toast />
 </template>
-
-<script>
-// import SideBar from "@/views/components/SideBar.vue";
-
-export default {
-  // components: {
-  //   SideBar,
-  // },
-};
+<script lang="ts">
+import { defineComponent } from "vue";
+import Toast from "@/views/components/Toast.vue";
+import Login from "@/views/pages/Login.vue";
+import { user } from "@/hooks/useUser";
+export default defineComponent({
+  components: {
+    Toast,
+    Login,
+  },
+  setup() {
+    return {
+      authenticated: user.authenticated,
+    };
+  },
+});
 </script>
 
 <style lang="scss"></style>
