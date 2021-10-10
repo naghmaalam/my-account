@@ -1,0 +1,245 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?790f8e8dee0cbbd1a6b8c4e4814d15d6") format("truetype"),
+url("./flaticon.woff?790f8e8dee0cbbd1a6b8c4e4814d15d6") format("woff"),
+url("./flaticon.woff2?790f8e8dee0cbbd1a6b8c4e4814d15d6") format("woff2"),
+url("./flaticon.eot?790f8e8dee0cbbd1a6b8c4e4814d15d6#iefix") format("embedded-opentype"),
+url("./flaticon.svg?790f8e8dee0cbbd1a6b8c4e4814d15d6#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "padlock": "\f101",
+    "rounded-plug": "\f102",
+    "alarm": "\f103",
+    "call-split": "\f104",
+    "start-up": "\f105",
+    "paint-board-and-brush": "\f106",
+    "world-wide-web": "\f107",
+    "share": "\f108",
+    "delete": "\f109",
+    "round-account-button-with-user-inside": "\f10a",
+    "settings": "\f10b",
+    "lifebuoy": "\f10c",
+    "arrow-angle-pointing-to-right": "\f10d",
+    "add": "\f10e",
+    "minus": "\f10f",
+    "check-mark": "\f110",
+    "comment": "\f111",
+    "info": "\f112",
+    "question-mark": "\f113",
+    "handshake": "\f114",
+    "magnifying-glass": "\f115",
+    "compass": "\f116",
+    "heart": "\f117",
+    "heart-1": "\f118",
+    "retweet-arrows-symbol": "\f119",
+    "gallery": "\f11a",
+    "logout": "\f11b",
+    "visibility": "\f11c",
+    "invisible": "\f11d",
+    "management": "\f11e",
+    "cancel": "\f11f",
+    "info-button": "\f120",
+    "left-arrow-angle-big-gross-symbol": "\f121",
+    "power": "\f122",
+    "warning": "\f123",
+    "king": "\f124",
+    "up-arrow": "\f125",
+    "security": "\f126",
+    "add-circular-interface-button": "\f127",
+    "up-arrow-1": "\f128",
+    "two-clockwise-circular-rotating-arrows-circle": "\f129",
+    "down-arrow": "\f12a",
+    "house": "\f12b",
+    "add-1": "\f12c",
+    "left-arrow": "\f12d",
+    "foreign": "\f12e",
+    "gift-box": "\f12f",
+    "exclamation": "\f130",
+    "windows-logo-silhouette": "\f131",
+    "apple": "\f132",
+    "linux": "\f133",
+    "android-logo": "\f134",
+    "edit": "\f135",
+    "add-2": "\f136",
+    "copy": "\f137",
+);
+
+.flaticon-padlock:before {
+    content: map-get($flaticon-map, "padlock");
+}
+.flaticon-rounded-plug:before {
+    content: map-get($flaticon-map, "rounded-plug");
+}
+.flaticon-alarm:before {
+    content: map-get($flaticon-map, "alarm");
+}
+.flaticon-call-split:before {
+    content: map-get($flaticon-map, "call-split");
+}
+.flaticon-start-up:before {
+    content: map-get($flaticon-map, "start-up");
+}
+.flaticon-paint-board-and-brush:before {
+    content: map-get($flaticon-map, "paint-board-and-brush");
+}
+.flaticon-world-wide-web:before {
+    content: map-get($flaticon-map, "world-wide-web");
+}
+.flaticon-share:before {
+    content: map-get($flaticon-map, "share");
+}
+.flaticon-delete:before {
+    content: map-get($flaticon-map, "delete");
+}
+.flaticon-round-account-button-with-user-inside:before {
+    content: map-get($flaticon-map, "round-account-button-with-user-inside");
+}
+.flaticon-settings:before {
+    content: map-get($flaticon-map, "settings");
+}
+.flaticon-lifebuoy:before {
+    content: map-get($flaticon-map, "lifebuoy");
+}
+.flaticon-arrow-angle-pointing-to-right:before {
+    content: map-get($flaticon-map, "arrow-angle-pointing-to-right");
+}
+.flaticon-add:before {
+    content: map-get($flaticon-map, "add");
+}
+.flaticon-minus:before {
+    content: map-get($flaticon-map, "minus");
+}
+.flaticon-check-mark:before {
+    content: map-get($flaticon-map, "check-mark");
+}
+.flaticon-comment:before {
+    content: map-get($flaticon-map, "comment");
+}
+.flaticon-info:before {
+    content: map-get($flaticon-map, "info");
+}
+.flaticon-question-mark:before {
+    content: map-get($flaticon-map, "question-mark");
+}
+.flaticon-handshake:before {
+    content: map-get($flaticon-map, "handshake");
+}
+.flaticon-magnifying-glass:before {
+    content: map-get($flaticon-map, "magnifying-glass");
+}
+.flaticon-compass:before {
+    content: map-get($flaticon-map, "compass");
+}
+.flaticon-heart:before {
+    content: map-get($flaticon-map, "heart");
+}
+.flaticon-heart-1:before {
+    content: map-get($flaticon-map, "heart-1");
+}
+.flaticon-retweet-arrows-symbol:before {
+    content: map-get($flaticon-map, "retweet-arrows-symbol");
+}
+.flaticon-gallery:before {
+    content: map-get($flaticon-map, "gallery");
+}
+.flaticon-logout:before {
+    content: map-get($flaticon-map, "logout");
+}
+.flaticon-visibility:before {
+    content: map-get($flaticon-map, "visibility");
+}
+.flaticon-invisible:before {
+    content: map-get($flaticon-map, "invisible");
+}
+.flaticon-management:before {
+    content: map-get($flaticon-map, "management");
+}
+.flaticon-cancel:before {
+    content: map-get($flaticon-map, "cancel");
+}
+.flaticon-info-button:before {
+    content: map-get($flaticon-map, "info-button");
+}
+.flaticon-left-arrow-angle-big-gross-symbol:before {
+    content: map-get($flaticon-map, "left-arrow-angle-big-gross-symbol");
+}
+.flaticon-power:before {
+    content: map-get($flaticon-map, "power");
+}
+.flaticon-warning:before {
+    content: map-get($flaticon-map, "warning");
+}
+.flaticon-king:before {
+    content: map-get($flaticon-map, "king");
+}
+.flaticon-up-arrow:before {
+    content: map-get($flaticon-map, "up-arrow");
+}
+.flaticon-security:before {
+    content: map-get($flaticon-map, "security");
+}
+.flaticon-add-circular-interface-button:before {
+    content: map-get($flaticon-map, "add-circular-interface-button");
+}
+.flaticon-up-arrow-1:before {
+    content: map-get($flaticon-map, "up-arrow-1");
+}
+.flaticon-two-clockwise-circular-rotating-arrows-circle:before {
+    content: map-get($flaticon-map, "two-clockwise-circular-rotating-arrows-circle");
+}
+.flaticon-down-arrow:before {
+    content: map-get($flaticon-map, "down-arrow");
+}
+.flaticon-house:before {
+    content: map-get($flaticon-map, "house");
+}
+.flaticon-add-1:before {
+    content: map-get($flaticon-map, "add-1");
+}
+.flaticon-left-arrow:before {
+    content: map-get($flaticon-map, "left-arrow");
+}
+.flaticon-foreign:before {
+    content: map-get($flaticon-map, "foreign");
+}
+.flaticon-gift-box:before {
+    content: map-get($flaticon-map, "gift-box");
+}
+.flaticon-exclamation:before {
+    content: map-get($flaticon-map, "exclamation");
+}
+.flaticon-windows-logo-silhouette:before {
+    content: map-get($flaticon-map, "windows-logo-silhouette");
+}
+.flaticon-apple:before {
+    content: map-get($flaticon-map, "apple");
+}
+.flaticon-linux:before {
+    content: map-get($flaticon-map, "linux");
+}
+.flaticon-android-logo:before {
+    content: map-get($flaticon-map, "android-logo");
+}
+.flaticon-edit:before {
+    content: map-get($flaticon-map, "edit");
+}
+.flaticon-add-2:before {
+    content: map-get($flaticon-map, "add-2");
+}
+.flaticon-copy:before {
+    content: map-get($flaticon-map, "copy");
+}

@@ -1,0 +1,15 @@
+{
+    "vetur.experimental.templateInterpolationService": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "[json]": {
+
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    
+
+}

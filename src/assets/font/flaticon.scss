@@ -1,0 +1,221 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?b4c3e680c50f01244bb4956f5c10f7e0") format("truetype"),
+url("./flaticon.woff?b4c3e680c50f01244bb4956f5c10f7e0") format("woff"),
+url("./flaticon.woff2?b4c3e680c50f01244bb4956f5c10f7e0") format("woff2"),
+url("./flaticon.eot?b4c3e680c50f01244bb4956f5c10f7e0#iefix") format("embedded-opentype"),
+url("./flaticon.svg?b4c3e680c50f01244bb4956f5c10f7e0#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "android": "\f101",
+    "apple": "\f102",
+    "windows": "\f103",
+    "linux": "\f104",
+    "macos": "\f105",
+    "house": "\f106",
+    "responsive": "\f107",
+    "cloud-computing": "\f108",
+    "calendar-interface-symbol-tool": "\f109",
+    "gift-box": "\f10a",
+    "round-account-button-with-user-inside": "\f10b",
+    "logout": "\f10c",
+    "shield": "\f10d",
+    "coding": "\f10e",
+    "map": "\f10f",
+    "network": "\f110",
+    "cyber-security": "\f111",
+    "cyber-security-1": "\f112",
+    "lighting": "\f113",
+    "ui-design": "\f114",
+    "file": "\f115",
+    "online-security": "\f116",
+    "add-friend": "\f117",
+    "link": "\f118",
+    "facebook": "\f119",
+    "twitter-sign": "\f11a",
+    "instagram": "\f11b",
+    "youtube": "\f11c",
+    "youtube-1": "\f11d",
+    "www": "\f11e",
+    "file-sharing": "\f11f",
+    "tag": "\f120",
+    "chapter": "\f121",
+    "game-console": "\f122",
+    "server": "\f123",
+    "add": "\f124",
+    "diamond": "\f125",
+    "cancel": "\f126",
+    "view": "\f127",
+    "invisible": "\f128",
+    "arrow-angle-pointing-to-right": "\f129",
+    "alarm": "\f12a",
+    "wifi": "\f12b",
+    "compliant": "\f12c",
+    "secure": "\f12d",
+    "checked": "\f12e",
+    "direct": "\f12f",
+    "comment": "\f130",
+    "download": "\f131",
+);
+
+.flaticon-android:before {
+    content: map-get($flaticon-map, "android");
+}
+.flaticon-apple:before {
+    content: map-get($flaticon-map, "apple");
+}
+.flaticon-windows:before {
+    content: map-get($flaticon-map, "windows");
+}
+.flaticon-linux:before {
+    content: map-get($flaticon-map, "linux");
+}
+.flaticon-macos:before {
+    content: map-get($flaticon-map, "macos");
+}
+.flaticon-house:before {
+    content: map-get($flaticon-map, "house");
+}
+.flaticon-responsive:before {
+    content: map-get($flaticon-map, "responsive");
+}
+.flaticon-cloud-computing:before {
+    content: map-get($flaticon-map, "cloud-computing");
+}
+.flaticon-calendar-interface-symbol-tool:before {
+    content: map-get($flaticon-map, "calendar-interface-symbol-tool");
+}
+.flaticon-gift-box:before {
+    content: map-get($flaticon-map, "gift-box");
+}
+.flaticon-round-account-button-with-user-inside:before {
+    content: map-get($flaticon-map, "round-account-button-with-user-inside");
+}
+.flaticon-logout:before {
+    content: map-get($flaticon-map, "logout");
+}
+.flaticon-shield:before {
+    content: map-get($flaticon-map, "shield");
+}
+.flaticon-coding:before {
+    content: map-get($flaticon-map, "coding");
+}
+.flaticon-map:before {
+    content: map-get($flaticon-map, "map");
+}
+.flaticon-network:before {
+    content: map-get($flaticon-map, "network");
+}
+.flaticon-cyber-security:before {
+    content: map-get($flaticon-map, "cyber-security");
+}
+.flaticon-cyber-security-1:before {
+    content: map-get($flaticon-map, "cyber-security-1");
+}
+.flaticon-lighting:before {
+    content: map-get($flaticon-map, "lighting");
+}
+.flaticon-ui-design:before {
+    content: map-get($flaticon-map, "ui-design");
+}
+.flaticon-file:before {
+    content: map-get($flaticon-map, "file");
+}
+.flaticon-online-security:before {
+    content: map-get($flaticon-map, "online-security");
+}
+.flaticon-add-friend:before {
+    content: map-get($flaticon-map, "add-friend");
+}
+.flaticon-link:before {
+    content: map-get($flaticon-map, "link");
+}
+.flaticon-facebook:before {
+    content: map-get($flaticon-map, "facebook");
+}
+.flaticon-twitter-sign:before {
+    content: map-get($flaticon-map, "twitter-sign");
+}
+.flaticon-instagram:before {
+    content: map-get($flaticon-map, "instagram");
+}
+.flaticon-youtube:before {
+    content: map-get($flaticon-map, "youtube");
+}
+.flaticon-youtube-1:before {
+    content: map-get($flaticon-map, "youtube-1");
+}
+.flaticon-www:before {
+    content: map-get($flaticon-map, "www");
+}
+.flaticon-file-sharing:before {
+    content: map-get($flaticon-map, "file-sharing");
+}
+.flaticon-tag:before {
+    content: map-get($flaticon-map, "tag");
+}
+.flaticon-chapter:before {
+    content: map-get($flaticon-map, "chapter");
+}
+.flaticon-game-console:before {
+    content: map-get($flaticon-map, "game-console");
+}
+.flaticon-server:before {
+    content: map-get($flaticon-map, "server");
+}
+.flaticon-add:before {
+    content: map-get($flaticon-map, "add");
+}
+.flaticon-diamond:before {
+    content: map-get($flaticon-map, "diamond");
+}
+.flaticon-cancel:before {
+    content: map-get($flaticon-map, "cancel");
+}
+.flaticon-view:before {
+    content: map-get($flaticon-map, "view");
+}
+.flaticon-invisible:before {
+    content: map-get($flaticon-map, "invisible");
+}
+.flaticon-arrow-angle-pointing-to-right:before {
+    content: map-get($flaticon-map, "arrow-angle-pointing-to-right");
+}
+.flaticon-alarm:before {
+    content: map-get($flaticon-map, "alarm");
+}
+.flaticon-wifi:before {
+    content: map-get($flaticon-map, "wifi");
+}
+.flaticon-compliant:before {
+    content: map-get($flaticon-map, "compliant");
+}
+.flaticon-secure:before {
+    content: map-get($flaticon-map, "secure");
+}
+.flaticon-checked:before {
+    content: map-get($flaticon-map, "checked");
+}
+.flaticon-direct:before {
+    content: map-get($flaticon-map, "direct");
+}
+.flaticon-comment:before {
+    content: map-get($flaticon-map, "comment");
+}
+.flaticon-download:before {
+    content: map-get($flaticon-map, "download");
+}
