@@ -1,26 +1,20 @@
 <template>
   <main class="container-fluid pr-bg">
-    <div class="container col col-md-4 password-recovery-box text-center">
-      <div class="text-center mob-res-header pt-5 mt-5">
+    <div class="container password-recovery-box text-center col col-lg-4 pb-5">
+      <div class="text-center mob-res-header pt-5 mt-5 pb-4">
         <img
           src="@/assets/images/password-recovery/logo-swoshs.png"
-          class="img-fluid mob-res-logo pt-5"
+          class="img-fluid pt-5 mob-res-logo"
           alt="swoshs-logo"
         />
-        <div class="pr-title text-center">Enter Log in code</div>
-        <div class="pr-subtitle text-center mt-2 mr-5 ml-5">
-          Check your inbox for our mail, We've sent it.
+        <div class="pr-title text-center">Verify your Account</div>
+        <div class="pr-subtitle text-center mr-5 ml-5 mt-3">
+          Please enter your verification code we have sent to your email.
         </div>
 
         <div class="verify-account-email mt-4" data-letters="J">
           john@domainsample.com
         </div>
-
-        <a href="login.html"
-          ><div class="pr-back-to-login text-center pt-2">
-            Use another account
-          </div></a
-        >
 
         <form name="verify" class="mr-5">
           <div class="container inputs mt-4 d-flex text-center">
@@ -32,20 +26,14 @@
             <input type="text" name="n6" maxlength="1" />
           </div>
         </form>
-
-        <div class="login-txt text-center mt-2">
-          Didn't get the code?
-          <span class="pr-back-to-login"> Send again </span>
+        <div class="rl-submit-btn ml-5 mr-5 mt-4">
+          <a href="create-new-password.html"
+            ><div class="rl-btn ml-5 mr-5 pt-3 pb-3">Verify my email</div></a
+          >
         </div>
-        <a href="login.html"
-          ><div class="pr-back-to-login text-center pt-5 pb-5">
-            Log in with password
-          </div></a
-        >
       </div>
     </div>
-
-    <div class="container login-footer pt-5 text-center">
+    <div class="container pr-footer pt-5 mt-5 text-center">
       <div class="row mob-res-footer pt-5 mt-5">
         <div class="col-md-4">support@swoshsvpn.com</div>
         <div class="col-md-4">Terms of Service</div>
@@ -68,11 +56,13 @@ export default {
   background: #f3f7fe;
   padding-top: 5rem;
 }
-
 .password-recovery-box {
   width: 100%;
   background: #fff;
   filter: drop-shadow(0px 8px 14px rgba(214, 225, 243, 0.64));
+  /* position: absolute;
+    top: 5%;
+    left: 35%; */
   border-radius: 1rem;
 }
 
@@ -80,7 +70,7 @@ export default {
   font-family: Poppins;
   font-weight: 500;
   font-size: 2.3rem;
-  line-height: 2.5rem;
+  /* line-height: 5rem; */
   text-align: left;
   color: #312b54;
 }
@@ -93,7 +83,7 @@ export default {
   color: #707070;
 }
 
-.login-footer {
+.pr-footer {
   font-family: Poppins;
   font-weight: 600;
   font-size: 0.8rem;
@@ -102,14 +92,23 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0);
 }
 
-/* back to login */
-
-.pr-back-to-login {
+.rl-submit-btn {
   font-family: Poppins;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 0.8rem;
   text-align: center;
-  color: #6727ff;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.rl-btn {
+  /* width: 449px;
+    height: 58px; */
+  border-radius: 5px;
+  background: linear-gradient(#a215ff 0%, #5f29ff 100%);
+  border: 1px solid rgba(0, 0, 0, 0);
+  text-align: center;
+  color: #fff;
 }
 
 /* verify account email  */
@@ -195,15 +194,15 @@ export default {
   }
 
   .pr-subtitle {
-    font-size: 0.8rem;
-    line-height: 1rem;
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
   }
 
   .login-txt {
     padding-top: 0rem !important;
   }
 
-  .login-footer {
+  .pr-footer {
     padding-top: 0rem !important;
     margin-top: 0rem !important;
   }
@@ -221,12 +220,14 @@ export default {
   }
 
   .mob-res-header {
-    margin-top: 1.2rem !important;
+    margin-top: 1.5rem !important;
     padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
   }
 
-  .pr-back-to-login {
-    padding-top: 1rem !important;
+  .rl-btn {
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
   }
 }
 </style>
