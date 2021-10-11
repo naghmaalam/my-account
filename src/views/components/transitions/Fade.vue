@@ -22,7 +22,7 @@ export default defineComponent({
   transition: all 0.7s;
 }
 .fade-enter-to {
-  opacity: 1; 
+  opacity: 1;
 }
 
 .fade-leave-from {
