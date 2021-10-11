@@ -10,6 +10,9 @@
         },
         "editor.suggest.insertMode": "replace"
     },
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.run": "onSave",
     
 
 }

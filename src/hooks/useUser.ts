@@ -1,6 +1,6 @@
 import { reactive } from "vue";
 
-import User from "@/types/User";
+import { User } from "@/types/User";
 
 import { api, Method } from "@/utils/api";
 
@@ -17,7 +17,7 @@ export interface LoginDetails {
   version: string;
 }
 
-export const user: User = reactive({
+const UserDefault: User = {
   authenticated: false,
   currentSubscription: null,
   accessToken: "",
@@ -28,10 +28,15 @@ export const user: User = reactive({
   subscription: {
     plans: [],
   },
-});
+};
+
+export const user: User = reactive(Object.create(UserDefault));
 
 export function useUser(): {
-  actions: { login: (param: LoginDetails) => Promise<void> };
+  actions: {
+    login: (param: LoginDetails) => Promise<void>;
+    logout: () => void;
+  };
 } {
   const login = async (loginDetails: LoginDetails) => {
     const toast = useToast();
@@ -39,6 +44,7 @@ export function useUser(): {
       const response = await api("login", Method.POST, loginDetails);
       console.log(response);
       toast.actions.show({ text: response.message });
+      resetUser();
       storeUser();
     } catch (error) {
       const err = error as Error;
@@ -47,13 +53,20 @@ export function useUser(): {
     }
   };
 
+  const logout = () => {
+    resetUser();
+  };
+
   const storeUser = () => {
     localStorage.setItem("user", JSON.stringify(user));
   };
 
-  // getUser()
+  const resetUser = () => {
+    localStorage.removeItem("user");
+    localStorage.setItem("user", JSON.stringify(UserDefault));
+  };
 
   return {
-    actions: { login },
+    actions: { login, logout },
   };
 }

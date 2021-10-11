@@ -49,13 +49,6 @@
     </div>
   </main>
 </template>
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
-</script>
 
 <style scoped>
 .pr-bg {

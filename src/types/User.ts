@@ -1,4 +1,4 @@
-interface Plan {
+export interface Plan {
   billed: number;
   description: string;
   end_date: Date; // "2021-10-07T16:50:44.000Z"
@@ -7,7 +7,7 @@ interface Plan {
   title: string; // "3 Days Trial"
 }
 
-interface User {
+export interface User {
   authenticated: boolean;
   currentSubscription: "trial" | "premium" | null;
   accessToken: string;
@@ -19,5 +19,3 @@ interface User {
     plans: Plan[];
   };
 }
-
-export default User;

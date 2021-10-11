@@ -1,4 +1,4 @@
-import { reactive, ref, watch } from "vue";
+import { reactive, ref } from "vue";
 
 interface Toast {
   title?: string;
