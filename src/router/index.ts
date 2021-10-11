@@ -30,10 +30,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: "code",
     path: "/code",
-    component: () =>
-      import(
-        "@/views/components/password-recovery/PasswordRecoveryNewPassword.vue"
-      ),
+    component: () => import("@/views/components/my-account/DevicesTable.vue"),
   },
 ];
 
