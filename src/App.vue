@@ -3,12 +3,13 @@
   <!-- <button type="button" class="btn btn-primary" @click="changeLang">
     Change lang
   </button> -->
-
-  <router-view v-if="userState.authenticated" v-slot="{ Component }">
-    <Fade>
-      <component :is="Component" />
-    </Fade>
-  </router-view>
+  <template v-if="userState.authenticated">
+    <router-view v-slot="{ Component }">
+      <Fade>
+        <component :is="Component" />
+      </Fade>
+    </router-view>
+  </template>
 
   <Fade v-else>
     <Login />

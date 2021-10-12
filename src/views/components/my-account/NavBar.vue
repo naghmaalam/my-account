@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <nav class="navbar fixed-top flex-md-nowrap p-0 shadow">
     <div
       class="
         account-navbar
@@ -62,7 +62,7 @@
               <i class="flaticon-arrow-angle-pointing-to-right"></i>
             </div>
           </a>
-          <a href="#" @click="">
+          <a href="#" @click="logout">
             <div class="d-flex flex-row justify-content-around">
               <img
                 src="@/assets/images/account-settings/logout.png"
@@ -86,8 +86,13 @@ import { useUser } from "@/hooks/useUser";
 export default defineComponent({
   setup() {
     const user = useUser();
+    const logout = () => {
+      user.actions.logout();
+    };
+
     return {
       userState: user.getters.data,
+      logout,
     };
   },
 });
