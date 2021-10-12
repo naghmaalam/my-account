@@ -1,6 +1,6 @@
 import { sha256 } from "js-sha256";
-import { useI18n } from "vue-i18n";
-const { t } = useI18n({ useScope: "global" });
+import {} from "vue-i18n";
+import i18n from "@/locales/localization";
 
 declare global {
   interface Window {
@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-export function getDeviceName() {
+export function getDeviceName(): string | null {
   let retVal = null;
   if (typeof window.H5Interface !== "undefined") {
     retVal = window.H5Interface.getDeviceName();
@@ -20,16 +20,18 @@ export function getDeviceName() {
   // if getDeviceName not working then check the userAgent
   if (!retVal) {
     const device = appSource();
-    if (device === "ios") retVal = t("iphone");
-    else if (device === "android") retVal = t("android");
-    else retVal = t("unknown_device");
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (device === "ios") retVal = i18n.global.t("iphone");
+    else if (device === "android") retVal = i18n.global.t("android");
+    else retVal = i18n.global.t("unknown_device");
   }
 
   return retVal;
 }
 
-export function getDeviceId() {
-  if (window.H5Interface) {
+export function getDeviceId(): string | null {
+  if (typeof window.H5Interface !== "undefined") {
     return window.H5Interface.getDeviceId();
   } else {
     const vS = { name: "getDeviceId", param: [] };
@@ -82,4 +84,8 @@ export function isDateExpired(date: string): boolean {
 
   if (distance < 0) return true;
   else return false;
+}
+
+export function newObj(obj: any): any {
+  return JSON.parse(JSON.stringify(obj));
 }

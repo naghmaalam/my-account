@@ -1,5 +1,10 @@
 <template>
-  <router-view v-if="user.authenticated" v-slot="{ Component }">
+  <!-- <button type="button" class="btn btn-primary" @click="logout">Logout</button> -->
+  <!-- <button type="button" class="btn btn-primary" @click="changeLang">
+    Change lang
+  </button> -->
+
+  <router-view v-if="userState.authenticated" v-slot="{ Component }">
     <Fade>
       <component :is="Component" />
     </Fade>
@@ -15,13 +20,14 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 import Toast from "@/views/components/Toast.vue";
 import Fade from "@/views/components/transitions/Fade.vue";
 
 import Login from "@/views/pages/Login.vue";
 
-import { user, useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
 export default defineComponent({
   components: {
     Toast,
@@ -29,8 +35,29 @@ export default defineComponent({
     Fade,
   },
   setup() {
+    const { locale } = useI18n({ useScope: "global" });
+    const user = useUser();
+    user.actions.init();
+
+    // const loading = ref(true);
+
+    // set language base on store
+    if (user.getters.data.value.language.selected === "cn") {
+      locale.value = "cn";
+    }
+
+    const logout = () => {
+      user.actions.logout();
+    };
+
+    const changeLang = () => {
+      user.actions.changeLanguage("cn");
+    };
+
     return {
-      user,
+      userState: user.getters.data,
+      logout,
+      changeLang,
     };
   },
 });

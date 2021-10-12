@@ -1,203 +1,7 @@
 <template>
-  <main
-    class="my-account d-flex flex-row justify-content-start align-items-start"
-  >
-    <div class="container sidebar">
-      <div class="row">
-        <div class="col pt-4">
-          <img
-            src="assets/images/my-account/logo-swoshs.png"
-            class="img-fluid swoshs-logo"
-            alt=""
-          />
-        </div>
-      </div>
-      <div class="row active-button">
-        <div class="col">
-          <div class="d-flex flex-row align-items-start">
-            <div class="px-2 mt-4">
-              <i class="flaticon-house icon-color"></i>
-            </div>
-            <div class="dashboard d-flex flex-column">
-              <h5 class="mt-4">Dashboard</h5>
-              <p>
-                The Account Dashboard is a comprehensive overview of account
-                details.
-              </p>
-              <div class="borderline mt-4"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a href="devices.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i class="flaticon-responsive icon-color"></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">Devices</h5>
-                <p>
-                  Manage and overview of your secured connected devices and
-                  details.
-                </p>
-                <div class="borderline mt-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="downloads.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i class="flaticon-cloud-computing icon-color"></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">Downloads</h5>
-                <p>
-                  Get Swoshs VPN with specific platform of your choice, from
-                  Android, iOS, Windows etc.
-                </p>
-                <div class="borderline mt-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="subscription.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i
-                  class="flaticon-calendar-interface-symbol-tool icon-color"
-                ></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">Subscription</h5>
-                <p>
-                  Where you can check the overview details of your subscription
-                  and order history.
-                </p>
-                <div class="borderline mt-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="account-settings-refer-friend.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i
-                  class="flaticon-calendar-interface-symbol-tool icon-color"
-                ></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">
-                  Refer a Friend <span class="promo px-2">promo</span>
-                </h5>
-                <p>
-                  Share your unique referral link with friends via email, FB, or
-                  whatever works for you.
-                </p>
-                <div class="borderline mt-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <div class="row pb-5">
-        <div class="col pb-5">
-          <div class="pb-5 mb-2"></div>
-        </div>
-      </div>
-    </div>
+  <Main>
     <div class="container-fluid account-bg m-0 p-0">
       <div class="container-fluid m-0">
-        <div class="row">
-          <div
-            class="
-              account-navbar
-              col
-              d-flex
-              flex-row
-              justify-content-end
-              align-items-end
-            "
-          >
-            <div class="d-flex flex-column justify-content-end align-items-end">
-              <p class="loggedin pt-3">Logged in as</p>
-              <p class="username pb-1">username@swoshsvpn.com</p>
-            </div>
-            <div class="dropdown">
-              <a href="javascript:void(0)" class="dropbtn">
-                <i
-                  class="
-                    flaticon-round-account-button-with-user-inside
-                    user-avatar
-                    mb-3
-                    pl-3
-                    pr-4
-                  "
-                ></i>
-              </a>
-              <div class="dropdown-content">
-                <a href="account-settings.html">
-                  <div class="d-flex flex-row justify-content-around">
-                    <img
-                      src="assets/images/account-settings/cogwheel.png"
-                      class="img-fluid swoshs-logo"
-                      alt=""
-                    />
-                    <div>Account Settings</div>
-                    <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="d-flex flex-row justify-content-around">
-                    <img
-                      src="assets/images/account-settings/lifesaver.png"
-                      class="img-fluid swoshs-logo"
-                      alt=""
-                    />
-                    <div>Support</div>
-                    <div class="d-flex justify-content-end">
-                      <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                    </div>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="d-flex flex-row justify-content-around">
-                    <img
-                      src="assets/images/account-settings/faq.png"
-                      class="img-fluid swoshs-logo"
-                      alt=""
-                    />
-                    <div>Privacy</div>
-                    <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="d-flex flex-row justify-content-around">
-                    <img
-                      src="assets/images/account-settings/Path 3235.png"
-                      class="img-fluid swoshs-logo"
-                      alt=""
-                    />
-                    <div>Logout</div>
-                    <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- headlines for promo -->
         <div class="container account-headline mt-5">
           <div class="col-md-12">
@@ -418,13 +222,18 @@
         </div>
       </div>
     </div>
-  </main>
+  </Main>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 
+import Main from "@/views/layouts/Main.vue";
+
 export default defineComponent({
+  components: {
+    Main,
+  },
   setup() {
     const state = reactive({
       welcome: "welcome to the vue.js",

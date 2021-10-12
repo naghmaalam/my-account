@@ -1,6 +1,9 @@
 import { Locale } from "@/types/Locale";
 
-const cn: Locale = {
+// uncomment if you need to check translation
+// const cn: Locale = {
+
+const cn = {
   create_account: "创建账户",
   already_account: "已有账户",
   online_access: "在线访问",

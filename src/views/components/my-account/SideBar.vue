@@ -1,8 +1,10 @@
 <template>
-  <main
-    class="my-account d-flex flex-row justify-content-start align-items-start"
+  <nav
+    id="sidebarMenu"
+    class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+    style=""
   >
-    <div class="container sidebar">
+    <div class="sidebar-sticky pt-3">
       <div class="row">
         <div class="col pt-4">
           <img
@@ -117,7 +119,7 @@
         </div>
       </div>
     </div>
-  </main>
+  </nav>
 </template>
 
 <script>

@@ -1,3 +1,5 @@
+export type SupportedLanguages = "en" | "cn";
+
 export interface Locale {
   copied_to_clipboard: string;
   error_copying_to_clipboard: string;

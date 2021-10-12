@@ -1,6 +1,9 @@
 import { Locale } from "@/types/Locale";
 
-const en: Locale = {
+// uncomment if you need to check translation
+// const en: Locale = {
+
+const en = {
   d: "Days",
   h: "Hrs",
   m: "Mins",
