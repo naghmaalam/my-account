@@ -1,33 +1,10 @@
 import { Locale } from "@/types/Locale";
 
 const en: Locale = {
-  // No Chinese translation yet
-  ///////////////////////////////////////////////////////////
-  copied_to_clipboard: "Copied to clipboard",
-  error_copying_to_clipboard: "Error copying to clipboard",
-  error_password_same_with_email: "Password is similar with email",
-  error_password_same_with_current:
-    "Your new password is similar with your current one",
-  unknown_device: "Unknown Device",
-  reset_password: "Reset Password",
-  sure_logout: "Are you sure you want to logout?",
-  yes: "Yes",
-  no: "No",
-  premium_users_only: "PREMIUM USERS ONLY!",
-  iphone: "Iphone",
-  android: "Android",
-  quick_disconnecting: "DISCONNECTING",
-  loading: "loading",
-  dark: "Dark",
-  light: "Light",
-  trial_ends_in: "Trial ends in",
-
   d: "Days",
   h: "Hrs",
   m: "Mins",
   s: "Secs",
-  ///////////////////////////////////////////////////////////
-  // No Chinese translation yet
 
   edit_account: "Edit Account",
   about_swoshs: "About Swoshs",
@@ -416,6 +393,30 @@ const en: Locale = {
   pay_processing_title: "Oopps your payment is still being processed",
   pay_processing_message:
     'We will update you as soon as possible, also you can check the details of your package in "My Account" after few minutes.',
+
+  // No Chinese translation yet
+  ///////////////////////////////////////////////////////////
+  copied_to_clipboard: "Copied to clipboard",
+  error_copying_to_clipboard: "Error copying to clipboard",
+  error_password_same_with_email: "Password is similar with email",
+  error_password_same_with_current:
+    "Your new password is similar with your current one",
+  unknown_device: "Unknown Device",
+  reset_password: "Reset Password",
+  sure_logout: "Are you sure you want to logout?",
+  yes: "Yes",
+  no: "No",
+  premium_users_only: "PREMIUM USERS ONLY!",
+  iphone: "Iphone",
+  android: "Android",
+  quick_disconnecting: "DISCONNECTING",
+  loading: "loading",
+  dark: "Dark",
+  light: "Light",
+  trial_ends_in: "Trial ends in",
+  hi_there: "Hi there!",
+  ///////////////////////////////////////////////////////////
+  // No Chinese translation yet
 };
 
 export default en;

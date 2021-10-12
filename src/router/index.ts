@@ -2,6 +2,11 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
+    name: "root",
+    path: "/",
+    component: () => import("@/views/pages/Home.vue"),
+  },
+  {
     name: "home",
     path: "/home",
     component: () => import("@/views/pages/Home.vue"),
@@ -30,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes,
 });
 

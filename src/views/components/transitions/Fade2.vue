@@ -17,7 +17,7 @@ export default defineComponent({
   opacity: 0;
 }
 .fade-enter-active {
-  transition: all 0.7s;
+  transition: all 0.3s;
 }
 .fade-enter-to {
   opacity: 1;
@@ -27,7 +27,7 @@ export default defineComponent({
   opacity: 1;
 }
 .fade-leave-active {
-  transition: all 0.7s;
+  transition: all 0.3s;
 }
 .fade-leave-to {
   opacity: 0;

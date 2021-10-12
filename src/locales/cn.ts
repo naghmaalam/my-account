@@ -394,6 +394,7 @@ const cn: Locale = {
   enter_new_password: "Enter your new password  CN",
   retype_password: "Retype Password CN",
   enter_retype_password: "Retype your Password CN",
+  hi_there: "Hi there! CN",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { reactive, computed, ComputedRef } from "vue";
 
 import { User } from "@/types/User";
 
@@ -36,6 +36,7 @@ export function useUser(): {
   actions: {
     login: (param: LoginDetails) => Promise<void>;
     logout: () => void;
+    isAuthenticated: ComputedRef;
   };
 } {
   const login = async (loginDetails: LoginDetails) => {
@@ -45,6 +46,8 @@ export function useUser(): {
       console.log(response);
       toast.actions.show({ text: response.message });
       resetUser();
+      user.authenticated = true;
+      user.me = response;
       storeUser();
     } catch (error) {
       const err = error as Error;
@@ -58,15 +61,20 @@ export function useUser(): {
   };
 
   const storeUser = () => {
-    localStorage.setItem("user", JSON.stringify(user));
+    sessionStorage.setItem("user", JSON.stringify(user));
   };
 
   const resetUser = () => {
-    localStorage.removeItem("user");
-    localStorage.setItem("user", JSON.stringify(UserDefault));
+    Object.assign(user, UserDefault);
+    sessionStorage.removeItem("user");
+    sessionStorage.setItem("user", JSON.stringify(UserDefault));
   };
 
+  const isAuthenticated = computed(() => {
+    return user.authenticated;
+  });
+
   return {
-    actions: { login, logout },
+    actions: { login, logout, isAuthenticated },
   };
 }

@@ -1,15 +1,15 @@
 <template>
-  <!-- <router-view v-if="authenticated" v-slot="{ Component }">
+  <router-view v-if="user.authenticated" v-slot="{ Component }">
     <Fade>
       <component :is="Component" />
     </Fade>
-  </router-view> -->
+  </router-view>
 
-  <Fade>
+  <Fade v-else>
     <Login />
   </Fade>
 
-  <router-view />
+  <!-- <router-view /> -->
 
   <Toast />
 </template>
@@ -21,7 +21,7 @@ import Fade from "@/views/components/transitions/Fade.vue";
 
 import Login from "@/views/pages/Login.vue";
 
-import { user } from "@/hooks/useUser";
+import { user, useUser } from "@/hooks/useUser";
 export default defineComponent({
   components: {
     Toast,
@@ -30,7 +30,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      authenticated: user.authenticated,
+      user,
     };
   },
 });
