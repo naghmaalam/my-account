@@ -1,94 +1,101 @@
 <template>
-  <div class="container-fluid account-bg m-0 p-0">
-    <div class="container-fluid m-0">
-      <div class="row">
-        <div
-          class="
-            account-navbar
-            col
-            d-flex
-            flex-row
-            justify-content-end
-            align-items-end
-          "
-        >
-          <div class="d-flex flex-column justify-content-end align-items-end">
-            <p class="loggedin pt-3">Logged in as</p>
-            <p class="username pb-1">username@swoshsvpn.com</p>
-          </div>
-          <div class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">
-              <i
-                class="
-                  flaticon-round-account-button-with-user-inside
-                  user-avatar
-                  mb-3
-                  pl-3
-                  pr-4
-                "
-              ></i>
-            </a>
-            <div class="dropdown-content">
-              <a href="account-settings.html">
-                <div class="d-flex flex-row justify-content-around">
-                  <img
-                    src="@/assets/images/account-settings/cogwheel.png"
-                    class="img-fluid swoshs-logo"
-                    alt=""
-                  />
-                  <div>Account Settings</div>
-                  <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                </div>
-              </a>
-              <a href="#">
-                <div class="d-flex flex-row justify-content-around">
-                  <img
-                    src="@/assets/images/account-settings/lifesaver.png"
-                    class="img-fluid swoshs-logo"
-                    alt=""
-                  />
-                  <div>Support</div>
-                  <div class="d-flex justify-content-end">
-                    <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                  </div>
-                </div>
-              </a>
-              <a href="#">
-                <div class="d-flex flex-row justify-content-around">
-                  <img
-                    src="@/assets/images/account-settings/faq.png"
-                    class="img-fluid swoshs-logo"
-                    alt=""
-                  />
-                  <div>Privacy</div>
-                  <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                </div>
-              </a>
-              <a href="#">
-                <div class="d-flex flex-row justify-content-around">
-                  <img
-                    src="@/assets/images/account-settings/logout.png"
-                    class="img-fluid swoshs-logo"
-                    alt=""
-                  />
-                  <div>Logout</div>
-                  <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                </div>
-              </a>
+  <nav class="navbar fixed-top flex-md-nowrap p-0 shadow">
+    <div
+      class="
+        account-navbar
+        col
+        d-flex
+        flex-row
+        justify-content-end
+        align-items-end
+      "
+    >
+      <div class="d-flex flex-column justify-content-end align-items-end">
+        <p class="loggedin pt-3">Logged in as</p>
+        <p class="username pb-1">{{ userState.email }}</p>
+      </div>
+      <div class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">
+          <i
+            class="
+              flaticon-round-account-button-with-user-inside
+              user-avatar
+              mb-3
+              pl-3
+              pr-4
+            "
+          ></i>
+        </a>
+        <div class="dropdown-content">
+          <a href="account-settings.html">
+            <div class="d-flex flex-row justify-content-around">
+              <img
+                src="@/assets/images/account-settings/cogwheel.png"
+                class="img-fluid swoshs-logo"
+                alt=""
+              />
+              <div>Account Settings</div>
+              <i class="flaticon-arrow-angle-pointing-to-right"></i>
             </div>
-          </div>
+          </a>
+          <a href="#">
+            <div class="d-flex flex-row justify-content-around">
+              <img
+                src="@/assets/images/account-settings/lifesaver.png"
+                class="img-fluid swoshs-logo"
+                alt=""
+              />
+              <div>Support</div>
+              <div class="d-flex justify-content-end">
+                <i class="flaticon-arrow-angle-pointing-to-right"></i>
+              </div>
+            </div>
+          </a>
+          <a href="#">
+            <div class="d-flex flex-row justify-content-around">
+              <img
+                src="@/assets/images/account-settings/faq.png"
+                class="img-fluid swoshs-logo"
+                alt=""
+              />
+              <div>Privacy</div>
+              <i class="flaticon-arrow-angle-pointing-to-right"></i>
+            </div>
+          </a>
+          <a href="#" @click="logout">
+            <div class="d-flex flex-row justify-content-around">
+              <img
+                src="@/assets/images/account-settings/logout.png"
+                class="img-fluid swoshs-logo"
+                alt=""
+              />
+              <div>Logout</div>
+              <i class="flaticon-arrow-angle-pointing-to-right"></i>
+            </div>
+          </a>
         </div>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+import { useUser } from "@/hooks/useUser";
+
+export default defineComponent({
   setup() {
-    return {};
+    const user = useUser();
+    const logout = () => {
+      user.actions.logout();
+    };
+
+    return {
+      userState: user.getters.data,
+      logout,
+    };
   },
-};
+});
 </script>
 
 <style scoped>

@@ -1,4 +1,5 @@
-import { user, LoginDetails } from "@/hooks/useUser";
+import { state as userState } from "@/hooks/useUser";
+import { LoginDetails } from "@/types/User";
 
 export const host = "https://swoshstest.com/api";
 
@@ -25,8 +26,10 @@ export async function api(
   try {
     // if not logged in then add language to url query but not in /login page
     let query = "";
-    if (!user.authenticated && endpoint.indexOf("login") < 0) {
-      const selectedLanguage = (user.language.selected || "en").toLowerCase();
+    if (!userState.user.authenticated && endpoint.indexOf("login") < 0) {
+      const selectedLanguage = (
+        userState.user.language.selected || "en"
+      ).toLowerCase();
       query =
         endpoint.indexOf("?") < 0
           ? `?lang=${selectedLanguage}`
@@ -36,7 +39,7 @@ export async function api(
     const options = {
       method: Method[method].toString(),
       headers: {
-        Authorization: user.accessToken,
+        Authorization: userState.user.accessToken,
         "Content-type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify(payload),

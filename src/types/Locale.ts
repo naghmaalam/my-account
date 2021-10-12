@@ -1,3 +1,5 @@
+export type SupportedLanguages = "en" | "cn";
+
 export interface Locale {
   copied_to_clipboard: string;
   error_copying_to_clipboard: string;
@@ -352,4 +354,10 @@ export interface Locale {
   pay_processing_message: string;
   edit_account: string;
   about_swoshs: string;
+
+  // new
+  /////////////////////////////////////////////////////////////////////////////////////////
+  hi_there: string;
+  /////////////////////////////////////////////////////////////////////////////////////////
+  // new
 }

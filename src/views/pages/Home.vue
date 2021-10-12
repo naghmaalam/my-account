@@ -1,415 +1,200 @@
 <template>
-  <main
-    class="my-account d-flex flex-row justify-content-start align-items-start"
-  >
-    <div class="container sidebar">
-      <div class="row">
-        <div class="col pt-4">
+  <Main>
+    <div class="container-fluid bg-light-gray m-0 p-0 m-0">
+      <!-- headlines for promo -->
+      <div class="row account-headline">
+        <div class="col-md-2 ml-3 pt-2 pb-2">
           <img
-            src="assets/images/my-account/logo-swoshs.png"
-            class="img-fluid swoshs-logo"
+            src="assets/images/my-account/gift.png"
             alt=""
+            class="img-fluid"
           />
         </div>
-      </div>
-      <div class="row active-button">
-        <div class="col">
-          <div class="d-flex flex-row align-items-start">
-            <div class="px-2 mt-4">
-              <i class="flaticon-house icon-color"></i>
+        <div class="col-md-4 pt-3">
+          <div class="promos">
+            <div class="headline-title">Sample headline for promos</div>
+            <div class="headline-subtitle">
+              Stay 1 step ahead of cybercrime threats like phishing and online
+              tracking with Prime
             </div>
-            <div class="dashboard d-flex flex-column">
-              <h5 class="mt-4">Dashboard</h5>
-              <p>
-                The Account Dashboard is a comprehensive overview of account
-                details.
-              </p>
-              <div class="borderline mt-4"></div>
-            </div>
+            <div class="headline-txt">Learn more about Swoshs ></div>
           </div>
         </div>
-      </div>
-      <a href="devices.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i class="flaticon-responsive icon-color"></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">Devices</h5>
-                <p>
-                  Manage and overview of your secured connected devices and
-                  details.
-                </p>
-                <div class="borderline mt-4"></div>
-              </div>
-            </div>
+        <div class="col-md-3">
+          <div class="pt-4">
+            <div class="price">$9.99</div>
+            <div class="new-price">$9.99</div>
           </div>
         </div>
-      </a>
-      <a href="downloads.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i class="flaticon-cloud-computing icon-color"></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">Downloads</h5>
-                <p>
-                  Get Swoshs VPN with specific platform of your choice, from
-                  Android, iOS, Windows etc.
-                </p>
-                <div class="borderline mt-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="subscription.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i
-                  class="flaticon-calendar-interface-symbol-tool icon-color"
-                ></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">Subscription</h5>
-                <p>
-                  Where you can check the overview details of your subscription
-                  and order history.
-                </p>
-                <div class="borderline mt-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="account-settings-refer-friend.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i
-                  class="flaticon-calendar-interface-symbol-tool icon-color"
-                ></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">
-                  Refer a Friend <span class="promo px-2">promo</span>
-                </h5>
-                <p>
-                  Share your unique referral link with friends via email, FB, or
-                  whatever works for you.
-                </p>
-                <div class="borderline mt-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <div class="row pb-5">
-        <div class="col pb-5">
-          <div class="pb-5 mb-2"></div>
+        <div class="col-md-2 pt-4">
+          <button class="upgrade-btn pt-2 pb-2 pr-4 pl-4">Upgrade</button>
         </div>
       </div>
-    </div>
-    <div class="container-fluid account-bg m-0 p-0">
-      <div class="container-fluid m-0">
+
+      <!-- member since -->
+      <div class="container mt-5">
         <div class="row">
-          <div
-            class="
-              account-navbar
-              col
-              d-flex
-              flex-row
-              justify-content-end
-              align-items-end
-            "
-          >
-            <div class="d-flex flex-column justify-content-end align-items-end">
-              <p class="loggedin pt-3">Logged in as</p>
-              <p class="username pb-1">username@swoshsvpn.com</p>
+          <div class="col-md-6">
+            <div class="account-info-title">Howdy!</div>
+          </div>
+          <div class="col-md-6">
+            <div class="account-info-member">
+              Member since:
+              <span class="account-info-date"> 04/07/2021 </span>
             </div>
-            <div class="dropdown">
-              <a href="javascript:void(0)" class="dropbtn">
-                <i
+          </div>
+        </div>
+      </div>
+
+      <!-- my devices, subscription, your account, support -->
+      <div class="container account-content gap-3">
+        <div class="row">
+          <!-- my devices -->
+          <div class="my-devices col-md-6 my-2">
+            <div class="account-title pt-3 px-3">My Devices</div>
+            <div class="row-line mt-2"></div>
+            <div
+              class="
+                d-flex
+                flex-row
+                justify-content-around
+                align-items-center
+                mb-4
+              "
+            >
+              <div class="recently-connected d-flex flex-column">
+                <div class="account-subtitle">Recently Connected (6)</div>
+                <div
                   class="
-                    flaticon-round-account-button-with-user-inside
-                    user-avatar
-                    mb-3
-                    pl-3
-                    pr-4
+                    desktop-connected
+                    d-flex
+                    flex-row
+                    justify-content-around
+                    pt-4
                   "
-                ></i>
-              </a>
-              <div class="dropdown-content">
-                <a href="account-settings.html">
-                  <div class="d-flex flex-row justify-content-around">
-                    <img
-                      src="assets/images/account-settings/cogwheel.png"
-                      class="img-fluid swoshs-logo"
-                      alt=""
-                    />
-                    <div>Account Settings</div>
-                    <i class="flaticon-arrow-angle-pointing-to-right"></i>
+                >
+                  <img
+                    src="assets/images/my-account/windows.png"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="d-flex flex-column">
+                    <div class="desktop pl-3">Desktop-MKEUF6J</div>
+                    <div class="account-info pl-3">Last Signin: 06/26/2021</div>
                   </div>
-                </a>
-                <a href="#">
-                  <div class="d-flex flex-row justify-content-around">
-                    <img
-                      src="assets/images/account-settings/lifesaver.png"
-                      class="img-fluid swoshs-logo"
-                      alt=""
-                    />
-                    <div>Support</div>
-                    <div class="d-flex justify-content-end">
-                      <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                    </div>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="d-flex flex-row justify-content-around">
-                    <img
-                      src="assets/images/account-settings/faq.png"
-                      class="img-fluid swoshs-logo"
-                      alt=""
-                    />
-                    <div>Privacy</div>
-                    <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="d-flex flex-row justify-content-around">
-                    <img
-                      src="assets/images/account-settings/Path 3235.png"
-                      class="img-fluid swoshs-logo"
-                      alt=""
-                    />
-                    <div>Logout</div>
-                    <i class="flaticon-arrow-angle-pointing-to-right"></i>
-                  </div>
-                </a>
+                </div>
               </div>
+              <div class="vertical-line mt-3"></div>
+              <button class="my-account-btn">View More</button>
+            </div>
+          </div>
+
+          <!-- Subscription -->
+          <div class="subscription col-md-6 my-2">
+            <div class="account-title pt-3 px-3">Subscription</div>
+            <div class="row-line mt-2"></div>
+            <div
+              class="
+                d-flex
+                flex-row
+                justify-content-around
+                align-items-center
+                mb-4
+              "
+            >
+              <img
+                src="assets/images/my-account/shield.png"
+                class="img-fluid pt-4"
+                alt=""
+              />
+              <div class="recently-connected d-flex flex-column">
+                <div
+                  class="
+                    desktop-connected
+                    d-flex
+                    flex-row
+                    justify-content-around
+                    pt-4
+                  "
+                >
+                  <div class="d-flex flex-column">
+                    <div class="account-subtitle pb-4">Premium Package</div>
+                    <div class="desktop pb-3">1 Month Subscription</div>
+                    <button class="my-account-btn">View Details</button>
+                  </div>
+                </div>
+              </div>
+              <div class="active-btn">Active</div>
             </div>
           </div>
         </div>
 
-        <!-- headlines for promo -->
-        <div class="container account-headline mt-5">
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-md-2 ml-3 pt-2 pb-2">
-                <img
-                  src="assets/images/my-account/gift.png"
-                  alt=""
-                  class="img-fluid"
-                />
-              </div>
-              <div class="col-md-4 pt-3">
-                <div class="promos">
-                  <div class="headline-title">Sample headline for promos</div>
-                  <div class="headline-subtitle">
-                    Stay 1 step ahead of cybercrime threats like phishing and
-                    online tracking with Prime
-                  </div>
-                  <div class="headline-txt">Learn more about Swoshs ></div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="pt-4">
-                  <div class="price">$9.99</div>
-                  <div class="new-price">$9.99</div>
-                </div>
-              </div>
-              <div class="col-md-2 pt-4">
-                <button class="upgrade-btn pt-2 pb-2 pr-4 pl-4">Upgrade</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- member since -->
-        <div class="container mt-5">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="account-info-title">Howdy!</div>
-            </div>
-            <div class="col-md-6">
-              <div class="account-info-member">
-                Member since:
-                <span class="account-info-date"> 04/07/2021 </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- my devices, subscription, your account, support -->
-        <div class="container account-content gap-3">
-          <div class="row">
-            <!-- my devices -->
-            <div class="my-devices col-md-6 my-2">
-              <div class="account-title pt-3 px-3">My Devices</div>
-              <div class="row-line mt-2"></div>
-              <div
-                class="
-                  d-flex
-                  flex-row
-                  justify-content-around
-                  align-items-center
-                  mb-4
-                "
-              >
-                <div class="recently-connected d-flex flex-column">
-                  <div class="account-subtitle">Recently Connected (6)</div>
-                  <div
-                    class="
-                      desktop-connected
-                      d-flex
-                      flex-row
-                      justify-content-around
-                      pt-4
-                    "
-                  >
-                    <img
-                      src="assets/images/my-account/windows.png"
-                      class="img-fluid"
-                      alt=""
-                    />
-                    <div class="d-flex flex-column">
-                      <div class="desktop pl-3">Desktop-MKEUF6J</div>
-                      <div class="account-info pl-3">
-                        Last Signin: 06/26/2021
-                      </div>
+        <!-- your account -->
+        <div class="row gap-3">
+          <div class="your-account col-md-6 my-2">
+            <div class="account-title pt-3 px-3">Your Account</div>
+            <div class="row-line mt-2"></div>
+            <div
+              class="d-flex flex-row justify-content-around align-items-center"
+            >
+              <img
+                src="assets/images/my-account/personal-computer.png"
+                class="img-fluid mb-5"
+                alt=""
+              />
+              <div class="recently-connected d-flex flex-column">
+                <div
+                  class="
+                    desktop-connected
+                    d-flex
+                    flex-row
+                    justify-content-around
+                    pt-4
+                    pb-3
+                  "
+                >
+                  <div class="d-flex flex-column">
+                    <div class="account-subtitle pl-3">Account Section</div>
+                    <div class="account-info pb-4 mt-3 pl-3">
+                      Manage your info, edit change your email or password and
+                      check settings to keep you account secure
                     </div>
+                    <button class="my-account-btn">View Details</button>
                   </div>
                 </div>
-                <div class="vertical-line mt-3"></div>
-                <button class="my-account-btn">View More</button>
-              </div>
-            </div>
-
-            <!-- Subscription -->
-            <div class="subscription col-md-6 my-2">
-              <div class="account-title pt-3 px-3">Subscription</div>
-              <div class="row-line mt-2"></div>
-              <div
-                class="
-                  d-flex
-                  flex-row
-                  justify-content-around
-                  align-items-center
-                  mb-4
-                "
-              >
-                <img
-                  src="assets/images/my-account/shield.png"
-                  class="img-fluid pt-4"
-                  alt=""
-                />
-                <div class="recently-connected d-flex flex-column">
-                  <div
-                    class="
-                      desktop-connected
-                      d-flex
-                      flex-row
-                      justify-content-around
-                      pt-4
-                    "
-                  >
-                    <div class="d-flex flex-column">
-                      <div class="account-subtitle pb-4">Premium Package</div>
-                      <div class="desktop pb-3">1 Month Subscription</div>
-                      <button class="my-account-btn">View Details</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="active-btn">Active</div>
               </div>
             </div>
           </div>
 
-          <!-- your account -->
-          <div class="row gap-3">
-            <div class="your-account col-md-6 my-2">
-              <div class="account-title pt-3 px-3">Your Account</div>
-              <div class="row-line mt-2"></div>
-              <div
-                class="
-                  d-flex
-                  flex-row
-                  justify-content-around
-                  align-items-center
-                "
-              >
-                <img
-                  src="assets/images/my-account/personal-computer.png"
-                  class="img-fluid mb-5"
-                  alt=""
-                />
-                <div class="recently-connected d-flex flex-column">
-                  <div
-                    class="
-                      desktop-connected
-                      d-flex
-                      flex-row
-                      justify-content-around
-                      pt-4
-                      pb-3
-                    "
-                  >
-                    <div class="d-flex flex-column">
-                      <div class="account-subtitle pl-3">Account Section</div>
-                      <div class="account-info pb-4 mt-3 pl-3">
-                        Manage your info, edit change your email or password and
-                        check settings to keep you account secure
-                      </div>
-                      <button class="my-account-btn">View Details</button>
+          <!-- support -->
+          <div class="support col-md-6 my-2">
+            <div class="account-title pt-3 px-3">Support</div>
+            <div class="row-line mt-2"></div>
+            <div
+              class="d-flex flex-row justify-content-around align-items-center"
+            >
+              <img
+                src="assets/images/my-account/life-saver.png"
+                class="img-fluid pb-4"
+                alt=""
+              />
+              <div class="recently-connected d-flex flex-column">
+                <div
+                  class="
+                    desktop-connected
+                    d-flex
+                    flex-row
+                    justify-content-around
+                    pt-4
+                  "
+                >
+                  <div class="d-flex flex-column">
+                    <div class="account-subtitle pl-3">Need Help?</div>
+                    <div class="account-info pb-4 mt-3 pl-3">
+                      If you have any Swoshs VPN-related inquiries, get in touch
+                      with our knowledgeable colleagues from Technical Support
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- support -->
-            <div class="support col-md-6 my-2">
-              <div class="account-title pt-3 px-3">Support</div>
-              <div class="row-line mt-2"></div>
-              <div
-                class="
-                  d-flex
-                  flex-row
-                  justify-content-around
-                  align-items-center
-                "
-              >
-                <img
-                  src="assets/images/my-account/life-saver.png"
-                  class="img-fluid pb-4"
-                  alt=""
-                />
-                <div class="recently-connected d-flex flex-column">
-                  <div
-                    class="
-                      desktop-connected
-                      d-flex
-                      flex-row
-                      justify-content-around
-                      pt-4
-                    "
-                  >
-                    <div class="d-flex flex-column">
-                      <div class="account-subtitle pl-3">Need Help?</div>
-                      <div class="account-info pb-4 mt-3 pl-3">
-                        If you have any Swoshs VPN-related inquiries, get in
-                        touch with our knowledgeable colleagues from Technical
-                        Support
-                      </div>
-                      <button class="my-account-btn">Contact Support</button>
-                    </div>
+                    <button class="my-account-btn">Contact Support</button>
                   </div>
                 </div>
               </div>
@@ -418,13 +203,18 @@
         </div>
       </div>
     </div>
-  </main>
+  </Main>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 
+import Main from "@/views/layouts/Main.vue";
+
 export default defineComponent({
+  components: {
+    Main,
+  },
   setup() {
     const state = reactive({
       welcome: "welcome to the vue.js",
@@ -520,7 +310,7 @@ export default defineComponent({
 }
 
 .account-bg {
-  background: #f3f7fe;
+  /* background: #f3f7fe; */
   width: 100%;
   height: 100vh;
 }

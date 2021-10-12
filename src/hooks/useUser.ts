@@ -1,51 +1,67 @@
-import { reactive } from "vue";
+import { reactive, computed, ComputedRef, watch } from "vue";
+import i18n from "@/locales/localization";
 
-import { User } from "@/types/User";
+import { User, LoginDetails } from "@/types/User";
+import { SupportedLanguages } from "@/types/Locale";
 
-import { api, Method } from "@/utils/api";
+import { api, Method } from "@/modules/api";
+import { newObj } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
-
-export interface LoginDetails {
-  username: string;
-  password: string;
-  device_code: string;
-  device_name: string;
-  device_type: string;
-  myaccount: boolean;
-  lang: string;
-  version: string;
-}
 
 const UserDefault: User = {
   authenticated: false,
   currentSubscription: null,
   accessToken: "",
+  email: "",
   language: {
     selected: "en",
   },
   me: null,
   subscription: {
-    plans: [],
+    plans: null,
   },
 };
 
-export const user: User = reactive(Object.create(UserDefault));
+// Initialize user data
+export const state = <{ user: User }>(
+  reactive<{ user: User }>(newObj({ user: UserDefault }))
+);
 
 export function useUser(): {
   actions: {
-    login: (param: LoginDetails) => Promise<void>;
+    login: (a: LoginDetails) => Promise<void>;
     logout: () => void;
+    isAuthenticated: ComputedRef<boolean>;
+    init: () => void;
+    state: { user: User };
+    changeLanguage: (a: SupportedLanguages) => void;
+  };
+  getters: {
+    data: ComputedRef<User>;
   };
 } {
+  // actions
+  /////////////////////////////////////////////////////////////////////
   const login = async (loginDetails: LoginDetails) => {
     const toast = useToast();
     try {
-      const response = await api("login", Method.POST, loginDetails);
+      const response = <any>await api("login", Method.POST, loginDetails);
       console.log(response);
       toast.actions.show({ text: response.message });
-      resetUser();
-      storeUser();
+      console.log("waits..");
+      setTimeout(() => {
+        resetUser();
+        state.user.authenticated = true;
+        state.user.me = response;
+        state.user.email = response.email;
+        state.user.language.selected = <SupportedLanguages>(
+          response.preferred_language
+        );
+
+        // state.user.asd = "asd";
+        console.log("state.user = ", state.user);
+      }, 1000);
     } catch (error) {
       const err = error as Error;
       toast.actions.error({ text: err.message });
@@ -57,16 +73,54 @@ export function useUser(): {
     resetUser();
   };
 
-  const storeUser = () => {
-    localStorage.setItem("user", JSON.stringify(user));
+  const resetUser = () => {
+    console.log("resetUser()");
+    state.user = JSON.parse(JSON.stringify(UserDefault));
+    sessionStorage.removeItem("user");
+    sessionStorage.setItem("user", JSON.stringify(UserDefault));
   };
 
-  const resetUser = () => {
-    localStorage.removeItem("user");
-    localStorage.setItem("user", JSON.stringify(UserDefault));
+  const isAuthenticated = computed(() => {
+    return state.user.authenticated;
+  });
+
+  const init = () => {
+    // check if storage has user data if not then initialize
+    const userSessionData = sessionStorage.getItem("user");
+    if (userSessionData) {
+      state.user = JSON.parse(userSessionData);
+    } else {
+      resetUser();
+    }
+
+    // add watcher to user to save updates to session storage
+    watch(
+      () => state.user,
+      (val) => {
+        console.log("user changed");
+        sessionStorage.setItem("user", JSON.stringify(val));
+      },
+      { deep: true }
+    );
   };
+
+  const changeLanguage = (lang: SupportedLanguages) => {
+    state.user.language.selected = lang;
+    i18n.global.locale = lang;
+  };
+  /////////////////////////////////////////////////////////////////////
+  // actions
+
+  // getters
+  /////////////////////////////////////////////////////////////////////
+  const data = computed(() => {
+    return state.user;
+  });
+  /////////////////////////////////////////////////////////////////////
+  // getters
 
   return {
-    actions: { login, logout },
+    actions: { state, login, logout, isAuthenticated, init, changeLanguage },
+    getters: { data },
   };
 }

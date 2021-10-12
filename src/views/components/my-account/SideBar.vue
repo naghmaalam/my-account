@@ -1,35 +1,36 @@
 <template>
-  <main
-    class="my-account d-flex flex-row justify-content-start align-items-start"
+  <nav
+    id="sidebar"
+    class="col-md-3 col-lg-2 d-md-block sidebar collapse"
+    style=""
   >
-    <div class="container sidebar">
-      <div class="row">
-        <div class="col pt-4">
+    <div class="sidebar-sticky">
+      <div class="container">
+        <div class="row p-4 justify-content-center align-items-center">
           <img
             src="@/assets/images/my-account/logo-swoshs.png"
-            class="img-fluid swoshs-logo"
+            class="img-fluid swoshs-logo pt-2"
             alt=""
           />
         </div>
-      </div>
-      <div class="row active-button">
-        <div class="col">
-          <div class="d-flex flex-row align-items-start">
-            <div class="px-2 mt-4">
-              <i class="flaticon-house icon-color"></i>
-            </div>
-            <div class="dashboard d-flex flex-column">
-              <h5 class="mt-4">Dashboard</h5>
-              <p>
-                The Account Dashboard is a comprehensive overview of account
-                details.
-              </p>
-              <div class="borderline mt-4"></div>
+        <div class="row active-button">
+          <div class="col">
+            <div class="d-flex flex-row align-items-start">
+              <div class="px-2 mt-4">
+                <i class="flaticon-house icon-color"></i>
+              </div>
+              <div class="dashboard d-flex flex-column">
+                <h5 class="mt-4">Dashboard</h5>
+                <p>
+                  The Account Dashboard is a comprehensive overview of account
+                  details.
+                </p>
+                <div class="borderline mt-4"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <a href="devices.html">
+        <!-- <a href="devices.html"></a> -->
         <div class="row">
           <div class="col">
             <div class="d-flex flex-row">
@@ -47,93 +48,100 @@
             </div>
           </div>
         </div>
-      </a>
-      <a href="downloads.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i class="flaticon-cloud-computing icon-color"></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">Downloads</h5>
-                <p>
-                  Get Swoshs VPN with specific platform of your choice, from
-                  Android, iOS, Windows etc.
-                </p>
-                <div class="borderline mt-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-      <a href="subscription.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i
-                  class="flaticon-calendar-interface-symbol-tool icon-color"
-                ></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">Subscription</h5>
-                <p>
-                  Where you can check the overview details of your subscription
-                  and order history.
-                </p>
-                <div class="borderline mt-4"></div>
+
+        <a href="downloads.html">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex flex-row">
+                <div class="px-2 mt-4">
+                  <i class="flaticon-cloud-computing icon-color"></i>
+                </div>
+                <div class="dashboard d-flex flex-column">
+                  <h5 class="mt-4">Downloads</h5>
+                  <p>
+                    Get Swoshs VPN with specific platform of your choice, from
+                    Android, iOS, Windows etc.
+                  </p>
+                  <div class="borderline mt-4"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </a>
-      <a href="account-settings-refer-friend.html">
-        <div class="row">
-          <div class="col">
-            <div class="d-flex flex-row">
-              <div class="px-2 mt-4">
-                <i
-                  class="flaticon-calendar-interface-symbol-tool icon-color"
-                ></i>
-              </div>
-              <div class="dashboard d-flex flex-column">
-                <h5 class="mt-4">
-                  Refer a Friend <span class="promo px-2">promo</span>
-                </h5>
-                <p>
-                  Share your unique referral link with friends via email, FB, or
-                  whatever works for you.
-                </p>
-                <div class="borderline mt-4"></div>
+        </a>
+        <a href="subscription.html">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex flex-row">
+                <div class="px-2 mt-4">
+                  <i
+                    class="flaticon-calendar-interface-symbol-tool icon-color"
+                  ></i>
+                </div>
+                <div class="dashboard d-flex flex-column">
+                  <h5 class="mt-4">Subscription</h5>
+                  <p>
+                    Where you can check the overview details of your
+                    subscription and order history.
+                  </p>
+                  <div class="borderline mt-4"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </a>
-      <div class="row pb-5">
-        <div class="col pb-5">
-          <div class="pb-5 mb-2"></div>
+        </a>
+        <a href="account-settings-refer-friend.html">
+          <div class="row">
+            <div class="col">
+              <div class="d-flex flex-row">
+                <div class="px-2 mt-4">
+                  <i
+                    class="flaticon-calendar-interface-symbol-tool icon-color"
+                  ></i>
+                </div>
+                <div class="dashboard d-flex flex-column">
+                  <h5 class="mt-4">
+                    Refer a Friend <span class="promo px-2">promo</span>
+                  </h5>
+                  <p>
+                    Share your unique referral link with friends via email, FB,
+                    or whatever works for you.
+                  </p>
+                  <div class="borderline mt-4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="row pb-5">
+          <div class="col pb-5">
+            <div class="pb-5 mb-2"></div>
+          </div>
         </div>
       </div>
     </div>
-  </main>
+  </nav>
 </template>
 
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
-</script>
-
 <style scoped>
+#sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1031;
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgb(0 0 0 / 10%);
+}
+
 .sidebar {
   width: auto;
   height: 100vh;
   background: #463770;
   margin-left: 0px !important;
+}
+
+.dashboard {
+  max-width: 250px;
 }
 
 .dashboard h5 {
@@ -142,6 +150,7 @@ export default {
   font-size: 1.1rem;
   text-align: left;
   color: #fff;
+  padding-right: 15px;
 }
 
 .active-button {
@@ -149,7 +158,7 @@ export default {
 }
 
 .dashboard p {
-  width: 200px;
+  /* width: 200px; */
   height: auto;
   font-family: Poppins;
   font-weight: 300;
@@ -157,6 +166,7 @@ export default {
   line-height: 17px;
   text-align: left;
   color: rgba(255, 255, 255, 0.88);
+  padding-right: 15px;
 }
 
 .borderline {

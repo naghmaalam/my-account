@@ -1,27 +1,34 @@
 <template>
-  <router-view v-if="authenticated" v-slot="{ Component }">
-    <Fade>
-      <component :is="Component" />
-    </Fade>
-  </router-view>
+  <!-- <button type="button" class="btn btn-primary" @click="logout">Logout</button> -->
+  <!-- <button type="button" class="btn btn-primary" @click="changeLang">
+    Change lang
+  </button> -->
+  <template v-if="userState.authenticated">
+    <router-view v-slot="{ Component }">
+      <Fade>
+        <component :is="Component" />
+      </Fade>
+    </router-view>
+  </template>
 
-  <!-- <Fade>
+  <Fade v-else>
     <Login />
-  </Fade> -->
+  </Fade>
 
-  <router-view />
+  <!-- <router-view /> -->
 
   <Toast />
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 import Toast from "@/views/components/Toast.vue";
 import Fade from "@/views/components/transitions/Fade.vue";
 
 import Login from "@/views/pages/Login.vue";
 
-import { user } from "@/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
 export default defineComponent({
   components: {
     Toast,
@@ -29,8 +36,29 @@ export default defineComponent({
     Fade,
   },
   setup() {
+    const { locale } = useI18n({ useScope: "global" });
+    const user = useUser();
+    user.actions.init();
+
+    // const loading = ref(true);
+
+    // set language base on store
+    if (user.getters.data.value.language.selected === "cn") {
+      locale.value = "cn";
+    }
+
+    const logout = () => {
+      user.actions.logout();
+    };
+
+    const changeLang = () => {
+      user.actions.changeLanguage("cn");
+    };
+
     return {
-      authenticated: user.authenticated,
+      userState: user.getters.data,
+      logout,
+      changeLang,
     };
   },
 });

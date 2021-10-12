@@ -38,17 +38,17 @@ export function useToast(): {
   };
 
   function startPopping() {
-    console.log("toasts.value.length xxxxxx", toasts.value.length);
+    // console.log("toasts.value.length xxxxxx", toasts.value.length);
     let interval: number;
     if (toasts.value.length == 1) {
       interval = setInterval(function () {
         // start removing if there is 1 toast but dont execute again
         toasts.value.pop();
-        console.log("Removing xxxxxx", interval);
+        // console.log("Removing xxxxxx", interval);
 
         // stop interval when toasts are empty
         if (toasts.value.length == 0) {
-          console.log("clearInterval xxxxxx = ", interval);
+          // console.log("clearInterval xxxxxx = ", interval);
           clearInterval(interval);
         }
       }, 3000);
