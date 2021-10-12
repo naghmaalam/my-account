@@ -142,7 +142,7 @@ export default defineComponent({
     Fade2,
   },
   setup() {
-    const { t } = useI18n({ useScope: "global" });
+    const { t, locale } = useI18n({ useScope: "global" });
 
     const vldt = useValidation();
     const user = useUser();
@@ -197,6 +197,10 @@ export default defineComponent({
         });
         isLoggingIn.value = false;
       }
+    };
+
+    const changeLang = () => {
+      locale.value = "cn"; // change
     };
 
     return {

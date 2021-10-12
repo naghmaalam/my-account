@@ -66,7 +66,7 @@ export default defineComponent({
 
 <style lang="scss">
 #app {
-  height: 100vh;
   background: #f3f7fe !important;
+  height: 100vh;
 }
 </style>
