@@ -64,4 +64,9 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+#app {
+  background: #f3f7fe !important;
+  height: 100vh;
+}
+</style>
