@@ -1,6 +1,6 @@
 <template>
   <Main>
-    <div class="container-fluid bg-light-gray m-0 p-0 m-0">
+    <div class="container-fluid m-0 p-0 m-0">
       <!-- headlines for promo -->
       <div class="row account-headline">
         <div class="col-md-2 ml-3 pt-2 pb-2">
