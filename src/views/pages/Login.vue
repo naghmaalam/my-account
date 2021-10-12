@@ -19,7 +19,7 @@
         </form>
         <div class="login-continue-btn ml-5 mr-5 mt-3">
           <!-- <a href="login-password.html"> -->
-          <a href="#">
+          <a href="#" @click="changeLang">
             <div class="login-btn pt-3 pb-3">Continue</div>
           </a>
         </div>
@@ -53,14 +53,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-// import { useI18n } from "vue-i18n";
+import { useI18n } from "vue-i18n";
 
 import { useUser } from "@/hooks/useUser";
 
 import { useValidation } from "@/modules/validation";
 export default defineComponent({
   setup() {
-    // const { locale } = useI18n({ useScope: "global" });
+    const { locale } = useI18n({ useScope: "global" });
     // locale.value = "cn"; // change
 
     const validate = useValidation();
@@ -78,8 +78,13 @@ export default defineComponent({
       });
     };
 
+    const changeLang = () => {
+      locale.value = "cn"; // change
+    };
+
     return {
       login,
+      changeLang,
     };
   },
 });

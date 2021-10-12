@@ -1,13 +1,13 @@
 <template>
-  <!-- <router-view v-if="authenticated" v-slot="{ Component }">
+  <router-view v-if="authenticated" v-slot="{ Component }">
     <Fade>
       <component :is="Component" />
     </Fade>
-  </router-view> -->
+  </router-view>
 
-  <Fade>
+  <!-- <Fade>
     <Login />
-  </Fade>
+  </Fade> -->
 
   <router-view />
 

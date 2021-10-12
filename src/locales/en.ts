@@ -51,7 +51,6 @@ const en: Locale = {
   error_password_changed_msg_title: "Error changing the password!",
   success_refer_friend: "Referral successful!",
   error_refer_friend: "Error referring a friend!",
-
   error_enter_valid_email: "Please enter a valid email.",
   error_email_max_characters: "Email max length is 100 characters.",
   error_password_min_length: "Password min length should be 6.",
