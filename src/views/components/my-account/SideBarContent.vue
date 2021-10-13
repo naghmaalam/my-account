@@ -138,7 +138,7 @@ export default defineComponent({
       if (props.isMobile) {
         setTimeout(() => {
           router.push({ name: page });
-        }, 750);
+        }, 150);
       } else {
         router.push({ name: page });
       }
