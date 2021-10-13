@@ -120,12 +120,28 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
+import { useSettings } from "@/hooks/useSettings";
 
 export default defineComponent({
-  setup() {
+  props: {
+    isMobile: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props) {
     const router = useRouter();
     const redirect = (page: string) => {
-      router.push({ name: page });
+      useSettings().do.sideMenu.hide();
+
+      // if in mobile then add delay
+      if (props.isMobile) {
+        setTimeout(() => {
+          router.push({ name: page });
+        }, 750);
+      } else {
+        router.push({ name: page });
+      }
     };
     return {
       redirect,

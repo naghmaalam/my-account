@@ -19,8 +19,11 @@
           @click="hideSideMenu"
         >
           <PromoHeadline />
-
-          <slot></slot>
+          <Fade>
+            <div>
+              <slot></slot>
+            </div>
+          </Fade>
         </main>
       </div>
     </div>
@@ -31,9 +34,10 @@
   </main> -->
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 
 import { useSettings } from "@/hooks/useSettings";
+import Fade from "@/views/components/transitions/Fade.vue";
 
 import SideBar from "@/views/components/my-account/SideBar.vue";
 import NavBar from "@/views/components/my-account/NavBar.vue";
@@ -43,10 +47,18 @@ export default defineComponent({
     SideBar,
     NavBar,
     PromoHeadline,
+    Fade,
   },
   setup() {
+    const showSlot = ref(false);
+    onMounted(() => {
+      setTimeout(() => {
+        showSlot.value = true;
+      }, 1000);
+    });
     return {
       hideSideMenu: useSettings().do.sideMenu.hide,
+      showSlot,
     };
   },
 });

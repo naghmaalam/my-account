@@ -10,7 +10,7 @@
       v-if="settingsState.mobile.sideMenu"
       class="col-md-3 d-md-block sidebar mobile"
     >
-      <SideBarContent />
+      <SideBarContent :isMobile="true" />
     </nav>
   </SlideLeft>
   <!-- ////////////////////////////////////////////////////////////// -->

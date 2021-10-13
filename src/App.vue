@@ -5,9 +5,7 @@
   </button> -->
   <template v-if="userState.authenticated">
     <router-view v-slot="{ Component }">
-      <Fade>
-        <component :is="Component" />
-      </Fade>
+      <component :is="Component" />
     </router-view>
   </template>
 
