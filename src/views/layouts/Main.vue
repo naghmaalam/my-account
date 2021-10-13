@@ -6,17 +6,20 @@
     <!-- ////////////////////////////////////////////////////////////////////////// -->
     <!-- nav bar -->
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color: #f3f7fe !important">
       <div class="row">
         <!-- side bar -->
         <!-- ////////////////////////////////////////////////////////////////////////// -->
         <SideBar />
         <!-- ////////////////////////////////////////////////////////////////////////// -->
         <!-- side bar -->
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-          <div class="mob-res-hide">
-            <PromoHeadline />
-          </div>
+        <main
+          role="main"
+          class="col-md-9 ml-sm-auto col-lg-10 px-md-4"
+          @click="hideSideMenu"
+        >
+          <PromoHeadline />
+
           <slot></slot>
         </main>
       </div>
@@ -29,6 +32,9 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+
+import { useSettings } from "@/hooks/useSettings";
+
 import SideBar from "@/views/components/my-account/SideBar.vue";
 import NavBar from "@/views/components/my-account/NavBar.vue";
 import PromoHeadline from "@/views/components/my-account/PromoHeadline.vue";
@@ -37,6 +43,11 @@ export default defineComponent({
     SideBar,
     NavBar,
     PromoHeadline,
+  },
+  setup() {
+    return {
+      hideSideMenu: useSettings().do.sideMenu.hide,
+    };
   },
 });
 </script>

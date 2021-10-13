@@ -38,8 +38,8 @@ export function getDeviceId(): string | null {
     return window.prompt(JSON.stringify(vS));
   }
 
-  // if(store.getters['lang/langs'].unknown_device)
-  // return store.getters['lang/langs'].unknown_device
+  // if(store.get['lang/langs'].unknown_device)
+  // return store.get['lang/langs'].unknown_device
   // else
   // return 'Unknown Device';
 }
