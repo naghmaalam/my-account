@@ -67,12 +67,12 @@ export default defineComponent({
 <style lang="scss">
 #app {
   background: #f3f7fe !important;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 992px) {
-  #app {
-    height: auto;
-  }
+  // #app {
+  //   height: auto;
+  // }
 }
 </style>
