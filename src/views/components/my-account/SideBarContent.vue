@@ -27,8 +27,8 @@
             </div>
           </div>
         </div>
-        <!-- <a href="devices.html"></a> -->
-        <div class="row">
+
+        <div class="row" @click="redirect('devices')">
           <div class="col">
             <div class="d-flex flex-row">
               <div class="px-2 mt-4">
@@ -46,25 +46,24 @@
           </div>
         </div>
 
-        <a href="downloads.html">
-          <div class="row">
-            <div class="col">
-              <div class="d-flex flex-row">
-                <div class="px-2 mt-4">
-                  <i class="flaticon-cloud-computing icon-color"></i>
-                </div>
-                <div class="dashboard d-flex flex-column">
-                  <h5 class="mt-4">Downloads</h5>
-                  <p>
-                    Get Swoshs VPN with specific platform of your choice, from
-                    Android, iOS, Windows etc.
-                  </p>
-                  <div class="borderline mt-4"></div>
-                </div>
+        <div class="row" @click="redirect('downloads')">
+          <div class="col">
+            <div class="d-flex flex-row">
+              <div class="px-2 mt-4">
+                <i class="flaticon-cloud-computing icon-color"></i>
+              </div>
+              <div class="dashboard d-flex flex-column">
+                <h5 class="mt-4">Downloads</h5>
+                <p>
+                  Get Swoshs VPN with specific platform of your choice, from
+                  Android, iOS, Windows etc.
+                </p>
+                <div class="borderline mt-4"></div>
               </div>
             </div>
           </div>
-        </a>
+        </div>
+
         <a href="subscription.html">
           <div class="row">
             <div class="col">
@@ -118,6 +117,22 @@
     </div>
   </div>
 </template>
+<script lang="ts">
+import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
+
+export default defineComponent({
+  setup() {
+    const router = useRouter();
+    const redirect = (page: string) => {
+      router.push({ name: page });
+    };
+    return {
+      redirect,
+    };
+  },
+});
+</script>
 
 <style lang="scss" scoped>
 .sidebar-menus {

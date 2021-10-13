@@ -23,7 +23,7 @@
       </div>
 
       <div class="ml-5 mr-5 mt-3">
-        <a href="login-with-code.html">
+        <a href="#" @click.prevent="showLoginCodeEmail">
           <div class="border-btn login-code-btn pt-3 pb-3">
             {{ $t("login_with_code") }}
           </div>
@@ -48,8 +48,8 @@
       >
         {{ loginDetails.email }}
       </div>
-      <form action="#">
-        <div class="d-flex flex-row mt-4 ml-4 mr-4">
+      <form action="#" class="ml-5 mr-5 mt-3">
+        <div class="d-flex flex-row">
           <input
             :type="isPasswordHidden ? 'password' : 'input'"
             class="form-control login-pwd"
@@ -81,7 +81,7 @@
         </a>
       </div>
       <div class="ml-5 mr-5 mt-3">
-        <a href="login-with-code.html">
+        <a href="#" @click.prevent="showLoginCodeEmail">
           <div class="border-btn login-code-btn pt-3 pb-3">
             {{ $t("login_with_code") }}
           </div>
@@ -109,9 +109,10 @@
   </Fade2>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, reactive, ref, inject } from "vue";
 import { useValidation } from "@/modules/validation";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 
 import Fade2 from "@/views/components/transitions/Fade2.vue";
 
@@ -124,7 +125,6 @@ export default defineComponent({
   setup() {
     const { t, locale } = useI18n({ useScope: "global" });
     const vldt = useValidation();
-
     const user = useUser();
     const toast = useToast();
 
@@ -149,7 +149,7 @@ export default defineComponent({
         email: loginDetails.email,
       });
       if (vldt.hasErrors()) {
-        toast.actions.error({ text: t(vldt.getError()) });
+        toast.do.error({ text: t(vldt.getError()) });
       } else {
         isEmailShown.value = false;
         isPasswordShown.value = true;
@@ -162,10 +162,10 @@ export default defineComponent({
         password: loginDetails.password,
       });
       if (vldt.hasErrors()) {
-        toast.actions.error({ text: t(vldt.getError()) });
+        toast.do.error({ text: t(vldt.getError()) });
       } else {
         isLoggingIn.value = true;
-        await user.actions.login({
+        await user.do.login({
           username: loginDetails.email,
           password: loginDetails.password,
           device_code: "device_code_my_account",
@@ -183,6 +183,15 @@ export default defineComponent({
       locale.value = "cn"; // change
     };
 
+    const router = useRouter();
+    type Section = "EmailPassword" | "LoginCodeEmail";
+    const section = inject<Section>("section");
+    const showLoginCodeEmail = () => {
+      // section.value = 'LoginCodeEmail'
+      router.push({ name: "devices" });
+      console.log();
+    };
+
     return {
       login,
       loginDetails,
@@ -192,6 +201,7 @@ export default defineComponent({
       showEmail,
       showPassword,
       isPasswordHidden,
+      showLoginCodeEmail,
     };
   },
 });
