@@ -12,26 +12,29 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/pages/Home.vue"),
   },
   {
-    name: "navBar",
-    path: "/navBar",
-    component: () => import("@/views/components/my-account/NavBar.vue"),
+    name: "devices",
+    path: "/devices",
+    component: () => import("@/views/pages/Devices.vue"),
   },
   {
-    name: "sidebar",
-    path: "/sidebar",
-    component: () => import("@/views/components/my-account/SideBar.vue"),
-  },
-
-  {
-    name: "dash",
-    path: "/dash",
-    component: () => import("@/views/components/my-account/DashboardBody.vue"),
+    name: "downloads",
+    path: "/downloads",
+    component: () => import("@/views/pages/Downloads.vue"),
   },
   {
-    name: "code",
-    path: "/code",
-    component: () =>
-      import("@/views/components/my-account/AccountSettings.vue"),
+    name: "account",
+    path: "/account",
+    component: () => import("@/views/pages/AccountSettings.vue"),
+  },
+  {
+    name: "subscription",
+    path: "/subscription",
+    component: () => import("@/views/pages/Subscription.vue"),
+  },
+  {
+    name: "referfriend",
+    path: "/referfriend",
+    component: () => import("@/views/pages/ReferFriend.vue"),
   },
 ];
 

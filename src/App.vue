@@ -69,4 +69,10 @@ export default defineComponent({
   background: #f3f7fe !important;
   height: 100vh;
 }
+
+@media screen and (max-width: 992px) {
+  #app {
+    height: auto;
+  }
+}
 </style>

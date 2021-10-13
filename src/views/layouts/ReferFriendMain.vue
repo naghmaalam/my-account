@@ -15,7 +15,7 @@
         <!-- side bar -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
           <div class="mob-res-hide">
-            <PromoHeadline />
+            <ReferFriendPromoHeadline />
           </div>
           <slot></slot>
         </main>
@@ -31,12 +31,12 @@
 import { defineComponent } from "vue";
 import SideBar from "@/views/components/my-account/SideBar.vue";
 import NavBar from "@/views/components/my-account/NavBar.vue";
-import PromoHeadline from "@/views/components/my-account/PromoHeadline.vue";
+import ReferFriendPromoHeadline from "@/views/components/my-account/ReferFriendPromoHeadline.vue";
 export default defineComponent({
   components: {
     SideBar,
     NavBar,
-    PromoHeadline,
+    ReferFriendPromoHeadline,
   },
 });
 </script>

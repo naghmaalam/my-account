@@ -6,7 +6,7 @@
           <img
             src="@/assets/images/my-account/gift.png"
             alt=""
-            class="img-fluid"
+            class="img-fluid mob-res-img"
           />
         </div>
         <div class="col-md-4 pt-3">
@@ -98,6 +98,14 @@ export default {
 
   .new-price {
     text-align: left;
+  }
+
+  .mob-res-img {
+    padding-top: 1.5rem !important;
+  }
+
+  .upgrade-btn {
+    margin-bottom: 1.5rem !important;
   }
 }
 </style>
