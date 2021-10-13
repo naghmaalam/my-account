@@ -16,7 +16,7 @@ export const toast: Toast = reactive({
 });
 
 export function useToast(): {
-  actions: {
+  do: {
     show(param: Toast): void;
     error(param: Toast): void;
   };
@@ -56,6 +56,6 @@ export function useToast(): {
   }
 
   return {
-    actions: { show, error },
+    do: { show, error },
   };
 }

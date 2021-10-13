@@ -10,6 +10,16 @@
         align-items-end
       "
     >
+      <div class="navbar-toggler-container">
+        <button
+          class="navbar-toggler position-absolute d-md-none"
+          type="button"
+          aria-label="Toggle navigation"
+          @click="showSideMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
       <div class="d-flex flex-column justify-content-end align-items-end">
         <p class="loggedin pt-3">Logged in as</p>
         <p class="username pb-1">{{ userState.email }}</p>
@@ -81,24 +91,41 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useUser } from "@/hooks/useUser";
+import { userState, useUser } from "@/hooks/useUser";
+import { useSettings } from "@/hooks/useSettings";
 
 export default defineComponent({
   setup() {
     const user = useUser();
     const logout = () => {
-      user.actions.logout();
+      user.do.logout();
     };
 
     return {
-      userState: user.getters.data,
+      userState,
       logout,
+      showSideMenu: useSettings().do.sideMenu.show,
     };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.navbar-toggler-container {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  .navbar-toggler {
+    border-radius: 10px;
+    background: linear-gradient(#a215ff 0%, #5f29ff 100%);
+    color: #fff;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+}
+
 .loggedin {
   font-family: Poppins;
   font-weight: normal;

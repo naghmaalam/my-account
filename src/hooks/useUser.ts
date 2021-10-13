@@ -24,31 +24,31 @@ const UserDefault: User = {
 };
 
 // Initialize user data
-export const state = <{ user: User }>(
+const state = <{ user: User }>(
   reactive<{ user: User }>(newObj({ user: UserDefault }))
 );
 
+export const userState = computed(() => {
+  return state.user;
+});
+
 export function useUser(): {
-  actions: {
+  do: {
     login: (a: LoginDetails) => Promise<void>;
     logout: () => void;
     isAuthenticated: ComputedRef<boolean>;
     init: () => void;
-    state: { user: User };
     changeLanguage: (a: SupportedLanguages) => void;
   };
-  getters: {
-    data: ComputedRef<User>;
-  };
 } {
-  // actions
+  // do
   /////////////////////////////////////////////////////////////////////
   const login = async (loginDetails: LoginDetails) => {
     const toast = useToast();
     try {
       const response = <any>await api("login", Method.POST, loginDetails);
       console.log(response);
-      toast.actions.show({ text: response.message });
+      toast.do.show({ text: response.message });
       console.log("waits..");
       setTimeout(() => {
         resetUser();
@@ -64,7 +64,7 @@ export function useUser(): {
       }, 1000);
     } catch (error) {
       const err = error as Error;
-      toast.actions.error({ text: err.message });
+      toast.do.error({ text: err.message });
       // console.error("useUser() error", err.name);
     }
   };
@@ -109,18 +109,15 @@ export function useUser(): {
     i18n.global.locale = lang;
   };
   /////////////////////////////////////////////////////////////////////
-  // actions
+  // do
 
-  // getters
+  // get
   /////////////////////////////////////////////////////////////////////
-  const data = computed(() => {
-    return state.user;
-  });
+
   /////////////////////////////////////////////////////////////////////
-  // getters
+  // get
 
   return {
-    actions: { state, login, logout, isAuthenticated, init, changeLanguage },
-    getters: { data },
+    do: { login, logout, isAuthenticated, init, changeLanguage },
   };
 }

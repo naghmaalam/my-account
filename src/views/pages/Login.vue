@@ -169,7 +169,7 @@ export default defineComponent({
         email: loginDetails.email,
       });
       if (vldt.hasErrors()) {
-        toast.actions.error({ text: t(vldt.getError()) });
+        toast.do.error({ text: t(vldt.getError()) });
       } else {
         isEmailShown.value = false;
         isPasswordShown.value = true;
@@ -182,10 +182,10 @@ export default defineComponent({
         password: loginDetails.password,
       });
       if (vldt.hasErrors()) {
-        toast.actions.error({ text: t(vldt.getError()) });
+        toast.do.error({ text: t(vldt.getError()) });
       } else {
         isLoggingIn.value = true;
-        await user.actions.login({
+        await user.do.login({
           username: loginDetails.email,
           password: loginDetails.password,
           device_code: "device_code_my_account",

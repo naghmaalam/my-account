@@ -28,7 +28,8 @@ import Fade from "@/views/components/transitions/Fade.vue";
 
 import Login from "@/views/pages/Login.vue";
 
-import { useUser } from "@/hooks/useUser";
+import { userState, useUser } from "@/hooks/useUser";
+import { useSettings } from "@/hooks/useSettings";
 export default defineComponent({
   components: {
     Toast,
@@ -38,25 +39,32 @@ export default defineComponent({
   setup() {
     const { locale } = useI18n({ useScope: "global" });
     const user = useUser();
-    user.actions.init();
+    const settings = useSettings();
+
+    // Initialize
+    //////////////////////////////////////
+    user.do.init();
+    settings.do.init();
+    //////////////////////////////////////
+    // Initialize
 
     // const loading = ref(true);
 
     // set language base on store
-    if (user.getters.data.value.language.selected === "cn") {
+    if (userState.value.language.selected === "cn") {
       locale.value = "cn";
     }
 
     const logout = () => {
-      user.actions.logout();
+      user.do.logout();
     };
 
     const changeLang = () => {
-      user.actions.changeLanguage("cn");
+      user.do.changeLanguage("cn");
     };
 
     return {
-      userState: user.getters.data,
+      userState,
       logout,
       changeLang,
     };
