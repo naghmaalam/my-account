@@ -140,4 +140,8 @@ export default {
   filter: drop-shadow(0px 8px 14px rgba(214, 225, 243, 0.64));
   border-radius: 10px;
 }
+
+.account-downloads {
+  padding-top: 1rem !important;
+}
 </style>

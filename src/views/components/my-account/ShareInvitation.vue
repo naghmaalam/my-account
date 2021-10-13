@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid account-bg m-0 p-0">
+  <div class="container-fluid m-0 p-0">
     <div class="container m-0">
       <!-- toggle button -->
 
@@ -172,12 +172,6 @@ export default {
   color: #5b5970;
 }
 
-.account-bg {
-  width: 100vw;
-  height: 100vh;
-  background: #f3f7fe;
-}
-
 .account-loggedin {
   background: #fff;
 }
@@ -231,7 +225,7 @@ export default {
   font-family: Poppins;
   font-weight: bold;
   font-size: 2rem;
-  line-height: 3.5rem;
+  line-height: 2.5rem;
   text-align: left;
   color: #383361;
 }

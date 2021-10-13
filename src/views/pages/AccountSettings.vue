@@ -1,22 +1,22 @@
 <template>
   <Main>
-    <DashboardBody />
+    <AccountSettings />
   </Main>
 </template>
-
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
 
 import Main from "@/views/layouts/Main.vue";
-import DashboardBody from "@/views/components/my-account/DashboardBody.vue";
+import AccountSettings from "@/views/components/my-account/AccountSettings.vue";
 
 export default defineComponent({
   components: {
     Main,
-    DashboardBody,
+    AccountSettings,
   },
   setup() {
     return {};
   },
 });
 </script>
+<style scoped></style>

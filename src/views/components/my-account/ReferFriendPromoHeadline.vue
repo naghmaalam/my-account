@@ -1,7 +1,7 @@
 <template>
   <!-- headlines for promo -->
   <div class="container mt-5">
-    <div class="row pl-5">
+    <div class="row">
       <div class="col-md-2 ml-3 pt-2 pb-2 pl-5">
         <img
           src="@/assets/images/account-settings-refer-friend/open-gift.png"

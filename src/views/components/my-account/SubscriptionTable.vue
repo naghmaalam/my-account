@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid account-bg m-0 p-0 hide-mobile">
+  <div class="container-fluid m-0 p-0 hide-mobile">
     <div class="container-fluid m-0">
       <div class="container">
         <div class="row">
@@ -352,11 +352,11 @@ export default {
   opacity: 0.19;
 }
 
-.account-bg {
+/* .account-bg {
   background: #f3f7fe;
   width: 100%;
   height: 100vh;
-}
+} */
 
 .subscription {
   background: #fff;
@@ -423,6 +423,7 @@ export default {
 
   .account-subscription {
     font-size: 1rem;
+    padding-top: 2rem !important;
   }
 
   .active-subscription {

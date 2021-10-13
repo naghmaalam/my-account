@@ -26,6 +26,7 @@ import { defineComponent, ref } from "vue";
 import { toasts, ToastType } from "@/hooks/useToast";
 
 export default defineComponent({
+  props: ["hey"],
   setup() {
     const showTest = ref(true);
     const getClass = (type: ToastType) => {

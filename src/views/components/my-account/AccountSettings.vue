@@ -54,7 +54,7 @@
               Swoshs VPN.
             </div>
           </div>
-          <div class="col-md-6 pl-5 pr-5">
+          <div class="col-md-6 p-0">
             <div
               class="
                 col-md-4
