@@ -1,35 +1,36 @@
 <template>
-  <div class="conatainer">
-    <div class="fu-rf-bg"></div>
-  </div>
-  <!-- <div class="container-fluid m-0 p-0">
-    <div class="container-fluid m-0">
-      <div class="account-header d-flex justify-content-center">
-        <div class="container pt-5 mt-5 pl-5 ml-5">
-          <div class="row ml-5 pl-5">
-            <div class="col">
-              <div class="container">
-                <img
-                  src="@/assets/images/account-settings-refer-friend/free-user-rf.png"
-                  class="free-user-rf img-fluid"
-                  alt=""
-                />
-                <div class="fu-rf-title text-center pt-4">
-                  To get a reward please upgrade your account
-                </div>
-                <div class="fu-rf-subtitle pt-5">
-                  Your current package is not supported on this feature
-                </div>
-                <div class="fu-rf-btn pt-5">
-                  <div class="upgrade-btn">Upgrade</div>
-                </div>
-              </div>
+  <div class="container account-content">
+    <div class="row">
+      <div class="my-devices col-md-6 my-2 pr-3 pl-3 mt-5">
+        <div class="d-flex flex-row justify-content-center">
+          <div
+            class="
+              d-flex
+              flex-column
+              align-items-center
+              justify-content-center
+              mt-5
+            "
+          >
+            <img
+              src="@/assets/images/account-settings-refer-friend/free-user-rf.png"
+              alt=""
+              class="rf-image"
+            />
+            <div class="devices-title pt-3 px-3">
+              To get a reward please upgrade your account
+            </div>
+            <div class="devices-subtitle px-3">
+              Your current package is not supported on this feature
+            </div>
+            <div class="add-device text-center mt-3 pb-5">
+              <button class="devices-btn pt-2 pb-2">Upgrade</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script>
@@ -41,66 +42,113 @@ export default {
 </script>
 
 <style scoped>
-.free-user-rf {
+.add-device {
   width: 100%;
+  color: #ffff;
 }
 
-.fu-rf-bg {
-  width: 50%;
+.active-button {
+  background: linear-gradient(#a215ff 0%, #5f29ff 100%);
+}
+
+.my-devices {
   border-radius: 10px;
-  background: #fff;
-  box-shadow: 0px 8px 14px rgba(214, 225, 243, 0.64);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(243, 247, 254, 1) 50%
+  );
 }
 
-.fu-rf-title {
+.account-info-title {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 50px;
+  text-align: left;
+  color: #383361;
+}
+
+.row-line {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #d4e3fc;
+}
+
+.account-info {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 0.7rem;
+  line-height: 1rem;
+  text-align: left;
+  color: #383361;
+}
+
+.rf-image {
+  width: 50%;
+}
+
+.devices-title {
   font-family: Poppins;
   font-weight: bold;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   line-height: 2rem;
   text-align: center;
   color: #383361;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  /* width: 35rem; */
-  transform: translate(-50%, -50%);
 }
 
-.fu-rf-subtitle {
+.devices-subtitle {
   font-family: Poppins;
-  font-weight: 400;
-  font-size: 0.9rem;
-  line-height: 1.2rem;
+  font-weight: 500;
+  font-size: 0.8rem;
+  line-height: 2rem;
   text-align: center;
   color: #383361;
-  border: 1px solid rgba(0, 0, 0, 0);
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  /* width: 20rem; */
-  transform: translate(-50%, -50%);
 }
 
-.fu-rf-btn {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  /* width: 35rem; */
-  transform: translate(-50%, -50%);
-}
-
-.upgrade-btn {
-  /* width: 161px;
-    height: 53px; */
-  width: 6rem;
+.devices-btn {
   border-radius: 10px;
   background: linear-gradient(#a215ff 0%, #5f29ff 100%);
-  color: #fff;
+  color: #ffff;
+  font-family: Poppins;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-align: center;
+  border: 1px solid #a08beb;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.devices-row-line {
+  width: auto;
+  height: 0px;
+  background: transparent;
+  border: 1px solid #d4e3fc;
+}
+
+.devices-name {
   font-family: Poppins;
   font-weight: 600;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 0.5rem;
+  font-size: 0.8rem;
+  text-align: left;
+  color: #383361;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.devices-logout {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-align: right;
+  color: #5c7bf7;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+@media screen and (max-width: 992px) {
+  .devices-btn {
+    font-size: 0.6rem;
+  }
 }
 </style>

@@ -66,7 +66,7 @@
               "
             >
               <img
-                src="@/assets/images/account-settings/Swoshs-logo.png"
+                src="@/assets/images/account-settings/as-free-user.png"
                 class="img-fluid swoshs-logo"
                 alt=""
               />
