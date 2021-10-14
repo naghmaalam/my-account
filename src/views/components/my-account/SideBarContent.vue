@@ -134,15 +134,7 @@ export default defineComponent({
     const router = useRouter();
     const redirect = (page: string) => {
       useSettings().do.sideMenu.hide();
-
-      // if in mobile then add delay
-      if (props.isMobile) {
-        setTimeout(() => {
-          router.push({ name: page });
-        }, 150);
-      } else {
-        router.push({ name: page });
-      }
+      router.push({ name: page });
     };
     return {
       redirect,
