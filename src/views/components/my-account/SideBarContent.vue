@@ -12,7 +12,10 @@
       <div class="container sidebar-menus">
         <div class="row active-button">
           <div class="col">
-            <div class="d-flex flex-row align-items-start">
+            <div
+              class="d-flex flex-row align-items-start"
+              @click="redirect('home')"
+            >
               <div class="px-2 mt-4">
                 <i class="flaticon-house icon-color"></i>
               </div>
@@ -27,10 +30,10 @@
             </div>
           </div>
         </div>
-        <!-- <a href="devices.html"></a> -->
+
         <div class="row">
           <div class="col">
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-row" @click="redirect('devices')">
               <div class="px-2 mt-4">
                 <i class="flaticon-responsive icon-color"></i>
               </div>
@@ -46,69 +49,66 @@
           </div>
         </div>
 
-        <a href="downloads.html">
-          <div class="row">
-            <div class="col">
-              <div class="d-flex flex-row">
-                <div class="px-2 mt-4">
-                  <i class="flaticon-cloud-computing icon-color"></i>
-                </div>
-                <div class="dashboard d-flex flex-column">
-                  <h5 class="mt-4">Downloads</h5>
-                  <p>
-                    Get Swoshs VPN with specific platform of your choice, from
-                    Android, iOS, Windows etc.
-                  </p>
-                  <div class="borderline mt-4"></div>
-                </div>
+        <div class="row">
+          <div class="col">
+            <div class="d-flex flex-row" @click="redirect('downloads')">
+              <div class="px-2 mt-4">
+                <i class="flaticon-cloud-computing icon-color"></i>
+              </div>
+              <div class="dashboard d-flex flex-column">
+                <h5 class="mt-4">Downloads</h5>
+                <p>
+                  Get Swoshs VPN with specific platform of your choice, from
+                  Android, iOS, Windows etc.
+                </p>
+                <div class="borderline mt-4"></div>
               </div>
             </div>
           </div>
-        </a>
-        <a href="subscription.html">
-          <div class="row">
-            <div class="col">
-              <div class="d-flex flex-row">
-                <div class="px-2 mt-4">
-                  <i
-                    class="flaticon-calendar-interface-symbol-tool icon-color"
-                  ></i>
-                </div>
-                <div class="dashboard d-flex flex-column">
-                  <h5 class="mt-4">Subscription</h5>
-                  <p>
-                    Where you can check the overview details of your
-                    subscription and order history.
-                  </p>
-                  <div class="borderline mt-4"></div>
-                </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="d-flex flex-row" @click="redirect('subscription')">
+              <div class="px-2 mt-4">
+                <i
+                  class="flaticon-calendar-interface-symbol-tool icon-color"
+                ></i>
+              </div>
+              <div class="dashboard d-flex flex-column">
+                <h5 class="mt-4">Subscription</h5>
+                <p>
+                  Where you can check the overview details of your subscription
+                  and order history.
+                </p>
+                <div class="borderline mt-4"></div>
               </div>
             </div>
           </div>
-        </a>
-        <a href="account-settings-refer-friend.html">
-          <div class="row">
-            <div class="col">
-              <div class="d-flex flex-row">
-                <div class="px-2 mt-4">
-                  <i
-                    class="flaticon-calendar-interface-symbol-tool icon-color"
-                  ></i>
-                </div>
-                <div class="dashboard d-flex flex-column">
-                  <h5 class="mt-4">
-                    Refer a Friend <span class="promo px-2">promo</span>
-                  </h5>
-                  <p>
-                    Share your unique referral link with friends via email, FB,
-                    or whatever works for you.
-                  </p>
-                  <div class="borderline mt-4"></div>
-                </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="d-flex flex-row" @click="redirect('referfriend')">
+              <div class="px-2 mt-4">
+                <i
+                  class="flaticon-calendar-interface-symbol-tool icon-color"
+                ></i>
+              </div>
+              <div class="dashboard d-flex flex-column">
+                <h5 class="mt-4">
+                  Refer a Friend <span class="promo px-2">promo</span>
+                </h5>
+                <p>
+                  Share your unique referral link with friends via email, FB, or
+                  whatever works for you.
+                </p>
+                <div class="borderline mt-4"></div>
               </div>
             </div>
           </div>
-        </a>
+        </div>
+
         <div class="row pb-5">
           <div class="col pb-5">
             <div class="pb-5 mb-2"></div>
@@ -118,6 +118,24 @@
     </div>
   </div>
 </template>
+
+<script>
+import { useRouter } from "vue-router";
+
+export default {
+  setup() {
+    const router = useRouter();
+
+    const redirect = (page) => {
+      router.push({ name: page });
+    };
+
+    return {
+      redirect,
+    };
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .sidebar-menus {

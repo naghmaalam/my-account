@@ -1,3 +1,5 @@
 module.exports = {
-  productionSourceMap: true,
+  configureWebpack: {
+    devtool: "eval-source-map",
+  },
 };

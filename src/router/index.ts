@@ -36,6 +36,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/referfriend",
     component: () => import("@/views/pages/ReferFriend.vue"),
   },
+  {
+    name: "test",
+    path: "/test",
+    component: () =>
+      import("@/views/components/freeUser/FreeUserReferFriend.vue"),
+  },
 ];
 
 const router = createRouter({
