@@ -1,9 +1,6 @@
 import { Locale } from "@/types/Locale";
 
-// uncomment if you need to check translation
-// const cn: Locale = {
-
-const cn = {
+const cn: Locale = {
   create_account: "创建账户",
   already_account: "已有账户",
   online_access: "在线访问",
@@ -370,34 +367,35 @@ const cn = {
 
   // No Chinese translation yet
   ///////////////////////////////////////////////////////////
-  copied_to_clipboard: "Copied to clipboard CN",
-  error_copying_to_clipboard: "Error copying to clipboard CN",
-  error_password_same_with_email: "Password is similar with email CN",
+  copied_to_clipboard: "Copied to clipboard_CN",
+  error_copying_to_clipboard: "Error copying to clipboard_CN",
+  error_password_same_with_email: "Password is similar with email_CN",
   error_password_same_with_current:
-    "Your new password is similar with your current one CN",
-  unknown_device: "Unknown Device CN",
-  reset_password: "Reset Password CN",
-  sure_logout: "Are you sure you want to logout? CN",
-  yes: "Yes CN",
-  no: "No CN",
-  premium_users_only: "PREMIUM USERS ONLY! CN",
-  iphone: "Iphone CN",
-  android: "Android CN",
-  quick_disconnecting: "DISCONNECTING CN",
-  loading: "loading CN",
-  dark: "Dark CN",
-  light: "Light CN",
-  trial_ends_in: "Trial ends in CN",
+    "Your new password is similar with your current one_CN",
+  unknown_device: "Unknown Device_CN",
+  reset_password: "Reset Password_CN",
+  sure_logout: "Are you sure you want to logout?_CN",
+  yes: "Yes_CN",
+  no: "No_CN",
+  premium_users_only: "PREMIUM USERS ONLY!_CN",
+  iphone: "Iphone_CN",
+  android: "Android_CN",
+  quick_disconnecting: "DISCONNECTING_CN",
+  loading: "loading_CN",
+  dark: "Dark_CN",
+  light: "Light_CN",
+  trial_ends_in: "Trial ends in_CN",
 
-  get_code: "Get Code CN",
-  current_password: "Current Password CN",
-  enter_current_password: "Enter Current Password CN",
-  new_password: "Enter New Password CN",
+  get_code: "Get Code_CN",
+  current_password: "Current Password_CN",
+  enter_current_password: "Enter Current Password_CN",
+  new_password: "Enter New Password_CN",
 
-  enter_new_password: "Enter your new password  CN",
-  retype_password: "Retype Password CN",
-  enter_retype_password: "Retype your Password CN",
-  hi_there: "Hi there! CN",
+  enter_new_password: "Enter your new password _CN",
+  retype_password: "Retype Password_CN",
+  enter_retype_password: "Retype your Password_CN",
+  hi_there: "Hi there!_CN",
+  email_address: "Email Address_CN",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

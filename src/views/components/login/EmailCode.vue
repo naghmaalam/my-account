@@ -1,51 +1,81 @@
 <template>
-  <main class="container-fluid pr-bg">
-    <div class="container col col-md-4 login-box text-center pt-5 mt-5">
-      <div class="text-center mob-res-header mt-5">
-        <img
-          src="@/assets/images/password-recovery/logo-swoshs.png"
-          class="img-fluid mob-res-logo"
-          alt="swoshs-logo"
+  <div>
+    <div class="login-title text-center">
+      {{ $t("login_with_6_digit_code") }}
+    </div>
+    <form action="">
+      <div class="reset-email-main-input mt-4 pl-5 pr-5">
+        <input
+          type="text"
+          class="form-control email pt-4 pb-4"
+          :placeholder="$t('email_address')"
+          v-model="email"
         />
-        <div class="login-title text-center">Log In with 6 digits</div>
-        <form action="">
-          <div class="reset-email-main-input mt-4 pl-5 pr-5">
-            <input
-              type="text"
-              class="form-control email pt-4 pb-4"
-              placeholder="Email address"
-            />
-          </div>
-        </form>
-        <div class="login-continue-btn mt-3">
-          <a href="enter-login-with-code.html"
-            ><div class="login-btn ml-5 mr-5 pt-3 pb-3">get code</div></a
-          >
+      </div>
+    </form>
+    <div class="login-continue-btn mt-3" @click="submit">
+      <a href="#">
+        <div class="login-btn ml-5 mr-5 pt-3 pb-3">
+          <span
+            v-if="isLoading"
+            class="spinner-border spinner-border-sm mr-2"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          {{ $t("get_code") }}
         </div>
-        <a href="login.html"
-          ><div class="pr-back-to-login text-center mt-5 pt-3 pb-5">
-            Log in with password
-          </div></a
-        >
-      </div>
+      </a>
     </div>
-
-    <div class="container login-footer pt-5 mt-5 text-center">
-      <div class="row mob-res-footer pt-5 mt-5">
-        <div class="col-md-4">support@swoshsvpn.com</div>
-        <div class="col-md-4">Terms of Service</div>
-        <div class="col-md-4">Privacy Policy</div>
+    <a href="#" @click.prevent="updateSection('EmailPassword')">
+      <div class="pr-back-to-login text-center mt-5 pt-3">
+        {{ $t("login_with_password") }}
       </div>
-    </div>
-  </main>
+    </a>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, inject, ref } from "vue";
+import { useI18n } from "vue-i18n";
+import { UpdateSection } from "@/types/Section";
+import { useValidation } from "@/modules/validation";
 
+import { useUser } from "@/hooks/useUser";
+import { useToast } from "@/hooks/useToast";
 export default defineComponent({
-  setup() {
-    return {};
+  setup(props, context) {
+    const { t } = useI18n({ useScope: "global" });
+    const user = useUser();
+    const toast = useToast();
+    const vldt = useValidation();
+    const updateSection = inject("updateSection") as UpdateSection;
+    const email = ref("");
+    const isLoading = ref(false);
+
+    const submit = async () => {
+      // validate email
+      vldt.checkErrors({
+        email: email.value,
+      });
+      if (vldt.hasErrors()) {
+        toast.do.error(t(vldt.getError()));
+      } else {
+        isLoading.value = true;
+        const success = await user.do.emailCode(email.value);
+        isLoading.value = false;
+        if (success) {
+          context.emit("update:email", email.value);
+          updateSection("EnterCode");
+        }
+      }
+    };
+
+    return {
+      updateSection,
+      email,
+      isLoading,
+      submit,
+    };
   },
 });
 </script>

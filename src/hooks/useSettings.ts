@@ -39,45 +39,43 @@ export function useSettings(): {
 } {
   // do
   /////////////////////////////////////////////////////////////////////
-  const resetSettings = () => {
+  function resetSettings() {
     console.log("resetSettings()");
     state.settings = JSON.parse(JSON.stringify(SettingsDefault));
     sessionStorage.removeItem("settings");
     sessionStorage.setItem("settings", JSON.stringify(SettingsDefault));
+  }
+
+  const init = () => {
+    state.settings.mobile.sideMenu = false;
+    // check if storage has settings data if not then initialize
+    const settingsSessionData = sessionStorage.getItem("settings");
+    if (settingsSessionData) {
+      state.settings = JSON.parse(settingsSessionData);
+    } else {
+      resetSettings();
+    }
+
+    // add watcher to settings to save updates to session storage
+    watch(
+      () => state.settings,
+      (val) => {
+        console.log("settings changed");
+        sessionStorage.setItem("settings", JSON.stringify(val));
+      },
+      { deep: true }
+    );
   };
 
-  const doo = {
-    init: () => {
-      state.settings.mobile.sideMenu = false;
-      // check if storage has settings data if not then initialize
-      const settingsSessionData = sessionStorage.getItem("settings");
-      if (settingsSessionData) {
-        state.settings = JSON.parse(settingsSessionData);
-      } else {
-        resetSettings();
-      }
-
-      // add watcher to settings to save updates to session storage
-      watch(
-        () => state.settings,
-        (val) => {
-          console.log("settings changed");
-          sessionStorage.setItem("settings", JSON.stringify(val));
-        },
-        { deep: true }
-      );
+  const sideMenu = {
+    toggle: () => {
+      state.settings.mobile.sideMenu = !state.settings.mobile.sideMenu;
     },
-    resetSettings: resetSettings,
-    sideMenu: {
-      toggle: () => {
-        state.settings.mobile.sideMenu = !state.settings.mobile.sideMenu;
-      },
-      show: () => {
-        state.settings.mobile.sideMenu = true;
-      },
-      hide: () => {
-        state.settings.mobile.sideMenu = false;
-      },
+    show: () => {
+      state.settings.mobile.sideMenu = true;
+    },
+    hide: () => {
+      state.settings.mobile.sideMenu = false;
     },
   };
 
@@ -95,7 +93,7 @@ export function useSettings(): {
   // get
 
   return {
-    do: doo,
+    do: { init, sideMenu },
     get,
   };
 }

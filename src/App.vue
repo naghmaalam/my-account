@@ -2,9 +2,9 @@
   <!-- <button type="button" class="btn btn-primary" @click="logout">Logout</button> -->
   <!-- <button type="button" class="btn btn-primary" @click="changeLang">Change lang </button> -->
 
-  <template v-if="userState.authenticated">
-    <router-view />
-  </template>
+  <Fade v-if="stateUser.authenticated">
+    <Main />
+  </Fade>
 
   <Fade v-else>
     <Login />
@@ -22,13 +22,15 @@ import Toast from "@/views/components/Toast.vue";
 import Fade from "@/views/components/transitions/Fade.vue";
 
 import Login from "@/views/pages/Login.vue";
+import Main from "@/views/layouts/Main.vue";
 
-import { userState, useUser } from "@/hooks/useUser";
+import { stateUser, useUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
 export default defineComponent({
   components: {
     Toast,
     Login,
+    Main,
     Fade,
   },
   setup() {
@@ -46,7 +48,7 @@ export default defineComponent({
     // const loading = ref(true);
 
     // set language base on store
-    if (userState.value.language.selected === "cn") {
+    if (stateUser.value.language.selected === "cn") {
       locale.value = "cn";
     }
 
@@ -59,7 +61,7 @@ export default defineComponent({
     };
 
     return {
-      userState,
+      stateUser,
       logout,
       changeLang,
     };

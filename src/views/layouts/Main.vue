@@ -38,10 +38,6 @@
       </div>
     </div>
   </div>
-  <!-- <main
-    class="my-account d-flex flex-row justify-content-start align-items-start"
-  >    
-  </main> -->
 </template>
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";

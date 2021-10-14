@@ -17,19 +17,24 @@ export const toast: Toast = reactive({
 
 export function useToast(): {
   do: {
-    show(param: Toast): void;
-    error(param: Toast): void;
+    show(text: string): void;
+    error(text: string): void;
   };
 } {
-  const show = (toast: Toast) => {
-    toasts.value = [toast, ...toasts.value];
+  const show = (text: string) => {
+    toasts.value = [
+      {
+        text,
+      },
+      ...toasts.value,
+    ];
     startPopping();
   };
 
-  const error = (toast: Toast) => {
+  const error = (text: string) => {
     toasts.value = [
       {
-        ...toast,
+        text,
         type: "ERROR",
       },
       ...toasts.value,

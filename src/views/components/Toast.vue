@@ -42,6 +42,9 @@ export default defineComponent({
 });
 </script>
 <style scoped>
+.toast {
+  min-width: 200px;
+}
 .toasts-enter-from {
   opacity: 0;
   transform: translateX(10px);

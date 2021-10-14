@@ -11,11 +11,15 @@
             <img
               src="@/assets/images/password-recovery/logo-swoshs.png"
               class="img-fluid mob-res-logo"
+              style="min-height: 65px"
               alt="swoshs-logo"
             />
 
-            <EmailPassword v-if="section == 'EmailPassword'" />
-            <LoginCodeEmail v-if="section == 'LoginCodeEmail'" />
+            <keep-alive>
+              <Fade>
+                <component v-model:email="email" :is="section" />
+              </Fade>
+            </keep-alive>
           </div>
         </div>
         <!-- </div> -->
@@ -33,22 +37,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, provide } from "vue";
+import { defineComponent, ref, provide, onMounted } from "vue";
+import { Section, UpdateSection } from "@/types/Section";
 import EmailPassword from "@/views/components/login/EmailPassword.vue";
-import LoginCodeEmail from "@/views/components/login/LoginCodeEmail.vue";
+import EmailCode from "@/views/components/login/EmailCode.vue";
+import EnterCode from "@/views/components/login/EnterCode.vue";
+import Fade from "@/views/components/transitions/Fade.vue";
+
 export default defineComponent({
   components: {
     EmailPassword,
-    LoginCodeEmail,
+    EmailCode,
+    EnterCode,
+    Fade,
   },
   setup() {
-    type Section = "EmailPassword" | "LoginCodeEmail";
     const section = ref<Section>("EmailPassword");
+    const email = ref("");
 
     provide("section", section);
+    const updateSection: UpdateSection = (newSection: Section) => {
+      section.value = newSection;
+    };
+    provide("updateSection", updateSection);
+
+    const showSlot = ref(false);
+    onMounted(() => {
+      setTimeout(() => {
+        showSlot.value = true;
+      }, 1000);
+    });
 
     return {
       section,
+      showSlot,
+      email,
     };
   },
 });

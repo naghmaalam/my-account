@@ -28,27 +28,39 @@ const state = <{ user: User }>(
   reactive<{ user: User }>(newObj({ user: UserDefault }))
 );
 
-export const userState = computed(() => {
+export const stateUser = computed(() => {
   return state.user;
 });
 
 export function useUser(): {
   do: {
-    login: (a: LoginDetails) => Promise<void>;
+    login: (email: string, password: string) => Promise<void>;
     logout: () => void;
     isAuthenticated: ComputedRef<boolean>;
     init: () => void;
     changeLanguage: (a: SupportedLanguages) => void;
+    emailCode: (email: string) => Promise<boolean>;
+    loginCode: (email: string, code: string) => Promise<boolean>;
   };
 } {
+  const toast = useToast();
   // do
   /////////////////////////////////////////////////////////////////////
-  const login = async (loginDetails: LoginDetails) => {
-    const toast = useToast();
+  const login = async (email: string, password: string) => {
     try {
+      const loginDetails: LoginDetails = {
+        username: email,
+        password: password,
+        device_code: "device_code_my_account",
+        device_name: "device_name_my_account",
+        device_type: "ios, android, windows, mac",
+        myaccount: true,
+        lang: "en",
+        version: "version",
+      };
       const response = <any>await api("login", Method.POST, loginDetails);
       console.log(response);
-      toast.do.show({ text: response.message });
+      toast.do.show(response.message);
       console.log("waits..");
       setTimeout(() => {
         resetUser();
@@ -64,13 +76,53 @@ export function useUser(): {
       }, 1000);
     } catch (error) {
       const err = error as Error;
-      toast.do.error({ text: err.message });
+      toast.do.error(err.message);
       // console.error("useUser() error", err.name);
     }
   };
 
   const logout = () => {
     resetUser();
+  };
+
+  const emailCode = async (email: string) => {
+    try {
+      await api("login/with/code", Method.POST, {
+        username: email,
+      });
+      return true;
+    } catch (error) {
+      const err = error as Error;
+      toast.do.error(err.message);
+      return false;
+    }
+  };
+
+  const loginCode = async (email: string, code: string) => {
+    try {
+      const response = <any>await api("login/with/code", Method.POST, {
+        username: email,
+        login_code: code,
+      });
+      console.log("waits..");
+      setTimeout(() => {
+        resetUser();
+        state.user.authenticated = true;
+        state.user.me = response;
+        state.user.email = response.email;
+        state.user.language.selected = <SupportedLanguages>(
+          response.preferred_language
+        );
+
+        // state.user.asd = "asd";
+        console.log("state.user = ", state.user);
+      }, 1000);
+      return true;
+    } catch (error) {
+      const err = error as Error;
+      toast.do.error(err.message);
+      return false;
+    }
   };
 
   const resetUser = () => {
@@ -118,6 +170,14 @@ export function useUser(): {
   // get
 
   return {
-    do: { login, logout, isAuthenticated, init, changeLanguage },
+    do: {
+      login,
+      logout,
+      isAuthenticated,
+      init,
+      changeLanguage,
+      emailCode,
+      loginCode,
+    },
   };
 }

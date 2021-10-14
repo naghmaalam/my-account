@@ -22,7 +22,7 @@
       </div>
       <div class="d-flex flex-column justify-content-end align-items-end">
         <p class="loggedin pt-3">Logged in as</p>
-        <p class="username pb-1">{{ userState.email }}</p>
+        <p class="username pb-1">{{ stateUser.email }}</p>
       </div>
       <div class="dropdown">
         <a href="javascript:void(0)" class="dropbtn">
@@ -91,7 +91,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { userState, useUser } from "@/hooks/useUser";
+import { stateUser, useUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
 
 export default defineComponent({
@@ -102,7 +102,7 @@ export default defineComponent({
     };
 
     return {
-      userState,
+      stateUser,
       logout,
       showSideMenu: useSettings().do.sideMenu.show,
     };
