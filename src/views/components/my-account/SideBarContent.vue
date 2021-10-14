@@ -151,24 +151,6 @@ export default defineComponent({
 });
 </script>
 
-<script>
-import { useRouter } from "vue-router";
-
-export default {
-  setup() {
-    const router = useRouter();
-
-    const redirect = (page) => {
-      router.push({ name: page });
-    };
-
-    return {
-      redirect,
-    };
-  },
-};
-</script>
-
 <style lang="scss" scoped>
 .sidebar-menus {
   height: 85vh;

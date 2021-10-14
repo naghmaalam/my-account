@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "test",
     path: "/test",
     component: () =>
-      import("@/views/components/freeUser/FreeUserReferFriend.vue"),
+      import("@/views/components/freeUser/FreeUserAccountSettings.vue"),
   },
 ];
 

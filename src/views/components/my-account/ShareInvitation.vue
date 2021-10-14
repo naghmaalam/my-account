@@ -429,5 +429,23 @@ export default {
   .rf-title {
     font-size: 1rem;
   }
+
+  .flaticon-link {
+    padding-left: 0rem !important;
+  }
+
+  .rf-link {
+    font-size: 0.6rem;
+  }
+
+  .as-input-email {
+    font-size: 0.8rem;
+  }
+
+  .link-btn {
+    font-size: 0.8rem;
+    padding-left: 0.25rem !important;
+    padding-right: 00.25rem !important;
+  }
 }
 </style>
