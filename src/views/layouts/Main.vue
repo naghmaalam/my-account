@@ -18,12 +18,22 @@
           class="col-md-9 ml-sm-auto col-lg-10 px-md-4"
           @click="hideSideMenu"
         >
-          <PromoHeadline />
+          <!-- for meta customComponents -->
+          <!-- //////////////////////////////////////////////// -->
           <Fade>
-            <div>
-              <slot></slot>
-            </div>
+            <ReferFriendPromoHeadline
+              v-if="customComponents?.headline === 'ReferFriendPromoHeadline'"
+            />
+            <PromoHeadline v-else />
           </Fade>
+          <!-- //////////////////////////////////////////////// -->
+          <!-- for meta customComponents -->
+
+          <router-view v-slot="{ Component }">
+            <Fade>
+              <component :is="Component" />
+            </Fade>
+          </router-view>
         </main>
       </div>
     </div>
@@ -34,7 +44,8 @@
   </main> -->
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 
 import { useSettings } from "@/hooks/useSettings";
 import Fade from "@/views/components/transitions/Fade.vue";
@@ -42,11 +53,13 @@ import Fade from "@/views/components/transitions/Fade.vue";
 import SideBar from "@/views/components/my-account/SideBar.vue";
 import NavBar from "@/views/components/my-account/NavBar.vue";
 import PromoHeadline from "@/views/components/my-account/PromoHeadline.vue";
+import ReferFriendPromoHeadline from "@/views/components/my-account/ReferFriendPromoHeadline.vue";
 export default defineComponent({
   components: {
     SideBar,
     NavBar,
     PromoHeadline,
+    ReferFriendPromoHeadline,
     Fade,
   },
   setup() {
@@ -56,9 +69,16 @@ export default defineComponent({
         showSlot.value = true;
       }, 1000);
     });
+
+    const route = useRoute();
+    const customComponents = computed(
+      () => route.meta.customComponents ?? null
+    );
+
     return {
       hideSideMenu: useSettings().do.sideMenu.hide,
       showSlot,
+      customComponents,
     };
   },
 });

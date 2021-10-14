@@ -1,16 +1,14 @@
 <template>
-  <Main>
+  <div>
     <DevicesTable />
-  </Main>
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
-import Main from "@/views/layouts/Main.vue";
 import DevicesTable from "@/views/components/my-account/DevicesTable.vue";
 
 export default defineComponent({
   components: {
-    Main,
     DevicesTable,
   },
   setup() {

@@ -14,10 +14,14 @@
         <!-- ////////////////////////////////////////////////////////////////////////// -->
         <!-- side bar -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-          <div class="mob-res-hide">
+          <!-- <div class="mob-res-hide">
             <ReferFriendPromoHeadline />
-          </div>
-          <slot></slot>
+          </div> -->
+          <router-view v-slot="{ Component }">
+            <Fade>
+              <component :is="Component" />
+            </Fade>
+          </router-view>
         </main>
       </div>
     </div>
@@ -31,12 +35,14 @@
 import { defineComponent } from "vue";
 import SideBar from "@/views/components/my-account/SideBar.vue";
 import NavBar from "@/views/components/my-account/NavBar.vue";
-import ReferFriendPromoHeadline from "@/views/components/my-account/ReferFriendPromoHeadline.vue";
+import Fade from "@/views/components/transitions/Fade.vue";
+// import ReferFriendPromoHeadline from "@/views/components/my-account/ReferFriendPromoHeadline.vue";
 export default defineComponent({
   components: {
     SideBar,
     NavBar,
-    ReferFriendPromoHeadline,
+    Fade,
+    // ReferFriendPromoHeadline,
   },
 });
 </script>

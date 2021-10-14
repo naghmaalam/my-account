@@ -1,28 +1,30 @@
 <template>
-  <!-- headlines for promo -->
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-2 ml-3 pt-2 pb-2 pl-5">
-        <img
-          src="@/assets/images/account-settings-refer-friend/open-gift.png"
-          class="open-gift mob-res-gift img-fluid"
-          alt=""
-        />
-      </div>
-      <div class="col-md-6 pt-3">
-        <div class="pt-2">
-          <div class="headline-title">Refer friends and both get gifts!</div>
-          <div class="headline-subtitle mr-5">
-            Gift xx days to weach you invite, and collect more than a year of
-            free Swoshs subscription for yourself!
-          </div>
-          <div class="headline-txt pt-2">
-            Check our <a href="#"> Reward Rules </a>
+  <div class="mob-res-hide">
+    <!-- headlines for promo -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-2 ml-3 pt-2 pb-2 pl-5">
+          <img
+            src="@/assets/images/account-settings-refer-friend/open-gift.png"
+            class="open-gift mob-res-gift img-fluid"
+            alt=""
+          />
+        </div>
+        <div class="col-md-6 pt-3">
+          <div class="pt-2">
+            <div class="headline-title">Refer friends and both get gifts!</div>
+            <div class="headline-subtitle mr-5">
+              Gift xx days to weach you invite, and collect more than a year of
+              free Swoshs subscription for yourself!
+            </div>
+            <div class="headline-txt pt-2">
+              Check our <a href="#"> Reward Rules </a>
+            </div>
           </div>
         </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2 pt-4"></div>
       </div>
-      <div class="col-md-2"></div>
-      <div class="col-md-2 pt-4"></div>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade" appear>
+  <transition name="fade" appear mode="out-in">
     <slot></slot>
   </transition>
 </template>
@@ -18,7 +18,7 @@ export default defineComponent({
   transform: translateY(10px);
 }
 .fade-enter-active {
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 .fade-enter-to {
   opacity: 1;
@@ -30,7 +30,7 @@ export default defineComponent({
   transform: translateY(0);
 }
 .fade-leave-active {
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 .fade-leave-to {
   opacity: 0;

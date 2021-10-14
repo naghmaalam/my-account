@@ -1,18 +1,16 @@
 <template>
-  <ReferFriendMain>
+  <div>
     <ShareInvitation />
-  </ReferFriendMain>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
-import ReferFriendMain from "@/views/layouts/ReferFriendMain.vue";
 import ShareInvitation from "@/views/components/my-account/ShareInvitation.vue";
 
 export default defineComponent({
   components: {
-    ReferFriendMain,
     ShareInvitation,
   },
   setup() {

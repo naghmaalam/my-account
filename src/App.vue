@@ -1,12 +1,9 @@
 <template>
   <!-- <button type="button" class="btn btn-primary" @click="logout">Logout</button> -->
-  <!-- <button type="button" class="btn btn-primary" @click="changeLang">
-    Change lang
-  </button> -->
+  <!-- <button type="button" class="btn btn-primary" @click="changeLang">Change lang </button> -->
+
   <template v-if="userState.authenticated">
-    <router-view v-slot="{ Component }">
-      <component :is="Component" />
-    </router-view>
+    <router-view />
   </template>
 
   <Fade v-else>

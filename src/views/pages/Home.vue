@@ -1,18 +1,16 @@
 <template>
-  <Main>
+  <div>
     <DashboardBody />
-  </Main>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 
-import Main from "@/views/layouts/Main.vue";
 import DashboardBody from "@/views/components/my-account/DashboardBody.vue";
 
 export default defineComponent({
   components: {
-    Main,
     DashboardBody,
   },
   setup() {
