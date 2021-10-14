@@ -18,7 +18,7 @@ export default defineComponent({
   transform: translateX(-100%);
 }
 .slide-left-enter-active {
-  transition: all 0.7s;
+  transition: all 0.3s;
 }
 .slide-left-enter-to {
   // opacity: 1;
@@ -29,7 +29,7 @@ export default defineComponent({
   // opacity: 1;
 }
 .slide-left-leave-active {
-  transition: all 0.7s;
+  transition: all 0.3s;
 }
 .slide-left-leave-to {
   // opacity: 0;

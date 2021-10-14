@@ -3,18 +3,23 @@
     <DevicesTable />
   </Main>
 </template>
-<script>
+<script lang="ts">
+import { defineComponent, onMounted } from "vue";
 import Main from "@/views/layouts/Main.vue";
 import DevicesTable from "@/views/components/my-account/DevicesTable.vue";
 
-export default {
+export default defineComponent({
   components: {
     Main,
     DevicesTable,
   },
   setup() {
+    onMounted(() => {
+      console.log("Devices Mounted");
+    });
     return {};
   },
-};
+});
 </script>
+
 <style scoped></style>
