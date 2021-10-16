@@ -89,6 +89,7 @@ export function isDateExpired(date: string): boolean {
 }
 
 // type any is used here because obj and return type can be anything
-export function newObj(obj: any): any {
-  return JSON.parse(JSON.stringify(obj));
-}
+// REMOVED BECAUSE WILL BE USING CLASSES
+// export function newObj<T>(obj: T): T {
+//   return JSON.parse(JSON.stringify(obj));
+// }

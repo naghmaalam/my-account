@@ -67,10 +67,9 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject, onMounted, ref, watch } from "vue";
+import { defineComponent, inject, ref, watch } from "vue";
 import { UpdateSection } from "@/types/Section";
 import { useUser } from "@/hooks/useUser";
-import { useToast } from "@/hooks/useToast";
 export default defineComponent({
   props: {
     email: {
@@ -81,7 +80,6 @@ export default defineComponent({
   setup(props) {
     const updateSection = inject("updateSection") as UpdateSection;
     const user = useUser();
-    const toast = useToast();
     const code = ref(["", "", "", "", "", ""]);
     const inputs = ref<HTMLInputElement[]>([]);
     const isLoading = ref(false);
@@ -110,11 +108,6 @@ export default defineComponent({
         console.log(`${foc} < ${inputs.value.length}`);
       }
     };
-
-    onMounted(() => {
-      console.log("xxxcc");
-      console.log(inputs.value);
-    });
 
     const loginCode = async () => {
       isLoading.value = true;

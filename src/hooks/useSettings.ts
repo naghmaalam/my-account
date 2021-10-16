@@ -1,9 +1,9 @@
 import { reactive, computed, ComputedRef, watch } from "vue";
-import i18n from "@/locales/localization";
+// import i18n from "@/locales/localization";
 
-import { newObj } from "@/modules/utils";
+// import { newObj } from "@/modules/utils";
 
-import { useToast } from "@/hooks/useToast";
+// import { useToast } from "@/hooks/useToast";
 
 interface Settings {
   mobile: {
@@ -11,15 +11,22 @@ interface Settings {
   };
 }
 
-const SettingsDefault = <Settings>{
-  mobile: {
+// const SettingsDefault = <Settings>{
+//   mobile: {
+//     sideMenu: false,
+//   },
+// };
+
+class SettingsDefault implements Settings {
+  mobile = {
     sideMenu: false,
-  },
-};
+  };
+}
 
 // Initialize settings
 export const state = reactive<{ settings: Settings }>(
-  newObj({ settings: SettingsDefault })
+  // newObj({ settings: SettingsDefault })
+  { settings: new SettingsDefault() }
 );
 
 export const settingsState: ComputedRef<Settings> = computed(() => {
@@ -41,9 +48,9 @@ export function useSettings(): {
   /////////////////////////////////////////////////////////////////////
   function resetSettings() {
     console.log("resetSettings()");
-    state.settings = JSON.parse(JSON.stringify(SettingsDefault));
+    state.settings = new SettingsDefault();
     sessionStorage.removeItem("settings");
-    sessionStorage.setItem("settings", JSON.stringify(SettingsDefault));
+    sessionStorage.setItem("settings", JSON.stringify(state.settings));
   }
 
   const init = () => {

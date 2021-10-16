@@ -6,27 +6,40 @@ import { SupportedLanguages } from "@/types/Locale";
 import { Response } from "@/types/Response";
 
 import { api, Method } from "@/modules/api";
-import { newObj } from "@/modules/utils";
+// import { newObj } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
 
-const UserDefault: User = {
-  authenticated: false,
-  currentSubscription: null,
-  accessToken: "",
-  email: "",
-  language: {
-    selected: "en",
-  },
-  me: null,
-  subscription: {
+class UserDefault implements User {
+  // authenticated: false,
+  // currentSubscription: null,
+  // accessToken: "",
+  // email: "",
+  // language: {
+  //   selected: "en",
+  // },
+  // me: null,
+  // subscription: {
+  //   plans: null,
+  // },
+
+  authenticated = false;
+  currentSubscription = null;
+  accessToken = "";
+  email = "";
+  language = {
+    selected: "en" as SupportedLanguages,
+  };
+  me = null;
+  subscription = {
     plans: null,
-  },
-};
+  };
+}
 
 // Initialize user data
 const state = <{ user: User }>(
-  reactive<{ user: User }>(newObj({ user: UserDefault }))
+  // reactive<{ user: User }>(newObj({ user: UserDefault }))
+  reactive<{ user: User }>({ user: new UserDefault() })
 );
 
 export const stateUser = computed(() => {
@@ -131,9 +144,10 @@ export function useUser(): {
 
   const resetUser = () => {
     console.log("resetUser()");
-    state.user = JSON.parse(JSON.stringify(UserDefault));
+    console.log(JSON.stringify(new UserDefault()));
+    state.user = new UserDefault();
     sessionStorage.removeItem("user");
-    sessionStorage.setItem("user", JSON.stringify(UserDefault));
+    sessionStorage.setItem("user", JSON.stringify(state.user));
   };
 
   const isAuthenticated = computed(() => {
