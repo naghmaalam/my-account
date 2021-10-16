@@ -59,9 +59,11 @@ export function useUser(): {
         lang: "en",
         version: "version",
       };
-      const response = (<unknown>(
-        await api("login", Method.POST, loginDetails)
-      )) as Response;
+      const response = (await api(
+        "login",
+        Method.POST,
+        loginDetails
+      )) as unknown as Response;
       toast.do.show(response.message);
       console.log("waits..");
       setTimeout(() => {
@@ -102,10 +104,10 @@ export function useUser(): {
 
   const loginCode = async (email: string, code: string) => {
     try {
-      const response = (<unknown>await api("login/with/code", Method.POST, {
+      const response = (await api("login/with/code", Method.POST, {
         username: email,
         login_code: code,
-      })) as Response;
+      })) as unknown as Response;
       console.log("waits..");
       setTimeout(() => {
         resetUser();

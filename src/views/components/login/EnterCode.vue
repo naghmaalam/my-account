@@ -87,7 +87,7 @@ export default defineComponent({
     const isLoading = ref(false);
 
     const handlePaste = (event: ClipboardEvent) => {
-      const paste = <string>event.clipboardData?.getData("text") || "";
+      const paste = (event.clipboardData?.getData("text") as string) || "";
       for (let x = 0; x <= 5; x++) code.value[x] = paste.charAt(x);
     };
 
@@ -102,7 +102,7 @@ export default defineComponent({
         console.log("backspace / delete");
       } else if (event.key === "ArrowLeft") {
         foc = i - 1;
-        if (foc >= 0) inputs.value[foc]?.focus();
+        if (foc >= 0) inputs.value[foc].focus();
       } else {
         foc = i + 1;
         if (foc < inputs.value.length) inputs.value[foc]?.focus();
