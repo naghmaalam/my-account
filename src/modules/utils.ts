@@ -1,10 +1,11 @@
 import { sha256 } from "js-sha256";
 import {} from "vue-i18n";
 import i18n from "@/locales/localization";
+import { H5Interface } from "@/types/H5Interface";
 
 declare global {
   interface Window {
-    H5Interface: any;
+    H5Interface: H5Interface;
   }
 }
 
@@ -60,7 +61,8 @@ export function getEncryptedPassword(password: string): string {
 
 export function openURLInDefaultBrowser(strURL: string): string | null {
   if (window.H5Interface) {
-    return window.H5Interface.openURLInDefaultBrowser(strURL);
+    window.H5Interface.openURLInDefaultBrowser(strURL);
+    return null;
   } else {
     // store.dispatch("snack/snack", {
     // 	text: `window.H5Interface = ${(typeof window?.H5Interface)} || window = ${(typeof window)} || `,

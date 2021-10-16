@@ -3,6 +3,7 @@ import i18n from "@/locales/localization";
 
 import { User, LoginDetails } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
+import { Response } from "@/types/Response";
 
 import { api, Method } from "@/modules/api";
 import { newObj } from "@/modules/utils";
@@ -58,8 +59,9 @@ export function useUser(): {
         lang: "en",
         version: "version",
       };
-      const response = <any>await api("login", Method.POST, loginDetails);
-      console.log(response);
+      const response = (<unknown>(
+        await api("login", Method.POST, loginDetails)
+      )) as Response;
       toast.do.show(response.message);
       console.log("waits..");
       setTimeout(() => {
@@ -100,10 +102,10 @@ export function useUser(): {
 
   const loginCode = async (email: string, code: string) => {
     try {
-      const response = <any>await api("login/with/code", Method.POST, {
+      const response = (<unknown>await api("login/with/code", Method.POST, {
         username: email,
         login_code: code,
-      });
+      })) as Response;
       console.log("waits..");
       setTimeout(() => {
         resetUser();
