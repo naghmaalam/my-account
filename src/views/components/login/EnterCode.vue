@@ -88,7 +88,7 @@ export default defineComponent({
 
     const handlePaste = (event: Event) => {
       let clipboardEvent = <ClipboardEvent>event;
-      const paste = <string>clipboardEvent.clipboardData?.getData("text");
+      const paste = <string>clipboardEvent.clipboardData?.getData("text") || "";
       for (let x = 0; x <= 5; x++) code.value[x] = paste.charAt(x);
     };
 
