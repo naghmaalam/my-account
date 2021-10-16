@@ -3,7 +3,7 @@
     <div class="login-title text-center">
       {{ $t("login_with_6_digit_code") }}
     </div>
-    <form action="">
+    <form action="#" @submit.prevent="submit">
       <div class="reset-email-main-input mt-4 pl-5 pr-5">
         <input
           type="text"

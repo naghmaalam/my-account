@@ -23,27 +23,19 @@
       >
         <input
           v-model="code[0]"
+          :ref="(el) => (inputs[0] = el)"
           @keyup="handleInput($event, 0)"
           @paste="handlePaste"
           type="text"
           name="n0"
           maxlength="1"
-          :ref="
-            (el) => {
-              if (el) inputs[0] = el;
-            }
-          "
         />
 
         <input
           v-for="i in 5"
           :key="i"
-          :ref="
-            (el) => {
-              if (el) inputs[i] = el;
-            }
-          "
           v-model="code[i]"
+          :ref="(el) => (inputs[i] = el)"
           @keyup="handleInput($event, i)"
           type="text"
           :name="`n${i}`"
@@ -75,7 +67,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject, ref, watch } from "vue";
+import { defineComponent, inject, onMounted, ref, watch } from "vue";
 import { UpdateSection } from "@/types/Section";
 import { useUser } from "@/hooks/useUser";
 import { useToast } from "@/hooks/useToast";
@@ -83,6 +75,7 @@ export default defineComponent({
   props: {
     email: {
       type: String,
+      default: "",
     },
   },
   setup(props) {
@@ -90,38 +83,36 @@ export default defineComponent({
     const user = useUser();
     const toast = useToast();
     const code = ref(["", "", "", "", "", ""]);
-    const inputs = ref([]);
+    const inputs = ref<HTMLInputElement[]>([]);
     const isLoading = ref(false);
 
     const handlePaste = (event: Event) => {
-      const paste = event.clipboardData.getData("text");
-      for (let x = 0; x <= 5; x++) {
-        code.value[x] = paste[x];
-      }
-
-      // put cursor on field without data
-      // for (let x = 0; x <= 5; x++) {
-      //   if (code.value[x] == "") {
-      //     inputs.value[x].focus();
-      //     break;
-      //   }
-      // }
+      let clipboardEvent = <ClipboardEvent>event;
+      const paste = <string>clipboardEvent.clipboardData?.getData("text");
+      for (let x = 0; x <= 5; x++) code.value[x] = paste.charAt(x);
     };
 
-    const handleInput = (event: Event, i: number) => {
+    const handleInput = (event: KeyboardEvent, i: number) => {
       let foc: number;
+      console.log("input " + event.key);
 
       // if backspace is pressed
-      if (event.keyCode === 8) {
+      if (event.key === "Backspace") {
         foc = i - 1;
-        if (foc >= 0) inputs.value[foc].focus();
+        if (foc >= 0) inputs.value[foc]?.focus();
         console.log("backspace / delete");
       } else {
         foc = i + 1;
-        if (foc < inputs.value.length) inputs.value[foc].focus();
-        console.log("input " + event.keyCode);
+        if (foc < inputs.value.length) inputs.value[foc]?.focus();
+        console.log("input " + event.key);
+        console.log(`${foc} < ${inputs.value.length}`);
       }
     };
+
+    onMounted(() => {
+      console.log("xxxcc");
+      console.log(inputs.value);
+    });
 
     const loginCode = async () => {
       isLoading.value = true;
@@ -135,17 +126,19 @@ export default defineComponent({
     watch(
       () => code.value,
       (val) => {
-        // console.log(
-        //   `val = ${val[0]}, ${val[1]}, ${val[2]}, ${val[3]}, ${val[4]}, ${val[5]}`
-        // );
         if (val.every((v) => v !== "")) {
           console.log("SUBMIT");
-          inputs.value[5].focus();
+          inputs.value[5]?.focus();
           loginCode();
         }
       },
       { deep: true }
     );
+
+    const refHandler = (el: HTMLInputElement, i: number) => {
+      console.log(el);
+      if (el) inputs.value[i] = el;
+    };
 
     return {
       handlePaste,
@@ -154,6 +147,7 @@ export default defineComponent({
       code,
       inputs,
       isLoading,
+      refHandler,
     };
   },
 });

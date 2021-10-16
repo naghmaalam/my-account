@@ -3,7 +3,7 @@
     <!-- email -->
     <!-- ///////////////////////////////////////////////////////////////// -->
     <div class="login-title text-center">{{ $t("login") }}</div>
-    <form action="">
+    <form action="#" @submit.prevent="showPassword">
       <div class="d-flex mt-4 pl-5 pr-5">
         <input
           type="text"
@@ -47,7 +47,7 @@
     >
       {{ loginDetails.email }}
     </div>
-    <form action="#" class="ml-5 mr-5 mt-3">
+    <form action="#" @submit.prevent="login" class="ml-5 mr-5 mt-3">
       <div class="d-flex flex-row">
         <input
           :type="isPasswordHidden ? 'password' : 'input'"

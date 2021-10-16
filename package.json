@@ -46,6 +46,7 @@
   "eslintConfig": {
     "root": true,
     "env": {
+      "browser": true,
       "node": true
     },
     "extends": [
@@ -56,7 +57,10 @@
       "@vue/prettier/@typescript-eslint"
     ],
     "parserOptions": {
-      "ecmaVersion": 2020
+      "ecmaVersion": 2020,
+      "ecmaFeatures" : {
+        "jsx" : false
+      }
     },
     "rules": {
       "prettier/prettier": [
