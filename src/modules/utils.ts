@@ -88,6 +88,7 @@ export function isDateExpired(date: string): boolean {
   else return false;
 }
 
+// type any is used here because obj and return type can be anything
 export function newObj(obj: any): any {
   return JSON.parse(JSON.stringify(obj));
 }
