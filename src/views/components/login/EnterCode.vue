@@ -86,9 +86,8 @@ export default defineComponent({
     const inputs = ref<HTMLInputElement[]>([]);
     const isLoading = ref(false);
 
-    const handlePaste = (event: Event) => {
-      let clipboardEvent = <ClipboardEvent>event;
-      const paste = <string>clipboardEvent.clipboardData?.getData("text") || "";
+    const handlePaste = (event: ClipboardEvent) => {
+      const paste = <string>event.clipboardData?.getData("text") || "";
       for (let x = 0; x <= 5; x++) code.value[x] = paste.charAt(x);
     };
 
@@ -101,6 +100,9 @@ export default defineComponent({
         foc = i - 1;
         if (foc >= 0) inputs.value[foc]?.focus();
         console.log("backspace / delete");
+      } else if (event.key === "ArrowLeft") {
+        foc = i - 1;
+        if (foc >= 0) inputs.value[foc]?.focus();
       } else {
         foc = i + 1;
         if (foc < inputs.value.length) inputs.value[foc]?.focus();
