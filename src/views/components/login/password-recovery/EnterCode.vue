@@ -57,8 +57,14 @@
 
     <div class="login-txt text-center mt-2">
       Didn't get the code?
-      <a href="#" @click.prevent="updateSection('EmailPassword')">
+      <a href="#" @click.prevent="sendEmailAgain" :disabled="isLoadingResend">
         <span class="pr-back-to-login"> Send again </span>
+        <span
+          v-if="isLoadingResend"
+          class="spinner-border spinner-border-sm ml-2"
+          role="status"
+          aria-hidden="true"
+        ></span>
       </a>
     </div>
     <a href="#" @click.prevent="updateSection('EmailPassword')">
@@ -72,6 +78,7 @@
 import { defineComponent, inject, ref, watch } from "vue";
 import { UpdateSection } from "@/types/Section";
 import { useUser } from "@/hooks/useUser";
+import { useToast } from "@/hooks/useToast";
 export default defineComponent({
   props: {
     email: {
@@ -82,9 +89,11 @@ export default defineComponent({
   setup(props, context) {
     const updateSection = inject("updateSection") as UpdateSection;
     const user = useUser();
+    const toast = useToast();
     const code = ref(["", "", "", "", "", ""]);
     const inputs = ref<HTMLInputElement[]>([]);
     const isLoading = ref(false);
+    const isLoadingResend = ref(false);
 
     const handlePaste = (event: ClipboardEvent) => {
       const paste = (event.clipboardData?.getData("text") as string) || "";
@@ -142,6 +151,15 @@ export default defineComponent({
       if (el) inputs.value[i] = el;
     };
 
+    const sendEmailAgain = async () => {
+      isLoadingResend.value = true;
+      const success = await user.do.passwordRecovery.emailCode(props.email);
+      isLoadingResend.value = false;
+      if (success) {
+        toast.do.showTranslated("check_inbox");
+      }
+    };
+
     return {
       handlePaste,
       updateSection,
@@ -149,7 +167,9 @@ export default defineComponent({
       code,
       inputs,
       isLoading,
+      isLoadingResend,
       refHandler,
+      sendEmailAgain,
     };
   },
 });

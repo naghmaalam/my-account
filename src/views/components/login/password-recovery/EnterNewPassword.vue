@@ -23,6 +23,7 @@
           :type="isPasswordHidden ? 'password' : 'text'"
           class="form-control"
           v-model="password"
+          @input="atKeyUp"
           :placeholder="$t('password')"
         />
         <button
@@ -37,17 +38,17 @@
       <div class="create-new-password-input mt-4 d-flex flex-row">
         <input
           class="form-control"
-          :type="isPasswordHiddenConfirm ? 'password' : 'text'"
+          :type="isPasswordConfirmHidden ? 'password' : 'text'"
           v-model="password_confirm"
           :placeholder="$t('confirm_password')"
         />
         <button
           type="button"
           class="visiblity-btn"
-          @click="isPasswordHiddenConfirm = !isPasswordHiddenConfirm"
+          @click="isPasswordConfirmHidden = !isPasswordConfirmHidden"
         >
           <i
-            v-if="isPasswordHiddenConfirm"
+            v-if="isPasswordConfirmHidden"
             class="flaticon-invisible pr-3 pl-3"
           ></i>
           <i v-else class="flaticon-view pr-3 pl-3"></i>
@@ -57,11 +58,11 @@
 
     <div class="ml-5 mr-5">
       <div class="indicator text-center mt-4 ml-5 mr-5">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span :class="{ marked: passwordStrength >= 1 }"></span>
+        <span :class="{ marked: passwordStrength >= 2 }"></span>
+        <span :class="{ marked: passwordStrength >= 3 }"></span>
+        <span :class="{ marked: passwordStrength >= 4 }"></span>
+        <span :class="{ marked: passwordStrength >= 5 }"></span>
       </div>
     </div>
 
@@ -123,7 +124,12 @@ export default defineComponent({
     const password = ref("");
     const password_confirm = ref("");
     const isPasswordHidden = ref(true);
-    const isPasswordHiddenConfirm = ref(true);
+    const isPasswordConfirmHidden = ref(true);
+    const passwordStrength = ref(0);
+
+    const atKeyUp = () => {
+      passwordStrength.value = vldt.getPasswordStrength(password.value);
+    };
 
     const submit = async () => {
       // validate password
@@ -158,11 +164,13 @@ export default defineComponent({
     return {
       updateSection,
       isLoading,
+      atKeyUp,
       submit,
       password,
       password_confirm,
       isPasswordHidden,
-      isPasswordHiddenConfirm,
+      isPasswordConfirmHidden,
+      passwordStrength,
     };
   },
 });
@@ -319,6 +327,11 @@ export default defineComponent({
   background: #0c3285;
   position: relative;
   opacity: 0.21;
+  transition: opacity 0.4s;
+}
+
+.indicator span.marked {
+  opacity: 1;
 }
 
 .indicator span:before {

@@ -1,5 +1,5 @@
 import { sha256 } from "js-sha256";
-import {} from "vue-i18n";
+// import {} from "vue-i18n";
 import i18n from "@/locales/localization";
 import { H5Interface } from "@/types/H5Interface";
 

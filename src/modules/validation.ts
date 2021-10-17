@@ -15,7 +15,19 @@ export interface Fields {
   };
 }
 
-export function useValidation() {
+export function useValidation(): {
+  errors: string[];
+  init: () => void;
+  checkErrors: (
+    fields: Fields,
+    settings?: {
+      init: boolean;
+    }
+  ) => void;
+  hasErrors: () => boolean;
+  getError: (index?: number) => string;
+  getPasswordStrength: (password: string) => number;
+} {
   let errors: string[] = [];
 
   const init = () => {
@@ -103,6 +115,18 @@ export function useValidation() {
     }
   };
 
+  const getPasswordStrength = (password: string): number => {
+    let strength = 0;
+    if (password.match(/[a-z]+/)) strength += 1;
+    if (password.match(/[A-Z]+/)) strength += 1;
+    if (password.match(/[0-9]+/)) strength += 1;
+    if (password.match(/[$@#&!]+/)) strength += 1;
+    if (password.length > 12) strength += 1;
+    if (password.length < 6) strength = 0;
+
+    return strength;
+  };
+
   const hasErrors = () => {
     return errors.length > 0 ? true : false;
   };
@@ -118,5 +142,6 @@ export function useValidation() {
     checkErrors,
     hasErrors,
     getError,
+    getPasswordStrength,
   };
 }

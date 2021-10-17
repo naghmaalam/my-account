@@ -1,9 +1,10 @@
 <template>
   <div class="">
-    <div class="pr-title text-center">Password recovery</div>
+    <div class="pr-title text-center">
+      {{ $t("password_recovery") }}
+    </div>
     <div class="pr-subtitle text-center mr-5 ml-5 mt-4">
-      Please enter your account email and we will send you a verification code
-      for resetting password.
+      {{ $t("password_reset_link") }}
     </div>
     <form action="">
       <div class="d-flex mob-res-email mt-4 pl-5 pr-5">
@@ -24,12 +25,14 @@
             role="status"
             aria-hidden="true"
           ></span>
-          Submit
+          {{ $t("submit") }}
         </div>
       </a>
     </div>
     <a href="#" @click.prevent="updateSection('EmailPassword')">
-      <div class="pr-back-to-login text-center mt-4 pt-5">Back to Log in</div>
+      <div class="pr-back-to-login text-center mt-4 pt-5">
+        {{ $t("back_to_login") }}
+      </div>
     </a>
   </div>
 </template>

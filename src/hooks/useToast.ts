@@ -1,4 +1,5 @@
 import { reactive, ref } from "vue";
+import i18n from "@/locales/localization";
 
 interface Toast {
   title?: string;
@@ -18,7 +19,9 @@ export const toast: Toast = reactive({
 export function useToast(): {
   do: {
     show(text: string): void;
+    showTranslated(locale: string): void;
     error(text: string): void;
+    errorTranslated(locale: string): void;
   };
 } {
   const show = (text: string) => {
@@ -31,6 +34,10 @@ export function useToast(): {
     startPopping();
   };
 
+  const showTranslated = (locale: string) => {
+    show(i18n.global.t(locale));
+  };
+
   const error = (text: string) => {
     toasts.value = [
       {
@@ -40,6 +47,10 @@ export function useToast(): {
       ...toasts.value,
     ];
     startPopping();
+  };
+
+  const errorTranslated = (locale: string) => {
+    error(i18n.global.t(locale));
   };
 
   function startPopping() {
@@ -61,6 +72,6 @@ export function useToast(): {
   }
 
   return {
-    do: { show, error },
+    do: { show, showTranslated, error, errorTranslated },
   };
 }

@@ -76,7 +76,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, inject, ref, watch } from "vue";
-import { useI18n } from "vue-i18n";
 import { UpdateSection } from "@/types/Section";
 import { useToast } from "@/hooks/useToast";
 import { useUser } from "@/hooks/useUser";
@@ -88,7 +87,6 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { t } = useI18n({ useScope: "global" });
     const updateSection = inject("updateSection") as UpdateSection;
     const user = useUser();
     const toast = useToast();
@@ -140,7 +138,7 @@ export default defineComponent({
       const success = await user.do.withCode.emailCode(props.email);
       isLoadingResend.value = false;
       if (success) {
-        toast.do.show(t("check_inbox"));
+        toast.do.showTranslated("check_inbox");
       }
     };
 

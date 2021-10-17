@@ -43,7 +43,7 @@ import { useValidation } from "@/modules/validation";
 import { useUser } from "@/hooks/useUser";
 import { useToast } from "@/hooks/useToast";
 export default defineComponent({
-  setup(props, context) {
+  setup(_, context) {
     const { t } = useI18n({ useScope: "global" });
     const user = useUser();
     const toast = useToast();
