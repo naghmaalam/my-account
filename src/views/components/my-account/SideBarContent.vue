@@ -10,12 +10,13 @@
       </div>
 
       <div class="container sidebar-menus">
-        <div class="row active-button">
+        <div
+          class="row"
+          @click="redirect('home')"
+          :class="{ 'active-button': $route.name == 'home' }"
+        >
           <div class="col">
-            <div
-              class="d-flex flex-row align-items-start"
-              @click="redirect('home')"
-            >
+            <div class="d-flex flex-row align-items-start">
               <div class="px-2 mt-4">
                 <i class="flaticon-house icon-color"></i>
               </div>
@@ -31,9 +32,13 @@
           </div>
         </div>
 
-        <div class="row" @click="redirect('devices')">
+        <div
+          class="row"
+          @click="redirect('devices')"
+          :class="{ 'active-button': $route.name == 'devices' }"
+        >
           <div class="col">
-            <div class="d-flex flex-row" @click="redirect('devices')">
+            <div class="d-flex flex-row">
               <div class="px-2 mt-4">
                 <i class="flaticon-responsive icon-color"></i>
               </div>
@@ -49,7 +54,11 @@
           </div>
         </div>
 
-        <div class="row" @click="redirect('downloads')">
+        <div
+          class="row"
+          @click="redirect('downloads')"
+          :class="{ 'active-button': $route.name == 'downloads' }"
+        >
           <div class="col">
             <div class="d-flex flex-row">
               <div class="px-2 mt-4">
@@ -67,9 +76,13 @@
           </div>
         </div>
 
-        <div class="row">
+        <div
+          class="row"
+          @click="redirect('subscription')"
+          :class="{ 'active-button': $route.name == 'subscription' }"
+        >
           <div class="col">
-            <div class="d-flex flex-row" @click="redirect('subscription')">
+            <div class="d-flex flex-row">
               <div class="px-2 mt-4">
                 <i
                   class="flaticon-calendar-interface-symbol-tool icon-color"
@@ -87,9 +100,13 @@
           </div>
         </div>
 
-        <div class="row">
+        <div
+          class="row"
+          @click="redirect('referfriend')"
+          :class="{ 'active-button': $route.name == 'referfriend' }"
+        >
           <div class="col">
-            <div class="d-flex flex-row" @click="redirect('referfriend')">
+            <div class="d-flex flex-row">
               <div class="px-2 mt-4">
                 <i
                   class="flaticon-calendar-interface-symbol-tool icon-color"
@@ -148,6 +165,10 @@ export default defineComponent({
   height: 85vh;
   overflow-y: auto;
   // background-color: red;
+  > div {
+    cursor: pointer;
+    transition: all 0.5s;
+  }
   .a-menu {
     padding-left: 15px;
     padding-right: 15px;

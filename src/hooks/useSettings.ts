@@ -1,7 +1,7 @@
 import { reactive, computed, ComputedRef, watch } from "vue";
 // import i18n from "@/locales/localization";
 
-// import { newObj } from "@/modules/utils";
+import { storage } from "@/modules/utils";
 
 // import { useToast } from "@/hooks/useToast";
 
@@ -49,14 +49,14 @@ export function useSettings(): {
   function resetSettings() {
     console.log("resetSettings()");
     state.settings = new SettingsDefault();
-    sessionStorage.removeItem("settings");
-    sessionStorage.setItem("settings", JSON.stringify(state.settings));
+    storage.removeItem("settings");
+    storage.setItem("settings", state.settings);
   }
 
   const init = () => {
     state.settings.mobile.sideMenu = false;
     // check if storage has settings data if not then initialize
-    const settingsSessionData = sessionStorage.getItem("settings");
+    const settingsSessionData = storage.getItem("settings");
     if (settingsSessionData) {
       state.settings = JSON.parse(settingsSessionData);
     } else {
@@ -68,7 +68,7 @@ export function useSettings(): {
       () => state.settings,
       (val) => {
         console.log("settings changed");
-        sessionStorage.setItem("settings", JSON.stringify(val));
+        storage.setItem("settings", val);
       },
       { deep: true }
     );

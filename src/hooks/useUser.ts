@@ -6,7 +6,7 @@ import { SupportedLanguages } from "@/types/Locale";
 import { Response } from "@/types/Response";
 
 import { api, Method } from "@/modules/api";
-// import { newObj } from "@/modules/utils";
+import { storage } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
 
@@ -205,8 +205,8 @@ export function useUser(): {
     console.log("resetUser()");
     console.log(JSON.stringify(new UserDefault()));
     state.user = new UserDefault();
-    sessionStorage.removeItem("user");
-    sessionStorage.setItem("user", JSON.stringify(state.user));
+    storage.removeItem("user");
+    storage.setItem("user", state.user);
   };
 
   const isAuthenticated = computed(() => {
@@ -215,7 +215,7 @@ export function useUser(): {
 
   const init = () => {
     // check if storage has user data if not then initialize
-    const userSessionData = sessionStorage.getItem("user");
+    const userSessionData = storage.getItem("user");
     if (userSessionData) {
       state.user = JSON.parse(userSessionData);
     } else {
@@ -227,7 +227,7 @@ export function useUser(): {
       () => state.user,
       (val) => {
         console.log("user changed");
-        sessionStorage.setItem("user", JSON.stringify(val));
+        storage.setItem("user", val);
       },
       { deep: true }
     );

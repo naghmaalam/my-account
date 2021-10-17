@@ -88,6 +88,33 @@ export function isDateExpired(date: string): boolean {
   else return false;
 }
 
+export const storage = {
+  setItem: <T>(key: string, data: T): void => {
+    try {
+      sessionStorage.setItem(key, JSON.stringify(data));
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+  removeItem: (key: string): void => {
+    try {
+      sessionStorage.removeItem(key);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+  getItem: (key: string): string | null => {
+    try {
+      return sessionStorage.getItem(key);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+};
+
 // type any is used here because obj and return type can be anything
 // REMOVED BECAUSE WILL BE USING CLASSES
 // export function newObj<T>(obj: T): T {
