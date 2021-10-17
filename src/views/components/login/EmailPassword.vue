@@ -48,7 +48,7 @@
       {{ loginDetails.email }}
     </div>
     <form action="#" @submit.prevent="login" class="ml-5 mr-5 mt-3">
-      <div class="d-flex flex-row">
+      <div class="d-flex flex-row with-visiblity-btn">
         <input
           :type="isPasswordHidden ? 'password' : 'text'"
           class="form-control login-pwd"

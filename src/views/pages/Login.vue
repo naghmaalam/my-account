@@ -91,6 +91,29 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .login-sections ::v-deep() {
+  .with-visiblity-btn:focus {
+    input.form-control {
+      border-color: #7c21ff;
+    }
+
+    button.visiblity-btn {
+      border-color: #7c21ff;
+    }
+  }
+  .with-visiblity-btn {
+    input.form-control {
+      border-color: #7c21ff;
+      border-radius: 5px 0 0 5px;
+      border-right: 0;
+    }
+
+    button.visiblity-btn {
+      border-color: #7c21ff;
+      border-radius: 0 5px 5px 0;
+      border-left: 0;
+    }
+  }
+
   .pr-bg {
     width: 100vw;
     height: 100vh;

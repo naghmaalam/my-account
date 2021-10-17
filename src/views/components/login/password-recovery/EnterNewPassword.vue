@@ -18,7 +18,15 @@
         mob-res-form
       "
     >
-      <div class="create-new-password-input mt-4 d-flex flex-row">
+      <div
+        class="
+          create-new-password-input
+          mt-4
+          d-flex
+          flex-row
+          with-visiblity-btn
+        "
+      >
         <input
           :type="isPasswordHidden ? 'password' : 'text'"
           class="form-control"
@@ -35,7 +43,15 @@
           <i v-else class="flaticon-view pr-3 pl-3"></i>
         </button>
       </div>
-      <div class="create-new-password-input mt-4 d-flex flex-row">
+      <div
+        class="
+          create-new-password-input
+          mt-4
+          d-flex
+          flex-row
+          with-visiblity-btn
+        "
+      >
         <input
           class="form-control"
           :type="isPasswordConfirmHidden ? 'password' : 'text'"

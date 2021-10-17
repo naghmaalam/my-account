@@ -24,7 +24,15 @@
             mob-res-form
           "
         >
-          <div class="create-new-password-input mt-4 d-flex flex-row">
+          <div
+            class="
+              create-new-password-input
+              mt-4
+              d-flex
+              flex-row
+              with-visiblity-btn
+            "
+          >
             <input
               type="password"
               class="form-control"
@@ -35,7 +43,15 @@
               <i class="flaticon-invisible pr-3 pl-3"></i>
             </button>
           </div>
-          <div class="create-new-password-input mt-4 d-flex flex-row">
+          <div
+            class="
+              create-new-password-input
+              mt-4
+              d-flex
+              flex-row
+              with-visiblity-btn
+            "
+          >
             <input
               type="password"
               class="form-control"
