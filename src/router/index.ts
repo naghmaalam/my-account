@@ -38,6 +38,17 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/pages/Subscription.vue"),
       },
       {
+        name: "orderhistory",
+        path: "/orderhistory",
+        component: () => import("@/views/pages/OrderHistoryPage.vue"),
+      },
+      {
+        name: "test",
+        path: "/test",
+        component: () =>
+          import("@/views/components/freeUser/FreeUserReferFriend.vue"),
+      },
+      {
         name: "referfriend",
         path: "/referfriend",
         meta: {
@@ -46,6 +57,16 @@ const routes: Array<RouteRecordRaw> = [
           },
         },
         component: () => import("@/views/pages/ReferFriend.vue"),
+      },
+      {
+        name: "rewards",
+        path: "/rewards",
+        meta: {
+          customComponents: {
+            headline: "ReferFriendPromoHeadline",
+          },
+        },
+        component: () => import("@/views/pages/RewardsPage.vue"),
       },
     ],
   },

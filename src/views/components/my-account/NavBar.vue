@@ -37,52 +37,48 @@
           ></i>
         </a>
         <div class="dropdown-content">
-          <a href="account-settings.html">
-            <div class="d-flex flex-row justify-content-around">
-              <img
-                src="@/assets/images/account-settings/cogwheel.png"
-                class="img-fluid swoshs-logo"
-                alt=""
-              />
-              <div>Account Settings</div>
+          <div
+            class="d-flex flex-row justify-content-around"
+            @click="redirect('account')"
+          >
+            <img
+              src="@/assets/images/account-settings/cogwheel.png"
+              class="img-fluid swoshs-logo"
+              alt=""
+            />
+            <div>Account Settings</div>
+            <i class="flaticon-arrow-angle-pointing-to-right"></i>
+          </div>
+          <div class="d-flex flex-row justify-content-around">
+            <img
+              src="@/assets/images/account-settings/lifesaver.png"
+              class="img-fluid swoshs-logo"
+              alt=""
+            />
+            <div>Support</div>
+            <div class="d-flex justify-content-end">
               <i class="flaticon-arrow-angle-pointing-to-right"></i>
             </div>
-          </a>
-          <a href="#">
-            <div class="d-flex flex-row justify-content-around">
-              <img
-                src="@/assets/images/account-settings/lifesaver.png"
-                class="img-fluid swoshs-logo"
-                alt=""
-              />
-              <div>Support</div>
-              <div class="d-flex justify-content-end">
-                <i class="flaticon-arrow-angle-pointing-to-right"></i>
-              </div>
-            </div>
-          </a>
-          <a href="#">
-            <div class="d-flex flex-row justify-content-around">
-              <img
-                src="@/assets/images/account-settings/faq.png"
-                class="img-fluid swoshs-logo"
-                alt=""
-              />
-              <div>Privacy</div>
-              <i class="flaticon-arrow-angle-pointing-to-right"></i>
-            </div>
-          </a>
-          <a href="#" @click="logout">
-            <div class="d-flex flex-row justify-content-around">
-              <img
-                src="@/assets/images/account-settings/logout.png"
-                class="img-fluid swoshs-logo"
-                alt=""
-              />
-              <div>Logout</div>
-              <i class="flaticon-arrow-angle-pointing-to-right"></i>
-            </div>
-          </a>
+          </div>
+
+          <div class="d-flex flex-row justify-content-around">
+            <img
+              src="@/assets/images/account-settings/faq.png"
+              class="img-fluid swoshs-logo"
+              alt=""
+            />
+            <div>Privacy</div>
+            <i class="flaticon-arrow-angle-pointing-to-right"></i>
+          </div>
+          <div class="d-flex flex-row justify-content-around" @click="logout">
+            <img
+              src="@/assets/images/account-settings/logout.png"
+              class="img-fluid swoshs-logo"
+              alt=""
+            />
+            <div>Logout</div>
+            <i class="flaticon-arrow-angle-pointing-to-right"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -93,18 +89,26 @@
 import { defineComponent } from "vue";
 import { userState, useUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
     const user = useUser();
+    const router = useRouter();
+
     const logout = () => {
       user.do.logout();
+    };
+
+    const redirect = (page: any) => {
+      router.push({ name: page });
     };
 
     return {
       userState,
       logout,
       showSideMenu: useSettings().do.sideMenu.show,
+      redirect,
     };
   },
 });

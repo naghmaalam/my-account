@@ -363,12 +363,21 @@ export default {
     margin-bottom: 0.2rem !important;
   }
 
+  .mob-device-img {
+    padding-top: 1.5rem !important;
+  }
+
   .account-title {
     text-align: center;
   }
 
   .account-subtitle {
     text-align: center;
+    padding-bottom: 0rem !important;
+  }
+
+  .mob-acct-subtitle {
+    padding-top: 1.5rem !important;
   }
 
   .mob-res-btn {
@@ -386,6 +395,13 @@ export default {
 
   .show-desktop {
     display: block;
+  }
+
+  .mob-btn {
+    margin-top: 1.5rem !important;
+  }
+  .desktop-connected {
+    padding-top: 0rem !important;
   }
 }
 </style>

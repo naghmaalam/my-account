@@ -3,7 +3,7 @@
   <div class="container-fluid account-bg m-0 p-0">
     <div class="container-fluid m-0">
       <div class="container">
-        <div class="row">
+        <div class="row mt-5">
           <div class="col-md-6">
             <div class="account-settings-title">Account Settings</div>
           </div>
@@ -71,7 +71,7 @@
                 alt=""
               />
               <button class="account-settings-btn mt-3 pr-5 pl-5">
-                Premium
+                FreeUser
               </button>
               <div class="account-settings-content mt-3">
                 *To upgrade the package just click the button

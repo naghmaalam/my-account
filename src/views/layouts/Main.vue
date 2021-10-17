@@ -20,12 +20,14 @@
         >
           <!-- for meta customComponents -->
           <!-- //////////////////////////////////////////////// -->
-          <Fade>
-            <ReferFriendPromoHeadline
-              v-if="customComponents?.headline === 'ReferFriendPromoHeadline'"
-            />
-            <PromoHeadline v-else />
-          </Fade>
+          <div class="mob-res-hide">
+            <Fade>
+              <ReferFriendPromoHeadline
+                v-if="customComponents?.headline === 'ReferFriendPromoHeadline'"
+              />
+              <PromoHeadline v-else />
+            </Fade>
+          </div>
           <!-- //////////////////////////////////////////////// -->
           <!-- for meta customComponents -->
 

@@ -1,39 +1,45 @@
 <template>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="account-info-title">Devices</div>
+      </div>
+    </div>
+  </div>
   <div class="container account-content">
     <div class="row">
-      <div class="my-devices col my-2 pr-3 pl-3 mt-5">
-        <div class="d-flex flex-row justify-content-center">
-          <div
-            class="
-              mob-res-margin
-              d-flex
-              flex-column
-              align-items-center
-              justify-content-center
-              mt-5
-            "
-          >
-            <img
-              src="@/assets/images/account-settings-refer-friend/free-user-rf.png"
-              alt=""
-              class="rf-image"
-            />
+      <div class="my-devices col-lg-6 my-2 pr-3 pl-3">
+        <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex flex-column">
             <div class="devices-title pt-3 px-3">
-              To get a reward please upgrade your account
+              Free Trial package supports 1 device only.
             </div>
             <div class="devices-subtitle px-3">
-              Your current package is not supported on this feature
+              *Your privacy and Internet security can be protected when the
+              device is connected. It is recommended to keep the connection
+              status when browsing online
             </div>
-            <div class="add-device text-center mt-3 pb-5">
-              <button class="devices-btn pt-2 pb-2">Upgrade</button>
-            </div>
+          </div>
+          <div class="add-device mt-3">
+            <button class="devices-btn pr-3 pl-3 pt-2 pb-2">Upgrade</button>
+          </div>
+        </div>
+        <div class="devices-row-line mt-2"></div>
+        <!-- Galaxy  -->
+        <div class="d-flex flex-row justify-content-between pt-2 pb-3">
+          <div class="devices-name d-flex flex-row">
+            <i class="flaticon-android pl-3 pr-3"></i>
+            <div>Galaxy A80</div>
+          </div>
+          <div class="devices-logout d-flex flex-row">
+            <i class="flaticon-logout pr-2 pt-1"></i>
+            <div>Logout</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 export default {
   setup() {
@@ -41,11 +47,10 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .add-device {
   width: 100%;
-  color: #ffff;
+  text-align: right;
 }
 
 .active-button {
@@ -53,14 +58,9 @@ export default {
 }
 
 .my-devices {
+  background: #fff;
+  filter: drop-shadow(0px 8px 14px rgba(214, 225, 243, 0.64));
   border-radius: 10px;
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(243, 247, 254, 1) 50%
-  );
 }
 
 .account-info-title {
@@ -87,36 +87,32 @@ export default {
   color: #383361;
 }
 
-.rf-image {
-  width: 50%;
-}
-
 .devices-title {
   font-family: Poppins;
   font-weight: bold;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  text-align: center;
+  font-size: 0.8rem;
+  line-height: 20px;
+  text-align: left;
   color: #383361;
 }
 
 .devices-subtitle {
   font-family: Poppins;
   font-weight: 500;
-  font-size: 0.8rem;
-  line-height: 2rem;
-  text-align: center;
+  font-size: 0.6rem;
+  line-height: 0.9rem;
+  text-align: left;
   color: #383361;
 }
 
 .devices-btn {
   border-radius: 10px;
-  background: linear-gradient(#a215ff 0%, #5f29ff 100%);
-  color: #ffff;
+  background: #fff;
   font-family: Poppins;
   font-weight: bold;
   font-size: 0.8rem;
-  text-align: center;
+  text-align: left;
+  color: #724bfe;
   border: 1px solid #a08beb;
   text-align: center;
   text-transform: uppercase;
@@ -150,33 +146,6 @@ export default {
 @media screen and (max-width: 992px) {
   .devices-btn {
     font-size: 0.6rem;
-  }
-
-  .rf-image {
-    margin-top: 8rem;
-  }
-
-  .devices-title {
-    font-size: 1rem;
-    line-height: 1.2rem;
-  }
-
-  .devices-subtitle {
-    padding-top: 1rem !important;
-    font-size: 0.7rem;
-    line-height: 1.2rem;
-  }
-
-  .my-devices {
-    margin-top: 0rem !important;
-  }
-
-  .mob-res-margin {
-    margin-top: 0rem !important;
-  }
-
-  .add-device {
-    padding-bottom: 1rem !important;
   }
 }
 </style>
