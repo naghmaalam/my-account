@@ -10,14 +10,18 @@
           <div class="text-center mob-res-header mt-5">
             <img
               src="@/assets/images/password-recovery/logo-swoshs.png"
-              class="img-fluid mob-res-logo"
+              class="img-fluid mob-res-logo mb-4"
               style="min-height: 65px"
               alt="swoshs-logo"
             />
 
             <keep-alive>
               <Fade>
-                <component v-model:email="email" :is="section" />
+                <component
+                  v-model:email="email"
+                  v-model:code="code"
+                  :is="section"
+                />
               </Fade>
             </keep-alive>
           </div>
@@ -40,8 +44,11 @@
 import { defineComponent, ref, provide, onMounted } from "vue";
 import { Section, UpdateSection } from "@/types/Section";
 import EmailPassword from "@/views/components/login/EmailPassword.vue";
-import EmailCode from "@/views/components/login/EmailCode.vue";
-import EnterCode from "@/views/components/login/EnterCode.vue";
+import EmailCode from "@/views/components/login/code/EmailCode.vue";
+import EnterCode from "@/views/components/login/code/EnterCode.vue";
+import PasswordRecovery from "@/views/components/login/password-recovery/EmailCode.vue";
+import PasswordRecoveryEnterCode from "@/views/components/login/password-recovery/EnterCode.vue";
+import PasswordRecoveryEnterNewPassword from "@/views/components/login/password-recovery/EnterNewPassword.vue";
 import Fade from "@/views/components/transitions/Fade.vue";
 
 export default defineComponent({
@@ -49,11 +56,15 @@ export default defineComponent({
     EmailPassword,
     EmailCode,
     EnterCode,
+    PasswordRecovery,
+    PasswordRecoveryEnterCode,
+    PasswordRecoveryEnterNewPassword,
     Fade,
   },
   setup() {
     const section = ref<Section>("EmailPassword");
     const email = ref("");
+    const code = ref("");
 
     provide("section", section);
     const updateSection: UpdateSection = (newSection: Section) => {
@@ -72,6 +83,7 @@ export default defineComponent({
       section,
       showSlot,
       email,
+      code,
     };
   },
 });

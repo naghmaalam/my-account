@@ -53,8 +53,19 @@ export function useUser(): {
     isAuthenticated: ComputedRef<boolean>;
     init: () => void;
     changeLanguage: (a: SupportedLanguages) => void;
-    emailCode: (email: string) => Promise<boolean>;
-    loginCode: (email: string, code: string) => Promise<boolean>;
+    withCode: {
+      emailCode: (email: string) => Promise<boolean>;
+      loginCode: (email: string, code: string) => Promise<boolean>;
+    };
+    passwordRecovery: {
+      emailCode: (email: string) => Promise<boolean>;
+      verifyCode: (email: string, code: string) => Promise<boolean>;
+      updatePassword: (
+        email: string,
+        code: string,
+        new_password: string
+      ) => Promise<boolean>;
+    };
   };
 } {
   const toast = useToast();
@@ -102,44 +113,92 @@ export function useUser(): {
     resetUser();
   };
 
-  const emailCode = async (email: string) => {
-    try {
-      await api("login/with/code", Method.POST, {
-        username: email,
-      });
-      return true;
-    } catch (error) {
-      const err = error as Error;
-      toast.do.error(err.message);
-      return false;
-    }
+  const withCode = {
+    emailCode: async (email: string) => {
+      try {
+        await api("login/with/code", Method.POST, {
+          username: email,
+        });
+        return true;
+      } catch (error) {
+        const err = error as Error;
+        toast.do.error(err.message);
+        return false;
+      }
+    },
+    loginCode: async (email: string, code: string) => {
+      try {
+        const response = (await api("login/with/code", Method.POST, {
+          username: email,
+          login_code: code,
+        })) as unknown as Response;
+        console.log("waits..");
+        setTimeout(() => {
+          resetUser();
+          state.user.authenticated = true;
+          state.user.me = response;
+          state.user.email = response.email;
+          state.user.language.selected = <SupportedLanguages>(
+            response.preferred_language
+          );
+
+          // state.user.asd = "asd";
+          console.log("state.user = ", state.user);
+        }, 1000);
+        return true;
+      } catch (error) {
+        const err = error as Error;
+        toast.do.error(err.message);
+        return false;
+      }
+    },
   };
 
-  const loginCode = async (email: string, code: string) => {
-    try {
-      const response = (await api("login/with/code", Method.POST, {
-        username: email,
-        login_code: code,
-      })) as unknown as Response;
-      console.log("waits..");
-      setTimeout(() => {
-        resetUser();
-        state.user.authenticated = true;
-        state.user.me = response;
-        state.user.email = response.email;
-        state.user.language.selected = <SupportedLanguages>(
-          response.preferred_language
-        );
-
-        // state.user.asd = "asd";
-        console.log("state.user = ", state.user);
-      }, 1000);
-      return true;
-    } catch (error) {
-      const err = error as Error;
-      toast.do.error(err.message);
-      return false;
-    }
+  const passwordRecovery = {
+    emailCode: async (email: string) => {
+      try {
+        await api("send/confirm/email/code", Method.POST, {
+          email,
+        });
+        return true;
+      } catch (error) {
+        const err = error as Error;
+        toast.do.error(err.message);
+        return false;
+      }
+    },
+    verifyCode: async (email: string, verification_code: string) => {
+      try {
+        await api("verify/code", Method.POST, {
+          email,
+          verification_code,
+        });
+        return true;
+      } catch (error) {
+        const err = error as Error;
+        toast.do.error(err.message);
+        return false;
+      }
+    },
+    updatePassword: async (
+      email: string,
+      verification_code: string,
+      new_password: string
+    ) => {
+      try {
+        const response = (await api("reset/password", Method.POST, {
+          email,
+          verification_code,
+          new_password,
+        })) as unknown as Response;
+        toast.do.show(response.message);
+        return true;
+      } catch (error) {
+        const err = error as Error;
+        toast.do.error(err.message);
+        return false;
+      }
+    },
   };
 
   const resetUser = () => {
@@ -194,8 +253,8 @@ export function useUser(): {
       isAuthenticated,
       init,
       changeLanguage,
-      emailCode,
-      loginCode,
+      withCode,
+      passwordRecovery,
     },
   };
 }

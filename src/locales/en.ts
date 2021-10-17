@@ -415,6 +415,11 @@ const en: Locale = {
   trial_ends_in: "Trial ends in *",
   hi_there: "Hi there! *",
   email_address: "Email Address *",
+  create_new_password: "Create your new password *",
+  confirm_password: "Confirm Password *",
+  back_to_login: "Back to Log in *",
+  password_info_never_reuse:
+    "Confirm a strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account. *",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

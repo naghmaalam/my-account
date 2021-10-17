@@ -28,8 +28,8 @@
         </div>
       </a>
     </div>
-    <a href="password-recovery.html">
-      <div class="forget-your-password text-center mt-2">
+    <a href="#" @click.prevent="updateSection('PasswordRecovery')">
+      <div class="forget-your-password text-center mt-4">
         {{ $t("forget_password") }}
       </div>
     </a>
@@ -50,7 +50,7 @@
     <form action="#" @submit.prevent="login" class="ml-5 mr-5 mt-3">
       <div class="d-flex flex-row">
         <input
-          :type="isPasswordHidden ? 'password' : 'input'"
+          :type="isPasswordHidden ? 'password' : 'text'"
           class="form-control login-pwd"
           :placeholder="$t('enter_password')"
           v-model="loginDetails.password"
@@ -60,13 +60,13 @@
           type="button"
           @click="isPasswordHidden = !isPasswordHidden"
         >
-          <i class="flaticon-invisible pr-3 pl-3"></i>
+          <i v-if="isPasswordHidden" class="flaticon-invisible pr-3 pl-3"></i>
+          <i v-else class="flaticon-view pr-3 pl-3"></i>
         </button>
       </div>
     </form>
 
     <div class="login-continue-btn ml-5 mr-5 mt-3">
-      <!-- <a href="login-password.html"> -->
       <a href="#" @click="login">
         <div class="login-btn pt-3 pb-3" :disabled="isLoggingIn">
           <span
@@ -86,8 +86,8 @@
         </div>
       </a>
     </div>
-    <a href="password-recovery.html">
-      <div class="forget-your-password text-center mt-2">
+    <a href="#" @click.prevent="updateSection('PasswordRecovery')">
+      <div class="forget-your-password text-center mt-4">
         {{ $t("forget_password") }}
       </div>
     </a>
@@ -107,7 +107,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref, inject } from "vue";
+import { defineComponent, reactive, ref, inject, onMounted } from "vue";
 import { useValidation } from "@/modules/validation";
 import { useI18n } from "vue-i18n";
 import { UpdateSection } from "@/types/Section";
@@ -115,7 +115,13 @@ import { UpdateSection } from "@/types/Section";
 import { useToast } from "@/hooks/useToast";
 import { useUser } from "@/hooks/useUser";
 export default defineComponent({
-  setup() {
+  props: {
+    email: {
+      type: String,
+      default: "",
+    },
+  },
+  setup(props) {
     const { t } = useI18n({ useScope: "global" });
     const vldt = useValidation();
     const user = useUser();
@@ -124,11 +130,15 @@ export default defineComponent({
     const isEmailShown = ref(true);
     const isPasswordShown = ref(false);
     const isLoggingIn = ref(false);
-    const isPasswordHidden = ref("password");
+    const isPasswordHidden = ref(true);
 
     const loginDetails = reactive({
       email: "",
       password: "",
+    });
+
+    onMounted(() => {
+      loginDetails.email = props.email;
     });
 
     const showEmail = () => {

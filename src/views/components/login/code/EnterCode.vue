@@ -11,8 +11,8 @@
 
     <a href="#" @click.prevent="updateSection('EmailCode')">
       <!-- <div class="pr-back-to-login text-center pt-2">Use another account</div> -->
-      <div class="pr-back-to-login text-center pt-2">
-        {{ $t("wrong_email") }}
+      <div class="pr-back-to-login text-center pt-2 pb-2 mt-4">
+        {{ $t("use_another_account") }}
       </div>
     </a>
 
@@ -57,7 +57,15 @@
 
     <div class="login-txt text-center mt-2">
       Didn't get the code?
-      <span class="pr-back-to-login"> Send again </span>
+      <a href="#" @click.prevent="sendEmailAgain" :disabled="isLoadingResend">
+        <span class="pr-back-to-login"> Send again </span>
+        <span
+          v-if="isLoadingResend"
+          class="spinner-border spinner-border-sm ml-2"
+          role="status"
+          aria-hidden="true"
+        ></span>
+      </a>
     </div>
     <a href="#" @click.prevent="updateSection('EmailPassword')">
       <div class="pr-back-to-login text-center pt-5 pb-5">
@@ -68,7 +76,9 @@
 </template>
 <script lang="ts">
 import { defineComponent, inject, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
 import { UpdateSection } from "@/types/Section";
+import { useToast } from "@/hooks/useToast";
 import { useUser } from "@/hooks/useUser";
 export default defineComponent({
   props: {
@@ -78,11 +88,14 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const { t } = useI18n({ useScope: "global" });
     const updateSection = inject("updateSection") as UpdateSection;
     const user = useUser();
+    const toast = useToast();
     const code = ref(["", "", "", "", "", ""]);
     const inputs = ref<HTMLInputElement[]>([]);
     const isLoading = ref(false);
+    const isLoadingResend = ref(false);
 
     const handlePaste = (event: ClipboardEvent) => {
       const paste = (event.clipboardData?.getData("text") as string) || "";
@@ -111,10 +124,23 @@ export default defineComponent({
 
     const loginCode = async () => {
       isLoading.value = true;
-      const success = await user.do.loginCode(props.email, code.value.join(""));
+      const success = await user.do.withCode.loginCode(
+        props.email,
+        code.value.join("")
+      );
       isLoading.value = false;
       if (success) {
         console.log("SUCCESS");
+        updateSection("EnterCode");
+      }
+    };
+
+    const sendEmailAgain = async () => {
+      isLoadingResend.value = true;
+      const success = await user.do.withCode.emailCode(props.email);
+      isLoadingResend.value = false;
+      if (success) {
+        toast.do.show(t("check_inbox"));
       }
     };
 
@@ -142,7 +168,9 @@ export default defineComponent({
       code,
       inputs,
       isLoading,
+      isLoadingResend,
       refHandler,
+      sendEmailAgain,
     };
   },
 });

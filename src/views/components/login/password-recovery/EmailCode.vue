@@ -1,39 +1,38 @@
 <template>
-  <div>
-    <div class="login-title text-center">
-      {{ $t("login_with_6_digit_code") }}
+  <div class="">
+    <div class="pr-title text-center">Password recovery</div>
+    <div class="pr-subtitle text-center mr-5 ml-5 mt-4">
+      Please enter your account email and we will send you a verification code
+      for resetting password.
     </div>
-    <form action="#" @submit.prevent="submit">
-      <div class="reset-email-main-input mt-4 pl-5 pr-5">
+    <form action="">
+      <div class="d-flex mob-res-email mt-4 pl-5 pr-5">
         <input
           type="text"
-          class="form-control email pt-4 pb-4"
-          :placeholder="$t('email_address')"
           v-model="email"
+          class="form-control pt-4 pb-4"
+          :placeholder="$t('email_address')"
         />
       </div>
     </form>
-    <div class="login-continue-btn mt-3" @click="submit">
-      <a href="#">
-        <div class="login-btn ml-5 mr-5 pt-3 pb-3">
+    <div class="login-continue-btn ml-5 mr-5 mt-3">
+      <a href="#" @click.prevent="submit">
+        <div class="login-btn pt-3 pb-3">
           <span
             v-if="isLoading"
             class="spinner-border spinner-border-sm mr-2"
             role="status"
             aria-hidden="true"
           ></span>
-          {{ $t("get_code") }}
+          Submit
         </div>
       </a>
     </div>
     <a href="#" @click.prevent="updateSection('EmailPassword')">
-      <div class="pr-back-to-login text-center mt-5 pt-3">
-        {{ $t("login_with_password") }}
-      </div>
+      <div class="pr-back-to-login text-center mt-4 pt-5">Back to Log in</div>
     </a>
   </div>
 </template>
-
 <script lang="ts">
 import { defineComponent, inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
@@ -61,11 +60,11 @@ export default defineComponent({
         toast.do.error(t(vldt.getError()));
       } else {
         isLoading.value = true;
-        const success = await user.do.emailCode(email.value);
+        const success = await user.do.passwordRecovery.emailCode(email.value);
         isLoading.value = false;
         if (success) {
           context.emit("update:email", email.value);
-          updateSection("EnterCode");
+          updateSection("PasswordRecoveryEnterCode");
         }
       }
     };
@@ -81,7 +80,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Login Page */
 .pr-bg {
   width: 100vw;
   height: 100vh;
@@ -89,18 +87,18 @@ export default defineComponent({
   padding-top: 5rem;
 }
 
-.login-box {
+.password-recovery-box {
   width: 100%;
   background: #fff;
   filter: drop-shadow(0px 8px 14px rgba(214, 225, 243, 0.64));
   border-radius: 1rem;
 }
 
-.login-title {
+.pr-title {
   font-family: Poppins;
   font-weight: 500;
   font-size: 2.3rem;
-  line-height: 3rem;
+  line-height: 2.5rem;
   text-align: left;
   color: #312b54;
 }
@@ -111,6 +109,11 @@ export default defineComponent({
   font-size: 0.8rem;
   text-align: center;
   color: #707070;
+}
+
+.reset-email-main-input {
+  position: relative;
+  display: flex;
 }
 
 .form-control {
@@ -137,7 +140,39 @@ export default defineComponent({
   box-shadow: none;
 }
 
-/* submit button */
+.rl-submit-btn {
+  font-family: Poppins;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.rl-btn {
+  border-radius: 5px;
+  background: linear-gradient(#a215ff 0%, #5f29ff 100%);
+  border: 1px solid rgba(0, 0, 0, 0);
+  text-align: center;
+  color: #fff;
+}
+
+.pr-back-to-login {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #6727ff;
+}
+
+.pr-footer {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 2rem;
+  color: #454a63;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
 
 .login-continue-btn {
   font-family: Poppins;
@@ -156,44 +191,6 @@ export default defineComponent({
   color: #fff;
 }
 
-.login-code-btn {
-  border-radius: 5px !important;
-}
-
-/* back to login */
-
-.forget-your-password {
-  font-family: Poppins;
-  font-weight: 500;
-  font-size: 0.8rem;
-  text-align: center;
-  color: #6727ff;
-}
-
-.login-txt {
-  font-family: Poppins;
-  font-weight: 500;
-  font-size: 0.8em;
-  text-align: center;
-}
-
-.pr-back-to-login {
-  font-family: Poppins;
-  font-weight: 500;
-  font-size: 0.8rem;
-  text-align: center;
-  color: #6727ff;
-}
-
-.login-footer {
-  font-family: Poppins;
-  font-weight: 600;
-  font-size: 0.8rem;
-  line-height: 2rem;
-  color: #454a63;
-  border: 1px solid rgba(0, 0, 0, 0);
-}
-
 @media screen and (max-width: 992px) {
   .pr-bg {
     padding-top: 2rem;
@@ -204,20 +201,17 @@ export default defineComponent({
     margin-top: 2.2rem;
   }
 
-  .login-box {
-    padding-top: 0rem !important;
-  }
-
-  .login-title {
+  .pr-title {
     font-size: 1.5rem;
     line-height: 1rem;
   }
 
-  .login-txt {
-    padding-top: 0rem !important;
+  .pr-subtitle {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
   }
 
-  .login-footer {
+  .pr-footer {
     padding-top: 0rem !important;
     margin-top: 0rem !important;
   }
@@ -235,7 +229,18 @@ export default defineComponent({
   }
 
   .mob-res-header {
-    margin-top: 1rem !important;
+    margin-top: 1.5rem !important;
+    padding-top: 0rem !important;
+  }
+
+  .mob-res-email {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .login-continue-btn {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
   }
 }
 </style>

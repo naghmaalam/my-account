@@ -391,11 +391,16 @@ const cn: Locale = {
   enter_current_password: "Enter Current Password_CN",
   new_password: "Enter New Password_CN",
 
-  enter_new_password: "Enter your new password _CN",
+  enter_new_password: "Enter your new password_CN",
   retype_password: "Retype Password_CN",
   enter_retype_password: "Retype your Password_CN",
   hi_there: "Hi there!_CN",
   email_address: "Email Address_CN",
+  create_new_password: "Create your new password_CN",
+  confirm_password: "Confirm Password_CN",
+  back_to_login: "Back to Log in_CN",
+  password_info_never_reuse:
+    "Confirm A strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account._CN",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

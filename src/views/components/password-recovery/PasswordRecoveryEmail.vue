@@ -26,11 +26,11 @@
             <div class="login-btn pt-3 pb-3">Submit</div>
           </a>
         </div>
-        <a href="login.html"
-          ><div class="pr-back-to-login text-center mt-4 pt-5 pb-5">
+        <a href="login.html">
+          <div class="pr-back-to-login text-center mt-4 pt-5 pb-5">
             Back to Log in
-          </div></a
-        >
+          </div>
+        </a>
       </div>
     </div>
 

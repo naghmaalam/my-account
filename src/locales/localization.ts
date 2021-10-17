@@ -6,7 +6,7 @@ import { Locale } from "@/types/Locale";
 
 // 2. Create i18n instance with options
 const i18n = createI18n<[Locale], "en" | "cn">({
-  // legacy: false, // for composition API
+  // legacy: false, // for composition API, seems to work even if not set
   locale: "en", // set locale
   fallbackLocale: "cn", // set fallback locale
   messages: {
