@@ -73,38 +73,7 @@
           </div>
           <div class="col">
             <div class="table-subtitle">
-              <button class="my-account-btn">Recharge</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container table-content mt-3 pt-3 pb-3">
-        <div class="row d-dlex justify-content-center align-items-center">
-          <div class="col">
-            <div class="table-subtitle">5432178943</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              Premium-6 Months Subscription
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div class="inactive-btn pt-1 pb-1 ml-5">Inactive</div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">$20.00</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <button class="my-account-btn">Renew</button>
+              <button class="my-account-btn">Upgrade</button>
             </div>
           </div>
         </div>
@@ -146,9 +115,6 @@
           <div class="col">
             <div class="table-subtitle">5432178943</div>
           </div>
-          <div class="col">
-            <div class="table-subtitle">5432178943</div>
-          </div>
         </div>
 
         <div class="row mob-res-center table-content mb-2">
@@ -157,9 +123,6 @@
           </div>
           <div class="col">
             <div class="table-subtitle text-center">12/19/2021</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
           </div>
         </div>
 
@@ -170,11 +133,6 @@
           <div class="col">
             <div class="table-subtitle table-subtitle-bold">
               Premium-1 Months Subscription
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              Premium-6 Months Subscription
             </div>
           </div>
         </div>
@@ -188,19 +146,11 @@
               <div class="subscription-active-btn">Active</div>
             </div>
           </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div class="inactive-btn pt-1 pb-1 ml-5">Inactive</div>
-            </div>
-          </div>
         </div>
 
         <div class="row mob-res-center table-content mb-2">
           <div class="col">
             <div class="table-title">Payment Provider</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
           </div>
           <div class="col">
             <div class="table-subtitle">Bitcoin</div>
@@ -214,9 +164,6 @@
           <div class="col">
             <div class="table-subtitle">$20.00</div>
           </div>
-          <div class="col">
-            <div class="table-subtitle">$20.00</div>
-          </div>
         </div>
 
         <div class="row mob-res-center table-content mb-2">
@@ -226,11 +173,6 @@
           <div class="col">
             <div class="table-subtitle">
               <button class="my-account-btn">Recharge</button>
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <button class="my-account-btn">Renew</button>
             </div>
           </div>
         </div>

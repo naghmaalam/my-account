@@ -6,11 +6,12 @@
           <div class="col-md-6">
             <div class="account-subscription pt-5">My Subscription(s)</div>
             <div class="d-flex flex-row">
-              <a href="subscription.html">
-                <div class="inactive-subscription pr-4 pl-4">
-                  My Subscription
-                </div>
-              </a>
+              <div
+                class="inactive-subscription pr-4 pl-4"
+                @click="redirect('subscription')"
+              >
+                My Subscription
+              </div>
               <div class="d-flex flex-column">
                 <div class="active-subscription pr-4 pl-4">Order History</div>
                 <div class="selected-borderline"></div>
@@ -136,11 +137,12 @@
           <div class="col-md-6">
             <div class="account-subscription pt-5">My Subscription(s)</div>
             <div class="d-flex flex-row">
-              <a href="subscription.html">
-                <div class="inactive-subscription pr-4 pl-4">
-                  My Subscription
-                </div>
-              </a>
+              <div
+                class="inactive-subscription pr-4 pl-4"
+                @click="redirect('subscription')"
+              >
+                My Subscription
+              </div>
               <div class="d-flex flex-column">
                 <div class="active-subscription pr-4 pl-4">Order History</div>
                 <div class="selected-borderline"></div>
@@ -260,9 +262,17 @@
   </div>
 </template>
 <script>
+import { useRouter } from "vue-router";
+
 export default {
   setup() {
-    return {};
+    const router = useRouter();
+    const redirect = (page) => {
+      router.push({ name: page });
+    };
+    return {
+      redirect,
+    };
   },
 };
 </script>

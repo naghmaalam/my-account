@@ -24,7 +24,9 @@
               </div>
             </div>
             <div class="col">
-              <div class="toggle-btn-title pt-2">Rewards</div>
+              <div class="toggle-btn-title pt-2" @click="redirect('rewards')">
+                Rewards
+              </div>
             </div>
           </div>
         </div>
@@ -105,9 +107,16 @@
   </div>
 </template>
 <script>
+import { useRouter } from "vue-router";
 export default {
   setup() {
-    return {};
+    const router = useRouter();
+    const redirect = (page) => {
+      router.push({ name: page });
+    };
+    return {
+      redirect,
+    };
   },
 };
 </script>
