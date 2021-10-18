@@ -22,10 +22,9 @@
               <i class="flaticon-house icon-color"></i>
             </div>
             <div class="dashboard d-flex flex-column">
-              <h5 class="mt-4">Dashboard</h5>
+              <h5 class="mt-4">{{ $t("dashboard") }}</h5>
               <p>
-                The Account Dashboard is a comprehensive overview of account
-                details.
+               {{ $t("dashboard_info") }}
               </p>
               <div class="borderline mt-4"></div>
             </div>
@@ -44,10 +43,9 @@
               <i class="flaticon-responsive icon-color"></i>
             </div>
             <div class="dashboard d-flex flex-column">
-              <h5 class="mt-4">Devices</h5>
+              <h5 class="mt-4">{{ $t("devices") }}</h5>
               <p>
-                Manage and overview of your secured connected devices and
-                details.
+                {{ $t("devices_info") }}
               </p>
               <div class="borderline mt-4"></div>
             </div>
@@ -66,10 +64,9 @@
               <i class="flaticon-cloud-computing icon-color"></i>
             </div>
             <div class="dashboard d-flex flex-column">
-              <h5 class="mt-4">Downloads</h5>
+              <h5 class="mt-4">{{ $t("downloads") }}</h5>
               <p>
-                Get Swoshs VPN with specific platform of your choice, from
-                Android, iOS, Windows etc.
+                {{ $t("downloads_info") }}
               </p>
               <div class="borderline mt-4"></div>
             </div>
@@ -88,10 +85,9 @@
               <i class="flaticon-calendar-interface-symbol-tool icon-color"></i>
             </div>
             <div class="dashboard d-flex flex-column">
-              <h5 class="mt-4">Subscription</h5>
+              <h5 class="mt-4">{{ $t("subscription") }}</h5>
               <p>
-                Where you can check the overview details of your subscription
-                and order history.
+                {{ $t("subscription_info") }}
               </p>
               <div class="borderline mt-4"></div>
             </div>
@@ -111,11 +107,11 @@
             </div>
             <div class="dashboard d-flex flex-column">
               <h5 class="mt-4">
-                Refer a Friend <span class="promo px-2">promo</span>
+                {{ $t("refer_friend") }}
+                <span class="promo px-2">{{ $t("promo") }}</span>
               </h5>
               <p>
-                Share your unique referral link with friends via email, FB, or
-                whatever works for you.
+                {{ $t("refer_friend_info") }}
               </p>
               <div class="borderline mt-4"></div>
             </div>

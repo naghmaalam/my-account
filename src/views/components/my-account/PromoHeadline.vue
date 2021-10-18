@@ -11,12 +11,13 @@
         </div>
         <div class="col-md-4 pt-3">
           <div class="promos">
-            <div class="headline-title">Sample headline for promos</div>
+            <div class="headline-title">{{ $t("promo_headline") }}</div>
             <div class="headline-subtitle">
-              Stay 1 step ahead of cybercrime threats like phishing and online
-              tracking with Prime
+              {{ $t("promo_info") }}
             </div>
-            <div class="headline-txt">Learn more about Swoshs ></div>
+            <div class="headline-txt">
+              {{ $t("learn_more_about_swoshs") }} >
+            </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -26,7 +27,9 @@
           </div>
         </div>
         <div class="col-md-2 pt-4">
-          <button class="upgrade-btn pt-2 pb-2 pr-4 pl-4">Upgrade</button>
+          <button class="upgrade-btn pt-2 pb-2 pr-4 pl-4">
+            {{ $t("upgrade") }}
+          </button>
         </div>
       </div>
     </div>
@@ -89,6 +92,7 @@ export default {
   font-weight: 600;
   font-size: 1rem;
   text-transform: uppercase;
+  border: none;
 }
 
 @media screen and (max-width: 992px) {

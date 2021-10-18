@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-6">
-        <div class="account-info-title">Devices</div>
+        <div class="account-info-title">{{ $t("devices") }}</div>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
         <div class="d-flex flex-row justify-content-between">
           <div class="d-flex flex-column">
             <div class="devices-title pt-3 px-3">
-              Current package supports xx device to connect simultaneously
+              {{ $t("devices_title") }}
             </div>
             <div class="devices-subtitle px-3">
               Your privacy and Internet security can be protected when the

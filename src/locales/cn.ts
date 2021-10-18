@@ -398,6 +398,53 @@ const cn: Locale = {
   email_address: "Email Address_CN",
   create_new_password: "Create your new password_CN",
   confirm_password: "Confirm Password_CN",
+  back_to_login: "Back to Log in_CN",
+  my_devices: "my devices_CN",
+  howdy: "Howdy!_CN",
+  member_since: "Member Since_CN",
+  recently_connected: "Recently Connected_CN",
+  last_signin: "Last Signin_CN",
+  view_more: "view more_CN",
+  subscription: "Subscription_CN",
+  premium_package: " Premium Package_CN",
+  one_month_subscription: "1 Month Subscription_CN",
+  active: "Active_CN",
+  view_details: "View Details_CN",
+  your_account: "Your Account_CN",
+  account_section: "Account Section_CN",
+  your_account_info:
+    "Manage your info, edit change your email or password and check settings to keep you account secure_CN",
+  need_help: "Need Help?_CN",
+  support_info:
+    "If you have any Swoshs VPN-related inquiries, get in touch with our knowledgeable colleagues from Technical Support_CN",
+  logged_in_as: "Logged in as_CN",
+  account_settings: "Account Settings_CN",
+  privacy: "Privacy_CN",
+  dashboard: "Dashboard_CN",
+  dashboard_info:
+    "The Account Dashboard is a comprehensive overview of account details._CN",
+  devices_info:
+    "Manage and overview of your secured connected devices and details._CN",
+  downloads: " Downloads_CN",
+  password_info_never_reuse:
+    "Confirm A strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account._CN",
+  downloads_info:
+    "Get Swoshs VPN with specific platform of your choice, from Android, iOS, Windows etc._CN",
+  subscription_info:
+    "Where you can check the overview details of your subscription and order history._CN",
+  refer_friend: "Refer a Friend_CN",
+  promo: "Promo_CN",
+  refer_friend_info:
+    " Share your unique referral link with friends via email, FB, or whatever works for you._CN",
+  promo_headline: "Sample headline for promos_CN",
+  learn_more_about_swoshs: "Learn more about Swoshs_CN",
+  promo_info:
+    "Stay 1 step ahead of cybercrime threats like phishing and online tracking with Prime_CN",
+  devices_title:
+    "Current package supports xx device to connect simultaneously_CN",
+  devices_subtitle:
+    " Your privacy and Internet security can be protected when the device is connected. It is recommended to keep the connection status when browsing online._CN",
+
   password_info_never_reuse:
     "Confirm A strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account._CN",
   back_to_login: "Back to Log in_CN",

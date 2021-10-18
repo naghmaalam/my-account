@@ -393,8 +393,8 @@ export default {
 }
 
 .my-account-btn {
-  width: 161.68px;
-  height: 43.47px;
+  /* width: 161.68px;
+  height: 43.47px; */
   border-radius: 10px;
   background: transparent;
   border: 1px solid #7b47fc;
