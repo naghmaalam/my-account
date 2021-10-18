@@ -363,6 +363,39 @@ export interface Locale {
   confirm_password: string;
   password_info_never_reuse: string;
   back_to_login: string;
-  /////////////////////////////////////////////////////////////////////////////////////////
+  my_devices: string;
+  howdy: string;
+  member_since: string;
+  recently_connected: string;
+  last_signin: string;
+  view_more: string;
+  subscription: string;
+  premium_package: string;
+  one_month_subscription: string;
+  active: string;
+  view_details: string;
+  your_account: string;
+  account_section: string;
+  your_account_info: string;
+  need_help: string;
+  support_info: string;
+  logged_in_as: string;
+  account_settings: string;
+  privacy: string;
+  dashboard: string;
+  dashboard_info: string;
+  devices_info: string;
+  downloads: string;
+  downloads_info: string;
+  subscription_info: string;
+  refer_friend: string;
+  promo: string;
+  refer_friend_info: string;
+  promo_headline: string;
+  promo_info: string;
+  learn_more_about_swoshs: string;
+  devices_title: string;
+  devices_subtitle: string;
+  ////////////////////////////////////////////////////////////////
   // new
 }

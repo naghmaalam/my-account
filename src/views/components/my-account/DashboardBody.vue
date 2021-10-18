@@ -3,11 +3,12 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-6">
-        <div class="account-info-title">Howdy!</div>
+        <div class="account-info-title">{{ $t("howdy") }}</div>
       </div>
       <div class="col-md-6">
         <div class="account-info-member">
-          Member since: <span class="account-info-date"> 04/07/2021 </span>
+          {{ $t("member_since") }}:
+          <span class="account-info-date"> 04/07/2021 </span>
         </div>
       </div>
     </div>
@@ -18,13 +19,15 @@
     <div class="row">
       <!-- my devices -->
       <div class="my-devices col-md-6 my-2 hide-mobile">
-        <div class="account-title pt-3 px-3">My Devices</div>
+        <div class="account-title pt-3 px-3">{{ $t("my_devices") }}</div>
         <div class="row-line mt-2"></div>
         <div
           class="d-flex flex-row justify-content-around align-items-center mb-4"
         >
           <div class="recently-connected d-flex flex-column">
-            <div class="account-subtitle">Recently Connected (6)</div>
+            <div class="account-subtitle">
+              {{ $t("recently_connected") }} (6)
+            </div>
             <div
               class="
                 desktop-connected
@@ -41,18 +44,20 @@
               />
               <div class="d-flex flex-column">
                 <div class="desktop pl-3">Desktop-MKEUF6J</div>
-                <div class="account-info pl-3">Last Signin: 06/26/2021</div>
+                <div class="account-info pl-3">
+                  {{ $t("last_signin") }} : 06/26/2021
+                </div>
               </div>
             </div>
           </div>
           <div class="vertical-line mt-3"></div>
-          <button class="my-account-btn">View More</button>
+          <button class="my-account-btn">{{ $t("view_more") }}</button>
         </div>
       </div>
 
       <!-- my devices for mobile -->
       <div class="my-devices col-md-6 my-2 show-mobile hide-desktop">
-        <div class="account-title pt-3 px-3">My Devices</div>
+        <div class="account-title pt-3 px-3">{{ $t("my_devices") }}</div>
         <div class="row-line mt-2"></div>
         <div
           class="d-flex flex-row justify-content-around align-items-center mb-4"
@@ -66,7 +71,9 @@
               flex-column
             "
           >
-            <div class="account-subtitle">Recently Connected (6)</div>
+            <div class="account-subtitle">
+              {{ $t("recently_connected") }} (6)
+            </div>
             <img
               src="@/assets/images/my-account/windows.png"
               class="img-fluid mob-res-image"
@@ -74,16 +81,18 @@
             />
             <div class="d-flex flex-column">
               <div class="desktop pl-3">Desktop-MKEUF6J</div>
-              <div class="account-info pl-3">Last Signin: 06/26/2021</div>
+              <div class="account-info pl-3">
+                {{ $t("last_signin") }} : 06/26/2021
+              </div>
             </div>
-            <button class="my-account-btn">View More</button>
+            <button class="my-account-btn">{{ $t("view_more") }}</button>
           </div>
         </div>
       </div>
 
       <!-- Subscription -->
       <div class="subscription col-md-6 my-2">
-        <div class="account-title pt-3 px-3">Subscription</div>
+        <div class="account-title pt-3 px-3">{{ $t("subscription") }}</div>
         <div class="row-line mt-2"></div>
         <div
           class="
@@ -111,12 +120,16 @@
               "
             >
               <div class="d-flex flex-column">
-                <div class="account-subtitle pb-4">Premium Package</div>
-                <div class="d-flex flex-row mob-res-col">
-                  <div class="desktop pb-3">1 Month Subscription</div>
-                  <div class="active-btn">Active</div>
+                <div class="account-subtitle pb-4">
+                  {{ $t("premium_package") }}
                 </div>
-                <button class="my-account-btn">View Details</button>
+                <div class="d-flex flex-row mob-res-col">
+                  <div class="desktop pb-3">
+                    {{ $t("one_month_subscription") }}
+                  </div>
+                  <div class="active-btn">{{ $t("active") }}</div>
+                </div>
+                <button class="my-account-btn">{{ $t("view_details") }}</button>
               </div>
             </div>
           </div>
@@ -128,7 +141,7 @@
     <!-- your account -->
     <div class="row gap-3">
       <div class="your-account col-md-6 my-2">
-        <div class="account-title pt-3 px-3">Your Account</div>
+        <div class="account-title pt-3 px-3">{{ $t("your_account") }}</div>
         <div class="row-line mt-2"></div>
         <div
           class="
@@ -156,13 +169,16 @@
               "
             >
               <div class="d-flex flex-column">
-                <div class="account-subtitle pl-3">Account Section</div>
+                <div class="account-subtitle pl-3">
+                  {{ $t("account_section") }}
+                </div>
                 <div class="account-info pb-4 mt-3 pl-3">
-                  Manage your info, edit change your email or password and check
-                  settings to keep you account secure
+                  {{ $t("your_account_info") }}
                 </div>
                 <div class="mob-res-btn">
-                  <button class="my-account-btn">View Details</button>
+                  <button class="my-account-btn">
+                    {{ $t("view_details") }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -172,7 +188,7 @@
 
       <!-- support -->
       <div class="support col-md-6 my-2">
-        <div class="account-title pt-3 px-3">Support</div>
+        <div class="account-title pt-3 px-3">{{ $t("support") }}</div>
         <div class="row-line mt-2"></div>
         <div
           class="
@@ -199,13 +215,14 @@
               "
             >
               <div class="d-flex flex-column">
-                <div class="account-subtitle pl-3">Need Help?</div>
+                <div class="account-subtitle pl-3">{{ $t("need_help") }}</div>
                 <div class="account-info pb-4 mt-3 pl-3">
-                  If you have any Swoshs VPN-related inquiries, get in touch
-                  with our knowledgeable colleagues from Technical Support
+                  {{ $t("support_info") }}
                 </div>
                 <div class="mob-res-btn">
-                  <button class="my-account-btn">Contact Support</button>
+                  <button class="my-account-btn">
+                    {{ $t("contact_support") }}
+                  </button>
                 </div>
               </div>
             </div>

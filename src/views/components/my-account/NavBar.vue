@@ -21,7 +21,7 @@
         </button>
       </div>
       <div class="d-flex flex-column justify-content-end align-items-end">
-        <p class="loggedin pt-3">Logged in as</p>
+        <p class="loggedin pt-3">{{ $t("logged_in_as") }}</p>
         <p class="username pb-1">{{ stateUser.email }}</p>
       </div>
       <div class="dropdown">
@@ -46,7 +46,7 @@
               class="img-fluid swoshs-logo"
               alt=""
             />
-            <div>Account Settings</div>
+            <div>{{ $t("account_settings") }}</div>
             <i class="flaticon-arrow-angle-pointing-to-right"></i>
           </div>
           <div class="d-flex flex-row justify-content-around">
@@ -55,7 +55,7 @@
               class="img-fluid swoshs-logo"
               alt=""
             />
-            <div>Support</div>
+            <div>{{ $t("support") }}</div>
             <div class="d-flex justify-content-end">
               <i class="flaticon-arrow-angle-pointing-to-right"></i>
             </div>
@@ -67,7 +67,7 @@
               class="img-fluid swoshs-logo"
               alt=""
             />
-            <div>Privacy</div>
+            <div>{{ $t("privacy") }}</div>
             <i class="flaticon-arrow-angle-pointing-to-right"></i>
           </div>
           <div class="d-flex flex-row justify-content-around" @click="logout">
@@ -76,7 +76,7 @@
               class="img-fluid swoshs-logo"
               alt=""
             />
-            <div>Logout</div>
+            <div>{{ $t("logout") }}</div>
             <i class="flaticon-arrow-angle-pointing-to-right"></i>
           </div>
         </div>
