@@ -1,7 +1,10 @@
 <template>
   <main class="container-fluid rl-bg p-0">
+    <!-- notification-head -->
     <div
       class="
+        mob-margin mob-res-padding
+        reverse-to-top
         referrel-noti-head
         d-flex
         flex-row
@@ -9,16 +12,23 @@
         align-items-center
       "
     >
-      <img
-        src="assets/images/account-settings-refer-friend/open-gift.png"
-        class="rl-gift img-fluid"
-        alt=""
-      />
-      <p class="pt-3 pl-3">
-        Your friend rewarded you a 30-Day gift, Your buddy knows you value
-        online privacy and security.
-      </p>
+      <div>
+        <img
+          src="@/assets/images/account-settings-refer-friend/open-gift.png"
+          class="rl-gift img-fluid"
+          alt=""
+        />
+      </div>
+      <div>
+        <p class="mob-res-font pt-3 pl-3">
+          Your friend rewarded you a 30-Day gift, Your buddy knows you value
+          online privacy and security.
+        </p>
+      </div>
     </div>
+
+    <!-- create account container -->
+
     <div class="container">
       <div class="row">
         <div class="rl-box mt-5 col-md-6 col-sm-6">
@@ -31,7 +41,7 @@
             <b> 30 Days Free gift </b>
           </div>
           <form action="">
-            <div class="d-flex mt-4 pl-5 pr-5 ml-5 mr-5">
+            <div class="mob-res-inputs d-flex mt-4 pl-5 pr-5 ml-5 mr-5">
               <input
                 type="text"
                 class="form-control pt-4 pb-4"
@@ -39,41 +49,51 @@
               />
             </div>
 
-            <div class="d-flex flex-row mt-4 ml-5 mr-5">
+            <div class="mob-res-inputs d-flex flex-row mt-4 ml-5 mr-5">
               <input
                 type="password"
-                class="form-control login-pwd ml-5"
+                class="form-control login-pwd mob-res-inputs ml-5"
                 placeholder="Enter your password"
                 onkeydown="validation()"
               />
-              <button class="visiblity-btn mr-5">
+              <button class="visiblity-btn mob-res-inputs mr-5">
                 <i class="flaticon-invisible pr-3 pl-3"></i>
               </button>
             </div>
           </form>
-          <div class="pass-strength mt-3 pl-5 ml-5">Password Strength</div>
-          <div class="indicator mt-3 pl-5 pr-5 ml-5 mr-5">
+          <div class="pass-strength mob-res-inputs mt-3 pl-5 ml-5">
+            Password Strength
+          </div>
+          <div class="indicator mob-res-inputs mt-3 pl-5 pr-5 ml-5 mr-5">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
             <span></span>
           </div>
-          <div class="rl-txt pl-5 ml-5 pr-5 mr-5 pt-4">
+          <div class="rl-txt mob-res-inputs pl-5 ml-5 pr-5 mr-5 pt-4">
             A strong password has more than 8 character, containing uppercase
             and lowercase as well as symbols. Never reuse old password as this
             may compromise your account.
           </div>
           <div class="rl-submit-btn ml-5 mr-5 mt-4">
-            <div class="rl-btn ml-5 mr-5 pt-2 pb-2 mb-5">
+            <div class="rl-btn mob-res-inputs ml-5 mr-5 pt-2 pb-2 mb-5">
               Get your 30-Day free
             </div>
           </div>
         </div>
-        <div class="referrel-image mt-5 pt-5 col-md-6 col-sm-6">
+        <div
+          class="
+            referrel-image
+            mob-res-image mob-margin
+            mt-5
+            pt-5
+            col-md-6 col-sm-6
+          "
+        >
           <img
             src="@/assets/images/referrel-link/referrel-link.png"
-            class="mt-5 img-fluid"
+            class="mt-5 mob-res-image img-fluid"
             alt=""
           />
         </div>
@@ -392,5 +412,61 @@ export default {
   background: transparent;
   border: 1px solid;
   border-color: #1e156b transparent #1e156b #1e156b;
+}
+
+.hide-desktop {
+  display: none;
+}
+
+@media screen and (max-width: 992px) {
+  .rl-title {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+    text-align: center;
+  }
+
+  .rl-subtitle {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+    text-align: center;
+  }
+
+  .mob-res-inputs {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+    text-align: center;
+  }
+
+  .mob-res-image {
+    margin-top: 0rem !important;
+    padding-top: 0rem !important;
+    text-align: center;
+  }
+
+  .mob-margin {
+    margin-top: 2rem !important;
+  }
+
+  .rl-gift {
+    width: 2.5rem !important;
+  }
+
+  .mob-res-font {
+    font-size: 0.6rem !important;
+  }
+
+  .mob-res-padding {
+    padding-top: 1rem;
+  }
+
+  .reverse-to-top {
+    flex-direction: column !important;
+  }
 }
 </style>
