@@ -30,11 +30,7 @@ a:hover {
 @media only screen and (max-width: 768px) {}
 
 /* Medium Devices, Desktops */
-@media only screen and (max-width: 992px) {
-  .desktop {
-    display: none !important;
-  }
-}
+@media only screen and (max-width: 992px) {}
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width: 1200px) {}

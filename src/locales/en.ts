@@ -462,7 +462,6 @@ const en: Locale = {
     "Current package supports xx device to connect simultaneously *",
   devices_subtitle:
     " Your privacy and Internet security can be protected when the device is connected. It is recommended to keep the connection status when browsing online. *",
-    "Confirm a strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account.*",
   back_to_login: "Back to Log in*",
   select_os: "Select OS*",
   done: "Done*",

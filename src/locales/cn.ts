@@ -444,10 +444,6 @@ const cn: Locale = {
     "Current package supports xx device to connect simultaneously_CN",
   devices_subtitle:
     " Your privacy and Internet security can be protected when the device is connected. It is recommended to keep the connection status when browsing online._CN",
-
-  password_info_never_reuse:
-    "Confirm A strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account._CN",
-  back_to_login: "Back to Log in_CN",
   select_os: "Select OS_CN",
   done: "Done_CN",
   install: "Install_CN",
