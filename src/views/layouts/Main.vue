@@ -8,35 +8,41 @@
 
     <div class="container-fluid" style="background-color: #f3f7fe !important">
       <div class="row">
-        <!-- side bar -->
-        <!-- ////////////////////////////////////////////////////////////////////////// -->
-        <SideBar />
-        <!-- ////////////////////////////////////////////////////////////////////////// -->
-        <!-- side bar -->
-        <main
-          role="main"
-          class="col-md-9 ml-sm-auto col-lg-10 px-md-4"
-          @click="hideSideMenu"
-        >
-          <!-- for meta customComponents -->
-          <!-- //////////////////////////////////////////////// -->
-          <div class="mob-res-hide">
-            <Fade>
-              <ReferFriendPromoHeadline
-                v-if="customComponents?.headline === 'ReferFriendPromoHeadline'"
-              />
-              <PromoHeadline v-else />
-            </Fade>
-          </div>
-          <!-- //////////////////////////////////////////////// -->
-          <!-- for meta customComponents -->
+        <div class="col d-flex flex-row justify-content-center">
+          <!-- side bar -->
+          <!-- ////////////////////////////////////////////////////////////////////////// -->
+          <SideBar />
+          <!-- ////////////////////////////////////////////////////////////////////////// -->
+          <!-- side bar -->
 
-          <router-view v-slot="{ Component }">
-            <Fade>
-              <component :is="Component" />
-            </Fade>
-          </router-view>
-        </main>
+          <main
+            id="main-content"
+            class="pb-4"
+            role="main"
+            @click="hideSideMenu"
+          >
+            <!-- for meta customComponents -->
+            <!-- //////////////////////////////////////////////// -->
+            <div class="d-none d-lg-block">
+              <Fade>
+                <ReferFriendPromoHeadline
+                  v-if="
+                    customComponents?.headline === 'ReferFriendPromoHeadline'
+                  "
+                />
+                <PromoHeadline v-else />
+              </Fade>
+            </div>
+            <!-- //////////////////////////////////////////////// -->
+            <!-- for meta customComponents -->
+
+            <router-view v-slot="{ Component }">
+              <Fade>
+                <component :is="Component" />
+              </Fade>
+            </router-view>
+          </main>
+        </div>
       </div>
     </div>
   </div>
@@ -70,7 +76,7 @@ export default defineComponent({
 
     const route = useRoute();
     const customComponents = computed(
-      () => route.meta.customComponents ?? null
+      () => (route.meta.customComponents as { headline: string }) ?? null
     );
 
     return {
@@ -85,6 +91,9 @@ export default defineComponent({
 <style scoped>
 .main-padding {
   padding-top: 100px;
+}
+
+.left-spacer {
 }
 
 @media screen and (max-width: 992px) {

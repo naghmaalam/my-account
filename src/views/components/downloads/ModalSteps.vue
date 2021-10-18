@@ -3,91 +3,99 @@
     <div class="modal" v-if="open">
       <div class="modal-backdrop"></div>
       <Fade>
-        <div class="modal-content">
-          <div class="download-modal-header pr-5">
-            <div class="windowClose close" @click="closeModal">
-              <!-- <i class="icon-size flaticon-cancel"></i> -->
-              <i class="fas fa-times"></i>
-            </div>
-            <div
-              class="
-                circles
-                d-flex
-                flex-row
-                justify-content-center
-                align-items-center
-              "
-            >
-              <div class="circle-icon circle-check">
-                <!-- <i class="checked-icon flaticon-checked"></i> -->
-                <i class="fas fa-check"></i>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="download-modal-header pr-5">
+              <div class="windowClose close" @click="closeModal">
+                <i class="fas fa-times"></i>
               </div>
-              <div class="circle-title">Select OS</div>
-              <div class="circle-line"></div>
-              <div class="circle-icon circle-2">2</div>
-              <div class="circle-title">Download</div>
-              <div class="circle-line"></div>
-              <div class="circle-icon circle-3">3</div>
-              <div class="circle-title">Install</div>
-              <div class="circle-line"></div>
-              <div class="circle-icon circle-4">4</div>
-              <div class="circle-title">Done</div>
+              <div
+                class="
+                  circles
+                  d-flex
+                  flex-row
+                  justify-content-center
+                  align-items-center
+                "
+              >
+                <div class="circle-icon circle-check">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="circle-title">{{ $t("select_os") }}</div>
+                <div class="circle-line"></div>
+                <div class="circle-icon circle-2">2</div>
+                <div class="circle-title">{{ $t("download") }}</div>
+                <div class="circle-line"></div>
+                <div class="circle-icon circle-3">3</div>
+                <div class="circle-title">{{ $t("install") }}</div>
+                <div class="circle-line"></div>
+                <div class="circle-icon circle-4">4</div>
+                <div class="circle-title">{{ $t("done") }}</div>
+              </div>
             </div>
-          </div>
 
-          <div class="modal-body pt-5 pb-5 pr-5">
-            <div class="d-flex flex-row justify-content-around">
-              <div class="device-image ml-4">
-                <div
-                  class="
-                    d-flex
-                    flex-column
-                    justify-content-center
-                    align-items-center
-                    py-3
-                    px-4
-                  "
-                >
-                  <i class="downloads-icons pt-1" :class="device.icon"></i>
-                  <div class="downloads-title pb-1">{{ device.title }}</div>
+            <div class="modal-body pt-5 pb-5 pr-5">
+              <div class="d-flex flex-row justify-content-around">
+                <div class="device-image ml-4">
+                  <div
+                    class="
+                      d-flex
+                      flex-column
+                      justify-content-center
+                      align-items-center
+                      py-3
+                      px-4
+                    "
+                  >
+                    <i class="downloads-icons pt-1" :class="device?.icon"></i>
+                    <div class="downloads-title pb-1">{{ device?.title }}</div>
+                  </div>
                 </div>
-              </div>
-              <div class="mt-3 pl-5">
-                <div class="device-modal-title">
-                  Download SwoshVPN for {{ device.title }}
-                </div>
-                <div class="device-modal-subtitle">
-                  * Your privacy and Internet security can be protected when the
-                  device is connected. It is recommended to keep the connection
-                  status
+                <div class="mt-3 pl-5">
+                  <div class="device-modal-title">
+                    {{ $t("download_for") }} {{ device?.title }}
+                  </div>
+                  <div class="device-modal-subtitle">
+                    * {{ $t("your_privacy") }}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="download-modal-footer pr-5">
-            <div class="d-flex flex-row justify-content-around pb-4 ml-4">
-              <div class="pl-3 mt-0 pt-4">
-                <div class="device-modal-title">
-                  Swoshs VPN is ready to download
-                </div>
-                <div class="device-modal-subtitle pt-3">
-                  You can also send a link to your address
-                  <b> {{ stateUser.email }} </b> where you can download the
-                  Swoshs VPN.
-                </div>
-              </div>
-              <div class="device-download-btns pt-4">
-                <a href="#">
-                  <div class="device-download-btn pt-3 pb-3 pl-4 pr-4">
-                    download
+            <div class="download-modal-footer pr-5">
+              <div class="d-flex flex-row justify-content-around pb-4 ml-4">
+                <div class="pl-3 mt-0 pt-4">
+                  <div class="device-modal-title">
+                    {{ $t("ready_to_download") }}
                   </div>
-                </a>
-                <a href="#">
-                  <div class="device-sendemail-btn mt-2 pt-3 pb-3 pl-4 pr-4">
-                    Send Email
+                  <div class="device-modal-subtitle p-1">
+                    <span
+                      v-html="$t('send_link_email', { email: stateUser.email })"
+                    ></span>
                   </div>
-                </a>
+                </div>
+                <div class="device-download-btns pt-4">
+                  <a
+                    :href="device?.fileUrl"
+                    target="_blank"
+                    @click="isDownloadHereShown = true"
+                  >
+                    <div
+                      class="device-download-btn pt-3 pb-3 pl-4 pr-4"
+                      style="text-transform: uppercase"
+                    >
+                      {{ $t("download") }}
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div
+                      class="device-sendemail-btn mt-2 pt-3 pb-3 pl-4 pr-4"
+                      style="text-transform: uppercase"
+                    >
+                      {{ $t("send_email") }}
+                    </div>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -95,10 +103,23 @@
       </Fade>
     </div>
   </Fade2>
+  <Fade>
+    <div class="download-here" v-if="isDownloadHereShown">
+      <div class="dtp-arrow">
+        <div class="dtp-arrow-header"></div>
+        <div class="dtp-arrow-body">
+          <p>Click this file to start installing <strong>Swoshs VPN</strong></p>
+        </div>
+        <div class="dtp-arrow-footer">
+          <i class="fas fa-angle-double-down"></i>
+        </div>
+      </div>
+    </div>
+  </Fade>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType } from "vue";
+import { defineComponent, onMounted, PropType, ref } from "vue";
 
 import { stateUser } from "@/hooks/useUser";
 
@@ -122,22 +143,140 @@ export default defineComponent({
     },
   },
   setup(props, context) {
+    const isDownloadHereShown = ref(false);
     const closeModal = () => {
+      isDownloadHereShown.value = false;
       context.emit("update:open", false);
     };
 
     onMounted(() => {
+      isDownloadHereShown.value = false;
       console.log("props.device = ", props.device);
     });
+
     return {
       stateUser,
       closeModal,
+      isDownloadHereShown,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
+.download-here {
+  // position: fixed;
+  // z-index: 1031;
+  // bottom: 0;
+  // Arrow on Download Thank You page/popup
+
+  .dtp-arrow {
+    width: 160px;
+    height: auto;
+    position: absolute;
+    left: 37px;
+    bottom: 0;
+    display: block;
+    z-index: 9000;
+    opacity: 0;
+    will-change: transform;
+
+    background: var(--swoshs-linear-gradient);
+    border-radius: 10px;
+
+    animation: animateArrow0 500ms ease-in-out 3000ms 1 normal,
+      animateArrow1 2500ms ease-in-out 3500ms 1 normal,
+      animateArrow2 2000ms ease-in-out 6000ms infinite normal;
+
+    .dtp-arrow-header {
+      background: transparent
+        url("~@/assets/images/account-settings/Swoshs-logo.png") center center
+        no-repeat;
+      background-size: contain;
+      height: 104px;
+      position: relative;
+      bottom: -1px;
+      margin: 25px;
+    }
+
+    .dtp-arrow-body {
+      color: #fff;
+      background: transparent;
+      padding: 15px;
+
+      p {
+        margin-bottom: 0;
+        font-size: 13px;
+        line-height: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: normal;
+      }
+    }
+
+    .dtp-arrow-footer {
+      // background: transparent
+      //   url("../i/v2/pages/download-thank-you/popup-arrow-footer.png") 50% 50%
+      //   no-repeat;
+      height: 89px;
+      position: relative;
+      top: -1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 3rem;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+@keyframes animateArrow0 {
+  0% {
+    bottom: 10px;
+    opacity: 0;
+  }
+  100% {
+    bottom: 500px;
+    opacity: 0;
+  }
+}
+
+@keyframes animateArrow1 {
+  0% {
+    bottom: 500px;
+    opacity: 0;
+  }
+  33% {
+    bottom: 10px;
+    opacity: 1;
+  }
+  60% {
+    bottom: 200px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 10px;
+    opacity: 1;
+  }
+}
+
+@keyframes animateArrow2 {
+  0% {
+    bottom: 10px;
+    opacity: 1;
+  }
+  50% {
+    bottom: 100px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 10px;
+    opacity: 1;
+  }
+}
+
 .downloads-icons {
   color: #81afde;
   font-size: 3rem;
@@ -183,7 +322,7 @@ export default defineComponent({
   --modal-color: #494f53;
 }
 
-.modal {
+.modal ::v-deep() {
   display: block;
   position: fixed;
   left: 0;
@@ -199,7 +338,7 @@ export default defineComponent({
 
   .modal-content {
     margin: 10% auto;
-    width: 40%;
+    // width: 40%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     z-index: 1040;
   }
@@ -315,9 +454,11 @@ export default defineComponent({
     font-family: Poppins;
     font-weight: bold;
     font-size: 16px;
-    line-height: 34px;
+    line-height: inherit;
     text-align: left;
     color: #383361;
+    margin-bottom: 0.5rem;
+    padding-right: 1rem !important;
   }
 
   .device-modal-subtitle {
@@ -393,6 +534,13 @@ export default defineComponent({
   b,
   strong {
     font-weight: bold;
+  }
+}
+
+/* dont display below Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  .download-here {
+    display: none !important;
   }
 }
 </style>

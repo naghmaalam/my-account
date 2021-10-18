@@ -398,9 +398,19 @@ const cn: Locale = {
   email_address: "Email Address_CN",
   create_new_password: "Create your new password_CN",
   confirm_password: "Confirm Password_CN",
-  back_to_login: "Back to Log in_CN",
   password_info_never_reuse:
     "Confirm A strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account._CN",
+  back_to_login: "Back to Log in_CN",
+  select_os: "Select OS_CN",
+  done: "Done_CN",
+  install: "Install_CN",
+  download_for: "Download SwoshVPN for_CN",
+  your_privacy:
+    "Your privacy and Internet security can be protected when the device is connected. It is recommended to keep the connection status._CN",
+  ready_to_download: "Swoshs VPN is ready to download_CN",
+  send_link_email:
+    "You can also send a link to your address <strong>{email}</strong> where you can download the Swoshs VPN._CN",
+  send_email: "Send Email_CN",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

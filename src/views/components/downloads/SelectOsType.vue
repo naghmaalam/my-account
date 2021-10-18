@@ -48,35 +48,40 @@ export default defineComponent({
         title: "Windows",
         subtitle: "Support: Win7 /Win8 /Win10",
         icon: "flaticon-windows",
-        fileUrl: "https://google.com",
+        fileUrl:
+          "https://github.com/yourkin/fileupload-fastapi/raw/a85a697cab2f887780b3278059a0dd52847d80f3/tests/data/test-10mb.bin",
       },
       {
         id: "apple",
         title: "iOS",
         subtitle: "Support: iOS 11+",
         icon: "flaticon-apple",
-        fileUrl: "https://google.com",
+        fileUrl:
+          "https://github.com/yourkin/fileupload-fastapi/raw/a85a697cab2f887780b3278059a0dd52847d80f3/tests/data/test-10mb.bin",
       },
       {
         id: "linux",
         title: "Linux",
         subtitle: "Support: Ubuntu LTS 16.04+",
         icon: "flaticon-linux",
-        fileUrl: "https://google.com",
+        fileUrl:
+          "https://github.com/yourkin/fileupload-fastapi/raw/a85a697cab2f887780b3278059a0dd52847d80f3/tests/data/test-10mb.bin",
       },
       {
         id: "android",
         title: "Android",
         subtitle: "Support: Android 5.0+",
         icon: "flaticon-android",
-        fileUrl: "https://google.com",
+        fileUrl:
+          "https://github.com/yourkin/fileupload-fastapi/raw/a85a697cab2f887780b3278059a0dd52847d80f3/tests/data/test-10mb.bin",
       },
       {
         id: "macos",
         title: "Mac OS",
         subtitle: "Support: MacOS 10.12+",
         icon: "flaticon-macos",
-        fileUrl: "https://google.com",
+        fileUrl:
+          "https://github.com/yourkin/fileupload-fastapi/raw/a85a697cab2f887780b3278059a0dd52847d80f3/tests/data/test-10mb.bin",
       },
     ];
 

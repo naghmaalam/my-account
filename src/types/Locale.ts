@@ -363,6 +363,14 @@ export interface Locale {
   confirm_password: string;
   password_info_never_reuse: string;
   back_to_login: string;
+  select_os: string;
+  done: string;
+  install: string;
+  download_for: string;
+  your_privacy: string;
+  ready_to_download: string;
+  send_link_email: string;
+  send_email: string;
   /////////////////////////////////////////////////////////////////////////////////////////
   // new
 }

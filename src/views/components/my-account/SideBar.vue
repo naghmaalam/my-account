@@ -1,20 +1,22 @@
 <template>
-  <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+  <nav id="sidebar" class="sidebar d-none d-lg-block">
+    <!-- <h5>desktop</h5> -->
     <SideBarContent />
   </nav>
 
   <!-- for mobile -->
   <!-- ////////////////////////////////////////////////////////////// -->
   <SlideLeft>
-    <nav
-      v-if="settingsState.mobile.sideMenu"
-      class="col-md-3 d-md-block sidebar mobile"
-    >
+    <nav v-if="settingsState.mobile.sideMenu" class="sidebar">
+      <!-- <h5>mobile</h5> -->
       <SideBarContent :isMobile="true" />
     </nav>
   </SlideLeft>
   <!-- ////////////////////////////////////////////////////////////// -->
   <!-- for mobile -->
+
+  <!-- to add spacer on the left section of main -->
+  <div class="left-spacer d-none d-lg-block"></div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -64,10 +66,12 @@ export default defineComponent({
   height: 100vh;
   background: #463770;
   margin-left: 0px !important;
+  max-width: 310px;
 }
 
-.sidebar {
-  .mobile {
-  }
+.left-spacer {
+  width: 310px;
+  // background-color: red;
+  height: 100%;
 }
 </style>

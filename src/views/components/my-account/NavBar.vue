@@ -12,7 +12,7 @@
     >
       <div class="navbar-toggler-container">
         <button
-          class="navbar-toggler position-absolute d-md-none"
+          class="navbar-toggler position-absolute"
           type="button"
           aria-label="Toggle navigation"
           @click="showSideMenu"

@@ -1,7 +1,9 @@
 <template>
   <div>
     <SelectOsType @select-device="selectDevice" />
-    <ModalSteps v-model:open="showModalSteps" :device="deviceSelected" />
+    <teleport to="body">
+      <ModalSteps v-model:open="showModalSteps" :device="deviceSelected" />
+    </teleport>
   </div>
 </template>
 
