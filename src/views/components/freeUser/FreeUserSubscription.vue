@@ -334,6 +334,20 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0);
 }
 
+.my-account-btn {
+  width: 161.68px;
+  height: 43.47px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid #7b47fc;
+  font-family: Poppins;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  color: #724bfe;
+}
+
 .user-avatar {
   color: #c6cfde;
 }
