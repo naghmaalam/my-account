@@ -473,6 +473,13 @@ const en: Locale = {
   send_link_email:
     "You can also send a link to your address <strong>{email}</strong> where you can download the Swoshs VPN.*",
   send_email: "Send Email*",
+  upgrade_account_get_reward: "To get a reward please upgrade your account*",
+  package_not_supported:
+    "Your current package is not supported on this feature*",
+  share_it: "Share It*",
+  copy: "Copy*",
+  share: "Share*",
+  rewards: "Rewards*",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

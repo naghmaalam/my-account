@@ -81,39 +81,16 @@ export function fmtCurr(currency: number): string {
 
 export function isDateExpired(date: string): boolean {
   const now = new Date();
-  const end = new Date(date.replace(" ", "T") + "Z"); //add Z to indicate its Zulu timne
+  const endDate =
+    date.indexOf("Z") < 0 && date.indexOf("z") < 0
+      ? date.replace(" ", "T") + "Z"
+      : date;
+  const end = new Date(endDate); //add Z to indicate its Zulu timne
   const distance = end.getTime() - now.getTime();
 
   if (distance < 0) return true;
   else return false;
 }
-
-export const storage = {
-  setItem: <T>(key: string, data: T): void => {
-    try {
-      sessionStorage.setItem(key, JSON.stringify(data));
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  },
-  removeItem: (key: string): void => {
-    try {
-      sessionStorage.removeItem(key);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  },
-  getItem: (key: string): string | null => {
-    try {
-      return sessionStorage.getItem(key);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  },
-};
 
 // type any is used here because obj and return type can be anything
 // REMOVED BECAUSE WILL BE USING CLASSES

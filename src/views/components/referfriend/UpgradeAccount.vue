@@ -19,13 +19,15 @@
               class="rf-image"
             />
             <div class="devices-title pt-3 px-3">
-              To get a reward please upgrade your account
+              {{ $t("upgrade_account_get_reward") }}
             </div>
             <div class="devices-subtitle px-3">
-              Your current package is not supported on this feature
+              {{ $t("package_not_supported") }}
             </div>
             <div class="add-device text-center mt-3 pb-5">
-              <button class="devices-btn pt-2 pb-2">Upgrade</button>
+              <button class="devices-btn pt-2 pb-2">
+                {{ $t("upgrade") }}
+              </button>
             </div>
           </div>
         </div>
@@ -33,14 +35,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
-</script>
 
 <style scoped>
 .add-device {

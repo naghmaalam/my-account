@@ -1,64 +1,88 @@
 <template>
-  <div class="container-fluid main-padding">
+  <div class="container-fluid pt-80">
     <!-- nav bar -->
     <!-- ////////////////////////////////////////////////////////////////////////// -->
     <NavBar />
     <!-- ////////////////////////////////////////////////////////////////////////// -->
     <!-- nav bar -->
 
-    <div class="container-fluid">
+    <div id="main-content-container" class="container-fluid" style="">
       <div class="row">
-        <!-- side bar -->
-        <!-- ////////////////////////////////////////////////////////////////////////// -->
-        <SideBar />
-        <!-- ////////////////////////////////////////////////////////////////////////// -->
-        <!-- side bar -->
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-          <!-- <div class="mob-res-hide">
-            <ReferFriendPromoHeadline />
-          </div> -->
-          <router-view v-slot="{ Component }">
-            <Fade>
-              <component :is="Component" />
-            </Fade>
-          </router-view>
-        </main>
+        <div class="col d-flex flex-row justify-content-center p-0 m-0">
+          <!-- side bar -->
+          <!-- ////////////////////////////////////////////////////////////////////////// -->
+          <SideBar />
+          <!-- ////////////////////////////////////////////////////////////////////////// -->
+          <!-- side bar -->
+
+          <main
+            id="main-content"
+            class="pr-3 pl-4 pt-3 pb-4"
+            role="main"
+            @click="hideSideMenu"
+          >
+            <!-- for headline -->
+            <!-- //////////////////////////////////////////////// -->
+            <div id="headline">
+              <Fade>
+                <component :is="$route.meta.headline" />
+              </Fade>
+            </div>
+            <!-- //////////////////////////////////////////////// -->
+            <!-- for headline -->
+
+            <router-view v-slot="{ Component }">
+              <Fade>
+                <component :is="Component" />
+              </Fade>
+            </router-view>
+          </main>
+        </div>
       </div>
     </div>
   </div>
-  <!-- <main
-    class="my-account d-flex flex-row justify-content-start align-items-start"
-  >    
-  </main> -->
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
+
+import { useSettings } from "@/hooks/useSettings";
+import Fade from "@/views/components/transitions/Fade.vue";
+
 import SideBar from "@/views/components/my-account/SideBar.vue";
 import NavBar from "@/views/components/my-account/NavBar.vue";
-import Fade from "@/views/components/transitions/Fade.vue";
-// import ReferFriendPromoHeadline from "@/views/components/my-account/ReferFriendPromoHeadline.vue";
+
 export default defineComponent({
   components: {
     SideBar,
     NavBar,
     Fade,
-    // ReferFriendPromoHeadline,
+  },
+  setup() {
+    const showSlot = ref(false);
+    onMounted(() => {
+      setTimeout(() => {
+        showSlot.value = true;
+      }, 1000);
+    });
+
+    return {
+      hideSideMenu: useSettings().do.sideMenu.hide,
+      showSlot,
+    };
   },
 });
 </script>
 
-<style scoped>
-.main-padding {
-  padding-top: 100px;
+<style lang="scss" scoped>
+#main-content {
+  width: 100%;
 }
 
-@media screen and (max-width: 992px) {
-  .main-padding {
-    padding-top: 50px;
-  }
+#main-content-container {
+  background-color: var(--swoshs-light-gray) !important;
+}
 
-  .mob-res-hide {
-    display: none;
-  }
+.pt-80 {
+  padding-top: 80px;
 }
 </style>

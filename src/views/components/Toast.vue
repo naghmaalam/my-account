@@ -1,7 +1,7 @@
 <template>
   <div
     class="position-fixed top-0 right-0 p-3"
-    style="z-index: 5; right: 0; top: 0"
+    style="z-index: 1032; right: 0; top: 0"
   >
     <transition-group tag="div" name="toasts" style="position: relative" appear>
       <div
@@ -12,6 +12,7 @@
         role="alert"
         aria-live="assertive"
       >
+        <!-- <h5>{{ toasts }}</h5> -->
         <div v-if="tst.title" class="toast-header">
           <strong class="mr-auto">{{ tst.title }}</strong>
         </div>
@@ -26,7 +27,6 @@ import { defineComponent, ref } from "vue";
 import { toasts, ToastType } from "@/hooks/useToast";
 
 export default defineComponent({
-  props: ["hey"],
   setup() {
     const showTest = ref(true);
     const getClass = (type: ToastType) => {

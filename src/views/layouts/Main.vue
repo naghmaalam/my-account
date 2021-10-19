@@ -1,14 +1,14 @@
 <template>
-  <div class="container-fluid main-padding">
+  <div class="container-fluid pt-80">
     <!-- nav bar -->
     <!-- ////////////////////////////////////////////////////////////////////////// -->
     <NavBar />
     <!-- ////////////////////////////////////////////////////////////////////////// -->
     <!-- nav bar -->
 
-    <div class="container-fluid" style="background-color: #f3f7fe !important">
+    <div id="main-content-container" class="container-fluid" style="">
       <div class="row">
-        <div class="col d-flex flex-row justify-content-center">
+        <div class="col d-flex flex-row justify-content-center p-0 m-0">
           <!-- side bar -->
           <!-- ////////////////////////////////////////////////////////////////////////// -->
           <SideBar />
@@ -17,24 +17,19 @@
 
           <main
             id="main-content"
-            class="pb-4"
+            class="pr-3 pl-4 pt-3 pb-4"
             role="main"
             @click="hideSideMenu"
           >
-            <!-- for meta customComponents -->
+            <!-- for headline -->
             <!-- //////////////////////////////////////////////// -->
-            <div class="d-none d-lg-block">
+            <div id="headline">
               <Fade>
-                <ReferFriendPromoHeadline
-                  v-if="
-                    customComponents?.headline === 'ReferFriendPromoHeadline'
-                  "
-                />
-                <PromoHeadline v-else />
+                <component :is="$route.meta.headline" />
               </Fade>
             </div>
             <!-- //////////////////////////////////////////////// -->
-            <!-- for meta customComponents -->
+            <!-- for headline -->
 
             <router-view v-slot="{ Component }">
               <Fade>
@@ -49,21 +44,17 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
 
 import { useSettings } from "@/hooks/useSettings";
 import Fade from "@/views/components/transitions/Fade.vue";
 
 import SideBar from "@/views/components/my-account/SideBar.vue";
 import NavBar from "@/views/components/my-account/NavBar.vue";
-import PromoHeadline from "@/views/components/my-account/PromoHeadline.vue";
-import ReferFriendPromoHeadline from "@/views/components/my-account/ReferFriendPromoHeadline.vue";
+
 export default defineComponent({
   components: {
     SideBar,
     NavBar,
-    PromoHeadline,
-    ReferFriendPromoHeadline,
     Fade,
   },
   setup() {
@@ -74,35 +65,24 @@ export default defineComponent({
       }, 1000);
     });
 
-    const route = useRoute();
-    const customComponents = computed(
-      () => (route.meta.customComponents as { headline: string }) ?? null
-    );
-
     return {
       hideSideMenu: useSettings().do.sideMenu.hide,
       showSlot,
-      customComponents,
     };
   },
 });
 </script>
 
-<style scoped>
-.main-padding {
-  padding-top: 100px;
+<style lang="scss" scoped>
+#main-content {
+  width: 100%;
 }
 
-.left-spacer {
+#main-content-container {
+  background-color: var(--swoshs-light-gray) !important;
 }
 
-@media screen and (max-width: 992px) {
-  .main-padding {
-    padding-top: 50px;
-  }
-
-  .mob-res-hide {
-    display: none;
-  }
+.pt-80 {
+  padding-top: 80px;
 }
 </style>

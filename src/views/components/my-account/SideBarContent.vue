@@ -14,7 +14,7 @@
       <div
         class="row"
         @click="redirect('home')"
-        :class="{ 'active-button': $route.name == 'home' }"
+        :class="{ 'active-button': $route.meta.activeMenu == 'home' }"
       >
         <div class="col">
           <div class="d-flex flex-row align-items-start">
@@ -24,7 +24,7 @@
             <div class="dashboard d-flex flex-column">
               <h5 class="mt-4">{{ $t("dashboard") }}</h5>
               <p>
-               {{ $t("dashboard_info") }}
+                {{ $t("dashboard_info") }}
               </p>
               <div class="borderline mt-4"></div>
             </div>
@@ -35,7 +35,7 @@
       <div
         class="row"
         @click="redirect('devices')"
-        :class="{ 'active-button': $route.name == 'devices' }"
+        :class="{ 'active-button': $route.meta.activeMenu == 'devices' }"
       >
         <div class="col">
           <div class="d-flex flex-row">
@@ -56,7 +56,7 @@
       <div
         class="row"
         @click="redirect('downloads')"
-        :class="{ 'active-button': $route.name == 'downloads' }"
+        :class="{ 'active-button': $route.meta.activeMenu == 'downloads' }"
       >
         <div class="col">
           <div class="d-flex flex-row">
@@ -77,7 +77,7 @@
       <div
         class="row"
         @click="redirect('subscription')"
-        :class="{ 'active-button': $route.name == 'subscription' }"
+        :class="{ 'active-button': $route.meta.activeMenu == 'subscription' }"
       >
         <div class="col">
           <div class="d-flex flex-row">
@@ -98,7 +98,7 @@
       <div
         class="row"
         @click="redirect('referfriend')"
-        :class="{ 'active-button': $route.name == 'referfriend' }"
+        :class="{ 'active-button': $route.meta.activeMenu == 'referfriend' }"
       >
         <div class="col">
           <div class="d-flex flex-row">

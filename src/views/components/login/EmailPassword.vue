@@ -108,7 +108,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref, inject, onMounted } from "vue";
-import { useValidation } from "@/modules/validation";
+import { useValidation } from "@/hooks/useValidation";
 import { useI18n } from "vue-i18n";
 import { UpdateSection } from "@/types/Section";
 

@@ -1,7 +1,7 @@
 import { reactive, computed, ComputedRef, watch } from "vue";
 // import i18n from "@/locales/localization";
 
-import { storage } from "@/modules/utils";
+import { storage } from "@/modules/storage";
 
 // import { useToast } from "@/hooks/useToast";
 

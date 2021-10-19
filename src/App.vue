@@ -1,9 +1,8 @@
 <template>
   <!-- <button type="button" class="btn btn-primary" @click="logout">Logout</button> -->
   <!-- <button type="button" class="btn btn-primary" @click="changeLang">Change lang </button> -->
-
   <Fade v-if="stateUser.authenticated">
-    <Main />
+    <component :is="$route.meta.layout" />
   </Fade>
 
   <Fade v-else>
@@ -15,7 +14,7 @@
   <Toast />
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import Toast from "@/views/components/Toast.vue";

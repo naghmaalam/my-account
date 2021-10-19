@@ -3,32 +3,24 @@
     <div class="container m-0">
       <!-- toggle button -->
       <div class="container pt-5">
-        <div class="button-container">
+        <div class="button-container py-1 px-0">
           <div class="row">
-            <div class="col">
+            <div class="col px-0 mr-1">
               <div
-                class="
-                  toggle-btn-title
-                  switch-toggle-btn
-                  pl-4
-                  pr-2
-                  pt-2
-                  pb-2
-                  mt-1
-                  mb-1
-                  ml-2
-                "
+                class="toggle-btn-title p-2"
+                @click="switchSection('shareinvitation')"
               >
-                <div
-                  class="toggle-btn-title-color text-center"
-                  @click="redirect('referfriend')"
-                >
-                  Share
+                <div>
+                  {{ $t("share") }}
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="toggle-btn-title pt-2">Rewards</div>
+            <div class="col px-0 ml-1">
+              <div class="toggle-btn-title switch-toggle-btn p-2">
+                <div class="toggle-btn-title-color">
+                  {{ $t("rewards") }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -101,20 +93,19 @@
   </div>
 </template>
 <script>
-import { useRouter } from "vue-router";
+import { inject } from "vue";
+
 export default {
   setup() {
-    const router = useRouter();
-    const redirect = (page) => {
-      router.push({ name: page });
-    };
+    const switchSection = inject("switchSection");
+
     return {
-      redirect,
+      switchSection,
     };
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .reward-trophy {
   width: 5rem;
   height: auto;
@@ -198,14 +189,6 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0);
 }
 
-.button-container {
-  width: 15rem;
-  height: 2.7rem;
-  border-radius: 28.5px;
-  background: #fff;
-  box-shadow: 0px 8px 14px rgba(214, 225, 243, 0.64);
-}
-
 .active-toggle-btn {
   width: 6rem;
   border-radius: 0.2rem;
@@ -214,12 +197,19 @@ export default {
   color: #fff;
 }
 
-.switch-toggle-btn {
-  width: 6rem;
-  border-radius: 1rem;
-  background: linear-gradient(#a215ff 0%, #7124ff 100%);
-  border: 1px solid rgba(0, 0, 0, 0);
-  color: #fff;
+// switch button
+////////////////////////////////////////////////////////////
+.button-container {
+  width: 13rem;
+  height: 2.7rem;
+  border-radius: 28.5px;
+  background: #fff;
+  box-shadow: 0px 8px 14px rgba(214, 225, 243, 0.64);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
 }
 
 .toggle-btn-title {
@@ -228,11 +218,24 @@ export default {
   font-size: 0.7rem;
   color: #383361;
   border: 1px solid rgba(0, 0, 0, 0);
+  width: 6rem;
+  text-align: center;
+  cursor: pointer;
 }
 
 .toggle-btn-title-color {
   color: #fff;
 }
+.switch-toggle-btn {
+  border-radius: 1rem;
+  background: linear-gradient(#a215ff 0%, #7124ff 100%);
+  border: 1px solid rgba(0, 0, 0, 0);
+  color: #fff;
+  cursor: default;
+}
+
+////////////////////////////////////////////////////////////
+// switch button
 
 .refer-friend-container {
   width: 100%;

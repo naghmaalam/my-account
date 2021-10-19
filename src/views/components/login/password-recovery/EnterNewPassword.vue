@@ -114,7 +114,7 @@
 import { defineComponent, inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { UpdateSection } from "@/types/Section";
-import { useValidation } from "@/modules/validation";
+import { useValidation } from "@/hooks/useValidation";
 
 import { useUser } from "@/hooks/useUser";
 import { useToast } from "@/hooks/useToast";

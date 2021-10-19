@@ -3,6 +3,10 @@ module.exports = {
   configureWebpack: {
     devtool: "source-map",
   },
+  devServer: {
+    port: 8085, // CHANGE YOUR PORT HERE!
+    https: true,
+  },
 };
 
 // const path = require("path");

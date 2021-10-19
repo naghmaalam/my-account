@@ -1,5 +1,9 @@
+import PromoHeadline from "@/views/components/my-account/PromoHeadline.vue";
+import ReferFriendPromoHeadline from "@/views/components/my-account/ReferFriendPromoHeadline.vue";
+
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-// import Main from "@/views/layouts/Main.vue";
+import Main from "@/views/layouts/Main.vue";
+import ReferFriendMain from "@/views/layouts/ReferFriendMain.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -53,11 +57,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/pages/FreeUserOrderHistoryPage.vue"),
   },
   {
-    name: "freeUserFriend",
-    path: "/freeUserFriend",
-    component: () => import("@/views/pages/FreeUserReferFriendPage.vue"),
-  },
-  {
     name: "freeUserSubscription",
     path: "/freeUserSubscription",
     component: () => import("@/views/pages/FreeUserSubscriptionPage.vue"),
@@ -76,19 +75,16 @@ const routes: Array<RouteRecordRaw> = [
     name: "referfriend",
     path: "/referfriend",
     meta: {
-      customComponents: {
-        headline: "ReferFriendPromoHeadline",
-      },
+      headline: false,
     },
-    component: () => import("@/views/pages/ReferFriend.vue"),
+    component: () => import("@/views/pages/ReferFriendPage.vue"),
   },
   {
     name: "rewards",
-    path: "/rewards",
+    path: "/referfriend/rewards",
     meta: {
-      customComponents: {
-        headline: "ReferFriendPromoHeadline",
-      },
+      activeMenu: "referfriend",
+      headline: ReferFriendPromoHeadline,
     },
     component: () => import("@/views/pages/RewardsPage.vue"),
   },
@@ -97,6 +93,30 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(): any {
+    return { x: 0, y: 0 };
+  },
+});
+
+// insert default data to router.meta
+router.beforeEach((to, from, next) => {
+  // layout
+  if (!to.meta.layout) {
+    to.meta.layout = Main;
+  }
+
+  // active menu
+  if (!to.meta.activeMenu) {
+    to.meta.activeMenu = to.name;
+  }
+  // headline
+  if (to.meta.headline === false) {
+    to.meta.headline = null;
+  } else if (typeof to.meta.headline === "undefined") {
+    to.meta.headline = PromoHeadline;
+  }
+
+  next();
 });
 
 export default router;

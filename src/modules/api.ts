@@ -1,5 +1,7 @@
 import { stateUser } from "@/hooks/useUser";
 
+import { Me } from "@/types/User";
+
 export const host = "https://swoshstest.com/api";
 
 export enum Method {
@@ -9,19 +11,11 @@ export enum Method {
   DELETE,
 }
 
-export interface Response {
-  accessToken: string;
-  message: string;
-  email: string;
-  isPremiumUser: boolean;
-  isSuccess: boolean;
-}
-
 export async function api(
   endpoint: string,
   method: Method,
   payload?: unknown
-): Promise<Response> {
+): Promise<Me> {
   try {
     // if not logged in then add language to url query but not in /login page
     let query = "";
@@ -45,7 +39,9 @@ export async function api(
     };
 
     const response = await fetch(`${host}/${endpoint}${query}`, options);
+    // console.log("response from fetch = ", response);
     const resData = await response.json();
+    // console.log("resData from fetch = ", resData);
 
     if (!response.ok) {
       // set error messages
@@ -63,16 +59,14 @@ export async function api(
         // logout user then throw error
         error.name = "Unauthorized";
       }
-
       //422 == validation failed
-      if (response.status == 422) {
+      else if (response.status == 422) {
         error.name = "ValidationFailed";
       }
-
       //500 == Server Error
-      if (response.status == 500) {
+      else if (response.status == 500) {
         error.name = "ServerError";
-      }
+      } else error.name = "Error";
 
       error.message = errorMsg;
       throw error;
@@ -82,7 +76,7 @@ export async function api(
       return resData;
     }
   } catch (error) {
-    console.error("API.api() error", error);
+    console.error(error);
     throw error;
   }
 }

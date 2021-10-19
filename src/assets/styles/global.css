@@ -17,6 +17,32 @@ a:hover {
 }
 
 
+/* buttons */
+.swoshs.btn.btn-primary {
+  color: #fff;
+  background: var(--swoshs-linear-gradient);
+  border-color: transparent;
+}
+/* .swoshs.btn.btn-primary:hover {
+  color: #fff;
+  background: var(--swoshs-linear-gradient);
+} */
+
+.swoshs.btn.btn-outline-primary {
+  color: var(--swoshs-color1);
+  border-color: var(--swoshs-color1);
+}
+.swoshs.btn.btn-outline-primary:hover {
+  color: #fff;
+  background: var(--swoshs-linear-gradient);
+  border-color: transparent;
+}
+
+
+/* a */
+a.swoshs {
+  color: var(--swoshs-color2);
+}
 
 
 

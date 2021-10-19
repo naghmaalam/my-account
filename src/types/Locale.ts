@@ -405,6 +405,13 @@ export interface Locale {
   learn_more_about_swoshs: string;
   devices_title: string;
   devices_subtitle: string;
+
+  upgrade_account_get_reward: string;
+  package_not_supported: string;
+  share_it: string;
+  copy: string;
+  share: string;
+  rewards: string;
   ////////////////////////////////////////////////////////////////
   // new
 }

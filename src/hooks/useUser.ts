@@ -1,30 +1,22 @@
 import { reactive, computed, ComputedRef, watch } from "vue";
 import i18n from "@/locales/localization";
 
-import { User, LoginDetails } from "@/types/User";
+import { User, LoginDetails, Me } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
-import { Response } from "@/types/Response";
 
 import { api, Method } from "@/modules/api";
-import { storage } from "@/modules/utils";
+import { storage } from "@/modules/storage";
+import { isDateExpired } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
 
 class UserDefault implements User {
-  // authenticated: false,
-  // currentSubscription: null,
-  // accessToken: "",
-  // email: "",
-  // language: {
-  //   selected: "en",
-  // },
-  // me: null,
-  // subscription: {
-  //   plans: null,
-  // },
-
   authenticated = false;
-  currentSubscription = null;
+  currentSubscription = {
+    title: null,
+    isExpired: null,
+    expiryDate: null,
+  };
   accessToken = "";
   email = "";
   language = {
@@ -34,25 +26,81 @@ class UserDefault implements User {
   subscription = {
     plans: null,
   };
+  referral_link = "";
+  invite_code = "";
+  website_url = "";
 }
 
-// Initialize user data
-const state = <{ user: User }>(
-  // reactive<{ user: User }>(newObj({ user: UserDefault }))
-  reactive<{ user: User }>({ user: new UserDefault() })
-);
-
+// user data
+const state = reactive<{ user: User }>({ user: new UserDefault() });
 export const stateUser = computed(() => {
   return state.user;
 });
 
+function resetUser() {
+  console.log("resetUser()");
+  console.log(JSON.stringify(new UserDefault()));
+  state.user = new UserDefault();
+  storage.removeItem("user");
+  storage.setItem("user", state.user);
+}
+
+// will set User store according to response
+function setUser(response: Me) {
+  state.user.authenticated = true;
+  state.user.me = response;
+  state.user.email = response.email;
+  state.user.language.selected = <SupportedLanguages>(
+    response.preferred_language
+  );
+  state.user.subscription.plans = response.userPlans;
+
+  const title = getSubscription(response);
+  let isExpired = null;
+  let expiryDate = null;
+
+  if (title == "premium") {
+    isExpired = response.userTrialPremiumPackagesFlags.premiumPackageExipred;
+    expiryDate = response.userTrialPremiumPackagesFlags.premiumPackageEndDate;
+  }
+  if (title == "trial") {
+    isExpired = response.userTrialPremiumPackagesFlags.trialPackageExpired;
+    expiryDate = response.userTrialPremiumPackagesFlags.trialPackageEndDate;
+  }
+  state.user.currentSubscription = {
+    title,
+    isExpired,
+    expiryDate,
+  };
+
+  state.user.accessToken = response.accessToken;
+  state.user.referral_link = response.swoshs_website_referrer_link;
+  state.user.invite_code = response.invite_code;
+  state.user.website_url = response.swoshs_website_link;
+}
+
+function getSubscription(response: Me) {
+  if (
+    response?.isPremiumUser === false &&
+    response?.userTrialPremiumPackagesFlags.premiumPackageExipred === false
+  )
+    return "trial";
+  else if (
+    response?.userTrialPremiumPackagesFlags.trialPackageExpired === true &&
+    response?.userTrialPremiumPackagesFlags.premiumPackageEndDate
+  )
+    return "premium";
+  else return null;
+}
+
 export function useUser(): {
   do: {
-    login: (email: string, password: string) => Promise<void>;
+    login: (email: string, password: string) => Promise<boolean>;
     logout: () => void;
     isAuthenticated: ComputedRef<boolean>;
     init: () => void;
     changeLanguage: (a: SupportedLanguages) => void;
+    referFriend: (email: string) => Promise<boolean>;
     withCode: {
       emailCode: (email: string) => Promise<boolean>;
       loginCode: (email: string, code: string) => Promise<boolean>;
@@ -83,29 +131,22 @@ export function useUser(): {
         lang: "en",
         version: "version",
       };
-      const response = (await api(
-        "login",
-        Method.POST,
-        loginDetails
-      )) as unknown as Response;
+      const response = await api("login", Method.POST, loginDetails);
       toast.do.show(response.message);
       console.log("waits..");
       setTimeout(() => {
         resetUser();
-        state.user.authenticated = true;
-        state.user.me = response;
-        state.user.email = response.email;
-        state.user.language.selected = <SupportedLanguages>(
-          response.preferred_language
-        );
+        setUser(response);
 
         // state.user.asd = "asd";
         console.log("state.user = ", state.user);
       }, 1000);
+      return true;
     } catch (error) {
       const err = error as Error;
       toast.do.error(err.message);
-      // console.error("useUser() error", err.name);
+      return false;
+      console.error("useUser() error", err.name);
     }
   };
 
@@ -128,19 +169,14 @@ export function useUser(): {
     },
     loginCode: async (email: string, code: string) => {
       try {
-        const response = (await api("login/with/code", Method.POST, {
+        const response = await api("login/with/code", Method.POST, {
           username: email,
           login_code: code,
-        })) as unknown as Response;
+        });
         console.log("waits..");
         setTimeout(() => {
           resetUser();
-          state.user.authenticated = true;
-          state.user.me = response;
-          state.user.email = response.email;
-          state.user.language.selected = <SupportedLanguages>(
-            response.preferred_language
-          );
+          setUser(response);
 
           // state.user.asd = "asd";
           console.log("state.user = ", state.user);
@@ -186,11 +222,11 @@ export function useUser(): {
       new_password: string
     ) => {
       try {
-        const response = (await api("reset/password", Method.POST, {
+        const response = await api("reset/password", Method.POST, {
           email,
           verification_code,
           new_password,
-        })) as unknown as Response;
+        });
         toast.do.show(response.message);
         return true;
       } catch (error) {
@@ -201,20 +237,12 @@ export function useUser(): {
     },
   };
 
-  const resetUser = () => {
-    console.log("resetUser()");
-    console.log(JSON.stringify(new UserDefault()));
-    state.user = new UserDefault();
-    storage.removeItem("user");
-    storage.setItem("user", state.user);
-  };
-
   const isAuthenticated = computed(() => {
     return state.user.authenticated;
   });
 
   const init = () => {
-    // check if storage has user data if not then initialize
+    // check if storage has user data if not then initialize/reset
     const userSessionData = storage.getItem("user");
     if (userSessionData) {
       state.user = JSON.parse(userSessionData);
@@ -237,6 +265,21 @@ export function useUser(): {
     state.user.language.selected = lang;
     i18n.global.locale = lang;
   };
+
+  const referFriend = async (email: string) => {
+    try {
+      const response = await api("refer/friend", Method.POST, {
+        email,
+      });
+      toast.do.show(response.message);
+      return true;
+    } catch (error) {
+      const err = error as Error;
+      // console.error(err);
+      toast.do.error(err.message);
+      return false;
+    }
+  };
   /////////////////////////////////////////////////////////////////////
   // do
 
@@ -251,6 +294,7 @@ export function useUser(): {
       login,
       logout,
       isAuthenticated,
+      referFriend,
       init,
       changeLanguage,
       withCode,
