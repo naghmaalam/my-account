@@ -8,7 +8,7 @@
             <div class="col px-0 mr-1">
               <div
                 class="toggle-btn-title p-2"
-                @click="switchSection('shareinvitation')"
+                @click="switchSection('ShareInvitation')"
               >
                 <div>
                   {{ $t("share") }}
@@ -35,7 +35,7 @@
                 container
                 refer-friend-container
                 mt-5
-                pt-4
+                pt-5
                 pb-5
                 text-center
               "

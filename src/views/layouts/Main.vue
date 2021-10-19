@@ -8,7 +8,7 @@
 
     <div id="main-content-container" class="container-fluid" style="">
       <div class="row">
-        <div class="col d-flex flex-row justify-content-center p-0 m-0">
+        <div class="col d-flex flex-row justify-content-start p-0 m-0">
           <!-- side bar -->
           <!-- ////////////////////////////////////////////////////////////////////////// -->
           <SideBar />
@@ -43,7 +43,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 
 import { useSettings } from "@/hooks/useSettings";
 import Fade from "@/views/components/transitions/Fade.vue";
@@ -76,6 +76,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 #main-content {
   width: 100%;
+  max-width: 1200px;
 }
 
 #main-content-container {

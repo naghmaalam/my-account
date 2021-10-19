@@ -8,8 +8,7 @@
     >
       <ReferFriendPromoHeadline />
       <Fade>
-        <ShareInvitation v-if="section === `shareinvitation`" />
-        <Rewards v-if="section === `rewards`" />
+        <component :is="section" />
       </Fade>
     </template>
 
@@ -36,7 +35,7 @@ export default defineComponent({
     Fade,
   },
   setup() {
-    const section = ref("shareinvitation");
+    const section = ref("ShareInvitation");
     const switchSection = (newSection: string) => {
       section.value = newSection;
       console.log(newSection);

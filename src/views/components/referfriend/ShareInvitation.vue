@@ -15,7 +15,7 @@
             <div class="col px-0 ml-1">
               <div
                 class="toggle-btn-title p-2"
-                @click="switchSection('rewards')"
+                @click="switchSection('Rewards')"
               >
                 <div>
                   {{ $t("rewards") }}
@@ -29,7 +29,7 @@
       <!-- refer friend -->
       <div class="container refer-friend-container mt-5 pb-5">
         <div class="row">
-          <div class="col text-center pt-5">
+          <div class="col text-center pt-5 mb-5">
             <img
               src="@/assets/images/account-settings-refer-friend/refer-a-friend.png"
               class="rf-gift img-fluid"
@@ -493,7 +493,7 @@ export default defineComponent({
 }
 
 .rf-gift {
-  width: 10rem;
+  width: 15rem;
   height: auto;
 }
 
