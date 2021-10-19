@@ -76,7 +76,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, inject, ref, watch } from "vue";
-import { UpdateSection } from "@/types/Section";
+import { UpdateSection, Section } from "@/types/Section";
 import { useToast } from "@/hooks/useToast";
 import { useUser } from "@/hooks/useUser";
 export default defineComponent({
@@ -87,13 +87,18 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const updateSection = inject("updateSection") as UpdateSection;
     const user = useUser();
     const toast = useToast();
     const code = ref(["", "", "", "", "", ""]);
     const inputs = ref<HTMLInputElement[]>([]);
     const isLoading = ref(false);
     const isLoadingResend = ref(false);
+
+    // const updateSection = inject("updateSection") as UpdateSection;
+    const sS = inject("updateSection") as UpdateSection;
+    const updateSection = (section: Section) => {
+      sS(section);
+    };
 
     const handlePaste = (event: ClipboardEvent) => {
       const paste = (event.clipboardData?.getData("text") as string) || "";

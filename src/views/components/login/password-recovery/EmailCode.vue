@@ -39,7 +39,7 @@
 <script lang="ts">
 import { defineComponent, inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { UpdateSection } from "@/types/Section";
+import { UpdateSection, Section } from "@/types/Section";
 import { useValidation } from "@/hooks/useValidation";
 
 import { useUser } from "@/hooks/useUser";
@@ -50,9 +50,14 @@ export default defineComponent({
     const user = useUser();
     const toast = useToast();
     const vldt = useValidation();
-    const updateSection = inject("updateSection") as UpdateSection;
     const email = ref("");
     const isLoading = ref(false);
+
+    // const updateSection = inject("updateSection") as UpdateSection;
+    const sS = inject("updateSection") as UpdateSection;
+    const updateSection = (section: Section) => {
+      sS(section);
+    };
 
     const submit = async () => {
       // validate email

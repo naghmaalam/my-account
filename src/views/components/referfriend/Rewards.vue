@@ -92,19 +92,26 @@
     </div>
   </div>
 </template>
-<script>
-import { inject } from "vue";
 
-export default {
+<script lang="ts">
+import { defineComponent, inject } from "vue";
+import { UpdateSection, SectionReferral } from "@/types/Section";
+
+export default defineComponent({
   setup() {
-    const switchSection = inject("switchSection");
+    // const switchSection = inject("switchSection");
+    const sS = inject("switchSection") as UpdateSection;
+    const switchSection = (section: SectionReferral) => {
+      sS(section);
+    };
 
     return {
       switchSection,
     };
   },
-};
+});
 </script>
+
 <style lang="scss" scoped>
 .reward-trophy {
   width: 5rem;

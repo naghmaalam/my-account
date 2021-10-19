@@ -7,4 +7,8 @@ export type Section =
   | "PasswordRecovery"
   | "PasswordRecoveryEnterCode"
   | "PasswordRecoveryEnterNewPassword";
-export type UpdateSection = (a: Section) => void;
+
+export type SectionReferral = "ShareInvitation" | "Rewards";
+
+// export type UpdateSection = <T>(section: T) => void;
+export type UpdateSection = <T>(section: T) => void;

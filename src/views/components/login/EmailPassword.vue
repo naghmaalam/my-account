@@ -110,7 +110,7 @@
 import { defineComponent, reactive, ref, inject, onMounted } from "vue";
 import { useValidation } from "@/hooks/useValidation";
 import { useI18n } from "vue-i18n";
-import { UpdateSection } from "@/types/Section";
+import { UpdateSection, Section } from "@/types/Section";
 
 import { useToast } from "@/hooks/useToast";
 import { useUser } from "@/hooks/useUser";
@@ -173,7 +173,11 @@ export default defineComponent({
       }
     };
 
-    const updateSection = inject("updateSection") as UpdateSection;
+    // const updateSection = inject("updateSection") as UpdateSection;
+    const sS = inject("updateSection") as UpdateSection;
+    const updateSection = (section: Section) => {
+      sS(section);
+    };
 
     return {
       login,
