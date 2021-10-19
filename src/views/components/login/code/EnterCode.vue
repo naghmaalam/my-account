@@ -21,6 +21,8 @@
         class="container input_code mt-4 d-flex text-center"
         style="position: relative"
       >
+        <!-- :ref="(el) => refHandler(el, 0)" -->
+        <!-- :ref="(el) => (inputs[0] = el)" -->
         <input
           v-model="code[0]"
           :ref="(el) => (inputs[0] = el)"
@@ -102,7 +104,9 @@ export default defineComponent({
 
     const handleInput = (event: KeyboardEvent, i: number) => {
       let foc: number;
-      console.log("input " + event.key);
+      console.log("event object = " + event);
+      console.log("event.key " + event.key);
+      console.log("event ", event);
 
       // if backspace is pressed
       if (event.key === "Backspace") {
@@ -112,11 +116,13 @@ export default defineComponent({
       } else if (event.key === "ArrowLeft") {
         foc = i - 1;
         if (foc >= 0) inputs.value[foc].focus();
-      } else {
+      } else if (typeof event.key !== "undefined") {
         foc = i + 1;
         if (foc < inputs.value.length) inputs.value[foc]?.focus();
         console.log("input " + event.key);
         console.log(`${foc} < ${inputs.value.length}`);
+      } else {
+        console.log("xxxxxxx ");
       }
     };
 
@@ -155,7 +161,7 @@ export default defineComponent({
     );
 
     const refHandler = (el: HTMLInputElement, i: number) => {
-      console.log(el);
+      console.log(i);
       if (el) inputs.value[i] = el;
     };
 

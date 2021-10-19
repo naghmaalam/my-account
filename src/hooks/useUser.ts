@@ -6,7 +6,7 @@ import { SupportedLanguages } from "@/types/Locale";
 import { Response } from "@/types/Response";
 
 import { api, Method } from "@/modules/api";
-import { storage } from "@/modules/utils";
+import { storage, newObj } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
 

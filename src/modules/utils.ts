@@ -117,6 +117,6 @@ export const storage = {
 
 // type any is used here because obj and return type can be anything
 // REMOVED BECAUSE WILL BE USING CLASSES
-// export function newObj<T>(obj: T): T {
+// export function newObj<T extends string>(obj: T): T {
 //   return JSON.parse(JSON.stringify(obj));
 // }

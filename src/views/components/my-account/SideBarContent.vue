@@ -24,7 +24,7 @@
             <div class="dashboard d-flex flex-column">
               <h5 class="mt-4">{{ $t("dashboard") }}</h5>
               <p>
-               {{ $t("dashboard_info") }}
+                {{ $t("dashboard_info") }}
               </p>
               <div class="borderline mt-4"></div>
             </div>
