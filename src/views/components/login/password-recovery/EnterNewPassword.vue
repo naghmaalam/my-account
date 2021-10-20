@@ -143,7 +143,7 @@ export default defineComponent({
     const passwordStrength = ref(0);
 
     // const updateSection = inject("updateSection") as UpdateSection;
-    const sS = inject("updateSection") as UpdateSection;
+    const sS = inject("updateSection") as UpdateSection<Section>;
     const updateSection = (section: Section) => {
       sS(section);
     };

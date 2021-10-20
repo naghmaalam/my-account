@@ -100,7 +100,7 @@ import { UpdateSection, SectionReferral } from "@/types/Section";
 export default defineComponent({
   setup() {
     // const switchSection = inject("switchSection");
-    const sS = inject("switchSection") as UpdateSection;
+    const sS = inject("switchSection") as UpdateSection<SectionReferral>;
     const switchSection = (section: SectionReferral) => {
       sS(section);
     };

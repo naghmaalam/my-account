@@ -95,7 +95,7 @@ export default defineComponent({
     const isLoadingResend = ref(false);
 
     // const updateSection = inject("updateSection") as UpdateSection;
-    const sS = inject("updateSection") as UpdateSection;
+    const sS = inject("updateSection") as UpdateSection<Section>;
     const updateSection = (section: Section) => {
       sS(section);
     };

@@ -10,5 +10,4 @@ export type Section =
 
 export type SectionReferral = "ShareInvitation" | "Rewards";
 
-// export type UpdateSection = <T>(section: T) => void;
-export type UpdateSection = <T>(section: T) => void;
+export type UpdateSection<T> = (section: T) => void;

@@ -62,12 +62,11 @@ export default defineComponent({
     Fade,
   },
   setup() {
-    const section = ref<Section>("EmailPassword");
     const email = ref("");
     const code = ref("");
 
-    provide("section", section);
-    const updateSection: UpdateSection = (newSection: Section) => {
+    const section = ref<Section>("EmailPassword");
+    const updateSection = (newSection: Section) => {
       section.value = newSection;
     };
     provide("updateSection", updateSection);

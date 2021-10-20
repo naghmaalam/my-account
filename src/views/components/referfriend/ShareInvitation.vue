@@ -153,7 +153,7 @@ import { useRouter } from "vue-router";
 import { stateUser, useUser } from "@/hooks/useUser";
 import { useToast } from "@/hooks/useToast";
 import { useValidation } from "@/hooks/useValidation";
-import { UpdateSection, SectionReferral } from "@/types/Section";
+import { UpdateSection, Section, SectionReferral } from "@/types/Section";
 export default defineComponent({
   components: {},
   setup() {
@@ -214,7 +214,7 @@ export default defineComponent({
 
     // SectionReferral
     // const switchSection = inject("switchSection");
-    const sS = inject("switchSection") as UpdateSection;
+    const sS = inject("switchSection") as UpdateSection<SectionReferral>;
     const switchSection = (section: SectionReferral) => {
       sS(section);
     };

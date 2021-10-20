@@ -19,6 +19,7 @@
 <script lang="ts">
 import { defineComponent, provide, ref } from "vue";
 import { stateUser } from "@/hooks/useUser";
+import { Section, SectionReferral, UpdateSection } from "@/types/Section";
 
 import ReferFriendPromoHeadline from "@/views/components/my-account/ReferFriendPromoHeadline.vue";
 import ShareInvitation from "@/views/components/referfriend/ShareInvitation.vue";
@@ -35,8 +36,8 @@ export default defineComponent({
     Fade,
   },
   setup() {
-    const section = ref("ShareInvitation");
-    const switchSection = (newSection: string) => {
+    const section = ref<SectionReferral>("ShareInvitation");
+    const switchSection = (newSection: SectionReferral) => {
       section.value = newSection;
       console.log(newSection);
     };
