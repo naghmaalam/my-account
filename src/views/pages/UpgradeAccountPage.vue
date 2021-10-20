@@ -9,12 +9,12 @@ import { defineComponent } from "vue";
 import { stateUser } from "@/hooks/useUser";
 import { onBeforeRouteUpdate, onBeforeRouteLeave, useRouter } from "vue-router";
 
-import ShareInvitation from "@/views/components/referfriend/ShareInvitation.vue";
+// import ShareInvitation from "@/views/components/referfriend/ShareInvitation.vue";
 import UpgradeAccount from "@/views/components/referfriend/UpgradeAccount.vue";
 
 export default defineComponent({
   components: {
-    ShareInvitation,
+    // ShareInvitation,
     UpgradeAccount,
   },
   setup() {

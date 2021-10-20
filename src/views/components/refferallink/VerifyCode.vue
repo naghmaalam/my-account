@@ -1,18 +1,40 @@
 <template>
-  <div>
-    <div class="pr-title text-center">{{ $t("enter_login_code") }}</div>
-    <div class="pr-subtitle text-center mt-2 mr-5 ml-5">
-      {{ $t("check_inbox") }}
+  <div class="rl-box mt-5 col-md-6 col-sm-6 p-3">
+    <div
+      class="
+        d-flex
+        justify-content-center
+        align-items-center
+        px-3
+        pt-4
+        pb-4
+        mx-2
+        my-2
+        mb-1
+      "
+    >
+      <img
+        src="@/assets/images/password-recovery/logo-swoshs.png"
+        class="img-fluid mob-res-logo"
+        style="min-height: 65px"
+        alt="swoshs-logo"
+      />
     </div>
+    <div class="pr-title text-center">
+      {{ $t("enter_verification_code") }}
+    </div>
+    <!-- <div class="pr-subtitle text-center mt-2 mr-5 ml-5">
+      {{ $t("check_inbox") }}
+    </div> -->
 
     <div class="verify-account-email mt-4" :data-letters="email.charAt(0)">
       {{ email }}
     </div>
 
-    <a href="#" @click.prevent="updateSection('EmailCode')">
+    <a href="#" @click.prevent="updateSection('EmailPassword')">
       <!-- <div class="pr-back-to-login text-center pt-2">Use another account</div> -->
       <div class="pr-back-to-login text-center pt-2 pb-2 mt-4">
-        {{ $t("use_another_account") }}
+        {{ $t("wrong_email") }}
       </div>
     </a>
 
@@ -67,36 +89,52 @@
         ></span>
       </a>
     </div>
-    <a href="#" @click.prevent="updateSection('EmailPassword')">
-      <div class="pr-back-to-login text-center pt-5 pb-5">
-        {{ $t("login_with_password") }}
-      </div>
-    </a>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject, ref, watch } from "vue";
-import { UpdateSection, Section } from "@/types/Section";
-import { useToast } from "@/hooks/useToast";
+import {
+  computed,
+  ComputedRef,
+  defineComponent,
+  ref,
+  inject,
+  watch,
+} from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useUser } from "@/hooks/useUser";
+import { useToast } from "@/hooks/useToast";
+
+import { UpdateSection, SectionReferralLink } from "@/types/Section";
+
 export default defineComponent({
   props: {
     email: {
       type: String,
       default: "",
     },
+    password: {
+      type: String,
+      default: "",
+    },
   },
   setup(props) {
+    const router = useRouter();
+    const route = useRoute();
     const user = useUser();
+
     const toast = useToast();
     const code = ref(["", "", "", "", "", ""]);
     const inputs = ref<HTMLInputElement[]>([]);
-    const isLoading = ref(false);
     const isLoadingResend = ref(false);
+    const isLoading = ref(false);
+
+    const inviteCode: ComputedRef<string> = computed(() => {
+      return route.params.inviteCode as string;
+    });
 
     // const updateSection = inject("updateSection") as UpdateSection;
-    const sS = inject("updateSection") as UpdateSection<Section>;
-    const updateSection = (section: Section) => {
+    const sS = inject("updateSection") as UpdateSection<SectionReferralLink>;
+    const updateSection = (section: SectionReferralLink) => {
       sS(section);
     };
 
@@ -104,7 +142,6 @@ export default defineComponent({
       const paste = (event.clipboardData?.getData("text") as string) || "";
       for (let x = 0; x <= 5; x++) code.value[x] = paste.charAt(x);
     };
-
     const handleInput = (event: KeyboardEvent, i: number) => {
       let foc: number;
       console.log("input " + event.key);
@@ -125,26 +162,33 @@ export default defineComponent({
       }
     };
 
-    const loginCode = async () => {
+    const submit = async () => {
+      console.log("SUCCESS NEW ACCOUNT");
       isLoading.value = true;
-      const success = await user.do.loginWithCode.loginCode(
+      const success = await user.do.register.verifyCode(
         props.email,
         code.value.join("")
       );
-      isLoading.value = false;
       if (success) {
-        console.log("SUCCESS");
-        updateSection("EnterCode");
+        setTimeout(() => {
+          console.log("redirect to home");
+          router.push({ name: "home" });
+        }, 1000);
       }
+      isLoading.value = false;
     };
 
     const sendEmailAgain = async () => {
       isLoadingResend.value = true;
-      const success = await user.do.loginWithCode.emailCode(props.email);
+      const success = await user.do.register.inviteCode(
+        props.email,
+        props.password,
+        inviteCode.value
+      );
+      // if (success) {
+      //   toast.do.showTranslated("check_inbox");
+      // }
       isLoadingResend.value = false;
-      if (success) {
-        toast.do.showTranslated("check_inbox");
-      }
     };
 
     watch(
@@ -153,26 +197,23 @@ export default defineComponent({
         if (val.every((v) => v !== "")) {
           console.log("SUBMIT");
           inputs.value[5]?.focus();
-          loginCode();
+          submit();
         }
       },
       { deep: true }
     );
 
-    const refHandler = (el: HTMLInputElement, i: number) => {
-      console.log(el);
-      if (el) inputs.value[i] = el;
-    };
-
     return {
+      inviteCode,
+      isLoading,
+      submit,
+
       handlePaste,
       updateSection,
       handleInput,
       code,
       inputs,
-      isLoading,
       isLoadingResend,
-      refHandler,
       sendEmailAgain,
     };
   },
@@ -197,8 +238,8 @@ export default defineComponent({
 .pr-title {
   font-family: Poppins;
   font-weight: 500;
-  font-size: 2.3rem;
-  line-height: 2.5rem;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
   text-align: left;
   color: #312b54;
 }

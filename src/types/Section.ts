@@ -9,5 +9,6 @@ export type Section =
   | "PasswordRecoveryEnterNewPassword";
 
 export type SectionReferral = "ShareInvitation" | "Rewards";
+export type SectionReferralLink = "EmailPassword" | "VerifyCode";
 
 export type UpdateSection<T> = (section: T) => void;

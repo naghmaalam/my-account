@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, provide, onMounted } from "vue";
-import { Section, UpdateSection } from "@/types/Section";
+import { Section } from "@/types/Section";
 import EmailPassword from "@/views/components/login/EmailPassword.vue";
 import EmailCode from "@/views/components/login/code/EmailCode.vue";
 import EnterCode from "@/views/components/login/code/EnterCode.vue";

@@ -1,20 +1,24 @@
 <template>
   <div>
-    <AccountSettings />
+    <PaymentPage />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-
-import AccountSettings from "@/views/components/my-account/AccountSettings.vue";
+import PaymentPage from "@/views/pages/PaymentPage.vue";
 
 export default defineComponent({
   components: {
-    AccountSettings,
+    PaymentPage,
   },
   setup() {
     return {};
   },
 });
 </script>
-<style scoped></style>
+
+<style lang="scss">
+#app {
+  background: #ecf2fb !important;
+}
+</style>

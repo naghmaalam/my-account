@@ -1,92 +1,151 @@
-import PromoHeadline from "@/views/components/my-account/PromoHeadline.vue";
-import ReferFriendPromoHeadline from "@/views/components/my-account/ReferFriendPromoHeadline.vue";
-
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+
+import PromoHeadline from "@/views/components/my-account/PromoHeadline.vue";
+import ReferralLinkPage from "@/views/pages/ReferralLinkPage.vue";
+
 import Main from "@/views/layouts/Main.vue";
-import ReferFriendMain from "@/views/layouts/ReferFriendMain.vue";
+import ReferralLinkMain from "@/views/layouts/ReferralLinkMain.vue";
+
+import SideBar from "@/views/components/my-account/SideBar.vue";
+import NavBar from "@/views/components/my-account/NavBar.vue";
+
+const components = {
+  navigation: NavBar,
+  sidebar: SideBar,
+  headline: PromoHeadline,
+};
+
+const components2 = {
+  navigation: NavBar,
+  sidebar: SideBar,
+};
 
 const routes: Array<RouteRecordRaw> = [
   {
     name: "root",
     path: "",
-    component: () => import("@/views/pages/Home.vue"),
+    components: {
+      default: () => import("@/views/pages/Home.vue"),
+      ...components,
+    },
   },
   {
     name: "home",
     path: "/home",
-    component: () => import("@/views/pages/Home.vue"),
+    components: {
+      default: () => import("@/views/pages/Home.vue"),
+      ...components,
+    },
   },
   {
     name: "devices",
     path: "/devices",
-    component: () => import("@/views/pages/Devices.vue"),
+    components: {
+      default: () => import("@/views/pages/Devices.vue"),
+      ...components,
+    },
   },
   {
     name: "downloads",
     path: "/downloads",
-    component: () => import("@/views/pages/Downloads.vue"),
+    components: {
+      default: () => import("@/views/pages/Downloads.vue"),
+      ...components,
+    },
   },
   {
     name: "account",
     path: "/account",
-    component: () => import("@/views/pages/AccountSettings.vue"),
+    components: {
+      default: () => import("@/views/pages/AccountSettingsPage.vue"),
+      ...components,
+    },
   },
   {
     name: "subscription",
     path: "/subscription",
-    component: () => import("@/views/pages/Subscription.vue"),
+    components: {
+      default: () => import("@/views/pages/Subscription.vue"),
+      ...components,
+    },
   },
   {
     name: "orderhistory",
     path: "/orderhistory",
-    component: () => import("@/views/pages/OrderHistoryPage.vue"),
+    components: {
+      default: () => import("@/views/pages/OrderHistoryPage.vue"),
+      ...components,
+    },
   },
   {
     name: "freeUserAccount",
     path: "/freeUserAccount",
-    component: () => import("@/views/pages/FreeUserAccountSettingsPage.vue"),
+    components: {
+      default: () => import("@/views/pages/FreeUserAccountSettingsPage.vue"),
+      ...components,
+    },
   },
   {
     name: "freeUserDevices",
     path: "/freeUserDevices",
-    component: () => import("@/views/pages/FreeUserDevicesPage.vue"),
+    components: {
+      default: () => import("@/views/pages/FreeUserDevicesPage.vue"),
+      ...components,
+    },
   },
   {
     name: "freeUserOrder",
     path: "/freeUserOrder",
-    component: () => import("@/views/pages/FreeUserOrderHistoryPage.vue"),
+    components: {
+      default: () => import("@/views/pages/FreeUserOrderHistoryPage.vue"),
+      ...components,
+    },
   },
   {
     name: "freeUserSubscription",
     path: "/freeUserSubscription",
-    component: () => import("@/views/pages/FreeUserSubscriptionPage.vue"),
+    components: {
+      default: () => import("@/views/pages/FreeUserSubscriptionPage.vue"),
+      ...components,
+    },
   },
   {
     name: "freeUserSubscription",
     path: "/freeUserSubscription",
-    component: () => import("@/views/pages/FreeUserSubscriptionPage.vue"),
-  },
-  {
-    name: "test",
-    path: "/test",
-    component: () => import("@/views/components/refferalLink/ReferralLink.vue"),
+    components: {
+      default: () => import("@/views/pages/FreeUserSubscriptionPage.vue"),
+      ...components,
+    },
   },
   {
     name: "referfriend",
     path: "/referfriend",
-    meta: {
-      headline: false,
+    components: {
+      default: () => import("@/views/pages/ReferFriendPage.vue"),
+      ...components2,
     },
-    component: () => import("@/views/pages/ReferFriendPage.vue"),
   },
   {
     name: "rewards",
     path: "/referfriend/rewards",
     meta: {
       activeMenu: "referfriend",
-      headline: ReferFriendPromoHeadline,
     },
-    component: () => import("@/views/pages/RewardsPage.vue"),
+    components: {
+      default: () => import("@/views/pages/RewardsPage.vue"),
+      ...components2,
+    },
+  },
+  {
+    name: "referrallink",
+    path: "/register/referrer/:inviteCode",
+    props: true,
+    meta: {
+      layout: ReferralLinkMain,
+    },
+    components: {
+      default: ReferralLinkPage,
+    },
   },
 ];
 
@@ -108,12 +167,6 @@ router.beforeEach((to, from, next) => {
   // active menu
   if (!to.meta.activeMenu) {
     to.meta.activeMenu = to.name;
-  }
-  // headline
-  if (to.meta.headline === false) {
-    to.meta.headline = null;
-  } else if (typeof to.meta.headline === "undefined") {
-    to.meta.headline = PromoHeadline;
   }
 
   next();

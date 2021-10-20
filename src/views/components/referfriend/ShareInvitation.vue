@@ -15,7 +15,7 @@
             <div class="col px-0 ml-1">
               <div
                 class="toggle-btn-title p-2"
-                @click="switchSection('Rewards')"
+                @click="updateSection('Rewards')"
               >
                 <div>
                   {{ $t("rewards") }}
@@ -153,7 +153,7 @@ import { useRouter } from "vue-router";
 import { stateUser, useUser } from "@/hooks/useUser";
 import { useToast } from "@/hooks/useToast";
 import { useValidation } from "@/hooks/useValidation";
-import { UpdateSection, Section, SectionReferral } from "@/types/Section";
+import { UpdateSection, SectionReferral } from "@/types/Section";
 export default defineComponent({
   components: {},
   setup() {
@@ -162,18 +162,19 @@ export default defineComponent({
     const redirect = (page: string) => {
       router.push({ name: page });
     };
-
     const socials = [
       {
-        class: `flaticon-facebook`,
+        class: `fab fa-facebook-square`,
         url: `https://www.facebook.com/sharer/sharer.php?u=`,
       },
       {
-        class: `flaticon-twitter-sign`,
+        class: `fab fa-twitter-square`,
         url: `https://www.twitter.com/share?url=`,
       },
-      { class: `flaticon-instagram`, url: `https://www.instagram.com?u=` },
-      { class: `flaticon-youtube-1`, url: `https://www.youtube.com?u=` },
+      {
+        class: `fab fa-linkedin`,
+        url: `https://www.linkedin.com/sharing/share-offsite/?url=`,
+      },
     ];
 
     const copyToClipboard = async () => {
@@ -213,9 +214,9 @@ export default defineComponent({
     };
 
     // SectionReferral
-    // const switchSection = inject("switchSection");
-    const sS = inject("switchSection") as UpdateSection<SectionReferral>;
-    const switchSection = (section: SectionReferral) => {
+    // const updateSection = inject("updateSection");
+    const sS = inject("updateSection") as UpdateSection<SectionReferral>;
+    const updateSection = (section: SectionReferral) => {
       sS(section);
     };
 
@@ -227,7 +228,7 @@ export default defineComponent({
       email,
       submit,
       isLoading,
-      switchSection,
+      updateSection,
     };
   },
 });
@@ -267,6 +268,11 @@ export default defineComponent({
 
 .social-icons {
   color: #94a4c1;
+  > a {
+    font-size: 2rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 }
 
 .sidebar {

@@ -3,6 +3,9 @@
 /* font-family: 'Poppins', sans-serif; */
 
 
+#app {
+  min-height: 100vh;
+}
 
 .border-btn {
   background: #faebd700 !important;

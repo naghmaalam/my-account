@@ -66,7 +66,7 @@ export default defineComponent({
         toast.do.error(t(vldt.getError()));
       } else {
         isLoading.value = true;
-        const success = await user.do.withCode.emailCode(email.value);
+        const success = await user.do.loginWithCode.emailCode(email.value);
         isLoading.value = false;
         if (success) {
           context.emit("update:email", email.value);

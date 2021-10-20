@@ -2,7 +2,7 @@
   <div class="container-fluid pt-80">
     <!-- nav bar -->
     <!-- ////////////////////////////////////////////////////////////////////////// -->
-    <NavBar />
+    <router-view name="navigation" />
     <!-- ////////////////////////////////////////////////////////////////////////// -->
     <!-- nav bar -->
 
@@ -11,7 +11,7 @@
         <div class="col d-flex flex-row justify-content-start p-0 m-0">
           <!-- side bar -->
           <!-- ////////////////////////////////////////////////////////////////////////// -->
-          <SideBar />
+          <router-view name="sidebar" />
           <!-- ////////////////////////////////////////////////////////////////////////// -->
           <!-- side bar -->
 
@@ -24,9 +24,13 @@
             <!-- for headline -->
             <!-- //////////////////////////////////////////////// -->
             <div id="headline">
-              <Fade>
-                <component :is="$route.meta.headline" />
-              </Fade>
+              <!-- <component :is="$route.meta.headline" /> -->
+
+              <router-view name="headline" v-slot="{ Component }">
+                <Fade>
+                  <component :is="Component" />
+                </Fade>
+              </router-view>
             </div>
             <!-- //////////////////////////////////////////////// -->
             <!-- for headline -->
@@ -48,13 +52,8 @@ import { defineComponent, onMounted, ref } from "vue";
 import { useSettings } from "@/hooks/useSettings";
 import Fade from "@/views/components/transitions/Fade.vue";
 
-import SideBar from "@/views/components/my-account/SideBar.vue";
-import NavBar from "@/views/components/my-account/NavBar.vue";
-
 export default defineComponent({
   components: {
-    SideBar,
-    NavBar,
     Fade,
   },
   setup() {
@@ -85,5 +84,11 @@ export default defineComponent({
 
 .pt-80 {
   padding-top: 80px;
+}
+</style>
+
+<style lang="scss">
+#app {
+  background: #f3f7fe !important;
 }
 </style>

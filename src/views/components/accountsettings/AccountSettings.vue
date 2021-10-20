@@ -1,6 +1,6 @@
 <template>
   <!-- account settings -->
-  <div class="container-fluid account-bg m-0 p-0">
+  <div class="container-fluid account-bg mt-5 p-0">
     <div class="container-fluid m-0">
       <div class="container">
         <div class="row">
@@ -22,29 +22,20 @@
             <div class="account-settings-inputs pt-4">Email</div>
             <input
               class="input-email-password mr-5 mt-2 pt-2 pb-2 pl-2"
+              style="color: var(--swoshs-color2)"
               type="text"
               name="email"
               id="email"
               placeholder="username@swoshsvpn.com"
+              :value="stateUser.email"
+              disabled
+              readonly
             />
             <div class="account-settings-inputs mt-2">Password</div>
 
             <div
-              class="
-                input-btn
-                d-flex
-                flex-row
-                justify-content-between
-                pt-1
-                pb-1
-              "
+              class="input-btn d-flex flex-row justify-content-end pt-1 pb-1"
             >
-              <input
-                class="as-input-email"
-                type="password"
-                name="password"
-                id="password"
-              />
               <div class="link-btn mr-1 pt-1 pb-1 pr-4 pl-4">Edit</div>
             </div>
             <div class="account-settings-content mob-res-footer mt-4 pr-5">
@@ -83,13 +74,21 @@
     </div>
   </div>
 </template>
-<script>
-export default {
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+import { stateUser } from "@/hooks/useUser";
+
+export default defineComponent({
   setup() {
-    return {};
+    return {
+      stateUser,
+    };
   },
-};
+});
 </script>
+
 <style scoped>
 .account-settings-title {
   font-family: Poppins;
@@ -151,7 +150,7 @@ export default {
 .my-devices {
   background: #fff;
   /* filter: drop-shadow(4px 0px 8px rgba(214, 225, 243, 0.64)); */
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
 }
 /* email & password input */
 

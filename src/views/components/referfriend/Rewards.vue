@@ -8,7 +8,7 @@
             <div class="col px-0 mr-1">
               <div
                 class="toggle-btn-title p-2"
-                @click="switchSection('ShareInvitation')"
+                @click="updateSection('ShareInvitation')"
               >
                 <div>
                   {{ $t("share") }}
@@ -99,14 +99,14 @@ import { UpdateSection, SectionReferral } from "@/types/Section";
 
 export default defineComponent({
   setup() {
-    // const switchSection = inject("switchSection");
-    const sS = inject("switchSection") as UpdateSection<SectionReferral>;
-    const switchSection = (section: SectionReferral) => {
+    // const updateSection = inject("updateSection");
+    const sS = inject("updateSection") as UpdateSection<SectionReferral>;
+    const updateSection = (section: SectionReferral) => {
       sS(section);
     };
 
     return {
-      switchSection,
+      updateSection,
     };
   },
 });

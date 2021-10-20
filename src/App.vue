@@ -1,20 +1,14 @@
 <template>
-  <!-- <button type="button" class="btn btn-primary" @click="logout">Logout</button> -->
-  <!-- <button type="button" class="btn btn-primary" @click="changeLang">Change lang </button> -->
-  <Fade v-if="stateUser.authenticated">
+  <Fade v-if="stateUser.authenticated || $route.name === `referrallink`">
     <component :is="$route.meta.layout" />
   </Fade>
-
   <Fade v-else>
     <Login />
   </Fade>
-
-  <!-- <router-view /> -->
-
   <Toast />
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 
 import Toast from "@/views/components/Toast.vue";
@@ -22,6 +16,7 @@ import Fade from "@/views/components/transitions/Fade.vue";
 
 import Login from "@/views/pages/Login.vue";
 import Main from "@/views/layouts/Main.vue";
+// import ReferralLinkMain from "@/views/layouts/ReferralLinkMain.vue";
 
 import { stateUser, useUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
@@ -30,6 +25,7 @@ export default defineComponent({
     Toast,
     Login,
     Main,
+    // ReferralLinkMain,
     Fade,
   },
   setup() {
@@ -67,10 +63,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-#app {
-  background: #f3f7fe !important;
-  min-height: 100vh;
-}
-</style>

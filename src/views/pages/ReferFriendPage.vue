@@ -37,11 +37,11 @@ export default defineComponent({
   },
   setup() {
     const section = ref<SectionReferral>("ShareInvitation");
-    const switchSection = (newSection: SectionReferral) => {
+    const updateSection = (newSection: SectionReferral) => {
       section.value = newSection;
       console.log(newSection);
     };
-    provide("switchSection", switchSection);
+    provide("updateSection", updateSection);
 
     return {
       stateUser,

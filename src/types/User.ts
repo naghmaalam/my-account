@@ -48,13 +48,21 @@ export interface User {
   website_url: string;
 }
 
-export interface LoginDetails {
-  username: string;
-  password: string;
+interface Details {
   device_code: string;
   device_name: string;
   device_type: string;
-  myaccount: boolean;
   lang: string;
   version: string;
+}
+
+export interface LoginDetails extends Details {
+  username: string;
+  password: string;
+  myaccount: boolean;
+}
+
+export interface VerifyDetails extends Details {
+  email: string;
+  verification_code: string;
 }

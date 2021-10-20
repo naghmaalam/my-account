@@ -35,7 +35,7 @@ export function useValidation(): {
     errors = [];
   };
 
-  const checkErrors = (fields: Fields, settings = { init: true }) => {
+  const checkErrors = (fields: Fields, settings = { init: true }): void => {
     if (settings.init) init();
 
     let errorMessage = "";

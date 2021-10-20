@@ -1,7 +1,7 @@
 import { reactive, computed, ComputedRef, watch } from "vue";
 import i18n from "@/locales/localization";
 
-import { User, LoginDetails, Me } from "@/types/User";
+import { User, LoginDetails, Me, VerifyDetails } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
 
 import { api, Method } from "@/modules/api";
@@ -93,6 +93,10 @@ function getSubscription(response: Me) {
   else return null;
 }
 
+const toast = useToast();
+
+// useUser()
+///////////////////////////////////////////
 export function useUser(): {
   do: {
     login: (email: string, password: string) => Promise<boolean>;
@@ -101,7 +105,15 @@ export function useUser(): {
     init: () => void;
     changeLanguage: (a: SupportedLanguages) => void;
     referFriend: (email: string) => Promise<boolean>;
-    withCode: {
+    register: {
+      inviteCode: (
+        email: string,
+        password: string,
+        inviteCode: string
+      ) => Promise<boolean>;
+      verifyCode: (email: string, code: string) => Promise<boolean>;
+    };
+    loginWithCode: {
       emailCode: (email: string) => Promise<boolean>;
       loginCode: (email: string, code: string) => Promise<boolean>;
     };
@@ -116,7 +128,6 @@ export function useUser(): {
     };
   };
 } {
-  const toast = useToast();
   // do
   /////////////////////////////////////////////////////////////////////
   const login = async (email: string, password: string) => {
@@ -128,7 +139,7 @@ export function useUser(): {
         device_name: "device_name_my_account",
         device_type: "ios, android, windows, mac",
         myaccount: true,
-        lang: "en",
+        lang: state.user.language.selected,
         version: "version",
       };
       const response = await api("login", Method.POST, loginDetails);
@@ -146,7 +157,6 @@ export function useUser(): {
       const err = error as Error;
       toast.do.error(err.message);
       return false;
-      console.error("useUser() error", err.name);
     }
   };
 
@@ -154,7 +164,52 @@ export function useUser(): {
     resetUser();
   };
 
-  const withCode = {
+  const register = {
+    inviteCode: async (email: string, password: string, inviteCode: string) => {
+      try {
+        const response = await api("register", Method.POST, {
+          username: email,
+          password: password,
+          invite_code: inviteCode,
+        });
+        toast.do.show(response.message);
+        return true;
+      } catch (error) {
+        const err = error as Error;
+        toast.do.error(err.message);
+        return false;
+      }
+    },
+    verifyCode: async (email: string, code: string) => {
+      try {
+        const verifyDetails: VerifyDetails = {
+          email,
+          verification_code: code,
+          device_code: "device_code_my_account",
+          device_name: "device_name_my_account",
+          device_type: "ios, android, windows, mac",
+          lang: state.user.language.selected,
+          version: "version",
+        };
+        const response = await api(
+          "verify/email/code",
+          Method.POST,
+          verifyDetails
+        );
+        toast.do.show(response.message);
+        console.log("waits..");
+        resetUser();
+        setUser(response);
+        return true;
+      } catch (error) {
+        const err = error as Error;
+        toast.do.error(err.message);
+        return false;
+      }
+    },
+  };
+
+  const loginWithCode = {
     emailCode: async (email: string) => {
       try {
         await api("login/with/code", Method.POST, {
@@ -297,7 +352,8 @@ export function useUser(): {
       referFriend,
       init,
       changeLanguage,
-      withCode,
+      register,
+      loginWithCode,
       passwordRecovery,
     },
   };
