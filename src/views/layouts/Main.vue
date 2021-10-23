@@ -17,7 +17,7 @@
 
           <main
             id="main-content"
-            class="pr-3 pl-4 pt-3 pb-4"
+            class="pr-4 pl-4 pt-3 pb-4"
             role="main"
             @click="hideSideMenu"
           >

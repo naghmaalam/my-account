@@ -170,7 +170,7 @@ export default defineComponent({
       } else {
         console.log("SUCCESS NEW PASSWORD");
         isLoading.value = true;
-        const success = await user.do.passwordRecovery.updatePassword(
+        const success = await user.do.passwordRecovery.resetPassword(
           props.email,
           props.code,
           password.value

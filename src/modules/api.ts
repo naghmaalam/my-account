@@ -1,4 +1,4 @@
-import { stateUser } from "@/hooks/useUser";
+import { stateUser, useUser } from "@/hooks/useUser";
 
 import { Me } from "@/types/User";
 
@@ -10,6 +10,8 @@ export enum Method {
   PATCH,
   DELETE,
 }
+
+const user = useUser();
 
 export async function api(
   endpoint: string,
@@ -58,6 +60,7 @@ export async function api(
       if (response.status == 401) {
         // logout user then throw error
         error.name = "Unauthorized";
+        user.do.logout();
       }
       //422 == validation failed
       else if (response.status == 422) {

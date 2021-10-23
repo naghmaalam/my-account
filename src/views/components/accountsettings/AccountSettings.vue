@@ -4,11 +4,12 @@
     <div class="container mb-3">
       <div class="row">
         <div class="col-md-6">
-          <div class="account-settings-title">Account Settings</div>
+          <div class="account-settings-title">{{ $t("account_settings") }}</div>
         </div>
         <div class="col-md-6">
           <div class="account-info-member">
-            Member since: <span class="account-info-date"> 04/07/2021 </span>
+            {{ $t("member_since") }} :
+            <span class="account-info-date"> {{ memberDate }} </span>
           </div>
         </div>
       </div>
@@ -18,7 +19,7 @@
     <div class="container">
       <div class="row mob-reverse">
         <div class="col-md-8 my-devices">
-          <div class="account-settings-inputs pt-4">Email</div>
+          <div class="account-settings-inputs pt-4">{{ $t("email") }}</div>
           <input
             class="input-email-password mr-5 mt-2 pt-2 pb-2 pl-2"
             style="color: var(--swoshs-color2)"
@@ -30,48 +31,101 @@
             disabled
             readonly
           />
-          <div class="account-settings-inputs mt-2">Password</div>
+          <div class="account-settings-inputs mt-2">{{ $t("password") }}</div>
 
           <div
             class="input-btn d-flex flex-row justify-content-between pt-1 pb-1"
           >
             <div class="d-flex align-items-center ml-4">************</div>
-            <div class="link-btn mr-1 pt-1 pb-1 pr-4 pl-4">Edit</div>
+            <div
+              class="link-btn mr-1 pt-1 pb-1 pr-4 pl-4"
+              @click="showUpdatePassword = true"
+            >
+              {{ $t("edit") }}
+            </div>
           </div>
           <div class="account-settings-content mob-res-footer mt-4 pr-5">
-            *Basic information on Data Protection: Swoshs VPN stores your data
-            to improve the service and, with your consent, offers news,
-            promotions and raffles, as well as version and releases from Swoshs
-            VPN.
+            {{ $t("account_settings_content") }}
           </div>
         </div>
-        <div class="col-md-4 pl-0">
-          <div class="account-settings-logo d-flex flex-column p-3">
+        <div class="col-md-4 px-0">
+          <div class="account-settings-logo d-flex flex-column p-5">
             <img
               src="@/assets/images/account-settings/Swoshs-logo.png"
               class="img-fluid swoshs-logo"
               alt=""
             />
-            <button class="account-settings-btn mt-3 pr-5 pl-5">Premium</button>
-            <div class="account-settings-content mt-3">
-              *To upgrade the package just click the button
-            </div>
+            <template v-if="!isExpired && isPremium">
+              <button class="account-settings-btn mt-3 pr-5 pl-5">
+                {{ $t("premium") }}
+              </button>
+            </template>
+            <template v-else-if="!isExpired && !isPremium">
+              <button class="account-settings-btn mt-3 pr-5 pl-5">
+                {{ $t("free_user") }}
+              </button>
+              <div class="account-settings-content mt-3 text-center">
+                <span style="color: red">*</span>
+                {{ $t("upgrade_package") }}
+              </div>
+            </template>
+            <template v-if="isExpired && isPremium">
+              <button class="expired-btn account-settings-btn mt-3 pr-5 pl-5">
+                {{ $t("premium") }}
+              </button>
+              <div class="account-settings-content mt-3 text-center">
+                <span style="color: red">*</span>
+                {{ $t("subscription_expired_message") }}
+              </div>
+            </template>
+            <template v-else-if="isExpired && !isPremium">
+              <button class="expired-btn account-settings-btn mt-3 pr-5 pl-5">
+                {{ $t("free_user") }}
+              </button>
+              <div class="account-settings-content mt-3 text-center">
+                <span style="color: red">*</span>
+                {{ $t("subscription_expired_message") }}
+              </div>
+            </template>
           </div>
         </div>
       </div>
     </div>
+
+    <teleport to="body">
+      <UpdatePassword v-model:open="showUpdatePassword" />
+    </teleport>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 
 import { stateUser } from "@/hooks/useUser";
 
+import UpdatePassword from "@/views/components/accountsettings/changepassword/UpdatePassword.vue";
+
 export default defineComponent({
+  components: {
+    UpdatePassword,
+  },
   setup() {
+    const showUpdatePassword = ref(false);
+    const memberDate = ref("");
+
+    const isPremium = computed(() => {
+      return stateUser.value.currentSubscription.title === "premium";
+    });
+    const isExpired = computed(() => {
+      return stateUser.value.currentSubscription.isExpired;
+    });
+
     return {
       stateUser,
+      showUpdatePassword,
+      memberDate,
+      isPremium,
+      isExpired,
     };
   },
 });
@@ -164,6 +218,11 @@ export default defineComponent({
   font-size: 1rem;
   text-align: center;
   color: #7b47fc;
+  cursor: pointer;
+}
+
+.expired-btn {
+  background: var(--swoshs-linear-gradient2);
 }
 
 @media screen and (max-width: 992px) {

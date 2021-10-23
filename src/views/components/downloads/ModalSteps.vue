@@ -1,14 +1,17 @@
 <template>
-  <Fade2>
-    <div class="modal" v-if="open">
-      <div class="modal-backdrop"></div>
-      <Fade>
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="download-modal-header pr-5">
-              <div class="windowClose close" @click="closeModal">
-                <i class="fas fa-times"></i>
-              </div>
+  <SimpleFade>
+    <div class="modal-backdrop" v-if="open"></div>
+  </SimpleFade>
+
+  <Fade>
+    <div class="modal show d-block" v-if="open">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="close" @click="closeModal">
+              <i class="fas fa-times"></i>
+            </div>
+            <div class="download-modal-header">
               <div
                 class="
                   circles
@@ -33,76 +36,75 @@
                 <div class="circle-title">{{ $t("done") }}</div>
               </div>
             </div>
-
-            <div class="modal-body pt-5 pb-5 pr-5">
-              <div class="d-flex flex-row justify-content-around">
-                <div class="device-image ml-4">
-                  <div
-                    class="
-                      d-flex
-                      flex-column
-                      justify-content-center
-                      align-items-center
-                      py-3
-                      px-4
-                    "
-                  >
-                    <i class="downloads-icons pt-1" :class="device?.icon"></i>
-                    <div class="downloads-title pb-1">{{ device?.title }}</div>
-                  </div>
-                </div>
-                <div class="mt-3 pl-5">
-                  <div class="device-modal-title">
-                    {{ $t("download_for") }} {{ device?.title }}
-                  </div>
-                  <div class="device-modal-subtitle">
-                    * {{ $t("your_privacy") }}
-                  </div>
+          </div>
+          <div class="modal-body pt-5 pb-5 pr-5">
+            <div class="d-flex flex-row justify-content-around">
+              <div class="device-image ml-4">
+                <div
+                  class="
+                    d-flex
+                    flex-column
+                    justify-content-center
+                    align-items-center
+                    py-3
+                    px-4
+                  "
+                >
+                  <i class="downloads-icons pt-1" :class="device?.icon"></i>
+                  <div class="downloads-title pb-1">{{ device?.title }}</div>
                 </div>
               </div>
-            </div>
-
-            <div class="download-modal-footer pr-5">
-              <div class="d-flex flex-row justify-content-around pb-4 ml-4">
-                <div class="pl-3 mt-0 pt-4">
-                  <div class="device-modal-title">
-                    {{ $t("ready_to_download") }}
-                  </div>
-                  <div class="device-modal-subtitle p-1">
-                    <span
-                      v-html="$t('send_link_email', { email: stateUser.email })"
-                    ></span>
-                  </div>
+              <div class="mt-3 pl-5">
+                <div class="device-modal-title">
+                  {{ $t("download_for") }} {{ device?.title }}
                 </div>
-                <div class="device-download-btns pt-4">
-                  <a
-                    :href="device?.fileUrl"
-                    target="_blank"
-                    @click="isDownloadHereShown = true"
-                  >
-                    <div
-                      class="device-download-btn pt-3 pb-3 pl-4 pr-4"
-                      style="text-transform: uppercase"
-                    >
-                      {{ $t("download") }}
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div
-                      class="device-sendemail-btn mt-2 pt-3 pb-3 pl-4 pr-4"
-                      style="text-transform: uppercase"
-                    >
-                      {{ $t("send_email") }}
-                    </div>
-                  </a>
+                <div class="device-modal-subtitle">
+                  * {{ $t("your_privacy") }}
                 </div>
               </div>
             </div>
           </div>
+
+          <div class="download-modal-footer pr-5">
+            <div class="d-flex flex-row justify-content-around pb-4 ml-4">
+              <div class="pl-3 mt-0 pt-4 pr-3">
+                <div class="device-modal-title">
+                  {{ $t("ready_to_download") }}
+                </div>
+                <div class="device-modal-subtitle p-1">
+                  <span
+                    v-html="$t('send_link_email', { email: stateUser.email })"
+                  ></span>
+                </div>
+              </div>
+              <div class="device-download-btns pt-4">
+                <a
+                  :href="device?.fileUrl"
+                  target="_blank"
+                  @click="isDownloadHereShown = true"
+                >
+                  <div
+                    class="device-download-btn pt-3 pb-3 pl-4 pr-4"
+                    style="text-transform: uppercase"
+                  >
+                    {{ $t("download") }}
+                  </div>
+                </a>
+                <a href="#">
+                  <div
+                    class="device-sendemail-btn mt-2 pt-3 pb-3 pl-4 pr-4"
+                    style="text-transform: uppercase"
+                  >
+                    {{ $t("send_email") }}
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </Fade>
+      </div>
     </div>
-  </Fade2>
+  </Fade>
   <Fade>
     <div class="download-here" v-if="isDownloadHereShown">
       <div class="dtp-arrow">
@@ -126,12 +128,12 @@ import { stateUser } from "@/hooks/useUser";
 import { Device } from "@/types/Devices";
 
 import Fade from "@/views/components/transitions/Fade.vue";
-import Fade2 from "@/views/components/transitions/Fade2.vue";
+import SimpleFade from "@/views/components/transitions/SimpleFade.vue";
 
 export default defineComponent({
   components: {
     Fade,
-    Fade2,
+    SimpleFade,
   },
   props: {
     open: {
@@ -321,26 +323,29 @@ export default defineComponent({
   --modal-duration: 1s;
   --modal-color: #494f53;
 }
-
-.modal ::v-deep() {
-  display: block;
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  overflow: auto;
+.modal-backdrop {
+  background: #000000c4;
   z-index: 1031;
-
-  .modal-backdrop {
-    background: #000000c4;
-  }
+}
+.modal ::v-deep() {
+  // display: block;
+  // position: fixed;
+  // left: 0;
+  // top: 0;
+  // height: 100vh;
+  // width: 100vw;
+  // overflow: auto;
+  z-index: 1031;
 
   .modal-content {
     margin: 10% auto;
     // width: 40%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
     z-index: 1040;
+  }
+
+  .modal-dialog {
+    max-width: 700px;
   }
 
   .modal-header h2,
@@ -351,6 +356,7 @@ export default defineComponent({
   .download-modal-header {
     padding: 1.5rem;
     background: #fff;
+    width: 100%;
   }
 
   .modal-body {
@@ -448,6 +454,7 @@ export default defineComponent({
     background: #fff;
     border-radius: 20px;
     min-width: 130px;
+    max-height: 130px;
   }
 
   .device-modal-title {
@@ -496,16 +503,21 @@ export default defineComponent({
 
     color: #ccc;
     float: right;
-    font-size: 30px;
+    // font-size: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: transparent;
     height: 50px;
     width: 50px;
     border-radius: 50%;
     opacity: 1;
-    box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.44) !important;
+    // box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.44) !important;
+
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 1rem;
   }
 
   .close:hover,

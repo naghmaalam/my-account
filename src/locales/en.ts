@@ -493,10 +493,10 @@ const en: Locale = {
   copy: "Copy *",
   edit: "Edit*",
   account_settings_content:
-    "*Basic information on Data Protection: Swoshs VPN stores your data to improve the service and, with your consent, offers news, promotions and raffles, as well as version and releases from Swoshs VPN. *",
+    "* Basic information on Data Protection: Swoshs VPN stores your data to improve the service and, with your consent, offers news, promotions and raffles, as well as version and releases from Swoshs VPN. *",
   premium: "Premium*",
-  upgrade_package: "*To upgrade the package just click the button *",
-  free_user: "FreeUser *",
+  upgrade_package: "To upgrade the package just click the button *",
+  free_user: "Free User *",
   free_user_devices_title: "Free Trial package supports 1 device only. *",
   reward_upgrade: "To get a reward please upgrade your account *",
   no_information: "No information is available for this page *",
