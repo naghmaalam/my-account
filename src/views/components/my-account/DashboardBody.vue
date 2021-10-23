@@ -18,165 +18,139 @@
   <div class="container account-content gap-3">
     <div class="row">
       <!-- my devices -->
-      <div class="my-devices col-md-6 my-2 hide-mobile">
-        <div class="account-title pt-3 px-3">{{ $t("my_devices") }}</div>
-        <div class="row-line mt-2"></div>
-        <div
-          class="d-flex flex-row justify-content-around align-items-center mb-4"
-        >
-          <div class="recently-connected d-flex flex-column">
-            <div class="account-subtitle">
-              {{ $t("recently_connected") }} (6)
-            </div>
-            <div
-              class="
-                desktop-connected
-                d-flex
-                flex-row
-                justify-content-around
-                pt-4
-              "
-            >
-              <img
-                src="@/assets/images/my-account/windows.png"
-                class="img-fluid"
-                alt=""
-              />
-              <div class="d-flex flex-column">
-                <div class="desktop pl-3">Desktop-MKEUF6J</div>
-                <div class="account-info pl-3">
-                  {{ $t("last_signin") }} : 06/26/2021
+      <div class="col-md-6 hide-mobile">
+        <div class="my-devices p-3 pb-4">
+          <div class="account-title pt-3 px-3">{{ $t("my_devices") }}</div>
+          <div class="row-line mt-2"></div>
+          <div
+            class="d-flex flex-row justify-content-around align-items-center"
+          >
+            <div class="recently-connected d-flex flex-column">
+              <div class="account-subtitle">
+                {{ $t("recently_connected") }} (6)
+              </div>
+              <div
+                class="
+                  desktop-connected
+                  d-flex
+                  flex-row
+                  justify-content-around
+                  pt-4
+                "
+              >
+                <img
+                  src="@/assets/images/my-account/windows.png"
+                  class="img-fluid"
+                  alt=""
+                />
+                <div class="d-flex flex-column">
+                  <div class="desktop pl-3">Desktop-MKEUF6J</div>
+                  <div class="account-info pl-3">
+                    {{ $t("last_signin") }} : 06/26/2021
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="vertical-line mt-3"></div>
+            <button class="my-account-btn" @click="redirect('devices')">
+              {{ $t("view_more") }}
+            </button>
           </div>
-          <div class="vertical-line mt-3"></div>
-          <button class="my-account-btn">{{ $t("view_more") }}</button>
         </div>
       </div>
 
       <!-- my devices for mobile -->
-      <div class="my-devices col-md-6 my-2 show-mobile hide-desktop">
-        <div class="account-title pt-3 px-3">{{ $t("my_devices") }}</div>
-        <div class="row-line mt-2"></div>
-        <div
-          class="d-flex flex-row justify-content-around align-items-center mb-4"
-        >
+      <div class="col-md-6 show-mobile hide-desktop">
+        <div class="my-devices p-3 pb-4 mb-2">
+          <div class="account-title pt-3 px-3">{{ $t("my_devices") }}</div>
+          <div class="row-line mt-2"></div>
           <div
             class="
-              recently-connected
               d-flex
-              justify-content-center
+              flex-row
+              justify-content-around
               align-items-center
-              flex-column
+              mb-4
             "
           >
-            <div class="account-subtitle">
-              {{ $t("recently_connected") }} (6)
-            </div>
-            <img
-              src="@/assets/images/my-account/windows.png"
-              class="img-fluid mob-res-image"
-              alt=""
-            />
-            <div class="d-flex flex-column">
-              <div class="desktop pl-3">Desktop-MKEUF6J</div>
-              <div class="account-info pl-3">
-                {{ $t("last_signin") }} : 06/26/2021
+            <div
+              class="
+                recently-connected
+                d-flex
+                justify-content-center
+                align-items-center
+                flex-column
+              "
+            >
+              <div class="account-subtitle mob-res-padding">
+                {{ $t("recently_connected") }} (6)
               </div>
+              <img
+                src="@/assets/images/my-account/windows.png"
+                class="mob-res-padding img-fluid mob-res-image"
+                alt=""
+              />
+              <div class="d-flex flex-column">
+                <div class="desktop pl-3 mob-res-padding">Desktop-MKEUF6J</div>
+                <div class="account-info pl-3">
+                  {{ $t("last_signin") }} : 06/26/2021
+                </div>
+              </div>
+              <button
+                class="my-account-btn mob-res-margin"
+                @click="redirect('devices')"
+              >
+                {{ $t("view_more") }}
+              </button>
             </div>
-            <button class="my-account-btn">{{ $t("view_more") }}</button>
           </div>
         </div>
       </div>
 
       <!-- Subscription -->
-      <div class="subscription col-md-6 my-2">
-        <div class="account-title pt-3 px-3">{{ $t("subscription") }}</div>
-        <div class="row-line mt-2"></div>
-        <div
-          class="
-            d-flex
-            flex-row
-            justify-content-around
-            align-items-center
-            mob-res-col
-            mb-4
-          "
-        >
-          <img
-            src="@/assets/images/my-account/shield.png"
-            class="img-fluid mob-res-image pt-4"
-            alt=""
-          />
-          <div class="recently-connected d-flex flex-column">
-            <div
-              class="
-                desktop-connected
-                d-flex
-                flex-row
-                justify-content-around
-                pt-4
-              "
-            >
-              <div class="d-flex flex-column">
-                <div class="account-subtitle pb-4">
-                  {{ $t("premium_package") }}
-                </div>
-                <div class="d-flex flex-row mob-res-col">
-                  <div class="desktop pb-3">
-                    {{ $t("one_month_subscription") }}
+      <div class="col-md-6">
+        <div class="subscription pb-4 p-3">
+          <div class="account-title pt-3 px-3">{{ $t("subscription") }}</div>
+          <div class="row-line mt-2"></div>
+          <div
+            class="
+              d-flex
+              flex-row
+              justify-content-around
+              align-items-center
+              mob-res-col
+              mb-4
+            "
+          >
+            <img
+              src="@/assets/images/my-account/shield.png"
+              class="img-fluid mob-res-image pt-4"
+              alt=""
+            />
+            <div class="recently-connected d-flex flex-column">
+              <div
+                class="
+                  desktop-connected
+                  d-flex
+                  flex-row
+                  justify-content-around
+                  pt-4
+                "
+              >
+                <div class="d-flex flex-column">
+                  <div class="account-subtitle pb-4">
+                    {{ $t("premium_package") }}
                   </div>
-                  <div class="active-btn">{{ $t("active") }}</div>
-                </div>
-                <button class="my-account-btn">{{ $t("view_details") }}</button>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="active-btn">Active</div> -->
-        </div>
-      </div>
-    </div>
-
-    <!-- your account -->
-    <div class="row gap-3">
-      <div class="your-account col-md-6 my-2">
-        <div class="account-title pt-3 px-3">{{ $t("your_account") }}</div>
-        <div class="row-line mt-2"></div>
-        <div
-          class="
-            d-flex
-            flex-row
-            justify-content-around
-            align-items-center
-            mob-res-col
-          "
-        >
-          <img
-            src="@/assets/images/my-account/personal-computer.png"
-            class="img-fluid mb-5 mob-res-image"
-            alt=""
-          />
-          <div class="recently-connected d-flex flex-column">
-            <div
-              class="
-                desktop-connected
-                d-flex
-                flex-row
-                justify-content-around
-                pt-4
-                pb-3
-              "
-            >
-              <div class="d-flex flex-column">
-                <div class="account-subtitle pl-3">
-                  {{ $t("account_section") }}
-                </div>
-                <div class="account-info pb-4 mt-3 pl-3">
-                  {{ $t("your_account_info") }}
-                </div>
-                <div class="mob-res-btn">
-                  <button class="my-account-btn">
+                  <div class="d-flex flex-row mob-res-col">
+                    <div class="desktop pb-3">
+                      {{ $t("one_month_subscription") }}
+                    </div>
+                    <div class="active-btn">{{ $t("active") }}</div>
+                  </div>
+                  <button
+                    class="my-account-btn"
+                    @click="redirect('subscription')"
+                  >
                     {{ $t("view_details") }}
                   </button>
                 </div>
@@ -185,44 +159,99 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- your account -->
+    <div class="row gap-3">
+      <div class="col-md-6">
+        <div class="your-account pb-4 p-3 mt-2">
+          <div class="account-title pt-3 px-3">{{ $t("your_account") }}</div>
+          <div class="row-line mt-2"></div>
+          <div
+            class="
+              d-flex
+              flex-row
+              justify-content-around
+              align-items-center
+              mob-res-col
+            "
+          >
+            <img
+              src="@/assets/images/my-account/personal-computer.png"
+              class="img-fluid mb-5 mob-res-image"
+              alt=""
+            />
+            <div class="recently-connected d-flex flex-column">
+              <div
+                class="
+                  desktop-connected
+                  d-flex
+                  flex-row
+                  justify-content-around
+                  pt-4
+                  pb-3
+                "
+              >
+                <div class="d-flex flex-column">
+                  <div class="account-subtitle pl-3">
+                    {{ $t("account_section") }}
+                  </div>
+                  <div class="account-info pb-4 mt-3 pl-3">
+                    {{ $t("your_account_info") }}
+                  </div>
+                  <div class="mob-res-btn">
+                    <button class="my-account-btn" @click="redirect('account')">
+                      {{ $t("view_details") }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- support -->
-      <div class="support col-md-6 my-2">
-        <div class="account-title pt-3 px-3">{{ $t("support") }}</div>
-        <div class="row-line mt-2"></div>
-        <div
-          class="
-            d-flex
-            flex-row
-            justify-content-around
-            align-items-center
-            mob-res-col
-          "
-        >
-          <img
-            src="@/assets/images/my-account/life-saver.png"
-            class="img-fluid pb-4 mob-res-image"
-            alt=""
-          />
-          <div class="recently-connected d-flex flex-column">
-            <div
-              class="
-                desktop-connected
-                d-flex
-                flex-row
-                justify-content-around
-                pt-4
-              "
-            >
-              <div class="d-flex flex-column">
-                <div class="account-subtitle pl-3">{{ $t("need_help") }}</div>
-                <div class="account-info pb-4 mt-3 pl-3">
-                  {{ $t("support_info") }}
-                </div>
-                <div class="mob-res-btn">
-                  <button class="my-account-btn">
-                    {{ $t("contact_support") }}
-                  </button>
+      <div class="col-md-6">
+        <div class="support p-3 pb-4 mt-2">
+          <div class="account-title pt-3 px-3">{{ $t("support") }}</div>
+          <div class="row-line mt-2"></div>
+          <div
+            class="
+              d-flex
+              flex-row
+              justify-content-around
+              align-items-center
+              mob-res-col
+            "
+          >
+            <img
+              src="@/assets/images/my-account/life-saver.png"
+              class="img-fluid pb-4 mob-res-image"
+              alt=""
+            />
+            <div class="recently-connected d-flex flex-column">
+              <div
+                class="
+                  desktop-connected
+                  d-flex
+                  flex-row
+                  justify-content-around
+                  pt-4
+                "
+              >
+                <div class="d-flex flex-column">
+                  <div class="account-subtitle pl-3">{{ $t("need_help") }}</div>
+                  <div class="account-info pb-4 mt-3 pl-3">
+                    {{ $t("support_info") }}
+                  </div>
+                  <a href="http://swoshsvpn.com/contact.html">
+                    <div class="mob-res-btn pb-3">
+                      <button class="my-account-btn">
+                        {{ $t("contact_support") }}
+                      </button>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -233,9 +262,17 @@
   </div>
 </template>
 <script>
+import { useRouter } from "vue-router";
+
 export default {
   setup() {
-    return {};
+    const router = useRouter();
+    const redirect = (page) => {
+      router.push({ name: page });
+    };
+    return {
+      redirect,
+    };
   },
 };
 </script>
@@ -419,6 +456,14 @@ export default {
   }
   .desktop-connected {
     padding-top: 0rem !important;
+  }
+
+  .mob-res-padding {
+    padding-top: 1rem !important;
+  }
+
+  .mob-res-margin {
+    margin-top: 1rem !important;
   }
 }
 </style>

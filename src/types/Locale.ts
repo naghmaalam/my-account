@@ -405,6 +405,35 @@ export interface Locale {
   learn_more_about_swoshs: string;
   devices_title: string;
   devices_subtitle: string;
+  add_device: string;
+  select_os_type: string;
+  install_swoshs: string;
+  my_subscriptions: string;
+  my_subscription: string;
+  order_history: string;
+  refer_friend_headline: string;
+  refer_friend_text: string;
+  check_our: string;
+  reward_rules: string;
+  share: string;
+  rewards: string;
+  send_invitation_email: string;
+  share_it: string;
+  share_social_media: string;
+  copy: string;
+  edit: string;
+  account_settings_content: string;
+  premium: string;
+  upgrade_package: string;
+  free_user: string;
+  free_user_devices_title: string;
+  no_information: string;
+  reward_upgrade: string;
+  current_pkg_not_supported: string;
+  earn_first_free_month: string;
+  refer_invite_friend: string;
+  friends_bought: string;
+  free_months_added: string;
   ////////////////////////////////////////////////////////////////
   // new
 }

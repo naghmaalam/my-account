@@ -24,63 +24,65 @@
         <p class="loggedin pt-3">{{ $t("logged_in_as") }}</p>
         <p class="username pb-1">{{ stateUser.email }}</p>
       </div>
-      <div class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn">
-          <i
-            class="
-              flaticon-round-account-button-with-user-inside
-              user-avatar
-              mb-3
-              pl-3
-              pr-4
-            "
-          ></i>
-        </a>
-        <div class="dropdown-content">
-          <div
-            class="d-flex flex-row justify-content-around"
-            @click="redirect('account')"
-          >
-            <img
-              src="@/assets/images/account-settings/cogwheel.png"
-              class="img-fluid swoshs-logo"
-              alt=""
-            />
-            <div>{{ $t("account_settings") }}</div>
-            <i class="flaticon-arrow-angle-pointing-to-right"></i>
-          </div>
-          <div class="d-flex flex-row justify-content-around">
-            <img
-              src="@/assets/images/account-settings/lifesaver.png"
-              class="img-fluid swoshs-logo"
-              alt=""
-            />
-            <div>{{ $t("support") }}</div>
-            <div class="d-flex justify-content-end">
+      <Fade2>
+        <div class="dropdown">
+          <a href="javascript:void(0)" class="dropbtn">
+            <i
+              class="
+                flaticon-round-account-button-with-user-inside
+                user-avatar
+                mb-3
+                pl-3
+                pr-4
+              "
+            ></i>
+          </a>
+          <div class="dropdown-content">
+            <div
+              class="d-flex flex-row justify-content-around"
+              @click="redirect('account')"
+            >
+              <img
+                src="@/assets/images/account-settings/cogwheel.png"
+                class="img-fluid swoshs-logo"
+                alt=""
+              />
+              <div>{{ $t("account_settings") }}</div>
+              <i class="flaticon-arrow-angle-pointing-to-right"></i>
+            </div>
+            <div class="d-flex flex-row justify-content-around">
+              <img
+                src="@/assets/images/account-settings/lifesaver.png"
+                class="img-fluid swoshs-logo"
+                alt=""
+              />
+              <div>{{ $t("support") }}</div>
+              <div class="d-flex justify-content-end">
+                <i class="flaticon-arrow-angle-pointing-to-right"></i>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row justify-content-around">
+              <img
+                src="@/assets/images/account-settings/faq.png"
+                class="img-fluid swoshs-logo"
+                alt=""
+              />
+              <div>{{ $t("privacy") }}</div>
+              <i class="flaticon-arrow-angle-pointing-to-right"></i>
+            </div>
+            <div class="d-flex flex-row justify-content-around" @click="logout">
+              <img
+                src="@/assets/images/account-settings/logout.png"
+                class="img-fluid swoshs-logo"
+                alt=""
+              />
+              <div>{{ $t("logout") }}</div>
               <i class="flaticon-arrow-angle-pointing-to-right"></i>
             </div>
           </div>
-
-          <div class="d-flex flex-row justify-content-around">
-            <img
-              src="@/assets/images/account-settings/faq.png"
-              class="img-fluid swoshs-logo"
-              alt=""
-            />
-            <div>{{ $t("privacy") }}</div>
-            <i class="flaticon-arrow-angle-pointing-to-right"></i>
-          </div>
-          <div class="d-flex flex-row justify-content-around" @click="logout">
-            <img
-              src="@/assets/images/account-settings/logout.png"
-              class="img-fluid swoshs-logo"
-              alt=""
-            />
-            <div>{{ $t("logout") }}</div>
-            <i class="flaticon-arrow-angle-pointing-to-right"></i>
-          </div>
         </div>
-      </div>
+      </Fade2>
     </div>
   </nav>
 </template>
@@ -90,8 +92,12 @@ import { defineComponent } from "vue";
 import { stateUser, useUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
 import { useRouter } from "vue-router";
+import Fade2 from "@/views/components/transitions/Fade2.vue";
 
 export default defineComponent({
+  components: {
+    Fade2,
+  },
   setup() {
     const user = useUser();
     const router = useRouter();

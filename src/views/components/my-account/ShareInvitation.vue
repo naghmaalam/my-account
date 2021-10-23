@@ -20,12 +20,14 @@
                   ml-2
                 "
               >
-                <div class="toggle-btn-title-color text-center">Share</div>
+                <div class="toggle-btn-title-color text-center">
+                  {{ $t("share") }}
+                </div>
               </div>
             </div>
             <div class="col">
               <div class="toggle-btn-title pt-2" @click="redirect('rewards')">
-                Rewards
+                {{ $t("rewards") }}
               </div>
             </div>
           </div>
@@ -46,7 +48,7 @@
 
         <div class="row">
           <div class="col-md-6 send-invitation-email">
-            <div class="rf-title">Send Invitaion Email</div>
+            <div class="rf-title">{{ $t("send_invitation_email") }}</div>
             <div
               class="
                 input-btn
@@ -64,11 +66,13 @@
                 id="email"
                 placeholder="Your Friend email address"
               />
-              <div class="active-toggle-btn text-center mr-1">Send</div>
+              <div class="active-toggle-btn text-center mr-1">
+                {{ $t("send") }}
+              </div>
             </div>
           </div>
           <div class="col-md-6 share pl-5">
-            <div class="rf-title">Share It</div>
+            <div class="rf-title">{{ $t("share_it") }}</div>
             <div
               class="
                 input-btn
@@ -80,12 +84,12 @@
             >
               <i class="flaticon-link pl-3"></i>
               <div class="rf-link">https://swoshsvpn.com/yo/9i4j6v2r</div>
-              <div class="link-btn pl-2 pr-2 mr-1">Copy</div>
+              <div class="link-btn pl-2 pr-2 mr-1">{{ $t("copy") }}</div>
             </div>
           </div>
         </div>
         <div class="rf-title text-center pt-5">
-          Or Share it directly in social media
+          {{ $t("share_social_media") }}
         </div>
         <div
           class="

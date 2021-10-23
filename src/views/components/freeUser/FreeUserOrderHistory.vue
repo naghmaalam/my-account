@@ -5,12 +5,18 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <div class="account-subscription pt-5">My Subscription(s)</div>
+            <div class="account-subscription pt-5">
+              {{ $t("my_subscriptions") }}
+            </div>
             <div class="d-flex flex-row">
-              <div class="inactive-subscription pr-4 pl-4">My Subscription</div>
+              <div class="inactive-subscription pr-4 pl-4">
+                {{ $t("my_subscription") }}
+              </div>
 
               <div class="d-flex flex-column">
-                <div class="active-subscription pr-4 pl-4">Order History</div>
+                <div class="active-subscription pr-4 pl-4">
+                  {{ $t("order_history") }}
+                </div>
                 <div class="selected-borderline"></div>
               </div>
             </div>
@@ -60,7 +66,7 @@
             class="pt-5 pb5"
           />
           <div class="order-empty-title pt-3">
-            No information is available for this page
+            {{ $t("no_information") }}
           </div>
         </div>
       </div>
