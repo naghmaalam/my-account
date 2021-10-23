@@ -1,16 +1,16 @@
 <template>
-  <div class="mob-res-hide">
+  <div class="p-4 d-none d-lg-block">
     <!-- headlines for promo -->
-    <div class="container mt-5">
+    <div class="container">
       <div class="row">
-        <div class="col-md-2 ml-3 pt-2 pb-2 pl-5">
+        <div class="col-md-2 pt-2 pb-2 pl-5">
           <img
             src="@/assets/images/account-settings-refer-friend/open-gift.png"
             class="open-gift mob-res-gift img-fluid"
             alt=""
           />
         </div>
-        <div class="col-md-6 pt-3">
+        <div class="col-md-10 pt-3">
           <div class="pt-2">
             <div class="headline-title">Refer friends and both get gifts!</div>
             <div class="headline-subtitle mr-5">
@@ -22,8 +22,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-2 pt-4"></div>
+        <!-- <div class="col-md-2"></div>
+        <div class="col-md-2 pt-4"></div> -->
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@ export default {
   color: #5c7bf7;
 }
 
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) {
   .headline-title {
     font-size: 1.2rem !important;
     line-height: 1.5rem !important;
@@ -76,5 +76,5 @@ export default {
   .mob-res-gift {
     width: 5rem !important;
   }
-}
+} */
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container account-headline mt-5">
+  <div class="container account-headline p-4">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-2 ml-3 pt-2 pb-2">
@@ -95,7 +95,7 @@ export default {
   border: none;
 }
 
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) {
   .price {
     text-align: left;
   }
@@ -111,5 +111,5 @@ export default {
   .upgrade-btn {
     margin-bottom: 1.5rem !important;
   }
-}
+} */
 </style>

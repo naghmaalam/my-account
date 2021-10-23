@@ -9,7 +9,7 @@ import ReferralLinkMain from "@/views/layouts/ReferralLinkMain.vue";
 import SideBar from "@/views/components/my-account/SideBar.vue";
 import NavBar from "@/views/components/my-account/NavBar.vue";
 
-const components = {
+const components1 = {
   navigation: NavBar,
   sidebar: SideBar,
   headline: PromoHeadline,
@@ -26,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "",
     components: {
       default: () => import("@/views/pages/Home.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -34,7 +34,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/home",
     components: {
       default: () => import("@/views/pages/Home.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -42,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/devices",
     components: {
       default: () => import("@/views/pages/Devices.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -50,7 +50,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/downloads",
     components: {
       default: () => import("@/views/pages/Downloads.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -58,7 +58,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/account",
     components: {
       default: () => import("@/views/pages/AccountSettingsPage.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -66,7 +66,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/subscription",
     components: {
       default: () => import("@/views/pages/Subscription.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -74,7 +74,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/orderhistory",
     components: {
       default: () => import("@/views/pages/OrderHistoryPage.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -82,7 +82,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/freeUserAccount",
     components: {
       default: () => import("@/views/pages/FreeUserAccountSettingsPage.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -90,7 +90,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/freeUserDevices",
     components: {
       default: () => import("@/views/pages/FreeUserDevicesPage.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -98,7 +98,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/freeUserOrder",
     components: {
       default: () => import("@/views/pages/FreeUserOrderHistoryPage.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -106,7 +106,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/freeUserSubscription",
     components: {
       default: () => import("@/views/pages/FreeUserSubscriptionPage.vue"),
-      ...components,
+      ...components1,
     },
   },
   {
@@ -114,7 +114,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/freeUserSubscription",
     components: {
       default: () => import("@/views/pages/FreeUserSubscriptionPage.vue"),
-      ...components,
+      ...components1,
     },
   },
   {

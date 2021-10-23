@@ -1,72 +1,60 @@
 <template>
   <!-- account settings -->
   <div class="container-fluid account-bg mt-5 p-0">
-    <div class="container-fluid m-0">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="account-settings-title">Account Settings</div>
-          </div>
-          <div class="col-md-6">
-            <div class="account-info-member">
-              Member since: <span class="account-info-date"> 04/07/2021 </span>
-            </div>
+    <div class="container mb-3">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="account-settings-title">Account Settings</div>
+        </div>
+        <div class="col-md-6">
+          <div class="account-info-member">
+            Member since: <span class="account-info-date"> 04/07/2021 </span>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- new -->
-      <div class="container">
-        <div class="row mob-reverse">
-          <div class="col-md-6 my-devices">
-            <div class="account-settings-inputs pt-4">Email</div>
-            <input
-              class="input-email-password mr-5 mt-2 pt-2 pb-2 pl-2"
-              style="color: var(--swoshs-color2)"
-              type="text"
-              name="email"
-              id="email"
-              placeholder="username@swoshsvpn.com"
-              :value="stateUser.email"
-              disabled
-              readonly
-            />
-            <div class="account-settings-inputs mt-2">Password</div>
+    <!-- new -->
+    <div class="container">
+      <div class="row mob-reverse">
+        <div class="col-md-8 my-devices">
+          <div class="account-settings-inputs pt-4">Email</div>
+          <input
+            class="input-email-password mr-5 mt-2 pt-2 pb-2 pl-2"
+            style="color: var(--swoshs-color2)"
+            type="text"
+            name="email"
+            id="email"
+            placeholder="username@swoshsvpn.com"
+            :value="stateUser.email"
+            disabled
+            readonly
+          />
+          <div class="account-settings-inputs mt-2">Password</div>
 
-            <div
-              class="input-btn d-flex flex-row justify-content-end pt-1 pb-1"
-            >
-              <div class="link-btn mr-1 pt-1 pb-1 pr-4 pl-4">Edit</div>
-            </div>
-            <div class="account-settings-content mob-res-footer mt-4 pr-5">
-              *Basic information on Data Protection: Swoshs VPN stores your data
-              to improve the service and, with your consent, offers news,
-              promotions and raffles, as well as version and releases from
-              Swoshs VPN.
-            </div>
+          <div
+            class="input-btn d-flex flex-row justify-content-between pt-1 pb-1"
+          >
+            <div class="d-flex align-items-center ml-4">************</div>
+            <div class="link-btn mr-1 pt-1 pb-1 pr-4 pl-4">Edit</div>
           </div>
-          <div class="col-md-6 p-0">
-            <div
-              class="
-                col-md-4
-                account-settings-logo
-                d-flex
-                flex-column
-                pt-4
-                pb-4
-              "
-            >
-              <img
-                src="@/assets/images/account-settings/Swoshs-logo.png"
-                class="img-fluid swoshs-logo"
-                alt=""
-              />
-              <button class="account-settings-btn mt-3 pr-5 pl-5">
-                Premium
-              </button>
-              <div class="account-settings-content mt-3">
-                *To upgrade the package just click the button
-              </div>
+          <div class="account-settings-content mob-res-footer mt-4 pr-5">
+            *Basic information on Data Protection: Swoshs VPN stores your data
+            to improve the service and, with your consent, offers news,
+            promotions and raffles, as well as version and releases from Swoshs
+            VPN.
+          </div>
+        </div>
+        <div class="col-md-4 pl-0">
+          <div class="account-settings-logo d-flex flex-column p-3">
+            <img
+              src="@/assets/images/account-settings/Swoshs-logo.png"
+              class="img-fluid swoshs-logo"
+              alt=""
+            />
+            <button class="account-settings-btn mt-3 pr-5 pl-5">Premium</button>
+            <div class="account-settings-content mt-3">
+              *To upgrade the package just click the button
             </div>
           </div>
         </div>
