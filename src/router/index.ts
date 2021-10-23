@@ -143,9 +143,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: ReferralLinkMain,
     },
-    components: {
-      default: ReferralLinkPage,
-    },
+    components: {},
   },
 ];
 

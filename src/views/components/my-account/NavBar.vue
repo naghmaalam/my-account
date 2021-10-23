@@ -37,52 +37,57 @@
               "
             ></i>
           </a>
-          <div class="dropdown-content">
+          <div class="dropdown-content pb-3">
             <div
-              class="d-flex flex-row justify-content-around"
+              class="d-flex flex-row justify-content-between mt-2"
               @click="redirect('account')"
             >
-              <div>
-                <img
-                  src="@/assets/images/account-settings/cogwheel.png"
-                  class="img-fluid swoshs-logo"
-                  alt=""
-                />
-              </div>
+              <img
+                src="@/assets/images/account-settings/cogwheel.png"
+                class="img-fluid swoshs-logo pl-3"
+                alt=""
+              />
+
               <div>{{ $t("account_settings") }}</div>
-              <div><i class="flaticon-arrow-angle-pointing-to-right"></i></div>
+
+              <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
             </div>
-            <div class="d-flex flex-row justify-content-around">
-              <div>
-                <img
-                  src="@/assets/images/account-settings/lifesaver.png"
-                  class="img-fluid swoshs-logo"
-                  alt=""
-                />
-              </div>
+            <div class="d-flex flex-row justify-content-between mt-3">
+              <img
+                src="@/assets/images/account-settings/lifesaver.png"
+                class="img-fluid swoshs-logo pl-3"
+                alt=""
+              />
+
               <div>{{ $t("support") }}</div>
-              <div>
-                <i class="flaticon-arrow-angle-pointing-to-right"></i>
-              </div>
+
+              <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
             </div>
 
-            <div class="d-flex flex-row justify-content-around">
+            <div class="d-flex flex-row justify-content-between mt-3">
               <img
                 src="@/assets/images/account-settings/faq.png"
-                class="img-fluid swoshs-logo"
+                class="img-fluid swoshs-logo pl-3"
                 alt=""
               />
+
               <div>{{ $t("privacy") }}</div>
-              <i class="flaticon-arrow-angle-pointing-to-right"></i>
+
+              <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
             </div>
-            <div class="d-flex flex-row justify-content-around" @click="logout">
+            <div
+              class="d-flex flex-row justify-content-between mt-3"
+              @click="logout"
+            >
               <img
                 src="@/assets/images/account-settings/logout.png"
-                class="img-fluid swoshs-logo"
+                class="img-fluid swoshs-logo pl-3"
                 alt=""
               />
+
               <div>{{ $t("logout") }}</div>
-              <i class="flaticon-arrow-angle-pointing-to-right"></i>
+
+              <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
             </div>
           </div>
         </div>
@@ -212,7 +217,7 @@ a:hover,
   right: 0;
   z-index: 1;
   width: 307px;
-  height: 226px;
+  height: auto;
   border-radius: 0px 0px 30px 30px;
   background: #fff;
 }
