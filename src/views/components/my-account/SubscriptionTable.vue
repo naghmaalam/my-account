@@ -51,64 +51,49 @@
           </div>
         </div>
       </div>
-      <div class="container table-content mt-3 pt-3 pb-3">
+
+      <!-- ist row of the table -->
+      <div
+        class="container table-content mt-3 pt-3 pb-3"
+        v-for="items in tableItems"
+        :key="items"
+      >
         <div class="row d-dlex justify-content-center align-items-center">
           <div class="col">
-            <div class="table-subtitle">5432178943</div>
+            <div class="table-subtitle">
+              {{ items.refNum }}
+            </div>
           </div>
           <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
+            <div class="table-subtitle">{{ items.expires }}</div>
           </div>
           <div class="col">
             <div class="table-subtitle table-subtitle-bold">
-              Premium-1 Months Subscription
+              {{ items.subscription }}
             </div>
           </div>
           <div class="col">
             <div class="table-subtitle">
-              <div class="subscription-active-btn pt-1 pb-1 ml-5">Active</div>
+              <div
+                class="pt-1 pb-1 ml-5"
+                :class="{
+                  'subscription-active-btn': items.status === 'active',
+                  'inactive-btn': items.status === 'inactive',
+                }"
+              >
+                {{ items.status }}
+              </div>
             </div>
           </div>
           <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
+            <div class="table-subtitle">{{ items.paymentProvider }}</div>
           </div>
           <div class="col">
-            <div class="table-subtitle">$20.00</div>
+            <div class="table-subtitle">{{ items.renewalFee }}</div>
           </div>
           <div class="col">
             <div class="table-subtitle">
-              <button class="my-account-btn">Recharge</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container table-content mt-3 pt-3 pb-3">
-        <div class="row d-dlex justify-content-center align-items-center">
-          <div class="col">
-            <div class="table-subtitle">5432178943</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              Premium-6 Months Subscription
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div class="inactive-btn pt-1 pb-1 ml-5">Inactive</div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">$20.00</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <button class="my-account-btn">Renew</button>
+              <button class="my-account-btn">{{ items.action }}</button>
             </div>
           </div>
         </div>
@@ -254,6 +239,26 @@ export default {
     };
     return {
       redirect,
+      tableItems: [
+        {
+          refNum: 5432178943,
+          expires: "12 / 4 / 21",
+          subscription: "Premium-1 Months Subscription",
+          status: "active",
+          paymentProvider: "Bitcoin",
+          renewalFee: "$20",
+          action: "recharge",
+        },
+        {
+          refNum: 5432178944,
+          expires: "12 / 4 / 22",
+          subscription: "Premium-6 Months Subscription",
+          status: "inactive",
+          paymentProvider: "Bitcoin",
+          renewalFee: "$20",
+          action: "renew",
+        },
+      ],
     };
   },
 };
