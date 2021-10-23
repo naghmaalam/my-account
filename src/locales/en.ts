@@ -473,13 +473,42 @@ const en: Locale = {
   send_link_email:
     "You can also send a link to your address <strong>{email}</strong> where you can download the Swoshs VPN.*",
   send_email: "Send Email*",
+  add_device: "Add Device *",
+  select_os_type: "Select Os Type *",
+  install_swoshs:
+    " Improve your internet protection by installing Swoshs to your devices. *",
+  my_subscriptions: "My Subscription(s) *",
+  my_subscription: "My Subscription *",
+  order_history: "Order History *",
+  refer_friend_headline: "Refer friends and both get gifts! *",
+  refer_friend_text:
+    " Gift xx days to weach you invite, and collect more than a year of free Swoshs subscription for yourself! *",
+  check_our: "Check Our *",
+  reward_rules: "Reward Rules *",
+  share: "Share *",
+  rewards: "Rewards *",
+  send_invitation_email: "Send Invitation Email *",
+  share_it: "Share It*",
+  share_social_media: "Or Share it directly in social media *",
+  copy: "Copy *",
+  edit: "Edit*",
+  account_settings_content:
+    "*Basic information on Data Protection: Swoshs VPN stores your data to improve the service and, with your consent, offers news, promotions and raffles, as well as version and releases from Swoshs VPN. *",
+  premium: "Premium*",
+  upgrade_package: "*To upgrade the package just click the button *",
+  free_user: "FreeUser *",
+  free_user_devices_title: "Free Trial package supports 1 device only. *",
+  reward_upgrade: "To get a reward please upgrade your account *",
+  no_information: "No information is available for this page *",
+  current_pkg_not_supported:
+    "Your current package is not supported on this feature *",
+  earn_first_free_month: "Want to earn your first free month? *",
+  refer_invite_friend: "Invite a friend! *",
+  friends_bought: "Friend(s) who bought *",
+  free_months_added: "FREE months added *",
   upgrade_account_get_reward: "To get a reward please upgrade your account*",
   package_not_supported:
     "Your current package is not supported on this feature*",
-  share_it: "Share It*",
-  copy: "Copy*",
-  share: "Share*",
-  rewards: "Rewards*",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

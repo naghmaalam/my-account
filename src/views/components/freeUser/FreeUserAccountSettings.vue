@@ -5,11 +5,14 @@
       <div class="container">
         <div class="row mt-5">
           <div class="col-md-6">
-            <div class="account-settings-title">Account Settings</div>
+            <div class="account-settings-title">
+              {{ $t("account_settings") }}
+            </div>
           </div>
           <div class="col-md-6">
             <div class="account-info-member">
-              Member since: <span class="account-info-date"> 04/07/2021 </span>
+              {{ $t("member_since") }}:
+              <span class="account-info-date"> 04/07/2021 </span>
             </div>
           </div>
         </div>
@@ -19,7 +22,7 @@
       <div class="container">
         <div class="row mob-reverse">
           <div class="col-md-6 my-devices">
-            <div class="account-settings-inputs pt-4">Email</div>
+            <div class="account-settings-inputs pt-4">{{ $t("email") }}</div>
             <input
               class="input-email-password mr-5 mt-2 pt-2 pb-2 pl-2"
               type="text"
@@ -27,7 +30,7 @@
               id="email"
               placeholder="username@swoshsvpn.com"
             />
-            <div class="account-settings-inputs mt-2">Password</div>
+            <div class="account-settings-inputs mt-2">{{ $t("password") }}</div>
 
             <div
               class="
@@ -45,13 +48,12 @@
                 name="password"
                 id="password"
               />
-              <div class="link-btn mr-1 pt-1 pb-1 pr-4 pl-4">Edit</div>
+              <div class="link-btn mr-1 pt-1 pb-1 pr-4 pl-4">
+                {{ $t("edit") }}
+              </div>
             </div>
             <div class="account-settings-content mob-res-footer mt-4 pr-5">
-              *Basic information on Data Protection: Swoshs VPN stores your data
-              to improve the service and, with your consent, offers news,
-              promotions and raffles, as well as version and releases from
-              Swoshs VPN.
+              {{ $t("account_settings_content") }}
             </div>
           </div>
           <div class="col-md-6 p-0">
@@ -71,10 +73,10 @@
                 alt=""
               />
               <button class="account-settings-btn mt-3 pr-5 pl-5">
-                FreeUser
+                {{ $t("free_user") }}
               </button>
               <div class="account-settings-content mt-3">
-                *To upgrade the package just click the button
+                {{ $t("upgrade_package") }}
               </div>
             </div>
           </div>

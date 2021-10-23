@@ -454,13 +454,42 @@ const cn: Locale = {
   send_link_email:
     "You can also send a link to your address <strong>{email}</strong> where you can download the Swoshs VPN._CN",
   send_email: "Send Email_CN",
+  add_device: "Add Device_CN",
+  select_os_type: "Select Os Type_CN",
+  install_swoshs:
+    " Improve your internet protection by installing Swoshs to your devices._CN",
+  my_subscriptions: "My Subscription(s)_CN",
+  my_subscription: "My Subscription_CN",
+  order_history: "Order History_CN",
+  refer_friend_headline: "Refer friends and both get gifts!_CN",
+  refer_friend_text:
+    " Gift xx days to weach you invite, and collect more than a year of free Swoshs subscription for yourself!_CN",
+  check_our: "Check Our_CN",
+  reward_rules: "Reward Rules_CN",
+  share: "Share_CN",
+  rewards: "Rewards_CN",
+  send_invitation_email: "Send Invitation Email_CN",
+  share_it: "Share It_CN",
+  share_social_media: "Or Share it directly in social media_CN",
+  copy: "Copy_CN",
+  edit: "Edit_CN",
+  account_settings_content:
+    "*Basic information on Data Protection: Swoshs VPN stores your data to improve the service and, with your consent, offers news, promotions and raffles, as well as version and releases from Swoshs VPN._CN",
+  premium: "Premium_CN",
+  upgrade_package: "*To upgrade the package just click the button_CN",
+  free_user: "FreeUser_CN",
+  free_user_devices_title: "Free Trial package supports 1 device only._CN",
+  no_information: "No information is available for this page_CN",
+  reward_upgrade: "To get a reward please upgrade your account_CN",
+  current_pkg_not_supported:
+    "Your current package is not supported on this feature_CN",
+  earn_first_free_month: "Want to earn your first free month?_CN",
+  refer_invite_friend: "Invite a friend!_CN",
+  friends_bought: "Friend(s) who bought_CN",
+  free_months_added: "FREE months added_CN",
   upgrade_account_get_reward: "To get a reward please upgrade your account_CN",
   package_not_supported:
     "Your current package is not supported on this feature_CN",
-  share_it: "Share It_CN",
-  copy: "Copy_CN",
-  share: "Share_CN",
-  rewards: "Rewards_CN",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

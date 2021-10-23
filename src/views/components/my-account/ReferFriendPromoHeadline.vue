@@ -12,13 +12,12 @@
         </div>
         <div class="col-md-10 pt-3">
           <div class="pt-2">
-            <div class="headline-title">Refer friends and both get gifts!</div>
+            <div class="headline-title">{{ $t("refer_friend_headline") }}</div>
             <div class="headline-subtitle mr-5">
-              Gift xx days to weach you invite, and collect more than a year of
-              free Swoshs subscription for yourself!
+              {{ $t("refer_friend_text") }}
             </div>
             <div class="headline-txt pt-2">
-              Check our <a href="#"> Reward Rules </a>
+              {{ $t("check_our") }} <a href="#"> {{ $t("reward_rules") }} </a>
             </div>
           </div>
         </div>

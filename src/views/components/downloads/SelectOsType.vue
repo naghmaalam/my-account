@@ -2,9 +2,9 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-6">
-        <div class="account-downloads pt-5">Select your OS Type</div>
+        <div class="account-downloads pt-5">{{ $t("select_os_type") }}</div>
         <div class="my-account-downloads">
-          Improve your internet protection by installing Swoshs to your devices.
+          {{ $t("install_swoshs") }}
         </div>
       </div>
     </div>
