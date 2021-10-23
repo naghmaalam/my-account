@@ -42,22 +42,26 @@
               class="d-flex flex-row justify-content-around"
               @click="redirect('account')"
             >
-              <img
-                src="@/assets/images/account-settings/cogwheel.png"
-                class="img-fluid swoshs-logo"
-                alt=""
-              />
+              <div>
+                <img
+                  src="@/assets/images/account-settings/cogwheel.png"
+                  class="img-fluid swoshs-logo"
+                  alt=""
+                />
+              </div>
               <div>{{ $t("account_settings") }}</div>
-              <i class="flaticon-arrow-angle-pointing-to-right"></i>
+              <div><i class="flaticon-arrow-angle-pointing-to-right"></i></div>
             </div>
             <div class="d-flex flex-row justify-content-around">
-              <img
-                src="@/assets/images/account-settings/lifesaver.png"
-                class="img-fluid swoshs-logo"
-                alt=""
-              />
+              <div>
+                <img
+                  src="@/assets/images/account-settings/lifesaver.png"
+                  class="img-fluid swoshs-logo"
+                  alt=""
+                />
+              </div>
               <div>{{ $t("support") }}</div>
-              <div class="d-flex justify-content-end">
+              <div>
                 <i class="flaticon-arrow-angle-pointing-to-right"></i>
               </div>
             </div>
