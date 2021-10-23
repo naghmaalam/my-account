@@ -41,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "devices",
     path: "/devices",
     components: {
-      default: () => import("@/views/pages/Devices.vue"),
+      default: () => import("@/views/pages/DevicesPage.vue"),
       ...components1,
     },
   },

@@ -3,6 +3,7 @@ import i18n from "@/locales/localization";
 
 import { User, LoginDetails, Me, VerifyDetails } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
+import { MeDevice } from "@/types/Devices";
 
 import { api, Method } from "@/modules/api";
 import { storage } from "@/modules/storage";
@@ -16,6 +17,10 @@ class UserDefault implements User {
     title: null,
     isExpired: null,
     expiryDate: null,
+  };
+  devices = {
+    list: null,
+    allowed: 0,
   };
   accessToken = "";
   email = "";
@@ -77,6 +82,16 @@ function setUser(response: Me) {
   state.user.referral_link = response.swoshs_website_referrer_link;
   state.user.invite_code = response.invite_code;
   state.user.website_url = response.swoshs_website_link;
+
+  state.user.devices.list = response.userDevicesArr.map((element: MeDevice) => {
+    return {
+      id: element.id,
+      name: element.device_name,
+      type: element.device_type,
+      udid: element.device_udid,
+    };
+  });
+  state.user.devices.allowed = response.total_allowed_devices;
 }
 
 function getSubscription(response: Me) {
@@ -141,9 +156,9 @@ export function useUser(): {
       const loginDetails: LoginDetails = {
         username: email,
         password: password,
-        device_code: "device_code_my_account",
-        device_name: "device_name_my_account",
-        device_type: "ios, android, windows, mac",
+        device_code: "code",
+        device_name: "browser",
+        device_type: "windows",
         myaccount: true,
         lang: state.user.language.selected,
         version: "version",

@@ -1,4 +1,5 @@
 import { SupportedLanguages } from "@/types/Locale";
+import { LoggedInDevice, MeDevice } from "@/types/Devices";
 
 export interface Plan {
   billed: number;
@@ -25,6 +26,8 @@ export interface Me {
     trialPackageEndDate: Date | null; // "2021-09-25 07:04:09"
     trialPackageExpired: boolean;
   };
+  total_allowed_devices: number;
+  userDevicesArr: MeDevice[];
 }
 
 export interface User {
@@ -33,6 +36,10 @@ export interface User {
     title: "trial" | "premium" | null;
     isExpired: boolean | null;
     expiryDate: Date | null;
+  };
+  devices: {
+    list: LoggedInDevice[] | null;
+    allowed: number;
   };
   accessToken: string;
   email: string;
