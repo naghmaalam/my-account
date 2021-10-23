@@ -126,102 +126,130 @@
       </div>
 
       <div class="conatiner">
-        <div class="row mob-res-center table-content mb-2">
+        <div
+          class="row mob-res-center table-content mb-2"
+          v-for="items in tableItems"
+          :key="items"
+        >
           <div class="col">
             <div class="table-title">
               <span class="mob-line-height"> Refence Number </span>
             </div>
           </div>
           <div class="col">
-            <div class="table-subtitle">5432178943</div>
+            <div class="table-subtitle">{{ items.refNum }}</div>
           </div>
-          <div class="col">
+          <!-- <div class="col">
             <div class="table-subtitle">5432178943</div>
-          </div>
+          </div> -->
         </div>
 
-        <div class="row mob-res-center table-content mb-2">
+        <div
+          class="row mob-res-center table-content mb-2"
+          v-for="items in tableItems"
+          :key="items"
+        >
           <div class="col">
             <div class="table-title">Expires</div>
           </div>
           <div class="col">
-            <div class="table-subtitle text-center">12/19/2021</div>
+            <div class="table-subtitle text-center">{{ items.expires }}</div>
           </div>
-          <div class="col">
+          <!-- <div class="col">
             <div class="table-subtitle">12/19/2021</div>
-          </div>
+          </div> -->
         </div>
 
-        <div class="row mob-res-center table-content mb-2">
+        <div
+          class="row mob-res-center table-content mb-2"
+          v-for="items in tableItems"
+          :key="items"
+        >
           <div class="col">
             <div class="table-title">Subscription</div>
           </div>
           <div class="col">
             <div class="table-subtitle table-subtitle-bold">
-              Premium-1 Months Subscription
+              {{ items.subscription }}
             </div>
           </div>
-          <div class="col">
+          <!-- <div class="col">
             <div class="table-subtitle table-subtitle-bold">
               Premium-6 Months Subscription
             </div>
-          </div>
+          </div> -->
         </div>
 
-        <div class="row mob-res-center table-content mb-2">
+        <div
+          class="row mob-res-center table-content mb-2"
+          v-for="items in tableItems"
+          :key="items"
+        >
           <div class="col">
             <div class="table-title">Status</div>
           </div>
           <div class="col">
             <div class="table-subtitle">
-              <div class="subscription-active-btn">Active</div>
+              <div class="subscription-active-btn">{{ items.status }}</div>
             </div>
           </div>
-          <div class="col">
+          <!-- <div class="col">
             <div class="table-subtitle">
               <div class="inactive-btn pt-1 pb-1 ml-5">Inactive</div>
             </div>
-          </div>
+          </div> -->
         </div>
 
-        <div class="row mob-res-center table-content mb-2">
+        <div
+          class="row mob-res-center table-content mb-2"
+          v-for="items in tableItems"
+          :key="items"
+        >
           <div class="col">
             <div class="table-title">Payment Provider</div>
           </div>
           <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
+            <div class="table-subtitle">{{ items.action }}</div>
           </div>
-          <div class="col">
+          <!-- <div class="col">
             <div class="table-subtitle">Bitcoin</div>
-          </div>
+          </div> -->
         </div>
 
-        <div class="row mob-res-center table-content mb-2">
+        <div
+          class="row mob-res-center table-content mb-2"
+          v-for="items in tableItems"
+          :key="items"
+        >
           <div class="col">
             <div class="table-title">Renewal Fee</div>
           </div>
           <div class="col">
-            <div class="table-subtitle">$20.00</div>
+            <div class="table-subtitle">{{ items.renewalFee }}</div>
           </div>
-          <div class="col">
+          <!-- <div class="col">
             <div class="table-subtitle">$20.00</div>
-          </div>
+          </div> -->
         </div>
 
-        <div class="row mob-res-center table-content mb-2">
+        <div
+          class="row mob-res-center table-content mb-2"
+          v-for="items in tableItems"
+          :key="items"
+        >
           <div class="col">
             <div class="table-title">Action</div>
           </div>
           <div class="col">
             <div class="table-subtitle">
-              <button class="my-account-btn">Recharge</button>
+              <button class="my-account-btn">{{ items.action }}</button>
             </div>
           </div>
-          <div class="col">
+          <!-- <div class="col">
             <div class="table-subtitle">
               <button class="my-account-btn">Renew</button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

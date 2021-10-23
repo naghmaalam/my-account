@@ -95,7 +95,7 @@ export default {
   border: none;
 }
 
-/* @media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
   .price {
     text-align: left;
   }
@@ -111,5 +111,5 @@ export default {
   .upgrade-btn {
     margin-bottom: 1.5rem !important;
   }
-} */
+}
 </style>
