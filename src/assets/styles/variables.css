@@ -1,6 +1,7 @@
 :root {
   --swoshs-linear-gradient: linear-gradient(#a215ff 0%, #5f29ff 100%);
+  --swoshs-linear-gradient2: linear-gradient(#fb217d 0%, #ff29fc 100%);
   --swoshs-color1: #a215ff;
   --swoshs-color2: #5f29ff;
-  --swoshs-light-gray: #f3f7fe;
+  --swoshs-light-gray: rgb(240, 240, 240);
 }

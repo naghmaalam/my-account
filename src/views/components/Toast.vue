@@ -1,7 +1,7 @@
 <template>
   <div
     class="position-fixed top-0 right-0 p-3"
-    style="z-index: 1032; right: 0; top: 0"
+    style="z-index: 1042; right: 0; top: 0"
   >
     <transition-group tag="div" name="toasts" style="position: relative" appear>
       <div
@@ -16,7 +16,9 @@
         <div v-if="tst.title" class="toast-header">
           <strong class="mr-auto">{{ tst.title }}</strong>
         </div>
-        <div class="toast-body">{{ tst.text }}</div>
+        <div class="toast-body">
+          <span v-html="tst.text" />
+        </div>
       </div>
     </transition-group>
   </div>

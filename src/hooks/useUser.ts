@@ -6,7 +6,7 @@ import { SupportedLanguages } from "@/types/Locale";
 
 import { api, Method } from "@/modules/api";
 import { storage } from "@/modules/storage";
-// import { isDateExpired } from "@/modules/utils";
+import { getEncryptedPassword } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
 
@@ -120,10 +120,16 @@ export function useUser(): {
     passwordRecovery: {
       emailCode: (email: string) => Promise<boolean>;
       verifyCode: (email: string, code: string) => Promise<boolean>;
-      updatePassword: (
+      resetPassword: (
         email: string,
         code: string,
         new_password: string
+      ) => Promise<boolean>;
+    };
+    account: {
+      updatePassword: (
+        currentPassword: string,
+        newPassword: string
       ) => Promise<boolean>;
     };
   };
@@ -271,7 +277,7 @@ export function useUser(): {
         return false;
       }
     },
-    updatePassword: async (
+    resetPassword: async (
       email: string,
       verification_code: string,
       new_password: string
@@ -283,6 +289,24 @@ export function useUser(): {
           new_password,
         });
         toast.do.show(response.message);
+        return true;
+      } catch (error) {
+        const err = error as Error;
+        toast.do.error(err.message);
+        return false;
+      }
+    },
+  };
+
+  const account = {
+    updatePassword: async (currentPassword: string, newPassword: string) => {
+      try {
+        const response = await api("me/update", Method.POST, {
+          update_key: "password",
+          update_val: getEncryptedPassword(newPassword),
+          current_password: getEncryptedPassword(currentPassword),
+        });
+        // toast.do.show(response.message);
         return true;
       } catch (error) {
         const err = error as Error;
@@ -355,6 +379,7 @@ export function useUser(): {
       register,
       loginWithCode,
       passwordRecovery,
+      account,
     },
   };
 }

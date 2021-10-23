@@ -1,5 +1,5 @@
 <template>
-  <div class="container account-headline p-4">
+  <div class="container account-headline p-4 d-none d-lg-block">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-2 ml-3 pt-2 pb-2">

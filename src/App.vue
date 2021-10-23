@@ -5,7 +5,9 @@
   <Fade v-else>
     <Login />
   </Fade>
-  <Toast />
+  <teleport to="body">
+    <Toast />
+  </teleport>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";

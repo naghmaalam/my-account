@@ -24,7 +24,7 @@
         <p class="loggedin pt-3">{{ $t("logged_in_as") }}</p>
         <p class="username pb-1">{{ stateUser.email }}</p>
       </div>
-      <Fade2>
+      <SimpleFade>
         <div class="dropdown">
           <a href="javascript:void(0)" class="dropbtn">
             <i
@@ -91,7 +91,7 @@
             </div>
           </div>
         </div>
-      </Fade2>
+      </SimpleFade>
     </div>
   </nav>
 </template>
@@ -101,11 +101,11 @@ import { defineComponent } from "vue";
 import { stateUser, useUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
 import { useRouter } from "vue-router";
-import Fade2 from "@/views/components/transitions/Fade2.vue";
+import SimpleFade from "@/views/components/transitions/SimpleFade.vue";
 
 export default defineComponent({
   components: {
-    Fade2,
+    SimpleFade,
   },
   setup() {
     const user = useUser();
