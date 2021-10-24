@@ -17,7 +17,7 @@
 
           <main
             id="main-content"
-            class="pr-4 pl-4 pt-3 pb-4"
+            class="pr-4 pl-4 pt-3 pb-4 mob-res-nopadding"
             role="main"
             @click="hideSideMenu"
           >
@@ -84,6 +84,13 @@ export default defineComponent({
 
 .pt-80 {
   padding-top: 80px;
+}
+
+@media screen and (max-width: 992px) {
+  .mob-res-nopadding {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
 }
 </style>
 
