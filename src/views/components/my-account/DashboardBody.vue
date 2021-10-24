@@ -6,9 +6,11 @@
         <div class="account-info-title">{{ $t("howdy") }}</div>
       </div>
       <div class="col-md-6">
-        <div class="account-info-member">
-          {{ $t("member_since") }}:
-          <span class="account-info-date"> 04/07/2021 </span>
+        <div class="account-info-member text-right">
+          <h1>{{ $t("member_since") }}:</h1>
+          <span class="account-info-date">
+            {{ memberDate }}
+          </span>
         </div>
       </div>
     </div>
@@ -18,16 +20,24 @@
   <div class="container account-content gap-3">
     <div class="row">
       <!-- my devices -->
-      <div class="col-md-6 hide-mobile">
-        <div class="my-devices p-3 pb-4">
-          <div class="account-title pt-3 px-3">{{ $t("my_devices") }}</div>
+
+      <div class="col-md-6 p-0">
+        <div class="panel my-devices m-2 p-4">
+          <div class="account-title">{{ $t("my_devices") }}</div>
           <div class="row-line mt-2"></div>
           <div
-            class="d-flex flex-row justify-content-around align-items-center"
+            class="
+              d-flex
+              flex-column
+              justify-content-between
+              align-items-center
+              flex-md-row
+            "
           >
-            <div class="recently-connected d-flex flex-column">
-              <div class="account-subtitle">
-                {{ $t("recently_connected") }} (6)
+            <div class="recently-connected d-flex flex-column m-2">
+              <div class="account-subtitle py-3 p-md-3">
+                {{ $t("recently_connected") }}
+                ({{ stateUser.devices.connected }})
               </div>
               <div
                 class="
@@ -44,108 +54,63 @@
                   alt=""
                 />
                 <div class="d-flex flex-column">
-                  <div class="desktop pl-3">Desktop-MKEUF6J</div>
+                  <div class="desktop pl-3 text-capitalize">
+                    {{ recentDevice }}
+                  </div>
                   <div class="account-info pl-3">
-                    {{ $t("last_signin") }} : 06/26/2021
+                    {{ $t("last_signin") }} : {{ lastSignin }}
                   </div>
                 </div>
               </div>
             </div>
-            <div class="vertical-line mt-3"></div>
-            <button class="my-account-btn" @click="redirect('devices')">
+            <div class="vertical-line mt-3 d-none d-md-block"></div>
+            <button class="my-account-btn m-4" @click="redirect('devices')">
               {{ $t("view_more") }}
             </button>
           </div>
         </div>
       </div>
 
-      <!-- my devices for mobile -->
-      <div class="col-md-6 show-mobile hide-desktop">
-        <div class="my-devices p-3 pb-4 mb-2">
-          <div class="account-title pt-3 px-3">{{ $t("my_devices") }}</div>
-          <div class="row-line mt-2"></div>
-          <div
-            class="
-              d-flex
-              flex-row
-              justify-content-around
-              align-items-center
-              mb-4
-            "
-          >
-            <div
-              class="
-                recently-connected
-                d-flex
-                justify-content-center
-                align-items-center
-                flex-column
-              "
-            >
-              <div class="account-subtitle mob-res-padding">
-                {{ $t("recently_connected") }} (6)
-              </div>
-              <img
-                src="@/assets/images/my-account/windows.png"
-                class="mob-res-padding img-fluid mob-res-image"
-                alt=""
-              />
-              <div class="d-flex flex-column">
-                <div class="desktop pl-3 mob-res-padding">Desktop-MKEUF6J</div>
-                <div class="account-info pl-3">
-                  {{ $t("last_signin") }} : 06/26/2021
-                </div>
-              </div>
-              <button
-                class="my-account-btn mob-res-margin"
-                @click="redirect('devices')"
-              >
-                {{ $t("view_more") }}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Subscription -->
-      <div class="col-md-6">
-        <div class="subscription pb-4 p-3">
-          <div class="account-title pt-3 px-3">{{ $t("subscription") }}</div>
+      <div class="col-md-6 p-0">
+        <div class="panel subscription m-2 p-4">
+          <div class="account-title">{{ $t("subscription") }}</div>
           <div class="row-line mt-2"></div>
           <div
             class="
               d-flex
-              flex-row
+              flex-column flex-md-row
               justify-content-around
               align-items-center
-              mob-res-col
-              mb-4
+              position-relative
             "
           >
             <img
               src="@/assets/images/my-account/shield.png"
-              class="img-fluid mob-res-image pt-4"
+              class="img-fluid pt-4"
               alt=""
             />
             <div class="recently-connected d-flex flex-column">
               <div
-                class="
-                  desktop-connected
-                  d-flex
-                  flex-row
-                  justify-content-around
-                  pt-4
-                "
+                class="desktop-connected d-flex flex-row justify-content-around"
               >
                 <div class="d-flex flex-column">
-                  <div class="account-subtitle pb-4">
-                    {{ $t("premium_package") }}
+                  <div
+                    class="
+                      account-subtitle
+                      py-2
+                      pt-md-4
+                      py-md-3
+                      text-capitalize
+                    "
+                  >
+                    {{ stateUser.currentSubscription.title }}
                   </div>
-                  <div class="d-flex flex-row mob-res-col">
-                    <div class="desktop pb-3">
-                      {{ $t("one_month_subscription") }}
+                  <div class="d-flex flex-row">
+                    <div class="desktop pb-3 pb-md-3">
+                      {{ stateUser.currentSubscription.plan.title }}
+                      {{ $t("subscription") }}
                     </div>
-                    <div class="active-btn">{{ $t("active") }}</div>
                   </div>
                   <button
                     class="my-account-btn"
@@ -156,16 +121,21 @@
                 </div>
               </div>
             </div>
+            <div class="position-relative"></div>
+            <div
+              v-if="stateUser.currentSubscription.isExpired"
+              class="status-btn inactive-btn"
+            >
+              {{ $t("inactive") }}
+            </div>
+            <div v-else class="status-btn active-btn">{{ $t("active") }}</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- your account -->
-    <div class="row gap-3">
-      <div class="col-md-6">
-        <div class="your-account pb-4 p-3 mt-2">
-          <div class="account-title pt-3 px-3">{{ $t("your_account") }}</div>
+      <div class="col-md-6 p-0">
+        <div class="panel your-account m-2 p-4">
+          <div class="account-title">{{ $t("your_account") }}</div>
           <div class="row-line mt-2"></div>
           <div
             class="
@@ -178,7 +148,7 @@
           >
             <img
               src="@/assets/images/my-account/personal-computer.png"
-              class="img-fluid mb-5 mob-res-image"
+              class="img-fluid m-3"
               alt=""
             />
             <div class="recently-connected d-flex flex-column">
@@ -199,7 +169,14 @@
                   <div class="account-info pb-4 mt-3 pl-3">
                     {{ $t("your_account_info") }}
                   </div>
-                  <div class="mob-res-btn">
+                  <div
+                    class="
+                      pb-3
+                      px-2
+                      d-flex
+                      justify-content-center justify-content-md-start
+                    "
+                  >
                     <button class="my-account-btn" @click="redirect('account')">
                       {{ $t("view_details") }}
                     </button>
@@ -212,9 +189,9 @@
       </div>
 
       <!-- support -->
-      <div class="col-md-6">
-        <div class="support p-3 pb-4 mt-2">
-          <div class="account-title pt-3 px-3">{{ $t("support") }}</div>
+      <div class="col-md-6 p-0">
+        <div class="panel support m-2 p-4">
+          <div class="account-title">{{ $t("support") }}</div>
           <div class="row-line mt-2"></div>
           <div
             class="
@@ -227,7 +204,7 @@
           >
             <img
               src="@/assets/images/my-account/life-saver.png"
-              class="img-fluid pb-4 mob-res-image"
+              class="img-fluid m-3"
               alt=""
             />
             <div class="recently-connected d-flex flex-column">
@@ -246,7 +223,14 @@
                     {{ $t("support_info") }}
                   </div>
                   <a href="http://swoshsvpn.com/contact.html">
-                    <div class="mob-res-btn pb-3">
+                    <div
+                      class="
+                        pb-3
+                        px-2
+                        d-flex
+                        justify-content-center justify-content-md-start
+                      "
+                    >
                       <button class="my-account-btn">
                         {{ $t("contact_support") }}
                       </button>
@@ -261,23 +245,106 @@
     </div>
   </div>
 </template>
-<script>
+
+<script lang="ts">
+import { computed, defineComponent, ref } from "vue";
+import { stateUser } from "@/hooks/useUser";
+import { months } from "@/modules/utils";
+
 import { useRouter } from "vue-router";
 
-export default {
+export default defineComponent({
   setup() {
     const router = useRouter();
-    const redirect = (page) => {
+    const recentDevice = computed(() => {
+      return stateUser.value.devices.list[0].name;
+    });
+    const memberDate = computed(() => {
+      const date = new Date(stateUser.value.me?.createdAt as string);
+
+      if (date.toString() === "Invalid Date") return "- / - / -";
+      else
+        return `${date.getFullYear()} / ${
+          months[date.getMonth()]
+        } / ${date.getDate()} `;
+    });
+
+    const redirect = (page: string) => {
       router.push({ name: page });
     };
+
     return {
+      stateUser,
+      memberDate,
       redirect,
+      recentDevice,
+      lastSignin: "---",
     };
   },
-};
+});
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.panel {
+  min-height: 300px;
+}
+
+.account-info-member {
+  display: flex;
+  justify-content: end;
+  align-content: center;
+  h1 {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: gray;
+    margin: 0 10px;
+    line-height: inherit;
+    display: flex;
+    align-items: center;
+  }
+  .account-info-date {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--swoshs-black);
+  }
+}
+
+.account-title {
+  font-family: Poppins;
+  font-weight: bold;
+  font-size: 1.1rem;
+  line-height: 34px;
+  text-align: left;
+  color: var(--swoshs-black);
+  margin: 0px 20px 20px 20px;
+}
+
+.status-btn {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  width: 101px;
+  height: 30px;
+  border-radius: 15px;
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.active-btn {
+  color: var(--swoshs-green);
+  background: var(--swoshs-light-green);
+}
+
+.inactive-btn {
+  color: var(--swoshs-red);
+  background: var(--swoshs-light-red);
+}
+
+///////////////////////////////////////
+
 .my-devices {
   background: #fff;
   filter: drop-shadow(0px 8px 14px rgba(214, 225, 243, 0.64));
@@ -332,15 +399,6 @@ export default {
   color: #383361;
 }
 
-.account-title {
-  font-family: Poppins;
-  font-weight: bold;
-  font-size: 1.1rem;
-  line-height: 34px;
-  text-align: left;
-  color: #383361;
-}
-
 .row-line {
   width: 100%;
   background: transparent;
@@ -375,19 +433,6 @@ export default {
   color: #383361;
   border: 1px solid rgba(0, 0, 0, 0);
   opacity: 0.5;
-}
-
-.active-btn {
-  width: 101px;
-  height: 30px;
-  border-radius: 15px;
-  background: #e9f9ee;
-  font-family: Poppins;
-  font-weight: 600;
-  font-size: 15px;
-  text-align: center;
-  color: #15c50a;
-  border: 1px solid rgba(0, 0, 0, 0);
 }
 
 .hide-desktop {
@@ -427,7 +472,6 @@ export default {
 
   .account-subtitle {
     text-align: center;
-    padding-bottom: 0rem !important;
   }
 
   .mob-acct-subtitle {

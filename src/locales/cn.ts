@@ -399,7 +399,7 @@ const cn: Locale = {
   create_new_password: "Create your new password_CN",
   confirm_password: "Confirm Password_CN",
   back_to_login: "Back to Log in_CN",
-  my_devices: "my devices_CN",
+  my_devices: "My Devices_CN",
   howdy: "Howdy!_CN",
   member_since: "Member Since_CN",
   recently_connected: "Recently Connected_CN",

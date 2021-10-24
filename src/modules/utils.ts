@@ -7,6 +7,9 @@ declare global {
   interface Window {
     H5Interface: H5Interface;
   }
+  interface Document {
+    documentMode?: any;
+  }
 }
 
 export function getDeviceName(): string | null {
@@ -97,3 +100,40 @@ export function isDateExpired(date: string): boolean {
 // export function newObj<T>(obj: T): T {
 //   return JSON.parse(JSON.stringify(obj));
 // }
+
+export const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+export function detectBrowser() {
+  if (
+    (navigator.userAgent.indexOf("Opera") ||
+      navigator.userAgent.indexOf("OPR")) != -1
+  ) {
+    return "Opera";
+  } else if (navigator.userAgent.indexOf("Chrome") != -1) {
+    return "Chrome";
+  } else if (navigator.userAgent.indexOf("Safari") != -1) {
+    return "Safari";
+  } else if (navigator.userAgent.indexOf("Firefox") != -1) {
+    return "Firefox";
+  } else if (
+    navigator.userAgent.indexOf("MSIE") != -1 ||
+    !!document.documentMode == true
+  ) {
+    return "IE"; //crap
+  } else {
+    return "Unknown";
+  }
+}

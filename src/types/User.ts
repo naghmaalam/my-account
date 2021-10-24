@@ -28,18 +28,25 @@ export interface Me {
   };
   total_allowed_devices: number;
   userDevicesArr: MeDevice[];
+  userDevicesArrTotal: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface User {
   authenticated: boolean;
   currentSubscription: {
     title: "trial" | "premium" | null;
+    plan: {
+      title: string;
+    };
     isExpired: boolean | null;
     expiryDate: Date | null;
   };
   devices: {
     list: LoggedInDevice[];
     allowed: number;
+    connected: number;
   };
   accessToken: string;
   email: string;

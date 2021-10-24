@@ -3,12 +3,12 @@ import i18n from "@/locales/localization";
 
 import { User, LoginDetails, Me, VerifyDetails } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
-import { MeDevice } from "@/types/Devices";
+import { DeviceId, MeDevice } from "@/types/Devices";
 
 import { api, Method } from "@/modules/api";
 import { storage } from "@/modules/storage";
 import { tryCatch } from "@/modules/error";
-import { getEncryptedPassword } from "@/modules/utils";
+import { detectBrowser, getEncryptedPassword } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
 
@@ -18,10 +18,14 @@ class UserDefault implements User {
     title: null,
     isExpired: null,
     expiryDate: null,
+    plan: {
+      title: "",
+    },
   };
   devices = {
     list: [],
     allowed: 0,
+    connected: 0,
   };
   accessToken = "";
   email = "";
@@ -45,7 +49,7 @@ export const stateUser = computed(() => {
 
 function resetUser() {
   console.log("resetUser()");
-  console.log(JSON.stringify(new UserDefault()));
+  // console.log(JSON.stringify(new UserDefault()));
   state.user = new UserDefault();
   storage.removeItem("user");
   storage.setItem("user", state.user);
@@ -77,6 +81,9 @@ function setUser(response: Me) {
     title,
     isExpired,
     expiryDate,
+    plan: {
+      title: response.userPlans[0].title,
+    },
   };
 
   state.user.accessToken = response.accessToken;
@@ -88,11 +95,12 @@ function setUser(response: Me) {
     return {
       id: element.id,
       name: element.device_name,
-      type: element.device_type,
+      type: element.device_type as DeviceId,
       udid: element.device_udid,
     };
   });
-  state.user.devices.allowed = response.total_allowed_devices;
+  state.user.devices.allowed = +response.total_allowed_devices;
+  state.user.devices.connected = +response.userDevicesArrTotal;
 }
 
 function getSubscription(response: Me) {
@@ -162,8 +170,8 @@ export function useUser(): {
         username: email,
         password: password,
         device_code: "code",
-        device_name: "browser",
-        device_type: "windows",
+        device_name: detectBrowser(),
+        device_type: detectBrowser(),
         myaccount: true,
         lang: state.user.language.selected,
         version: "version",
@@ -201,9 +209,9 @@ export function useUser(): {
         const verifyDetails: VerifyDetails = {
           email,
           verification_code: code,
-          device_code: "device_code_my_account",
-          device_name: "device_name_my_account",
-          device_type: "ios, android, windows, mac",
+          device_code: "code",
+          device_name: detectBrowser(),
+          device_type: detectBrowser(),
           lang: state.user.language.selected,
           version: "version",
         };
