@@ -38,7 +38,7 @@ export interface User {
     expiryDate: Date | null;
   };
   devices: {
-    list: LoggedInDevice[] | null;
+    list: LoggedInDevice[];
     allowed: number;
   };
   accessToken: string;
@@ -48,7 +48,7 @@ export interface User {
     selected: SupportedLanguages;
   };
   subscription: {
-    plans: Plan[] | null;
+    plans: Plan[];
   };
   referral_link: string;
   invite_code: string;

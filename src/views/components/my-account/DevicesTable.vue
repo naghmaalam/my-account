@@ -32,7 +32,10 @@
               <i class="flaticon-windows pl-3 pr-3"></i>
               <div>{{ item.name }}</div>
             </div>
-            <div class="devices-logout d-flex flex-row">
+            <div
+              class="devices-logout d-flex flex-row"
+              @click="logoutDevice(item, i)"
+            >
               <i class="flaticon-logout pr-2 pt-1"></i>
               <div>Logout</div>
             </div>
@@ -46,11 +49,19 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { stateUser } from "@/hooks/useUser";
+import { stateUser, useUser } from "@/hooks/useUser";
+
+import { LoggedInDevice } from "@/types/Devices";
 
 export default defineComponent({
   setup() {
-    return { stateUser };
+    const user = useUser();
+    const logoutDevice = async (device: LoggedInDevice, i: number) => {
+      console.log(device, i);
+      let success = await user.do.device.logout(device.id);
+      if (success) success = await user.do.account.refreshStorage();
+    };
+    return { stateUser, logoutDevice };
   },
 });
 </script>
