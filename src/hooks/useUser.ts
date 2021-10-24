@@ -3,9 +3,11 @@ import i18n from "@/locales/localization";
 
 import { User, LoginDetails, Me, VerifyDetails } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
+import { MeDevice } from "@/types/Devices";
 
 import { api, Method } from "@/modules/api";
 import { storage } from "@/modules/storage";
+import { tryCatch } from "@/modules/error";
 import { getEncryptedPassword } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
@@ -17,6 +19,10 @@ class UserDefault implements User {
     isExpired: null,
     expiryDate: null,
   };
+  devices = {
+    list: [],
+    allowed: 0,
+  };
   accessToken = "";
   email = "";
   language = {
@@ -24,7 +30,7 @@ class UserDefault implements User {
   };
   me = null;
   subscription = {
-    plans: null,
+    plans: [],
   };
   referral_link = "";
   invite_code = "";
@@ -77,6 +83,16 @@ function setUser(response: Me) {
   state.user.referral_link = response.swoshs_website_referrer_link;
   state.user.invite_code = response.invite_code;
   state.user.website_url = response.swoshs_website_link;
+
+  state.user.devices.list = response.userDevicesArr.map((element: MeDevice) => {
+    return {
+      id: element.id,
+      name: element.device_name,
+      type: element.device_type,
+      udid: element.device_udid,
+    };
+  });
+  state.user.devices.allowed = response.total_allowed_devices;
 }
 
 function getSubscription(response: Me) {
@@ -131,19 +147,23 @@ export function useUser(): {
         currentPassword: string,
         newPassword: string
       ) => Promise<boolean>;
+      refreshStorage: () => Promise<boolean>;
+    };
+    device: {
+      logout: (deviceId: number) => Promise<boolean>;
     };
   };
 } {
   // do
   /////////////////////////////////////////////////////////////////////
   const login = async (email: string, password: string) => {
-    try {
+    return tryCatch(async () => {
       const loginDetails: LoginDetails = {
         username: email,
         password: password,
-        device_code: "device_code_my_account",
-        device_name: "device_name_my_account",
-        device_type: "ios, android, windows, mac",
+        device_code: "code",
+        device_name: "browser",
+        device_type: "windows",
         myaccount: true,
         lang: state.user.language.selected,
         version: "version",
@@ -158,12 +178,7 @@ export function useUser(): {
         // state.user.asd = "asd";
         console.log("state.user = ", state.user);
       }, 1000);
-      return true;
-    } catch (error) {
-      const err = error as Error;
-      toast.do.error(err.message);
-      return false;
-    }
+    });
   };
 
   const logout = () => {
@@ -172,22 +187,17 @@ export function useUser(): {
 
   const register = {
     inviteCode: async (email: string, password: string, inviteCode: string) => {
-      try {
+      return tryCatch(async () => {
         const response = await api("register", Method.POST, {
           username: email,
           password: password,
           invite_code: inviteCode,
         });
         toast.do.show(response.message);
-        return true;
-      } catch (error) {
-        const err = error as Error;
-        toast.do.error(err.message);
-        return false;
-      }
+      });
     },
     verifyCode: async (email: string, code: string) => {
-      try {
+      return tryCatch(async () => {
         const verifyDetails: VerifyDetails = {
           email,
           verification_code: code,
@@ -206,30 +216,20 @@ export function useUser(): {
         console.log("waits..");
         resetUser();
         setUser(response);
-        return true;
-      } catch (error) {
-        const err = error as Error;
-        toast.do.error(err.message);
-        return false;
-      }
+      });
     },
   };
 
   const loginWithCode = {
     emailCode: async (email: string) => {
-      try {
+      return tryCatch(async () => {
         await api("login/with/code", Method.POST, {
           username: email,
         });
-        return true;
-      } catch (error) {
-        const err = error as Error;
-        toast.do.error(err.message);
-        return false;
-      }
+      });
     },
     loginCode: async (email: string, code: string) => {
-      try {
+      return tryCatch(async () => {
         const response = await api("login/with/code", Method.POST, {
           username: email,
           login_code: code,
@@ -242,77 +242,73 @@ export function useUser(): {
           // state.user.asd = "asd";
           console.log("state.user = ", state.user);
         }, 1000);
-        return true;
-      } catch (error) {
-        const err = error as Error;
-        toast.do.error(err.message);
-        return false;
-      }
+      });
     },
   };
 
   const passwordRecovery = {
     emailCode: async (email: string) => {
-      try {
+      return tryCatch(async () => {
         await api("send/confirm/email/code", Method.POST, {
           email,
         });
-        return true;
-      } catch (error) {
-        const err = error as Error;
-        toast.do.error(err.message);
-        return false;
-      }
+      });
     },
     verifyCode: async (email: string, verification_code: string) => {
-      try {
+      return tryCatch(async () => {
         await api("verify/code", Method.POST, {
           email,
           verification_code,
         });
-        return true;
-      } catch (error) {
-        const err = error as Error;
-        toast.do.error(err.message);
-        return false;
-      }
+      });
     },
     resetPassword: async (
       email: string,
       verification_code: string,
       new_password: string
     ) => {
-      try {
+      return tryCatch(async () => {
         const response = await api("reset/password", Method.POST, {
           email,
           verification_code,
           new_password,
         });
         toast.do.show(response.message);
-        return true;
-      } catch (error) {
-        const err = error as Error;
-        toast.do.error(err.message);
-        return false;
-      }
+      });
     },
   };
 
   const account = {
     updatePassword: async (currentPassword: string, newPassword: string) => {
-      try {
+      return tryCatch(async () => {
         const response = await api("me/update", Method.POST, {
           update_key: "password",
           update_val: getEncryptedPassword(newPassword),
           current_password: getEncryptedPassword(currentPassword),
         });
-        // toast.do.show(response.message);
+        console.log("updatePassword", response);
+      });
+    },
+
+    refreshStorage: async () => {
+      return tryCatch(async () => {
+        const response = await api("me", Method.GET);
+        console.log("refreshStorage", response);
+        resetUser();
+        setUser(response);
         return true;
-      } catch (error) {
-        const err = error as Error;
-        toast.do.error(err.message);
-        return false;
-      }
+      });
+    },
+  };
+
+  const device = {
+    logout: async (deviceId: number) => {
+      return tryCatch(async () => {
+        const response = await api("remove/loggedin/device", Method.POST, {
+          id: deviceId,
+        });
+        console.log("device.logout", response);
+      });
     },
   };
 
@@ -346,18 +342,12 @@ export function useUser(): {
   };
 
   const referFriend = async (email: string) => {
-    try {
+    return tryCatch(async () => {
       const response = await api("refer/friend", Method.POST, {
         email,
       });
       toast.do.show(response.message);
-      return true;
-    } catch (error) {
-      const err = error as Error;
-      // console.error(err);
-      toast.do.error(err.message);
-      return false;
-    }
+    });
   };
   /////////////////////////////////////////////////////////////////////
   // do
@@ -380,6 +370,7 @@ export function useUser(): {
       loginWithCode,
       passwordRecovery,
       account,
+      device,
     },
   };
 }

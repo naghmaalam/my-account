@@ -20,99 +20,131 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
-      <div class="d-flex flex-column justify-content-end align-items-end">
+      <div
+        class="d-flex flex-column justify-content-end align-items-end"
+        @mouseenter="showMenu"
+        @click="toggleMenu"
+      >
         <p class="loggedin pt-3">{{ $t("logged_in_as") }}</p>
         <p class="username pb-1">{{ stateUser.email }}</p>
       </div>
-      <SimpleFade>
-        <div class="dropdown">
-          <a href="javascript:void(0)" class="dropbtn">
-            <i
-              class="
-                flaticon-round-account-button-with-user-inside
-                user-avatar
-                mb-3
-                pl-3
-                pr-4
-              "
-            ></i>
-          </a>
-          <div class="dropdown-content pb-3">
-            <div
-              class="d-flex flex-row justify-content-between mt-2"
-              @click="redirect('account')"
-            >
-              <img
-                src="@/assets/images/account-settings/cogwheel.png"
-                class="img-fluid swoshs-logo pl-3"
-                alt=""
-              />
-
-              <div>{{ $t("account_settings") }}</div>
-
-              <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
-            </div>
-            <div class="d-flex flex-row justify-content-between mt-3">
-              <img
-                src="@/assets/images/account-settings/lifesaver.png"
-                class="img-fluid swoshs-logo pl-3"
-                alt=""
-              />
-
-              <div>{{ $t("support") }}</div>
-
-              <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
-            </div>
-
-            <div class="d-flex flex-row justify-content-between mt-3">
-              <img
-                src="@/assets/images/account-settings/faq.png"
-                class="img-fluid swoshs-logo pl-3"
-                alt=""
-              />
-
-              <div>{{ $t("privacy") }}</div>
-
-              <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
-            </div>
-            <div
-              class="d-flex flex-row justify-content-between mt-3"
-              @click="logout"
-            >
-              <img
-                src="@/assets/images/account-settings/logout.png"
-                class="img-fluid swoshs-logo pl-3"
-                alt=""
-              />
-
-              <div>{{ $t("logout") }}</div>
-
-              <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
-            </div>
-          </div>
-        </div>
-      </SimpleFade>
+      <div class="dropdown" @mouseenter="showMenu" @click="toggleMenu">
+        <a href="javascript:void(0)" class="dropbtn">
+          <i
+            class="
+              flaticon-round-account-button-with-user-inside
+              user-avatar
+              mb-3
+              pl-3
+              pr-4
+            "
+          ></i>
+        </a>
+      </div>
     </div>
+
+    <transition name="navbar">
+      <div
+        class="dropdown-content shadow pb-3"
+        v-if="isShown"
+        @mouseenter="showMenu"
+        @mouseleave="hideMenu"
+      >
+        <div
+          class="d-flex flex-row justify-content-between mt-2"
+          @click="redirect('account')"
+        >
+          <img
+            src="@/assets/images/account-settings/cogwheel.png"
+            class="img-fluid swoshs-logo pl-3"
+            alt=""
+          />
+
+          <div>{{ $t("account_settings") }}</div>
+
+          <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
+        </div>
+        <div class="d-flex flex-row justify-content-between mt-3">
+          <img
+            src="@/assets/images/account-settings/lifesaver.png"
+            class="img-fluid swoshs-logo pl-3"
+            alt=""
+          />
+
+          <div>{{ $t("support") }}</div>
+
+          <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
+        </div>
+
+        <div class="d-flex flex-row justify-content-between mt-3">
+          <img
+            src="@/assets/images/account-settings/faq.png"
+            class="img-fluid swoshs-logo pl-3"
+            alt=""
+          />
+
+          <div>{{ $t("privacy") }}</div>
+
+          <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
+        </div>
+        <div
+          class="d-flex flex-row justify-content-between mt-3"
+          @click="logout"
+        >
+          <img
+            src="@/assets/images/account-settings/logout.png"
+            class="img-fluid swoshs-logo pl-3"
+            alt=""
+          />
+
+          <div>{{ $t("logout") }}</div>
+
+          <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
+        </div>
+      </div>
+    </transition>
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { stateUser, useUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
 import { useRouter } from "vue-router";
-import SimpleFade from "@/views/components/transitions/SimpleFade.vue";
 
 export default defineComponent({
   components: {
-    SimpleFade,
+    // SimpleFade,
   },
   setup() {
     const user = useUser();
     const router = useRouter();
 
+    const isShown = ref(false);
+    const isMouseOn = ref(false);
+
     const logout = () => {
       user.do.logout();
+    };
+
+    const showMenu = () => {
+      isMouseOn.value = true;
+      // isShown.value = true;
+      setTimeout(() => {
+        if (isMouseOn.value) isShown.value = true;
+      }, 300);
+    };
+
+    const hideMenu = () => {
+      isMouseOn.value = false;
+      setTimeout(() => {
+        if (!isMouseOn.value) isShown.value = false;
+      }, 300);
+    };
+
+    const toggleMenu = () => {
+      isMouseOn.value = !isMouseOn.value;
+      isShown.value = !isShown.value;
     };
 
     const redirect = (page: any) => {
@@ -124,6 +156,10 @@ export default defineComponent({
       logout,
       showSideMenu: useSettings().do.sideMenu.show,
       redirect,
+      isShown,
+      showMenu,
+      hideMenu,
+      toggleMenu,
     };
   },
 });
@@ -152,6 +188,7 @@ export default defineComponent({
   text-align: right;
   line-height: 5px;
   color: #5b5970;
+  cursor: pointer;
 }
 
 .username {
@@ -161,6 +198,7 @@ export default defineComponent({
   line-height: 5px;
   text-align: right;
   color: #383361;
+  cursor: pointer;
 }
 
 .account-bg {
@@ -172,6 +210,7 @@ export default defineComponent({
 .account-navbar {
   width: 100%;
   background: #fff;
+  z-index: 1;
 }
 
 .support {
@@ -189,7 +228,6 @@ export default defineComponent({
 
 .user-avatar {
   color: #c6cfde;
-  /* font-size: 3rem; */
 }
 
 /* dropdown */
@@ -202,41 +240,45 @@ export default defineComponent({
   text-decoration: none;
 }
 
-a:hover,
-.dropdown:hover .dropbtn {
-  /* background-color: red; */
-}
+// a:hover,
+// .dropdown:hover .dropbtn {
+//   background-color: red;
+// }
 
 .dropdown {
   display: inline-block;
 }
 
 .dropdown-content {
-  display: none;
   position: absolute;
+  top: 61px;
   right: 0;
-  z-index: 1;
   width: 307px;
   height: auto;
-  border-radius: 0px 0px 30px 30px;
+  border-radius: 0px 0px 5px 5px;
   background: #fff;
-}
+  // border: 1px solid red;
+  > div {
+    cursor: pointer;
+  }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
+  a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
 
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
+  a:hover {
+    background-color: #f1f1f1;
+  }
 }
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+// .dropdown:hover .dropdown-content {
+//   border: 1px solid red;
+//   opacity: 1;
+//   top: 100%;
+// }
 
 @media screen and (max-width: 992px) {
   .username {
@@ -253,5 +295,29 @@ a:hover,
     padding-right: 0px !important;
     padding-left: 0px !important;
   }
+}
+
+.navbar-enter-from {
+  // opacity: 0;
+  transform: translateY(-100%);
+}
+.navbar-enter-active {
+  transition: all 0.4s;
+}
+.navbar-enter-to {
+  // opacity: 1;
+  transform: translateY(0%);
+}
+
+.navbar-leave-from {
+  // opacity: 1;
+  transform: translateY(0%);
+}
+.navbar-leave-active {
+  transition: all 0.4s;
+}
+.navbar-leave-to {
+  // opacity: 0;
+  transform: translateY(-100%);
 }
 </style>

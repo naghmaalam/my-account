@@ -25,76 +25,47 @@
           </div>
         </div>
         <div class="devices-row-line mt-2"></div>
-        <!-- desktop -->
-        <div class="d-flex flex-row justify-content-between pt-2">
-          <div class="devices-name d-flex flex-row">
-            <i class="flaticon-windows pl-3 pr-3"></i>
-            <div>Desktop-MKEUF6J</div>
+
+        <template v-for="(item, i) in stateUser.devices.list" :key="`i_${i}`">
+          <div class="d-flex flex-row justify-content-between pt-2">
+            <div class="devices-name d-flex flex-row">
+              <i class="flaticon-windows pl-3 pr-3"></i>
+              <div>{{ item.name }}</div>
+            </div>
+            <div
+              class="devices-logout d-flex flex-row"
+              @click="logoutDevice(item, i)"
+            >
+              <i class="flaticon-logout pr-2 pt-1"></i>
+              <div>Logout</div>
+            </div>
           </div>
-          <div class="devices-logout d-flex flex-row">
-            <i class="flaticon-logout pr-2 pt-1"></i>
-            <div>Logout</div>
-          </div>
-        </div>
-        <div class="devices-row-line mt-2"></div>
-        <!-- Android -->
-        <div class="d-flex flex-row justify-content-between pt-2">
-          <div class="devices-name d-flex flex-row">
-            <i class="flaticon-android pl-3 pr-3"></i>
-            <div>Android Pixel 2</div>
-          </div>
-          <div class="devices-logout d-flex flex-row">
-            <i class="flaticon-logout pr-2 pt-1"></i>
-            <div>Logout</div>
-          </div>
-        </div>
-        <div class="devices-row-line mt-2"></div>
-        <!-- Galaxy  -->
-        <div class="d-flex flex-row justify-content-between pt-2">
-          <div class="devices-name d-flex flex-row">
-            <i class="flaticon-android pl-3 pr-3"></i>
-            <div>Galaxy A80</div>
-          </div>
-          <div class="devices-logout d-flex flex-row">
-            <i class="flaticon-logout pr-2 pt-1"></i>
-            <div>Logout</div>
-          </div>
-        </div>
-        <div class="devices-row-line mt-2"></div>
-        <!-- Desktop -->
-        <div class="d-flex flex-row justify-content-between pt-2">
-          <div class="devices-name d-flex flex-row">
-            <i class="flaticon-windows pl-3 pr-3"></i>
-            <div>Desktop-MKEUF6J</div>
-          </div>
-          <div class="devices-logout d-flex flex-row">
-            <i class="flaticon-logout pr-2 pt-1"></i>
-            <div>Logout</div>
-          </div>
-        </div>
-        <div class="devices-row-line mt-2"></div>
-        <!--Android  -->
-        <div class="d-flex flex-row justify-content-between pt-2">
-          <div class="devices-name d-flex flex-row">
-            <i class="flaticon-android pl-3 pr-3"></i>
-            <div>Android Pixel 2</div>
-          </div>
-          <div class="devices-logout d-flex flex-row">
-            <i class="flaticon-logout pr-2 pt-1"></i>
-            <div class="mb-5">Logout</div>
-          </div>
-        </div>
+          <div class="devices-row-line mt-2"></div>
+        </template>
+        <br />
       </div>
     </div>
   </div>
 </template>
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+import { stateUser, useUser } from "@/hooks/useUser";
+
+import { LoggedInDevice } from "@/types/Devices";
+
+export default defineComponent({
   setup() {
-    return {};
+    const user = useUser();
+    const logoutDevice = async (device: LoggedInDevice, i: number) => {
+      console.log(device, i);
+      let success = await user.do.device.logout(device.id);
+      if (success) success = await user.do.account.refreshStorage();
+    };
+    return { stateUser, logoutDevice };
   },
-};
+});
 </script>
+
 <style scoped>
 .add-device {
   width: 100%;
@@ -189,6 +160,7 @@ export default {
   text-align: right;
   color: #5c7bf7;
   border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 992px) {
