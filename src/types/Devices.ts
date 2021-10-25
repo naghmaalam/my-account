@@ -4,6 +4,7 @@ export type DeviceId =
   | "linux"
   | "android"
   | "macos"
+  | "ios"
   | null;
 export interface Device {
   id: DeviceId;
@@ -16,7 +17,7 @@ export interface Device {
 export interface LoggedInDevice {
   id: number;
   name: string;
-  type: string;
+  type: DeviceId;
   udid: string;
 }
 

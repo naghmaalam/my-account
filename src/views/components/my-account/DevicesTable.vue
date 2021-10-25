@@ -26,47 +26,117 @@
         </div>
         <div class="devices-row-line mt-2"></div>
 
-        <template v-for="(item, i) in stateUser.devices.list" :key="`i_${i}`">
-          <div class="d-flex flex-row justify-content-between pt-2">
-            <div class="devices-name d-flex flex-row">
-              <i class="flaticon-windows pl-3 pr-3"></i>
-              <div>{{ item.name }}</div>
+        <transition-group name="list" tag="div">
+          <template v-for="(item, i) in deviceList" :key="`i_${i}`">
+            <div class="list-item d-flex flex-column">
+              <div class="d-flex flex-row justify-content-between pt-2">
+                <div class="devices-name d-flex flex-row">
+                  <div class="px-3 device-icon">
+                    <i :class="getIcon(item.type)"></i>
+                  </div>
+
+                  <div>{{ item.name }}</div>
+                </div>
+                <div
+                  class="
+                    devices-logout
+                    d-flex
+                    flex-row
+                    justify-content-center
+                    align-items-center
+                    mr-1
+                  "
+                  @click="logoutDevice(item, i)"
+                >
+                  <span
+                    v-if="isLoading[i]"
+                    class="spinner-border spinner-border-sm mr-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <i class="flaticon-logout pr-2 pt-1"></i>
+                  <div>Logout</div>
+                </div>
+              </div>
+              <div class="devices-row-line mt-2"></div>
             </div>
-            <div
-              class="devices-logout d-flex flex-row"
-              @click="logoutDevice(item, i)"
-            >
-              <i class="flaticon-logout pr-2 pt-1"></i>
-              <div>Logout</div>
-            </div>
-          </div>
-          <div class="devices-row-line mt-2"></div>
-        </template>
+          </template>
+        </transition-group>
         <br />
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { stateUser, useUser } from "@/hooks/useUser";
 
-import { LoggedInDevice } from "@/types/Devices";
+import { DeviceId, LoggedInDevice } from "@/types/Devices";
 
 export default defineComponent({
   setup() {
     const user = useUser();
+
+    const isLoading = ref<boolean[]>([]);
+
+    const testList = ref<LoggedInDevice[]>([...stateUser.value.devices.list]);
+
+    const deviceList = computed(() => {
+      return stateUser.value.devices.list;
+    });
+
     const logoutDevice = async (device: LoggedInDevice, i: number) => {
       console.log(device, i);
+      isLoading.value[i] = true;
       let success = await user.do.device.logout(device.id);
       if (success) success = await user.do.account.refreshStorage();
+      isLoading.value[i] = false;
+
+      // setTimeout(() => {
+      //   isLoading.value[i] = false;
+      //   testList.value = testList.value.filter((item) => {
+      //     return item.id !== device.id;
+      //   });
+      // }, 1000);
     };
-    return { stateUser, logoutDevice };
+    const getIcon = (type: DeviceId) => {
+      let retVal = "";
+      switch (type) {
+        case "windows":
+          retVal = `far fa-window-maximize`;
+          break;
+        case "apple":
+          retVal = `fab fa-apple`;
+          break;
+        case "ios":
+          retVal = `fab fa-apple`;
+          break;
+        case "macos":
+          retVal = `fab fa-apple`;
+          break;
+        case "linux":
+          retVal = `fab fa-linux`;
+          break;
+        case "android":
+          retVal = `fab fa-android`;
+          break;
+      }
+      return retVal;
+    };
+
+    return {
+      stateUser,
+      logoutDevice,
+      getIcon,
+      deviceList,
+      testList,
+      isLoading,
+    };
   },
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .add-device {
   width: 100%;
   text-align: right;
@@ -163,9 +233,37 @@ export default defineComponent({
   cursor: pointer;
 }
 
+.device-icon {
+  width: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
 @media screen and (max-width: 992px) {
   .devices-btn {
     font-size: 0.6rem;
   }
 }
+
+// .list-item {
+//   transition: all 10.3s ease;
+//   display: flex;
+// }
+
+// .list-enter-from,
+// .list-leave-to {
+//   opacity: 0;
+//   transform: translateX(10px);
+// }
+
+// .list-leave-active {
+//   position: absolute;
+// }
+
+// .list-move {
+//   transition: transform 10.3s ease;
+// }
 </style>

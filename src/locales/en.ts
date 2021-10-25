@@ -419,7 +419,7 @@ const en: Locale = {
   confirm_password: "Confirm Password*",
   password_info_never_reuse:
     "Confirm a strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account. *",
-  my_devices: "my devices *",
+  my_devices: "My Devices *",
   howdy: "Howdy! *",
   member_since: "Member Since *",
   recently_connected: "Recently Connected *",

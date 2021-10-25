@@ -3,5 +3,10 @@
   --swoshs-linear-gradient2: linear-gradient(#fb217d 0%, #ff29fc 100%);
   --swoshs-color1: #a215ff;
   --swoshs-color2: #5f29ff;
-  --swoshs-light-gray: rgb(243 247 254);
+  --swoshs-black: #383361;
+  --swoshs-light-gray: rgb(243, 247, 254);
+  --swoshs-green: #15c50a;
+  --swoshs-light-green: #e9f9ee;
+  --swoshs-red: #c50a0a;
+  --swoshs-light-red: #f9e9e9;
 }

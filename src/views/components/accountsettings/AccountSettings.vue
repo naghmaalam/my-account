@@ -7,9 +7,11 @@
           <div class="account-settings-title">{{ $t("account_settings") }}</div>
         </div>
         <div class="col-md-6">
-          <div class="account-info-member">
-            {{ $t("member_since") }} :
-            <span class="account-info-date"> {{ memberDate }} </span>
+          <div class="account-info-member text-right">
+            <h1>{{ $t("member_since") }}:</h1>
+            <span class="account-info-date">
+              {{ memberDate }}
+            </span>
           </div>
         </div>
       </div>
@@ -102,6 +104,7 @@
 import { computed, defineComponent, ref } from "vue";
 
 import { stateUser } from "@/hooks/useUser";
+import { months } from "@/modules/utils";
 
 import UpdatePassword from "@/views/components/accountsettings/changepassword/UpdatePassword.vue";
 
@@ -111,7 +114,15 @@ export default defineComponent({
   },
   setup() {
     const showUpdatePassword = ref(false);
-    const memberDate = ref("");
+    const memberDate = computed(() => {
+      const date = new Date(stateUser.value.me?.createdAt as string);
+
+      if (date.toString() === "Invalid Date") return "- / - / -";
+      else
+        return `${date.getFullYear()} / ${
+          months[date.getMonth()]
+        } / ${date.getDate()} `;
+    });
 
     const isPremium = computed(() => {
       return stateUser.value.currentSubscription.title === "premium";
@@ -131,7 +142,28 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.account-info-member {
+  display: flex;
+  justify-content: end;
+  align-content: center;
+  h1 {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: gray;
+    margin: 0 10px;
+    line-height: inherit;
+    display: flex;
+    align-items: center;
+  }
+  .account-info-date {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--swoshs-black);
+  }
+}
+////////////////////////////////////////
+
 .account-settings-title {
   font-family: Poppins;
   font-weight: bold;

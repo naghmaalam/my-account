@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "root",
     path: "",
     components: {
-      default: () => import("@/views/pages/Home.vue"),
+      default: () => import("@/views/pages/HomePage.vue"),
       ...components1,
     },
   },
@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "home",
     path: "/home",
     components: {
-      default: () => import("@/views/pages/Home.vue"),
+      default: () => import("@/views/pages/HomePage.vue"),
       ...components1,
     },
   },

@@ -92,7 +92,7 @@
               "
             >
               <i class="flaticon-link pl-3"></i>
-              <div class="rf-link px-1 w-100">
+              <div class="rf-link px-1 w-auto">
                 <input
                   class="as-input-email pl-3"
                   type="text"

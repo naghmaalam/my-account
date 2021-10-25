@@ -23,12 +23,18 @@
       <div
         class="d-flex flex-column justify-content-end align-items-end"
         @mouseenter="showMenu"
+        @mouseleave="hideMenu"
         @click="toggleMenu"
       >
         <p class="loggedin pt-3">{{ $t("logged_in_as") }}</p>
         <p class="username pb-1">{{ stateUser.email }}</p>
       </div>
-      <div class="dropdown" @mouseenter="showMenu" @click="toggleMenu">
+      <div
+        class="dropdown"
+        @mouseenter="showMenu"
+        @mouseleave="hideMenu"
+        @click="toggleMenu"
+      >
         <a href="javascript:void(0)" class="dropbtn">
           <i
             class="
