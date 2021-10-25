@@ -260,7 +260,9 @@ export default defineComponent({
       return stateUser.value.devices.list[0].name;
     });
     const memberDate = computed(() => {
-      const date = new Date(stateUser.value.me?.createdAt as string);
+      const date = new Date(
+        stateUser.value.dateRegistered as unknown as string
+      );
 
       if (date.toString() === "Invalid Date") return "- / - / -";
       else

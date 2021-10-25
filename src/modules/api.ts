@@ -1,7 +1,5 @@
 import { stateUser, useUser } from "@/hooks/useUser";
 
-import { Me } from "@/types/User";
-
 export const host = "https://swoshstest.com/api";
 
 export enum Method {
@@ -17,7 +15,7 @@ export async function api(
   endpoint: string,
   method: Method,
   payload?: unknown
-): Promise<Me> {
+): Promise<any> {
   try {
     // if not logged in then add language to url query but not in /login page
     let query = "";
