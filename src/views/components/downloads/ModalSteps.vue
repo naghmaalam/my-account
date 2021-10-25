@@ -7,7 +7,7 @@
     <div class="modal show d-block" v-if="open">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header d-none d-md-block">
             <div class="close" @click="closeModal">
               <i class="fas fa-times"></i>
             </div>
@@ -39,7 +39,7 @@
           </div>
           <div class="modal-body pt-5 pb-5 pr-5">
             <div class="d-flex flex-row justify-content-around">
-              <div class="device-image ml-4">
+              <div class="device-image ml-4 mob-reverse-col">
                 <div
                   class="
                     d-flex
@@ -553,6 +553,11 @@ export default defineComponent({
 @media only screen and (max-width: 992px) {
   .download-here {
     display: none !important;
+  }
+
+  .mob-reverse-col {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 </style>
