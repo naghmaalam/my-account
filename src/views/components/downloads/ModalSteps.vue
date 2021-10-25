@@ -39,6 +39,9 @@
           </div>
 
           <div class="modal-body pt-5 pb-5 pr-5">
+            <div class="close d-md-none" @click="closeModal">
+              <i class="fas fa-times"></i>
+            </div>
             <div class="d-flex flex-row justify-content-around mob-reverse-col">
               <div class="device-image ml-4 mob-reverse-col">
                 <div
