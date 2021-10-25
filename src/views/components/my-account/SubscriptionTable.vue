@@ -26,28 +26,32 @@
         </div>
       </div>
       <!-- Devices Table -->
-      <div class="container mt-3">
+      <div
+        class="container mt-3"
+        v-for="headings in headingTitle"
+        :key="headings"
+      >
         <div class="row">
           <div class="col">
-            <div class="table-title">Refence Number</div>
+            <div class="table-title">{{ headings.titleRefNum }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Expires</div>
+            <div class="table-title">{{ headings.titleExpires }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Subscription</div>
+            <div class="table-title">{{ headings.titleSubscription }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Status</div>
+            <div class="table-title">{{ headings.titleStatus }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Payment Provider</div>
+            <div class="table-title">{{ headings.titlePayment }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Renewal Fee</div>
+            <div class="table-title">{{ headings.titlefee }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Action</div>
+            <div class="table-title">{{ headings.titleAction }}</div>
           </div>
         </div>
       </div>
@@ -107,7 +111,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <div class="account-subscription pt-3">My Subscription(s)</div>
+            <div class="account-subscription">My Subscription(s)</div>
             <div class="d-flex flex-row">
               <div class="d-flex flex-column">
                 <div class="active-subscription pr-4 pl-4">My Subscription</div>
@@ -125,131 +129,84 @@
         </div>
       </div>
 
-      <div class="conatiner">
-        <div
-          class="row mob-res-center table-content mb-2"
-          v-for="items in tableItems"
-          :key="items"
-        >
-          <div class="col">
-            <div class="table-title">
-              <span class="mob-line-height"> Refence Number </span>
+      <div
+        class="conatiner table-content pl-3"
+        v-for="items in tableItems"
+        :key="items"
+      >
+        <div v-for="headings in headingTitle" :key="headings">
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">
+                <span class="mob-line-height">
+                  {{ headings.titleRefNum }}
+                </span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle">{{ items.refNum }}</div>
             </div>
           </div>
-          <div class="col">
-            <div class="table-subtitle">{{ items.refNum }}</div>
-          </div>
-          <!-- <div class="col">
-            <div class="table-subtitle">5432178943</div>
-          </div> -->
-        </div>
 
-        <div
-          class="row mob-res-center table-content mb-2"
-          v-for="items in tableItems"
-          :key="items"
-        >
-          <div class="col">
-            <div class="table-title">Expires</div>
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titleExpires }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle text-center">{{ items.expires }}</div>
+            </div>
           </div>
-          <div class="col">
-            <div class="table-subtitle text-center">{{ items.expires }}</div>
-          </div>
-          <!-- <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
-          </div> -->
-        </div>
 
-        <div
-          class="row mob-res-center table-content mb-2"
-          v-for="items in tableItems"
-          :key="items"
-        >
-          <div class="col">
-            <div class="table-title">Subscription</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              {{ items.subscription }}
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titleSubscription }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle table-subtitle-bold">
+                {{ items.subscription }}
+              </div>
             </div>
           </div>
-          <!-- <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              Premium-6 Months Subscription
-            </div>
-          </div> -->
-        </div>
 
-        <div
-          class="row mob-res-center table-content mb-2"
-          v-for="items in tableItems"
-          :key="items"
-        >
-          <div class="col">
-            <div class="table-title">Status</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div class="subscription-active-btn">{{ items.status }}</div>
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titleStatus }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle">
+                <div class="subscription-active-btn">{{ items.status }}</div>
+              </div>
             </div>
           </div>
-          <!-- <div class="col">
-            <div class="table-subtitle">
-              <div class="inactive-btn pt-1 pb-1 ml-5">Inactive</div>
-            </div>
-          </div> -->
-        </div>
 
-        <div
-          class="row mob-res-center table-content mb-2"
-          v-for="items in tableItems"
-          :key="items"
-        >
-          <div class="col">
-            <div class="table-title">Payment Provider</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">{{ items.action }}</div>
-          </div>
-          <!-- <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
-          </div> -->
-        </div>
-
-        <div
-          class="row mob-res-center table-content mb-2"
-          v-for="items in tableItems"
-          :key="items"
-        >
-          <div class="col">
-            <div class="table-title">Renewal Fee</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">{{ items.renewalFee }}</div>
-          </div>
-          <!-- <div class="col">
-            <div class="table-subtitle">$20.00</div>
-          </div> -->
-        </div>
-
-        <div
-          class="row mob-res-center table-content mb-2"
-          v-for="items in tableItems"
-          :key="items"
-        >
-          <div class="col">
-            <div class="table-title">Action</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <button class="my-account-btn">{{ items.action }}</button>
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titlePayment }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle">{{ items.action }}</div>
             </div>
           </div>
-          <!-- <div class="col">
-            <div class="table-subtitle">
-              <button class="my-account-btn">Renew</button>
+
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titlefee }}</div>
             </div>
-          </div> -->
+            <div class="col">
+              <div class="table-subtitle">{{ items.renewalFee }}</div>
+            </div>
+          </div>
+
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titleAction }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle">
+                <button class="my-account-btn">{{ items.action }}</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -267,6 +224,17 @@ export default {
     };
     return {
       redirect,
+      headingTitle: [
+        {
+          titleRefNum: "Refence Number",
+          titleExpires: "Expires",
+          titleSubscription: "Subscription",
+          titleStatus: "Status",
+          titlePayment: "Payment Provider",
+          titlefee: "Renewal Fee",
+          titleAction: "Action",
+        },
+      ],
       tableItems: [
         {
           refNum: 5432178943,
@@ -489,7 +457,7 @@ export default {
 
   .account-subscription {
     font-size: 1rem;
-    padding-top: 2rem !important;
+    /* padding-top: 2rem !important; */
   }
 
   .active-subscription {

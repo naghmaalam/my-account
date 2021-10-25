@@ -27,106 +27,71 @@
       </div>
 
       <!-- table -->
-      <div class="container mt-3">
+      <div
+        class="container mt-3"
+        v-for="headings in headingTitles"
+        :key="headings"
+      >
         <div class="row">
           <div class="col">
-            <div class="table-title">Order Number</div>
+            <div class="table-title">{{ headings.titleOrderNum }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Subscription</div>
+            <div class="table-title">{{ headings.titleSubs }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Order Status</div>
+            <div class="table-title">{{ headings.titleStatus }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Payment Provider</div>
+            <div class="table-title">{{ headings.titlePayment }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Order Amount</div>
+            <div class="table-title">{{ headings.titleAmount }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Date of Order</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container table-content mt-3 pt-3 pb-3">
-        <div class="row d-dlex justify-content-center align-items-center">
-          <div class="col">
-            <div class="table-subtitle">5432178943</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              Premium-1 Months Subscription
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div class="subscription-active-btn pt-1 pb-1 ml-5">Paid</div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">$20.00</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
+            <div class="table-title">{{ headings.titleDate }}</div>
           </div>
         </div>
       </div>
 
-      <div class="container table-content mt-3 pt-3 pb-3">
-        <div class="row d-dlex justify-content-center align-items-center">
-          <div class="col">
-            <div class="table-subtitle">5432178943</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              Premium-6 Months Subscription
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div class="refunded-btn pt-1 pb-1 ml-5">Refunded</div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">$20.00</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
-          </div>
-        </div>
-      </div>
+      <!-- table content -->
 
-      <div class="container table-content mt-3 pt-3 pb-3">
+      <div
+        class="container table-content mt-3 pt-3 pb-3"
+        v-for="items in tableItems"
+        :key="items"
+      >
         <div class="row d-dlex justify-content-center align-items-center">
           <div class="col">
-            <div class="table-subtitle">5432178943</div>
+            <div class="table-subtitle">{{ items.orderNum }}</div>
           </div>
           <div class="col">
             <div class="table-subtitle table-subtitle-bold">
-              Premium-6 Months Subscription
+              {{ items.subscription }}
             </div>
           </div>
           <div class="col">
             <div class="table-subtitle">
-              <div class="inactive-btn pt-1 pb-1 ml-5">Unpaid</div>
+              <div
+                class="subscription-active-btn pt-1 pb-1 ml-5"
+                :class="{
+                  'subscription-active-btn': items.orderStatus === 'paid',
+                  'refunded-btn': items.orderStatus === 'Refunded',
+                  'inactive-btn': items.orderStatus === 'unpaid',
+                }"
+              >
+                {{ items.orderStatus }}
+              </div>
             </div>
           </div>
           <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
+            <div class="table-subtitle">{{ items.paymentProvider }}</div>
           </div>
           <div class="col">
-            <div class="table-subtitle">$20.00</div>
+            <div class="table-subtitle">{{ items.orderAmount }}</div>
           </div>
           <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
+            <div class="table-subtitle">{{ items.orderDate }}</div>
           </div>
         </div>
       </div>
@@ -134,21 +99,25 @@
   </div>
 
   <!-- mob responsive design -->
-  <div class="container-fluid account-bg m-0 p-0 hide-desktop show-mobile">
+  <div class="container-fluid account-bg m-0 p-0 d-md-none show-mobile">
     <div class="container-fluid m-0">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <div class="account-subscription pt-5">My Subscription(s)</div>
+            <div class="account-subscription">
+              {{ $t("my_subscriptions") }}
+            </div>
             <div class="d-flex flex-row">
               <div
                 class="inactive-subscription pr-4 pl-4"
                 @click="redirect('subscription')"
               >
-                My Subscription
+                {{ $t("my_subscription") }}
               </div>
               <div class="d-flex flex-column">
-                <div class="active-subscription pr-4 pl-4">Order History</div>
+                <div class="active-subscription pr-4 pl-4">
+                  {{ $t("order_history") }}
+                </div>
                 <div class="selected-borderline"></div>
               </div>
             </div>
@@ -157,108 +126,78 @@
         </div>
       </div>
 
-      <div class="conatiner">
-        <div class="row mob-res-center table-content mb-2">
-          <div class="col">
-            <div class="table-title">
-              <span class="mob-line-height"> Refence Number </span>
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">5432178943</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">5432178943</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">5432178943</div>
-          </div>
-        </div>
+      <!-- order table  -->
 
-        <div class="row mob-res-center table-content mb-2">
-          <div class="col">
-            <div class="table-title">Subscription</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              Premium-1 Months Subscription
+      <div
+        class="conatiner table-content pl-3"
+        v-for="items in tableItems"
+        :key="items"
+      >
+        <div v-for="headings in headingTitles" :key="headings">
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">
+                <span class="mob-line-height">
+                  {{ headings.titleOrderNum }}
+                </span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle">{{ items.orderNum }}</div>
             </div>
           </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              Premium-6 Months Subscription
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              Premium-6 Months Subscription
-            </div>
-          </div>
-        </div>
 
-        <div class="row mob-res-center table-content mb-2">
-          <div class="col">
-            <div class="table-title">Order Status</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div class="subscription-active-btn pt-1 pb-1">Paid</div>
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titleSubs }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle table-subtitle-bold">
+                {{ items.subscription }}
+              </div>
             </div>
           </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div class="refunded-btn pt-1 pb-1">Refunded</div>
+
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titleStatus }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle">
+                <div class="subscription-active-btn pt-1 pb-1">
+                  {{ items.orderStatus }}
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div class="inactive-btn pt-1 pb-1">Unpaid</div>
+
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titlePayment }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle">{{ items.paymentProvider }}</div>
             </div>
           </div>
-        </div>
 
-        <div class="row mob-res-center table-content mb-2">
-          <div class="col">
-            <div class="table-title">Payment Provider</div>
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titleAmount }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle">{{ items.orderAmount }}</div>
+            </div>
           </div>
-          <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">Bitcoin</div>
-          </div>
-        </div>
 
-        <div class="row mob-res-center table-content mb-2">
-          <div class="col">
-            <div class="table-title">Order Amount</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">$20.00</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">$20.00</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">$20.00</div>
-          </div>
-        </div>
-
-        <div class="row mob-res-center table-content mb-2">
-          <div class="col">
-            <div class="table-title">Date of Order</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle text-center">12/19/2021</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">12/19/2021</div>
+          <div class="row mob-res-center mb-2">
+            <div class="col">
+              <div class="table-title">{{ headings.titleDate }}</div>
+            </div>
+            <div class="col">
+              <div class="table-subtitle text-center">
+                {{ items.orderDate }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -276,6 +215,90 @@ export default {
     };
     return {
       redirect,
+      headingTitles: [
+        {
+          titleOrderNum: "Order Number",
+          titleSubs: "Subscription",
+          titleStatus: " Order Status",
+          titlePayment: "Payment Provider",
+          titleAmount: "Order Amount",
+          titleDate: " Date Of Order",
+        },
+      ],
+      tableItems: [
+        {
+          orderNum: 5432178943,
+          subscription: "Premium-1 Months Subscription",
+          orderStatus: "paid",
+          paymentProvider: "Bitcoin",
+          orderAmount: "$20",
+          orderDate: "12/9/2021",
+        },
+        {
+          orderNum: 5432178944,
+          subscription: "Premium-1 Months Subscription",
+          orderStatus: "Refunded",
+          paymentProvider: "Bitcoin",
+          orderAmount: "$20",
+          orderDate: "12/9/2021",
+        },
+        {
+          orderNum: 5432178944,
+          subscription: "Premium-1 Months Subscription",
+          orderStatus: "unpaid",
+          paymentProvider: "Bitcoin",
+          orderAmount: "$20",
+          orderDate: "12/9/2021",
+        },
+        {
+          orderNum: 5432178944,
+          subscription: "Premium-1 Months Subscription",
+          orderStatus: "unpaid",
+          paymentProvider: "Bitcoin",
+          orderAmount: "$20",
+          orderDate: "12/9/2021",
+        },
+        {
+          orderNum: 5432178944,
+          subscription: "Premium-1 Months Subscription",
+          orderStatus: "unpaid",
+          paymentProvider: "Bitcoin",
+          orderAmount: "$20",
+          orderDate: "12/9/2021",
+        },
+        {
+          orderNum: 5432178944,
+          subscription: "Premium-1 Months Subscription",
+          orderStatus: "unpaid",
+          paymentProvider: "Bitcoin",
+          orderAmount: "$20",
+          orderDate: "12/9/2021",
+        },
+        {
+          orderNum: 5432178944,
+          subscription: "Premium-1 Months Subscription",
+          orderStatus: "unpaid",
+          paymentProvider: "Bitcoin",
+          orderAmount: "$20",
+          orderDate: "12/9/2021",
+        },
+        {
+          orderNum: 5432178944,
+          subscription: "Premium-1 Months Subscription",
+          orderStatus: "unpaid",
+          paymentProvider: "Bitcoin",
+          orderAmount: "$20",
+          orderDate: "12/9/2021",
+        },
+        {
+          orderNum: 5432178944,
+          subscription: "Premium-1 Months Subscription",
+          orderStatus: "unpaid",
+          paymentProvider: "Bitcoin",
+          orderAmount: "$20",
+          orderDate: "12/9/2021",
+        },
+      ],
     };
   },
 };
@@ -437,6 +460,10 @@ export default {
   opacity: 0.94;
 }
 
+.hide-desktop {
+  display: none;
+}
+
 @media screen and (max-width: 992px) {
   .table-title {
     font-family: Poppins;
@@ -452,6 +479,10 @@ export default {
   }
 
   .hide-mobile {
+    display: none;
+  }
+
+  .hide-desktop {
     display: none;
   }
 
