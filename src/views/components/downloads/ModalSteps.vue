@@ -37,8 +37,12 @@
               </div>
             </div>
           </div>
+
           <div class="modal-body pt-5 pb-5 pr-5">
-            <div class="d-flex flex-row justify-content-around">
+            <div class="close d-md-none" @click="closeModal">
+              <i class="fas fa-times"></i>
+            </div>
+            <div class="d-flex flex-row justify-content-around mob-reverse-col">
               <div class="device-image ml-4 mob-reverse-col">
                 <div
                   class="
@@ -51,14 +55,16 @@
                   "
                 >
                   <i class="downloads-icons pt-1" :class="device?.icon"></i>
-                  <div class="downloads-title pb-1">{{ device?.title }}</div>
+                  <div class="downloads-title pb-1">
+                    {{ device?.title }}
+                  </div>
                 </div>
               </div>
               <div class="mt-3 pl-5">
-                <div class="device-modal-title">
+                <div class="device-modal-title mob-res-center">
                   {{ $t("download_for") }} {{ device?.title }}
                 </div>
-                <div class="device-modal-subtitle">
+                <div class="device-modal-subtitle mob-res-center">
                   * {{ $t("your_privacy") }}
                 </div>
               </div>
@@ -66,12 +72,21 @@
           </div>
 
           <div class="download-modal-footer pr-5">
-            <div class="d-flex flex-row justify-content-around pb-4 ml-4">
+            <div
+              class="
+                d-flex
+                flex-row
+                justify-content-around
+                pb-4
+                ml-4
+                mob-reverse-col
+              "
+            >
               <div class="pl-3 mt-0 pt-4 pr-3">
-                <div class="device-modal-title">
+                <div class="device-modal-title mob-res-center">
                   {{ $t("ready_to_download") }}
                 </div>
-                <div class="device-modal-subtitle p-1">
+                <div class="device-modal-subtitle p-1 mob-res-center">
                   <span
                     v-html="$t('send_link_email', { email: stateUser.email })"
                   ></span>
@@ -84,7 +99,14 @@
                   @click="isDownloadHereShown = true"
                 >
                   <div
-                    class="device-download-btn pt-3 pb-3 pl-4 pr-4"
+                    class="
+                      device-download-btn
+                      pt-3
+                      pb-3
+                      pl-4
+                      pr-4
+                      mob-res-center
+                    "
                     style="text-transform: uppercase"
                   >
                     {{ $t("download") }}
@@ -92,7 +114,15 @@
                 </a>
                 <a href="#">
                   <div
-                    class="device-sendemail-btn mt-2 pt-3 pb-3 pl-4 pr-4"
+                    class="
+                      device-sendemail-btn
+                      mt-2
+                      pt-3
+                      pb-3
+                      pl-4
+                      pr-4
+                      mob-res-center
+                    "
                     style="text-transform: uppercase"
                   >
                     {{ $t("send_email") }}
@@ -557,7 +587,12 @@ export default defineComponent({
 
   .mob-reverse-col {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .mob-res-center {
+    text-align: center !important;
   }
 }
 </style>
