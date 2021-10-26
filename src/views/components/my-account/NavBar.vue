@@ -66,7 +66,7 @@
             alt=""
           />
 
-          <div>{{ $t("account_settings") }}</div>
+          <div class="name">{{ $t("account_settings") }}</div>
 
           <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
         </div>
@@ -77,7 +77,7 @@
             alt=""
           />
 
-          <div>{{ $t("support") }}</div>
+          <div class="name">{{ $t("support") }}</div>
 
           <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
         </div>
@@ -89,7 +89,7 @@
             alt=""
           />
 
-          <div>{{ $t("privacy") }}</div>
+          <div class="name">{{ $t("privacy") }}</div>
 
           <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
         </div>
@@ -103,7 +103,7 @@
             alt=""
           />
 
-          <div>{{ $t("logout") }}</div>
+          <div class="name">{{ $t("logout") }}</div>
 
           <i class="flaticon-arrow-angle-pointing-to-right pr-3"></i>
         </div>
@@ -259,13 +259,16 @@ export default defineComponent({
   position: absolute;
   top: 61px;
   right: 30px;
-  width: 307px;
+  width: 290px;
   height: auto;
   border-radius: 0px 0px 5px 5px;
   background: #fff;
   // border: 1px solid red;
   > div {
     cursor: pointer;
+    .name {
+      width: 150px;
+    }
   }
 
   a {

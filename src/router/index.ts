@@ -5,6 +5,7 @@ import ReferralLinkPage from "@/views/pages/ReferralLinkPage.vue";
 
 import Main from "@/views/layouts/Main.vue";
 import ReferralLinkMain from "@/views/layouts/ReferralLinkMain.vue";
+import CheckoutMain from "@/views/layouts/CheckoutMain.vue";
 
 import SideBar from "@/views/components/my-account/SideBar.vue";
 import NavBar from "@/views/components/my-account/NavBar.vue";
@@ -140,6 +141,14 @@ const routes: Array<RouteRecordRaw> = [
     props: true,
     meta: {
       layout: ReferralLinkMain,
+    },
+    components: {},
+  },
+  {
+    name: "checkout",
+    path: "/purchase",
+    meta: {
+      layout: CheckoutMain,
     },
     components: {},
   },

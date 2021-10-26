@@ -59,29 +59,31 @@
         >
           <div class="row d-dlex justify-content-center align-items-center">
             <div class="col">
-              <div
-                class="
-                  d-flex
-                  flex-column
-                  justify-content-center
-                  align-items-center
-                  p-5
-                  text-center
-                "
-              >
-                <template v-if="isLoading">
-                  <div class="spinner-grow text-primary my-5" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-                </template>
-                <template v-else>
-                  <img
-                    src="@/assets/images/subscription/empty.png"
-                    alt="order-history-empty"
-                    class="pb-3"
-                  />
-                  {{ $t("no_information") }}
-                </template>
+              <div class="p-5 text-center">
+                <Fade>
+                  <template v-if="isLoading">
+                    <div class="spinner-grow text-primary my-5" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div
+                      class="
+                        d-flex
+                        flex-column
+                        justify-content-center
+                        align-items-center
+                      "
+                    >
+                      <img
+                        src="@/assets/images/subscription/empty.png"
+                        alt="order-history-empty"
+                        class="pb-3"
+                      />
+                      {{ $t("no_information") }}
+                    </div>
+                  </template>
+                </Fade>
               </div>
             </div>
           </div>
@@ -293,7 +295,7 @@ export default {
       router.push({ name: pg });
     };
 
-    const isLoading = ref(false);
+    const isLoading = ref(true);
 
     const headingTitles = {
       orderNum: "Order Number",

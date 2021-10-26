@@ -6,7 +6,13 @@
       </div>
     </div>
   </Fade>
-  <Fade v-else-if="stateUser.authenticated || $route.name === `referrallink`">
+  <Fade
+    v-else-if="
+      stateUser.authenticated ||
+      $route.name === `referrallink` ||
+      $route.name === `checkout`
+    "
+  >
     <component :is="$route.meta.layout" />
   </Fade>
   <Fade v-else>
@@ -53,7 +59,11 @@ export default defineComponent({
     // const loading = ref(true);
 
     // set language base on store
-    if (stateUser.value.language.selected === "cn") {
+    console.log(
+      "stateUser.value.language.selected ",
+      stateUser.value.language.selected
+    );
+    if (stateUser.value.language.selected.toLowerCase() === "cn") {
       locale.value = "cn";
     }
 

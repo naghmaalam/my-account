@@ -63,9 +63,8 @@ function setUser(response: Me) {
   state.user.me = response;
   state.user.email = response.email;
   state.user.dateRegistered = new Date(response.createdAt as string);
-  state.user.language.selected = <SupportedLanguages>(
-    response.preferred_language
-  );
+  state.user.language.selected =
+    response.preferred_language.toLowerCase() as SupportedLanguages;
   state.user.subscription.plans = response.userPlans;
 
   const title = getSubscription(response);
@@ -357,8 +356,8 @@ export function useUser(): {
   };
 
   const changeLanguage = (lang: SupportedLanguages) => {
-    state.user.language.selected = lang;
-    i18n.global.locale = lang;
+    state.user.language.selected = lang.toLowerCase() as SupportedLanguages;
+    i18n.global.locale = lang.toLowerCase();
   };
 
   const referFriend = async (email: string) => {

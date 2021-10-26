@@ -57,6 +57,12 @@
               class="img-fluid swoshs-logo"
               alt=""
             />
+            <!-- <div
+              class="user-img d-flex justify-content-center align-items-center"
+            >
+              <i class="far fa-user"></i>
+            </div> -->
+
             <template v-if="!isExpired && isPremium">
               <button class="account-settings-btn mt-3 pr-5 pl-5">
                 {{ $t("premium") }}
@@ -161,6 +167,21 @@ export default defineComponent({
     font-weight: bold;
     color: var(--swoshs-black);
   }
+}
+
+.user-img {
+  width: 180px;
+  height: 180px;
+  margin: 20px auto;
+  font-size: 110px;
+  border: 1px solid var(--swoshs-color3);
+  background-color: var(--swoshs-color3);
+  color: var(--swoshs-color1);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.swoshs-logo {
+  width: 200px;
 }
 ////////////////////////////////////////
 

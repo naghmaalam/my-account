@@ -27,7 +27,10 @@
           </div>
         </div>
         <div class="col-md-2 pt-4">
-          <button class="upgrade-btn pt-2 pb-2 pr-4 pl-4">
+          <button
+            class="upgrade-btn pt-2 pb-2 pr-4 pl-4"
+            @click="$router.push({ name: 'checkout' })"
+          >
             {{ $t("upgrade") }}
           </button>
         </div>
@@ -35,15 +38,17 @@
     </div>
   </div>
 </template>
+<script lang="ts">
+import { defineComponent } from "vue";
 
-<script>
-export default {
+export default defineComponent({
   setup() {
     return {};
   },
-};
+});
 </script>
-<style scoped>
+
+<style lang="scss" scoped>
 .account-headline {
   width: 100%;
   background: #fff;

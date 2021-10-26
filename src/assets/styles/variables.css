@@ -1,12 +1,15 @@
 :root {
   --swoshs-linear-gradient: linear-gradient(#a215ff 0%, #5f29ff 100%);
   --swoshs-linear-gradient2: linear-gradient(#fb217d 0%, #ff29fc 100%);
+  --swoshs-linear-gradient3: linear-gradient(#ff29fc 0%, #fb217d 100%);
   --swoshs-color1: #a215ff;
   --swoshs-color2: #5f29ff;
+  --swoshs-color3: #eee6ff;
   --swoshs-black: #383361;
   --swoshs-light-gray: rgb(243, 247, 254);
   --swoshs-green: #15c50a;
   --swoshs-light-green: #e9f9ee;
   --swoshs-red: #c50a0a;
   --swoshs-light-red: #f9e9e9;
+  --swoshs-box-shadow: 0px 8px 14px rgba(214, 225, 243, 0.64);
 }

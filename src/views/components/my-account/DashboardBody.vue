@@ -287,10 +287,14 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const recentDevice = computed(() => {
-      return stateUser.value.devices.list[0].name;
+      return stateUser.value.devices.list.length
+        ? stateUser.value.devices.list[0].name
+        : "-";
     });
     const recentOs = computed(() => {
-      return stateUser.value.devices.list[0].type;
+      return stateUser.value.devices.list.length
+        ? stateUser.value.devices.list[0].type
+        : "-";
     });
     const memberDate = computed(() => {
       const date = new Date(
@@ -460,6 +464,7 @@ export default defineComponent({
   text-align: left;
   color: #383361;
   border: 1px solid rgba(0, 0, 0, 0);
+  white-space: nowrap;
 }
 
 .account-info {
