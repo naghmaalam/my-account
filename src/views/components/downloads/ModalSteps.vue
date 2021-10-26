@@ -38,29 +38,29 @@
             </div>
           </div>
 
-          <div class="modal-body pt-5 pb-5 pr-5">
+          <div class="modal-body pt-5 pb-5 pr-5 mob-res-padding">
             <div class="close d-md-none" @click="closeModal">
               <i class="fas fa-times"></i>
             </div>
             <div class="d-flex flex-row justify-content-around mob-reverse-col">
-              <div class="device-image ml-4 mob-reverse-col">
-                <div
-                  class="
-                    d-flex
-                    flex-column
-                    justify-content-center
-                    align-items-center
-                    py-3
-                    px-4
-                  "
-                >
-                  <i class="downloads-icons pt-1" :class="device?.icon"></i>
-                  <div class="downloads-title pb-1">
-                    {{ device?.title }}
+              <div class="mob-res-device">
+                <div class="device-image ml-4">
+                  <div
+                    class="
+                      d-flex
+                      flex-column
+                      justify-content-center
+                      align-items-center
+                    "
+                  >
+                    <i class="downloads-icons pt-1" :class="device?.icon"></i>
+                    <div class="downloads-title pb-1">
+                      {{ device?.title }}
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="mt-3 pl-5">
+              <div class="mt-3 pl-5 mob-res">
                 <div class="device-modal-title mob-res-center">
                   {{ $t("download_for") }} {{ device?.title }}
                 </div>
@@ -71,7 +71,7 @@
             </div>
           </div>
 
-          <div class="download-modal-footer pr-5">
+          <div class="download-modal-footer pr-5 mob-res-padding">
             <div
               class="
                 d-flex
@@ -79,11 +79,13 @@
                 justify-content-around
                 pb-4
                 ml-4
-                mob-reverse-col
+                mob-res-margin mob-reverse-col
               "
             >
-              <div class="pl-3 mt-0 pt-4 pr-3">
-                <div class="device-modal-title mob-res-center">
+              <div class="pl-3 mt-0 pt-4 pr-3 mob-res-padding-top">
+                <div
+                  class="device-modal-title mob-res-center mob-res-title-margin"
+                >
                   {{ $t("ready_to_download") }}
                 </div>
                 <div class="device-modal-subtitle p-1 mob-res-center">
@@ -92,7 +94,13 @@
                   ></span>
                 </div>
               </div>
-              <div class="device-download-btns pt-4">
+              <div
+                class="
+                  device-download-btns
+                  pt-4
+                  mob-res-padding mob-res-btns-margin
+                "
+              >
                 <a
                   :href="device?.fileUrl"
                   target="_blank"
@@ -105,7 +113,7 @@
                       pb-3
                       pl-4
                       pr-4
-                      mob-res-center
+                      mob-res-center mob-res-padding
                     "
                     style="text-transform: uppercase"
                   >
@@ -121,7 +129,7 @@
                       pb-3
                       pl-4
                       pr-4
-                      mob-res-center
+                      mob-res-center mob-res-padding
                     "
                     style="text-transform: uppercase"
                   >
@@ -593,6 +601,65 @@ export default defineComponent({
 
   .mob-res-center {
     text-align: center !important;
+  }
+
+  .mob-res-padding {
+    padding-bottom: 1rem !important;
+  }
+
+  .modal-body {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+  }
+
+  .mob-res-btn {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .mob-res-padding {
+    padding: 0rem !important;
+  }
+
+  .device-image {
+    width: 10rem !important;
+    height: 7rem !important;
+    margin-top: 1rem !important ;
+  }
+
+  .center {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .mob-res-device {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .mob-res-padding-top {
+    padding-top: 0rem !important;
+  }
+
+  .mob-res {
+    padding-right: 2rem !important;
+    padding-left: 2rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .mob-res-margin {
+    margin-left: 0rem !important;
+  }
+
+  .mob-res-btns-margin {
+    margin-right: 3rem !important;
+    margin-left: 3rem !important;
+    margin-top: 1rem !important;
+  }
+
+  .mob-res-title-margin {
+    margin-top: 1rem !important;
   }
 }
 </style>

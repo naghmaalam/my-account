@@ -162,7 +162,7 @@ export default defineComponent({
     color: var(--swoshs-black);
   }
 }
-////////////////////////////////////////
+////////////////////////////////////////////
 
 .account-settings-title {
   font-family: Poppins;

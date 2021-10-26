@@ -26,11 +26,13 @@
             <div class="new-price">$9.99</div>
           </div>
         </div>
-        <div class="col-md-2 pt-4">
-          <button class="upgrade-btn pt-2 pb-2 pr-4 pl-4">
-            {{ $t("upgrade") }}
-          </button>
-        </div>
+        <a href="payment">
+          <div class="col-md-2 pt-4">
+            <button class="upgrade-btn pt-2 pb-2 pr-4 pl-4">
+              {{ $t("upgrade") }}
+            </button>
+          </div>
+        </a>
       </div>
     </div>
   </div>

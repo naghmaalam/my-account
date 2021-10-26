@@ -18,11 +18,13 @@
               {{ $t("devices_subtitle") }}
             </div>
           </div>
-          <div class="add-device mt-3">
-            <button class="devices-btn pr-3 pl-3 pt-2 pb-2">
-              {{ $t("add_device") }}
-            </button>
-          </div>
+          <a href="payment">
+            <div class="add-device mt-3">
+              <button class="devices-btn pr-3 pl-3 pt-2 pb-2">
+                {{ $t("add_device") }}
+              </button>
+            </div>
+          </a>
         </div>
         <div class="devices-row-line mt-2"></div>
 

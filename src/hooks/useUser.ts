@@ -4,16 +4,18 @@ import i18n from "@/locales/localization";
 import { User, LoginDetails, Me, VerifyDetails } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
 import { DeviceId, MeDevice } from "@/types/Devices";
+import { Order } from "@/types/Orders";
 
 import { api, Method } from "@/modules/api";
 import { storage } from "@/modules/storage";
-import { tryCatch } from "@/modules/error";
+import { tryCatchBoolean, tryCatch } from "@/modules/error";
 import { detectBrowser, getEncryptedPassword } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
 
 class UserDefault implements User {
   authenticated = false;
+  dateRegistered = null;
   currentSubscription = {
     title: null,
     isExpired: null,
@@ -60,6 +62,7 @@ function setUser(response: Me) {
   state.user.authenticated = true;
   state.user.me = response;
   state.user.email = response.email;
+  state.user.dateRegistered = new Date(response.createdAt as string);
   state.user.language.selected = <SupportedLanguages>(
     response.preferred_language
   );
@@ -71,11 +74,15 @@ function setUser(response: Me) {
 
   if (title == "premium") {
     isExpired = response.userTrialPremiumPackagesFlags.premiumPackageExipred;
-    expiryDate = response.userTrialPremiumPackagesFlags.premiumPackageEndDate;
+    expiryDate = new Date(
+      response.userTrialPremiumPackagesFlags.premiumPackageEndDate as string
+    );
   }
   if (title == "trial") {
     isExpired = response.userTrialPremiumPackagesFlags.trialPackageExpired;
-    expiryDate = response.userTrialPremiumPackagesFlags.trialPackageEndDate;
+    expiryDate = new Date(
+      response.userTrialPremiumPackagesFlags.trialPackageEndDate as string
+    );
   }
   state.user.currentSubscription = {
     title,
@@ -161,11 +168,14 @@ export function useUser(): {
       logout: (deviceId: number) => Promise<boolean>;
     };
   };
+  get: {
+    orders: () => Promise<Order[] | boolean>;
+  };
 } {
   // do
   /////////////////////////////////////////////////////////////////////
   const login = async (email: string, password: string) => {
-    return tryCatch(async () => {
+    return tryCatchBoolean(async () => {
       const loginDetails: LoginDetails = {
         username: email,
         password: password,
@@ -176,7 +186,7 @@ export function useUser(): {
         lang: state.user.language.selected,
         version: "version",
       };
-      const response = await api("login", Method.POST, loginDetails);
+      const response: Me = await api("login", Method.POST, loginDetails);
       toast.do.show(response.message);
       console.log("waits..");
       setTimeout(() => {
@@ -195,8 +205,8 @@ export function useUser(): {
 
   const register = {
     inviteCode: async (email: string, password: string, inviteCode: string) => {
-      return tryCatch(async () => {
-        const response = await api("register", Method.POST, {
+      return tryCatchBoolean(async () => {
+        const response: Me = await api("register", Method.POST, {
           username: email,
           password: password,
           invite_code: inviteCode,
@@ -205,7 +215,7 @@ export function useUser(): {
       });
     },
     verifyCode: async (email: string, code: string) => {
-      return tryCatch(async () => {
+      return tryCatchBoolean(async () => {
         const verifyDetails: VerifyDetails = {
           email,
           verification_code: code,
@@ -215,7 +225,7 @@ export function useUser(): {
           lang: state.user.language.selected,
           version: "version",
         };
-        const response = await api(
+        const response: Me = await api(
           "verify/email/code",
           Method.POST,
           verifyDetails
@@ -230,15 +240,15 @@ export function useUser(): {
 
   const loginWithCode = {
     emailCode: async (email: string) => {
-      return tryCatch(async () => {
+      return tryCatchBoolean(async () => {
         await api("login/with/code", Method.POST, {
           username: email,
         });
       });
     },
     loginCode: async (email: string, code: string) => {
-      return tryCatch(async () => {
-        const response = await api("login/with/code", Method.POST, {
+      return tryCatchBoolean(async () => {
+        const response: Me = await api("login/with/code", Method.POST, {
           username: email,
           login_code: code,
         });
@@ -256,14 +266,14 @@ export function useUser(): {
 
   const passwordRecovery = {
     emailCode: async (email: string) => {
-      return tryCatch(async () => {
+      return tryCatchBoolean(async () => {
         await api("send/confirm/email/code", Method.POST, {
           email,
         });
       });
     },
     verifyCode: async (email: string, verification_code: string) => {
-      return tryCatch(async () => {
+      return tryCatchBoolean(async () => {
         await api("verify/code", Method.POST, {
           email,
           verification_code,
@@ -275,8 +285,8 @@ export function useUser(): {
       verification_code: string,
       new_password: string
     ) => {
-      return tryCatch(async () => {
-        const response = await api("reset/password", Method.POST, {
+      return tryCatchBoolean(async () => {
+        const response: Me = await api("reset/password", Method.POST, {
           email,
           verification_code,
           new_password,
@@ -288,19 +298,21 @@ export function useUser(): {
 
   const account = {
     updatePassword: async (currentPassword: string, newPassword: string) => {
-      return tryCatch(async () => {
-        const response = await api("me/update", Method.POST, {
+      return tryCatchBoolean(async () => {
+        const response: Me = await api("me/update", Method.POST, {
           update_key: "password",
           update_val: getEncryptedPassword(newPassword),
           current_password: getEncryptedPassword(currentPassword),
         });
+        resetUser();
+        setUser(response);
         console.log("updatePassword", response);
       });
     },
 
     refreshStorage: async () => {
-      return tryCatch(async () => {
-        const response = await api("me", Method.GET);
+      return tryCatchBoolean(async () => {
+        const response: Me = await api("me", Method.GET);
         console.log("refreshStorage", response);
         resetUser();
         setUser(response);
@@ -311,8 +323,8 @@ export function useUser(): {
 
   const device = {
     logout: async (deviceId: number) => {
-      return tryCatch(async () => {
-        const response = await api("remove/loggedin/device", Method.POST, {
+      return tryCatchBoolean(async () => {
+        const response: Me = await api("remove/loggedin/device", Method.POST, {
           id: deviceId,
         });
         console.log("device.logout", response);
@@ -350,8 +362,8 @@ export function useUser(): {
   };
 
   const referFriend = async (email: string) => {
-    return tryCatch(async () => {
-      const response = await api("refer/friend", Method.POST, {
+    return tryCatchBoolean(async () => {
+      const response: Me = await api("refer/friend", Method.POST, {
         email,
       });
       toast.do.show(response.message);
@@ -362,7 +374,15 @@ export function useUser(): {
 
   // get
   /////////////////////////////////////////////////////////////////////
-
+  const orders = async () => {
+    return tryCatch(async () => {
+      const response: {
+        message: string;
+        data: Order[];
+      } = await api("orders", Method.GET);
+      return response.data as Order[];
+    });
+  };
   /////////////////////////////////////////////////////////////////////
   // get
 
@@ -379,6 +399,9 @@ export function useUser(): {
       passwordRecovery,
       account,
       device,
+    },
+    get: {
+      orders,
     },
   };
 }

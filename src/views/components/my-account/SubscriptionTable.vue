@@ -3,19 +3,20 @@
     <div class="container-fluid m-0">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col">
             <div class="account-subscription pt-5">
               {{ $t("my_subscriptions") }}
             </div>
             <div class="d-flex flex-row">
               <div class="d-flex flex-column">
-                <div class="active-subscription pr-4 pl-4">
+                <div class="active-subscription pr-4 pl-4" role="button">
                   {{ $t("my_subscription") }}
                 </div>
                 <div class="selected-borderline"></div>
               </div>
               <div
                 class="inactive-subscription pr-4 pl-4"
+                role="button"
                 @click="redirect('orderhistory')"
               >
                 {{ $t("order_history") }}
@@ -26,32 +27,25 @@
         </div>
       </div>
       <!-- Devices Table -->
-      <div
-        class="container mt-3"
-        v-for="headings in headingTitle"
-        :key="headings"
-      >
+      <div class="container mt-3">
         <div class="row">
           <div class="col">
-            <div class="table-title">{{ headings.titleRefNum }}</div>
+            <div class="table-title">{{ headingTitle.refNum }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titleExpires }}</div>
+            <div class="table-title">{{ headingTitle.expires }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titleSubscription }}</div>
+            <div class="table-title">{{ headingTitle.subscription }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titleStatus }}</div>
+            <div class="table-title">{{ headingTitle.status }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titlePayment }}</div>
+            <div class="table-title">{{ headingTitle.payment }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titlefee }}</div>
-          </div>
-          <div class="col">
-            <div class="table-title">{{ headings.titleAction }}</div>
+            <div class="table-title">{{ headingTitle.action }}</div>
           </div>
         </div>
       </div>
@@ -59,21 +53,23 @@
       <!-- ist row of the table -->
       <div
         class="container table-content mt-3 pt-3 pb-3"
-        v-for="items in tableItems"
-        :key="items"
+        v-for="(sub, i) in subscriptions"
+        :key="'d_' + i"
       >
         <div class="row d-dlex justify-content-center align-items-center">
           <div class="col">
             <div class="table-subtitle">
-              {{ items.refNum }}
+              {{ sub.refNum }}
             </div>
           </div>
           <div class="col">
-            <div class="table-subtitle">{{ items.expires }}</div>
+            <div class="table-subtitle">
+              {{ sub.expires }}
+            </div>
           </div>
           <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              {{ items.subscription }}
+            <div class="table-subtitle table-subtitle-bold text-center">
+              {{ sub.subscription }}
             </div>
           </div>
           <div class="col">
@@ -81,23 +77,22 @@
               <div
                 class="pt-1 pb-1 ml-5"
                 :class="{
-                  'subscription-active-btn': items.status === 'active',
-                  'inactive-btn': items.status === 'inactive',
+                  'subscription-active-btn': sub.status === 'active',
+                  'inactive-btn': sub.status === 'inactive',
                 }"
               >
-                {{ items.status }}
+                {{ sub.status }}
               </div>
             </div>
           </div>
           <div class="col">
-            <div class="table-subtitle">{{ items.paymentProvider }}</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">{{ items.renewalFee }}</div>
+            <div class="table-subtitle">{{ sub.paymentProvider }}</div>
           </div>
           <div class="col">
             <div class="table-subtitle">
-              <button class="my-account-btn">{{ items.action }}</button>
+              <button class="my-account-btn">
+                {{ sub.action }}
+              </button>
             </div>
           </div>
         </div>
@@ -130,80 +125,73 @@
       </div>
 
       <div
-        class="conatiner table-content pl-3"
-        v-for="items in tableItems"
-        :key="items"
+        class="container table-content my-3 p-3"
+        v-for="(sub, i) in subscriptions"
+        :key="'m_' + i"
       >
-        <div v-for="headings in headingTitle" :key="headings">
-          <div class="row mob-res-center mb-2">
+        <div class="table-row">
+          <div class="row">
             <div class="col">
               <div class="table-title">
                 <span class="mob-line-height">
-                  {{ headings.titleRefNum }}
+                  {{ headingTitle.refNum }}
                 </span>
               </div>
             </div>
             <div class="col">
-              <div class="table-subtitle">{{ items.refNum }}</div>
+              <div class="table-subtitle">{{ sub.refNum }}</div>
             </div>
           </div>
 
-          <div class="row mob-res-center mb-2">
+          <div class="row">
             <div class="col">
-              <div class="table-title">{{ headings.titleExpires }}</div>
+              <div class="table-title">{{ headingTitle.expires }}</div>
             </div>
             <div class="col">
-              <div class="table-subtitle text-center">{{ items.expires }}</div>
+              <div class="table-subtitle text-center">{{ sub.expires }}</div>
             </div>
           </div>
 
-          <div class="row mob-res-center mb-2">
+          <div class="row">
             <div class="col">
-              <div class="table-title">{{ headings.titleSubscription }}</div>
+              <div class="table-title">{{ headingTitle.subscription }}</div>
             </div>
             <div class="col">
               <div class="table-subtitle table-subtitle-bold">
-                {{ items.subscription }}
+                {{ sub.subscription }}
               </div>
             </div>
           </div>
 
-          <div class="row mob-res-center mb-2">
+          <div class="row">
             <div class="col">
-              <div class="table-title">{{ headings.titleStatus }}</div>
+              <div class="table-title">{{ headingTitle.status }}</div>
             </div>
             <div class="col">
               <div class="table-subtitle">
-                <div class="subscription-active-btn">{{ items.status }}</div>
+                <div class="subscription-active-btn">{{ sub.status }}</div>
               </div>
             </div>
           </div>
 
-          <div class="row mob-res-center mb-2">
+          <div class="row">
             <div class="col">
-              <div class="table-title">{{ headings.titlePayment }}</div>
+              <div class="table-title">{{ headingTitle.payment }}</div>
             </div>
             <div class="col">
-              <div class="table-subtitle">{{ items.action }}</div>
-            </div>
-          </div>
-
-          <div class="row mob-res-center mb-2">
-            <div class="col">
-              <div class="table-title">{{ headings.titlefee }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle">{{ items.renewalFee }}</div>
+              <div class="table-subtitle">{{ sub.paymentProvider }}</div>
             </div>
           </div>
 
-          <div class="row mob-res-center mb-2">
+          <div class="row">
             <div class="col">
-              <div class="table-title">{{ headings.titleAction }}</div>
+              <div class="table-title">{{ headingTitle.action }}</div>
             </div>
             <div class="col">
               <div class="table-subtitle">
-                <button class="my-account-btn">{{ items.action }}</button>
+                <button v-if="sub.action" class="my-account-btn">
+                  {{ sub.action }}
+                </button>
               </div>
             </div>
           </div>
@@ -213,53 +201,83 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { computed } from "vue";
 import { useRouter } from "vue-router";
+import { stateUser } from "@/hooks/useUser";
+import { isDateExpired } from "@/modules/utils";
 
 export default {
   setup() {
     const router = useRouter();
-    const redirect = (page) => {
+    const redirect = (page: string) => {
       router.push({ name: page });
     };
+
+    const headingTitle = {
+      refNum: "Refence Number",
+      expires: "Expires",
+      subscription: "Subscription",
+      status: "Status",
+      payment: "Payment Provider",
+      action: "Action",
+    };
+
+    const subscriptions = computed(() => {
+      return stateUser.value.subscription.plans.map((vl) => {
+        const expire = new Date(vl.end_date as unknown as string);
+        const status = isDateExpired(vl.end_date as unknown as string)
+          ? "inactive"
+          : "active";
+        let action = "";
+        if (!stateUser.value.currentSubscription.isExpired) {
+          if (stateUser.value.currentSubscription.title === "premium") {
+            action = "";
+          } else {
+            action = "upgrade";
+          }
+        } else {
+          if (stateUser.value.currentSubscription.title === "premium") {
+            action = "renew";
+          } else {
+            action = "upgrade";
+          }
+        }
+
+        return {
+          refNum: vl.id,
+          expires:
+            expire.getMonth() +
+            "/" +
+            expire.getDate() +
+            "/" +
+            expire.getFullYear(),
+          subscription: vl.title,
+          status,
+          paymentProvider: "-",
+          action,
+        };
+      });
+    });
+
     return {
       redirect,
-      headingTitle: [
-        {
-          titleRefNum: "Refence Number",
-          titleExpires: "Expires",
-          titleSubscription: "Subscription",
-          titleStatus: "Status",
-          titlePayment: "Payment Provider",
-          titlefee: "Renewal Fee",
-          titleAction: "Action",
-        },
-      ],
-      tableItems: [
-        {
-          refNum: 5432178943,
-          expires: "12 / 4 / 21",
-          subscription: "Premium-1 Months Subscription",
-          status: "active",
-          paymentProvider: "Bitcoin",
-          renewalFee: "$20",
-          action: "recharge",
-        },
-        {
-          refNum: 5432178944,
-          expires: "12 / 4 / 22",
-          subscription: "Premium-6 Months Subscription",
-          status: "inactive",
-          paymentProvider: "Bitcoin",
-          renewalFee: "$20",
-          action: "renew",
-        },
-      ],
+      headingTitle,
+      subscriptions,
     };
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+.table-row {
+  > div {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/////////////////////////////////////////////////
+
 .account-subscription {
   font-family: Poppins;
   font-weight: bold;
@@ -372,12 +390,6 @@ export default {
   opacity: 0.19;
 }
 
-/* .account-bg {
-  background: #f3f7fe;
-  width: 100%;
-  height: 100vh;
-} */
-
 .subscription {
   background: #fff;
   filter: drop-shadow(0px 8px 14px rgba(214, 225, 243, 0.64));
@@ -433,9 +445,9 @@ export default {
     display: none;
   }
 
-  .row {
-    flex-wrap: none !important;
-  }
+  // .row {
+  //   flex-wrap: none !important;
+  // }
 
   * {
     box-sizing: none !important;
@@ -447,17 +459,16 @@ export default {
     text-align: left !important;
   }
 
-  .table-subtitle-bold {
-    text-align: ;
-  }
-  /* 
-  .table-content {
-    padding-top: 0rem !important;
-  } */
+  // .table-subtitle-bold {
+  //   text-align: ;
+  // }
+
+  // .table-content {
+  //   padding-top: 0rem !important;
+  // }
 
   .account-subscription {
     font-size: 1rem;
-    /* padding-top: 2rem !important; */
   }
 
   .active-subscription {
@@ -475,11 +486,11 @@ export default {
     line-height: 1.2rem;
   }
 
-  .mob-res-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  // .mob-res-center {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  // }
 
   .table-title span {
     line-height: 2px;

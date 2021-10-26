@@ -21,9 +21,9 @@ export interface Me {
   userPlans: Plan[];
   isPremiumUser: boolean;
   userTrialPremiumPackagesFlags: {
-    premiumPackageEndDate: Date | null; // "2021-10-15 11:21:45"
+    premiumPackageEndDate: string | null; // "2021-10-15 11:21:45"
     premiumPackageExipred: boolean;
-    trialPackageEndDate: Date | null; // "2021-09-25 07:04:09"
+    trialPackageEndDate: string | null; // "2021-09-25 07:04:09"
     trialPackageExpired: boolean;
   };
   total_allowed_devices: number;
@@ -43,6 +43,7 @@ export interface User {
     isExpired: boolean | null;
     expiryDate: Date | null;
   };
+  dateRegistered: Date | null;
   devices: {
     list: LoggedInDevice[];
     allowed: number;

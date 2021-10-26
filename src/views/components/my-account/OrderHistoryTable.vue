@@ -3,53 +3,50 @@
     <div class="container-fluid m-0">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col">
             <div class="account-subscription pt-5">
               {{ $t("my_subscriptions") }}
             </div>
             <div class="d-flex flex-row">
               <div
                 class="inactive-subscription pr-4 pl-4"
+                role="button"
                 @click="redirect('subscription')"
               >
                 {{ $t("my_subscription") }}
               </div>
               <div class="d-flex flex-column">
-                <div class="active-subscription pr-4 pl-4">
+                <div class="active-subscription pr-4 pl-4" role="button">
                   {{ $t("order_history") }}
                 </div>
                 <div class="selected-borderline"></div>
               </div>
             </div>
+            <div class="subscription-borderline"></div>
           </div>
-          <div class="subscription-borderline"></div>
         </div>
       </div>
 
       <!-- table -->
-      <div
-        class="container mt-3"
-        v-for="headings in headingTitles"
-        :key="headings"
-      >
+      <div class="container mt-3">
         <div class="row">
           <div class="col">
-            <div class="table-title">{{ headings.titleOrderNum }}</div>
+            <div class="table-title">{{ headingTitles.orderNum }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titleSubs }}</div>
+            <div class="table-title">{{ headingTitles.subs }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titleStatus }}</div>
+            <div class="table-title">{{ headingTitles.status }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titlePayment }}</div>
+            <div class="table-title">{{ headingTitles.payment }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titleAmount }}</div>
+            <div class="table-title">{{ headingTitles.amount }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headings.titleDate }}</div>
+            <div class="table-title">{{ headingTitles.date }}</div>
           </div>
         </div>
       </div>
@@ -58,16 +55,16 @@
 
       <div
         class="container table-content mt-3 pt-3 pb-3"
-        v-for="items in tableItems"
-        :key="items"
+        v-for="(or, i) in orders"
+        :key="'d_' + i"
       >
         <div class="row d-dlex justify-content-center align-items-center">
           <div class="col">
-            <div class="table-subtitle">{{ items.orderNum }}</div>
+            <div class="table-subtitle">{{ or.orderNum }}</div>
           </div>
           <div class="col">
             <div class="table-subtitle table-subtitle-bold">
-              {{ items.subscription }}
+              {{ or.subscription }}
             </div>
           </div>
           <div class="col">
@@ -75,23 +72,23 @@
               <div
                 class="subscription-active-btn pt-1 pb-1 ml-5"
                 :class="{
-                  'subscription-active-btn': items.orderStatus === 'paid',
-                  'refunded-btn': items.orderStatus === 'Refunded',
-                  'inactive-btn': items.orderStatus === 'unpaid',
+                  'subscription-active-btn': or.orderStatus === 'paid',
+                  'refunded-btn': or.orderStatus === 'Refunded',
+                  'inactive-btn': or.orderStatus === 'unpaid',
                 }"
               >
-                {{ items.orderStatus }}
+                {{ or.orderStatus }}
               </div>
             </div>
           </div>
           <div class="col">
-            <div class="table-subtitle">{{ items.paymentProvider }}</div>
+            <div class="table-subtitle">{{ or.paymentProvider }}</div>
           </div>
           <div class="col">
-            <div class="table-subtitle">{{ items.orderAmount }}</div>
+            <div class="table-subtitle">{{ or.orderAmount }}</div>
           </div>
           <div class="col">
-            <div class="table-subtitle">{{ items.orderDate }}</div>
+            <div class="table-subtitle">{{ or.orderDate }}</div>
           </div>
         </div>
       </div>
@@ -99,7 +96,7 @@
   </div>
 
   <!-- mob responsive design -->
-  <div class="container-fluid account-bg m-0 p-0 d-md-none show-mobile">
+  <!-- <div class="container-fluid account-bg m-0 p-0 d-md-none show-mobile">
     <div class="container-fluid m-0">
       <div class="container">
         <div class="row">
@@ -125,8 +122,6 @@
           <div class="subscription-borderline"></div>
         </div>
       </div>
-
-      <!-- order table  -->
 
       <div
         class="conatiner table-content pl-3"
@@ -202,108 +197,71 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
-<script>
+<script lang="ts">
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+
+import { useUser } from "@/hooks/useUser";
+import { Order } from "@/types/Orders";
 
 export default {
   setup() {
     const router = useRouter();
-    const redirect = (page) => {
-      router.push({ name: page });
+
+    const redirect = (pg: string) => {
+      router.push({ name: pg });
     };
+
+    const headingTitles = {
+      orderNum: "Order Number",
+      subs: "Subscription",
+      status: " Order Status",
+      payment: "Payment Provider",
+      amount: "Order Amount",
+      date: " Date Of Order",
+    };
+
+    const orders = ref<Order[]>([]);
+    const user = useUser();
+    const getOrders = async () => {
+      const rslt = await user.get.orders();
+      if (Array.isArray(rslt)) {
+        return rslt.map((vl) => {
+          return {
+            orderNum: vl.order_number,
+            subscription: "Premium-1 Months Subscription",
+            orderStatus: "paid",
+            paymentProvider: "Bitcoin",
+            orderAmount: "$20",
+            orderDate: "12/9/2021",
+          };
+        });
+      }
+    };
+    onMounted(() => {
+      getOrders();
+    });
+
+    // {
+    //   orderNum: 5432178943,
+    //   subscription: "Premium-1 Months Subscription",
+    //   orderStatus: "paid",
+    //   paymentProvider: "Bitcoin",
+    //   orderAmount: "$20",
+    //   orderDate: "12/9/2021",
+    // }
+
     return {
       redirect,
-      headingTitles: [
-        {
-          titleOrderNum: "Order Number",
-          titleSubs: "Subscription",
-          titleStatus: " Order Status",
-          titlePayment: "Payment Provider",
-          titleAmount: "Order Amount",
-          titleDate: " Date Of Order",
-        },
-      ],
-      tableItems: [
-        {
-          orderNum: 5432178943,
-          subscription: "Premium-1 Months Subscription",
-          orderStatus: "paid",
-          paymentProvider: "Bitcoin",
-          orderAmount: "$20",
-          orderDate: "12/9/2021",
-        },
-        {
-          orderNum: 5432178944,
-          subscription: "Premium-1 Months Subscription",
-          orderStatus: "Refunded",
-          paymentProvider: "Bitcoin",
-          orderAmount: "$20",
-          orderDate: "12/9/2021",
-        },
-        {
-          orderNum: 5432178944,
-          subscription: "Premium-1 Months Subscription",
-          orderStatus: "unpaid",
-          paymentProvider: "Bitcoin",
-          orderAmount: "$20",
-          orderDate: "12/9/2021",
-        },
-        {
-          orderNum: 5432178944,
-          subscription: "Premium-1 Months Subscription",
-          orderStatus: "unpaid",
-          paymentProvider: "Bitcoin",
-          orderAmount: "$20",
-          orderDate: "12/9/2021",
-        },
-        {
-          orderNum: 5432178944,
-          subscription: "Premium-1 Months Subscription",
-          orderStatus: "unpaid",
-          paymentProvider: "Bitcoin",
-          orderAmount: "$20",
-          orderDate: "12/9/2021",
-        },
-        {
-          orderNum: 5432178944,
-          subscription: "Premium-1 Months Subscription",
-          orderStatus: "unpaid",
-          paymentProvider: "Bitcoin",
-          orderAmount: "$20",
-          orderDate: "12/9/2021",
-        },
-        {
-          orderNum: 5432178944,
-          subscription: "Premium-1 Months Subscription",
-          orderStatus: "unpaid",
-          paymentProvider: "Bitcoin",
-          orderAmount: "$20",
-          orderDate: "12/9/2021",
-        },
-        {
-          orderNum: 5432178944,
-          subscription: "Premium-1 Months Subscription",
-          orderStatus: "unpaid",
-          paymentProvider: "Bitcoin",
-          orderAmount: "$20",
-          orderDate: "12/9/2021",
-        },
-        {
-          orderNum: 5432178944,
-          subscription: "Premium-1 Months Subscription",
-          orderStatus: "unpaid",
-          paymentProvider: "Bitcoin",
-          orderAmount: "$20",
-          orderDate: "12/9/2021",
-        },
-      ],
+      headingTitles,
+      orders,
     };
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .borderline {
   width: auto;
   height: 0px;
@@ -500,9 +458,9 @@ export default {
     text-align: left !important;
   }
 
-  .table-subtitle-bold {
-    text-align: ;
-  }
+  // .table-subtitle-bold {
+  //   text-align: ;
+  // }
 
   .account-subscription {
     font-size: 1.2rem;

@@ -65,13 +65,16 @@ const routes: Array<RouteRecordRaw> = [
     name: "subscription",
     path: "/subscription",
     components: {
-      default: () => import("@/views/pages/Subscription.vue"),
+      default: () => import("@/views/pages/SubscriptionPage.vue"),
       ...components1,
     },
   },
   {
     name: "orderhistory",
     path: "/orderhistory",
+    meta: {
+      activeMenu: "subscription",
+    },
     components: {
       default: () => import("@/views/pages/OrderHistoryPage.vue"),
       ...components1,
@@ -98,14 +101,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/freeUserOrder",
     components: {
       default: () => import("@/views/pages/FreeUserOrderHistoryPage.vue"),
-      ...components1,
-    },
-  },
-  {
-    name: "freeUserSubscription",
-    path: "/freeUserSubscription",
-    components: {
-      default: () => import("@/views/pages/FreeUserSubscriptionPage.vue"),
       ...components1,
     },
   },
