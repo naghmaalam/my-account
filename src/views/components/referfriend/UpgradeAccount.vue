@@ -19,23 +19,69 @@
               alt=""
               class="rf-image"
             />
-            <div class="devices-title pt-3 px-3">
-              {{ $t("upgrade_account_get_reward") }}
-            </div>
-            <div class="devices-subtitle px-3">
-              {{ $t("package_not_supported") }}
-            </div>
-            <div class="add-device text-center mt-3 pb-5">
-              <button class="devices-btn pt-2 pb-2">
-                {{ $t("upgrade") }}
-              </button>
-            </div>
+
+            <template v-if="actionType === 'renew'">
+              <div class="devices-title pt-3 px-3">
+                {{ $t("subscription_expired") }}
+              </div>
+              <div class="devices-subtitle px-3">
+                {{ $t("subscription_expired_message") }}
+              </div>
+              <div class="add-device text-center mt-3 pb-5">
+                <button class="devices-btn pt-2 pb-2">
+                  {{ $t("renew") }}
+                </button>
+              </div>
+            </template>
+            <template v-else>
+              <div class="devices-title pt-3 px-3">
+                {{ $t("upgrade_account_get_reward") }}
+              </div>
+              <div class="devices-subtitle px-3">
+                {{ $t("package_not_supported") }}
+              </div>
+              <div class="add-device text-center mt-3 pb-5">
+                <button class="devices-btn pt-2 pb-2">
+                  {{ $t("upgrade") }}
+                </button>
+              </div>
+            </template>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+<script lang="ts">
+import { computed, defineComponent } from "vue";
+import { stateUser } from "@/hooks/useUser";
+
+export default defineComponent({
+  setup() {
+    const actionType = computed(() => {
+      let action = "renew";
+      if (!stateUser.value.currentSubscription.isExpired) {
+        if (stateUser.value.currentSubscription.title === "premium") {
+          action = "renew";
+        } else {
+          action = "upgrade";
+        }
+      } else {
+        if (stateUser.value.currentSubscription.title === "premium") {
+          action = "renew";
+        } else {
+          action = "upgrade";
+        }
+      }
+      return action;
+    });
+
+    return {
+      actionType,
+    };
+  },
+});
+</script>
 
 <style scoped>
 .add-device {

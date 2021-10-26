@@ -24,6 +24,9 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: "root",
     path: "",
+    meta: {
+      activeMenu: "home",
+    },
     components: {
       default: () => import("@/views/pages/HomePage.vue"),
       ...components1,

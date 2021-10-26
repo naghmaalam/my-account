@@ -8,3 +8,12 @@ export interface Order {
   currency_symbol: string;
   plan_name: string;
 }
+
+export interface TableOrder {
+  orderNum: string;
+  subscription: string;
+  orderStatus: string;
+  paymentProvider: string;
+  orderAmount: string;
+  orderDate: string;
+}

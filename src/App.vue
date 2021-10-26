@@ -1,5 +1,12 @@
 <template>
-  <Fade v-if="stateUser.authenticated || $route.name === `referrallink`">
+  <Fade v-if="isLoading">
+    <div class="page-loader d-flex justify-content-center align-items-center">
+      <div class="spinner-grow text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </Fade>
+  <Fade v-else-if="stateUser.authenticated || $route.name === `referrallink`">
     <component :is="$route.meta.layout" />
   </Fade>
   <Fade v-else>
@@ -10,7 +17,7 @@
   </teleport>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import Toast from "@/views/components/Toast.vue";
@@ -34,6 +41,7 @@ export default defineComponent({
     const { locale } = useI18n({ useScope: "global" });
     const user = useUser();
     const settings = useSettings();
+    const isLoading = ref(false);
 
     // Initialize
     //////////////////////////////////////
@@ -57,11 +65,33 @@ export default defineComponent({
       user.do.changeLanguage("cn");
     };
 
+    onMounted(async () => {
+      // refresh only when logged in
+      if (stateUser.value.authenticated) {
+        isLoading.value = true;
+        await user.do.account.refreshStorage();
+        isLoading.value = false;
+      }
+    });
+
     return {
       stateUser,
       logout,
       changeLang,
+      isLoading,
     };
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.page-loader {
+  height: 100vh;
+  width: 100vw;
+  .spinner-grow.text-primary {
+    color: var(--swoshs-color2) !important;
+    width: 5rem;
+    height: 5rem;
+  }
+}
+</style>

@@ -70,8 +70,9 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import { stateUser, useUser } from "@/hooks/useUser";
+import { getIcon } from "@/modules/utils";
 
-import { DeviceId, LoggedInDevice } from "@/types/Devices";
+import { LoggedInDevice } from "@/types/Devices";
 
 export default defineComponent({
   setup() {
@@ -98,30 +99,6 @@ export default defineComponent({
       //     return item.id !== device.id;
       //   });
       // }, 1000);
-    };
-    const getIcon = (type: DeviceId) => {
-      let retVal = "";
-      switch (type) {
-        case "windows":
-          retVal = `far fa-window-maximize`;
-          break;
-        case "apple":
-          retVal = `fab fa-apple`;
-          break;
-        case "ios":
-          retVal = `fab fa-apple`;
-          break;
-        case "macos":
-          retVal = `fab fa-apple`;
-          break;
-        case "linux":
-          retVal = `fab fa-linux`;
-          break;
-        case "android":
-          retVal = `fab fa-android`;
-          break;
-      }
-      return retVal;
     };
 
     return {

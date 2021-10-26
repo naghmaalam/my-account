@@ -135,10 +135,10 @@ export default defineComponent({
 
     const showMenu = () => {
       isMouseOn.value = true;
-      // isShown.value = true;
-      setTimeout(() => {
-        if (isMouseOn.value) isShown.value = true;
-      }, 300);
+      isShown.value = true;
+      // setTimeout(() => {
+      //   if (isMouseOn.value) isShown.value = true;
+      // }, 300);
     };
 
     const hideMenu = () => {
@@ -258,7 +258,7 @@ export default defineComponent({
 .dropdown-content {
   position: absolute;
   top: 61px;
-  right: 0;
+  right: 30px;
   width: 307px;
   height: auto;
   border-radius: 0px 0px 5px 5px;
@@ -300,6 +300,11 @@ export default defineComponent({
   .user-avatar {
     padding-right: 0px !important;
     padding-left: 0px !important;
+  }
+  .dropdown-content {
+    width: 100vw;
+    left: 0;
+    right: 0;
   }
 }
 

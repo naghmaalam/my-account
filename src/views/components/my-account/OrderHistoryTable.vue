@@ -52,67 +52,104 @@
       </div>
 
       <!-- table content -->
-
-      <div
-        class="container table-content mt-3 pt-3 pb-3"
-        v-for="(or, i) in orders"
-        :key="'d_' + i"
-      >
-        <div class="row d-dlex justify-content-center align-items-center">
-          <div class="col">
-            <div class="table-subtitle">{{ or.orderNum }}</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold">
-              {{ or.subscription }}
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
+      <Fade>
+        <div
+          v-if="isLoading || orders.length <= 0"
+          class="container table-content mt-3 py-3"
+        >
+          <div class="row d-dlex justify-content-center align-items-center">
+            <div class="col">
               <div
-                class="subscription-active-btn pt-1 pb-1 ml-5"
-                :class="{
-                  'subscription-active-btn': or.orderStatus === 'paid',
-                  'refunded-btn': or.orderStatus === 'Refunded',
-                  'inactive-btn': or.orderStatus === 'unpaid',
-                }"
+                class="
+                  d-flex
+                  flex-column
+                  justify-content-center
+                  align-items-center
+                  p-5
+                  text-center
+                "
               >
-                {{ or.orderStatus }}
+                <template v-if="isLoading">
+                  <div class="spinner-grow text-primary my-5" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </template>
+                <template v-else>
+                  <img
+                    src="@/assets/images/subscription/empty.png"
+                    alt="order-history-empty"
+                    class="pb-3"
+                  />
+                  {{ $t("no_information") }}
+                </template>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="table-subtitle">{{ or.paymentProvider }}</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">{{ or.orderAmount }}</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">{{ or.orderDate }}</div>
+        </div>
+        <div v-else>
+          <div
+            class="container table-content mt-3 pt-3 pb-3"
+            v-for="(or, i) in orders"
+            :key="'d_' + i"
+          >
+            <div class="row d-dlex justify-content-center align-items-center">
+              <div class="col">
+                <div class="table-subtitle">{{ or.orderNum }}</div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle table-subtitle-bold text-center">
+                  {{ or.subscription }}
+                </div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle text-center">
+                  <div
+                    class="status-btn py-1"
+                    :class="{
+                      'subscription-active-btn': or.orderStatus === 'paid',
+                      'refunded-btn': or.orderStatus === 'refunded',
+                      'inactive-btn': or.orderStatus === 'unpaid',
+                    }"
+                  >
+                    {{ or.orderStatus }}
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">{{ or.paymentProvider }}</div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">{{ or.orderAmount }}</div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">{{ or.orderDate }}</div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </Fade>
     </div>
   </div>
 
-  <!-- mob responsive design -->
-  <!-- <div class="container-fluid account-bg m-0 p-0 d-md-none show-mobile">
+  <!-- mobile -->
+  <!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+  <div class="container-fluid account-bg m-0 p-0 d-md-none show-mobile">
     <div class="container-fluid m-0">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
-            <div class="account-subscription">
+          <div class="col">
+            <div class="account-subscription text-center">
               {{ $t("my_subscriptions") }}
             </div>
             <div class="d-flex flex-row">
               <div
-                class="inactive-subscription pr-4 pl-4"
+                class="inactive-subscription px-2"
                 @click="redirect('subscription')"
               >
                 {{ $t("my_subscription") }}
               </div>
               <div class="d-flex flex-column">
-                <div class="active-subscription pr-4 pl-4">
+                <div class="active-subscription px-2">
                   {{ $t("order_history") }}
                 </div>
                 <div class="selected-borderline"></div>
@@ -122,97 +159,141 @@
           <div class="subscription-borderline"></div>
         </div>
       </div>
-
-      <div
-        class="conatiner table-content pl-3"
-        v-for="items in tableItems"
-        :key="items"
-      >
-        <div v-for="headings in headingTitles" :key="headings">
-          <div class="row mob-res-center mb-2">
+      <Fade>
+        <div
+          v-if="isLoading || orders.length <= 0"
+          class="container table-content mt-3 py-3"
+        >
+          <div class="row d-dlex justify-content-center align-items-center">
             <div class="col">
-              <div class="table-title">
-                <span class="mob-line-height">
-                  {{ headings.titleOrderNum }}
-                </span>
-              </div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle">{{ items.orderNum }}</div>
-            </div>
-          </div>
-
-          <div class="row mob-res-center mb-2">
-            <div class="col">
-              <div class="table-title">{{ headings.titleSubs }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle table-subtitle-bold">
-                {{ items.subscription }}
-              </div>
-            </div>
-          </div>
-
-          <div class="row mob-res-center mb-2">
-            <div class="col">
-              <div class="table-title">{{ headings.titleStatus }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle">
-                <div class="subscription-active-btn pt-1 pb-1">
-                  {{ items.orderStatus }}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mob-res-center mb-2">
-            <div class="col">
-              <div class="table-title">{{ headings.titlePayment }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle">{{ items.paymentProvider }}</div>
-            </div>
-          </div>
-
-          <div class="row mob-res-center mb-2">
-            <div class="col">
-              <div class="table-title">{{ headings.titleAmount }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle">{{ items.orderAmount }}</div>
-            </div>
-          </div>
-
-          <div class="row mob-res-center mb-2">
-            <div class="col">
-              <div class="table-title">{{ headings.titleDate }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle text-center">
-                {{ items.orderDate }}
+              <div
+                class="
+                  d-flex
+                  flex-column
+                  justify-content-center
+                  align-items-center
+                  p-5
+                  text-center
+                "
+              >
+                <template v-if="isLoading">
+                  <div class="spinner-grow text-primary my-5" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </template>
+                <template v-else>
+                  <img
+                    src="@/assets/images/subscription/empty.png"
+                    alt="order-history-empty"
+                    class="pb-3"
+                  />
+                  {{ $t("no_information") }}
+                </template>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <div v-else>
+          <div
+            class="container table-content my-3 p-3"
+            v-for="(or, i) in orders"
+            :key="'m_' + i"
+          >
+            <div class="row">
+              <div class="col">
+                <div class="table-title">
+                  <span class="mob-line-height">
+                    {{ headingTitles.orderNum }}
+                  </span>
+                </div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">{{ or.orderNum }}</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="table-title">{{ headingTitles.subs }}</div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle table-subtitle-bold">
+                  {{ or.subscription }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="table-title">{{ headingTitles.status }}</div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">
+                  <div class="subscription-active-btn pt-1 pb-1">
+                    {{ or.orderStatus }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="table-title">{{ headingTitles.payment }}</div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">{{ or.paymentProvider }}</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="table-title">{{ headingTitles.amount }}</div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">{{ or.orderAmount }}</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="table-title">{{ headingTitles.date }}</div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle text-center">
+                  {{ or.orderDate }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Fade>
     </div>
-  </div> -->
+  </div>
+  <!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- mobile -->
 </template>
 <script lang="ts">
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
 import { useUser } from "@/hooks/useUser";
-import { Order } from "@/types/Orders";
+import { TableOrder } from "@/types/Orders";
+import { fmtCurr } from "@/modules/utils";
+
+import Fade from "@/views/components/transitions/Fade.vue";
 
 export default {
+  components: {
+    Fade,
+  },
   setup() {
     const router = useRouter();
 
     const redirect = (pg: string) => {
       router.push({ name: pg });
     };
+
+    const isLoading = ref(false);
 
     const headingTitles = {
       orderNum: "Order Number",
@@ -223,25 +304,28 @@ export default {
       date: " Date Of Order",
     };
 
-    const orders = ref<Order[]>([]);
+    const orders = ref<TableOrder[]>([]);
     const user = useUser();
-    const getOrders = async () => {
+    const initOrders = async () => {
+      isLoading.value = true;
       const rslt = await user.get.orders();
       if (Array.isArray(rslt)) {
-        return rslt.map((vl) => {
+        orders.value = rslt.map((vl) => {
+          let orderDate = new Date(vl.created_at as unknown as string);
           return {
             orderNum: vl.order_number,
-            subscription: "Premium-1 Months Subscription",
-            orderStatus: "paid",
-            paymentProvider: "Bitcoin",
-            orderAmount: "$20",
-            orderDate: "12/9/2021",
+            subscription: vl.plan_name,
+            orderStatus: "-",
+            paymentProvider: vl.payment_method_name,
+            orderAmount: vl.currency_symbol + "" + fmtCurr(vl.amount),
+            orderDate: `${orderDate.getDate()}/${orderDate.getMonth()}/${orderDate.getFullYear()}`,
           };
         });
       }
+      isLoading.value = false;
     };
     onMounted(() => {
-      getOrders();
+      initOrders();
     });
 
     // {
@@ -257,11 +341,26 @@ export default {
       redirect,
       headingTitles,
       orders,
+      isLoading,
     };
   },
 };
 </script>
 <style lang="scss" scoped>
+.status-btn {
+  margin: auto;
+}
+.table-content {
+  > div {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.spinner-grow.text-primary {
+  color: var(--swoshs-color2) !important;
+}
+///////////////////////////////////
 .borderline {
   width: auto;
   height: 0px;
@@ -270,11 +369,11 @@ export default {
   opacity: 0.19;
 }
 
-.account-bg {
-  background: #f3f7fe;
-  width: 100%;
-  height: 100vh;
-}
+// .account-bg {
+//   background: #f3f7fe;
+//   width: 100%;
+//   height: 100vh;
+// }
 
 .subscription {
   background: #fff;
@@ -427,7 +526,7 @@ export default {
     font-family: Poppins;
     font-weight: bold;
     font-size: 0.7rem;
-    line-height: 3rem;
+    line-height: 2rem;
     text-align: left;
     color: #463770;
   }
@@ -463,17 +562,13 @@ export default {
   // }
 
   .account-subscription {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
+  .inactive-subscription,
   .active-subscription {
     font-size: 0.8rem;
-    line-height: 1.5rem;
-  }
-
-  .inactive-subscription {
-    font-size: 1rem;
-    line-height: 1.5rem;
+    line-height: 1.3rem;
   }
 
   .table-subtitle {

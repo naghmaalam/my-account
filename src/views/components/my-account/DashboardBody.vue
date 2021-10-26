@@ -3,10 +3,20 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-6">
-        <div class="account-info-title">{{ $t("howdy") }}</div>
+        <div class="account-info-title text-center text-md-left">
+          {{ $t("howdy") }}
+        </div>
       </div>
       <div class="col-md-6">
-        <div class="account-info-member text-right">
+        <div
+          class="
+            account-info-member
+            text-center text-md-right
+            d-flex
+            justify-content-center justify-content-md-end
+            align-content-center
+          "
+        >
           <h1>{{ $t("member_since") }}:</h1>
           <span class="account-info-date">
             {{ memberDate }}
@@ -45,15 +55,33 @@
                   d-flex
                   flex-row
                   justify-content-around
-                  pt-4
+                  pt-2
                 "
               >
-                <img
+                <!-- <img
                   src="@/assets/images/my-account/windows.png"
                   class="img-fluid"
                   alt=""
-                />
-                <div class="d-flex flex-column">
+                /> -->
+                <div
+                  class="
+                    device-icon
+                    p-3
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                  "
+                >
+                  <i :class="getIcon(recentOs)"></i>
+                </div>
+                <div
+                  class="
+                    d-flex
+                    flex-column
+                    align-items-start
+                    justify-content-center
+                  "
+                >
                   <div class="desktop pl-3 text-capitalize">
                     {{ recentDevice }}
                   </div>
@@ -151,6 +179,7 @@
               class="img-fluid m-3"
               alt=""
             />
+
             <div class="recently-connected d-flex flex-column">
               <div
                 class="
@@ -250,6 +279,7 @@
 import { computed, defineComponent, ref } from "vue";
 import { stateUser } from "@/hooks/useUser";
 import { months } from "@/modules/utils";
+import { getIcon } from "@/modules/utils";
 
 import { useRouter } from "vue-router";
 
@@ -258,6 +288,9 @@ export default defineComponent({
     const router = useRouter();
     const recentDevice = computed(() => {
       return stateUser.value.devices.list[0].name;
+    });
+    const recentOs = computed(() => {
+      return stateUser.value.devices.list[0].type;
     });
     const memberDate = computed(() => {
       const date = new Date(
@@ -281,6 +314,8 @@ export default defineComponent({
       redirect,
       recentDevice,
       lastSignin: "---",
+      getIcon,
+      recentOs,
     };
   },
 });
@@ -292,9 +327,9 @@ export default defineComponent({
 }
 
 .account-info-member {
-  display: flex;
-  justify-content: end;
-  align-content: center;
+  // display: flex;
+  // justify-content: end;
+  // align-content: center;
   h1 {
     font-size: 0.7rem;
     font-weight: bold;
@@ -343,6 +378,16 @@ export default defineComponent({
 .inactive-btn {
   color: var(--swoshs-red);
   background: var(--swoshs-light-red);
+}
+
+.device-icon {
+  font-size: 3rem;
+  color: #fff;
+  background: var(--swoshs-linear-gradient);
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  opacity: 0.7;
 }
 
 ///////////////////////////////////////
@@ -447,9 +492,9 @@ export default defineComponent({
     flex-direction: column-reverse;
   }
 
-  .account-info-member {
-    text-align: left;
-  }
+  // .account-info-member {
+  //   text-align: left;
+  // }
 
   .mob-res-col {
     flex-direction: column !important;

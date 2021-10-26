@@ -2,6 +2,7 @@ import { sha256 } from "js-sha256";
 // import {} from "vue-i18n";
 import i18n from "@/locales/localization";
 import { H5Interface } from "@/types/H5Interface";
+import { DeviceId } from "@/types/Devices";
 
 declare global {
   interface Window {
@@ -136,4 +137,30 @@ export function detectBrowser() {
   } else {
     return "Unknown";
   }
+}
+
+export function getIcon(type: DeviceId) {
+  let retVal = "";
+  switch (type) {
+    case "windows":
+      retVal = `fab fa-windows`;
+      // retVal = `far fa-window-maximize`;
+      break;
+    case "apple":
+      retVal = `fab fa-apple`;
+      break;
+    case "ios":
+      retVal = `fab fa-apple`;
+      break;
+    case "macos":
+      retVal = `fab fa-apple`;
+      break;
+    case "linux":
+      retVal = `fab fa-linux`;
+      break;
+    case "android":
+      retVal = `fab fa-android`;
+      break;
+  }
+  return retVal;
 }

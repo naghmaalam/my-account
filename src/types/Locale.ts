@@ -435,7 +435,8 @@ export interface Locale {
   friends_bought: string;
   free_months_added: string;
   upgrade_account_get_reward: string;
-  package_not_supported: string;  
+  package_not_supported: string;
+  renew: string;
   ////////////////////////////////////////////////////////////////
   // new
 }

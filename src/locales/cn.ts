@@ -490,6 +490,7 @@ const cn: Locale = {
   upgrade_account_get_reward: "To get a reward please upgrade your account_CN",
   package_not_supported:
     "Your current package is not supported on this feature_CN",
+  renew: "Renew_CN",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

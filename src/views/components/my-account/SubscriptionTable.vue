@@ -50,9 +50,38 @@
         </div>
       </div>
 
-      <!-- ist row of the table -->
+      <!-- content -->
+
       <div
-        class="container table-content mt-3 pt-3 pb-3"
+        v-if="subscriptions.length <= 0"
+        class="container table-content mt-3 py-3"
+      >
+        <div class="row d-dlex justify-content-center align-items-center">
+          <div class="col">
+            <div
+              class="
+                d-flex
+                flex-column
+                justify-content-center
+                align-items-center
+                p-5
+                text-center
+              "
+            >
+              <img
+                src="@/assets/images/subscription/empty.png"
+                alt="order-history-empty"
+                class="pb-3"
+              />
+              {{ $t("no_information") }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        v-else
+        class="container table-content mt-3 py-3"
         v-for="(sub, i) in subscriptions"
         :key="'d_' + i"
       >
@@ -90,7 +119,7 @@
           </div>
           <div class="col">
             <div class="table-subtitle">
-              <button class="my-account-btn">
+              <button v-if="sub.action" class="my-account-btn">
                 {{ sub.action }}
               </button>
             </div>
@@ -100,105 +129,139 @@
     </div>
   </div>
 
+  <!-- mobile -->
+  <!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+
   <!-- mob design -->
   <div class="container-fluid account-bg m-0 p-0 hide-desktop show-mobile">
     <div class="container-fluid m-0">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <div class="account-subscription">My Subscription(s)</div>
+            <div class="account-subscription text-center">
+              {{ $t("my_subscriptions") }}
+            </div>
             <div class="d-flex flex-row">
               <div class="d-flex flex-column">
-                <div class="active-subscription pr-4 pl-4">My Subscription</div>
+                <div class="active-subscription pr-4 pl-4">
+                  {{ $t("my_subscription") }}
+                </div>
                 <div class="selected-borderline"></div>
               </div>
               <div
                 class="inactive-subscription pr-4 pl-4"
                 @click="redirect('orderhistory')"
               >
-                Order History
+                {{ $t("order_history") }}
               </div>
             </div>
             <div class="subscription-borderline"></div>
           </div>
         </div>
       </div>
+      <div
+        v-if="subscriptions.length <= 0"
+        class="container table-content mt-3 py-3"
+      >
+        <div class="row d-dlex justify-content-center align-items-center">
+          <div class="col">
+            <div
+              class="
+                d-flex
+                flex-column
+                justify-content-center
+                align-items-center
+                p-5
+                text-center
+              "
+            >
+              <img
+                src="@/assets/images/subscription/empty.png"
+                alt="order-history-empty"
+                class="pb-3"
+              />
+              {{ $t("no_information") }}
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div
+        v-else
         class="container table-content my-3 p-3"
         v-for="(sub, i) in subscriptions"
         :key="'m_' + i"
       >
-        <div class="table-row">
-          <div class="row">
-            <div class="col">
-              <div class="table-title">
-                <span class="mob-line-height">
-                  {{ headingTitle.refNum }}
-                </span>
-              </div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle">{{ sub.refNum }}</div>
+        <div class="row">
+          <div class="col">
+            <div class="table-title">
+              <span class="mob-line-height">
+                {{ headingTitle.refNum }}
+              </span>
             </div>
           </div>
+          <div class="col">
+            <div class="table-subtitle">{{ sub.refNum }}</div>
+          </div>
+        </div>
 
-          <div class="row">
-            <div class="col">
-              <div class="table-title">{{ headingTitle.expires }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle text-center">{{ sub.expires }}</div>
+        <div class="row">
+          <div class="col">
+            <div class="table-title">{{ headingTitle.expires }}</div>
+          </div>
+          <div class="col">
+            <div class="table-subtitle text-center">{{ sub.expires }}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="table-title">{{ headingTitle.subscription }}</div>
+          </div>
+          <div class="col">
+            <div class="table-subtitle table-subtitle-bold">
+              {{ sub.subscription }}
             </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="col">
-              <div class="table-title">{{ headingTitle.subscription }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle table-subtitle-bold">
-                {{ sub.subscription }}
-              </div>
+        <div class="row">
+          <div class="col">
+            <div class="table-title">{{ headingTitle.status }}</div>
+          </div>
+          <div class="col">
+            <div class="table-subtitle">
+              <div class="subscription-active-btn">{{ sub.status }}</div>
             </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="col">
-              <div class="table-title">{{ headingTitle.status }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle">
-                <div class="subscription-active-btn">{{ sub.status }}</div>
-              </div>
-            </div>
+        <div class="row">
+          <div class="col">
+            <div class="table-title">{{ headingTitle.payment }}</div>
           </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="table-title">{{ headingTitle.payment }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle">{{ sub.paymentProvider }}</div>
-            </div>
+          <div class="col">
+            <div class="table-subtitle">{{ sub.paymentProvider }}</div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="col">
-              <div class="table-title">{{ headingTitle.action }}</div>
-            </div>
-            <div class="col">
-              <div class="table-subtitle">
-                <button v-if="sub.action" class="my-account-btn">
-                  {{ sub.action }}
-                </button>
-              </div>
+        <div class="row">
+          <div class="col">
+            <div class="table-title">{{ headingTitle.action }}</div>
+          </div>
+          <div class="col">
+            <div class="table-subtitle">
+              <button v-if="sub.action" class="my-account-btn">
+                {{ sub.action }}
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- mobile -->
 </template>
 
 <script lang="ts">
@@ -269,7 +332,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.table-row {
+.table-content {
   > div {
     justify-content: center;
     align-items: center;
@@ -432,7 +495,7 @@ export default {
     font-family: Poppins;
     font-weight: bold;
     font-size: 0.7rem;
-    line-height: 3rem;
+    line-height: 2rem;
     text-align: left;
     color: #463770;
   }
@@ -471,15 +534,16 @@ export default {
     font-size: 1rem;
   }
 
+  .inactive-subscription,
   .active-subscription {
     font-size: 0.8rem;
-    line-height: 1.5rem;
+    line-height: 1.3rem;
   }
 
-  .inactive-subscription {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
+  // .inactive-subscription {
+  //   font-size: 1rem;
+  //   line-height: 1.5rem;
+  // }
 
   .table-subtitle {
     font-size: 0.7rem;
