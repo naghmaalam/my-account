@@ -6,8 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import i18n from "@/locales/localization";
 
 import "@/assets/font/flaticon.css";
-import "@/assets/styles/variables.css";
-import "@/assets/styles/global.css";
+import "@/assets/styles/variables.scss";
+import "@/assets/styles/global.scss";
 
 import { dom, library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";

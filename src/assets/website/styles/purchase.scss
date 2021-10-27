@@ -1,0 +1,345 @@
+.custom-inc:hover {
+  background: #DFDFED !important;
+}
+
+.plan {
+	cursor: pointer;
+}
+
+.custom-inc::after {
+  background: #DFDFED !important;
+}
+
+.tabs-custom h1 {
+  color: #212529;
+}
+
+.cards {
+  position: relative;
+  // top: -80px;
+}
+
+.cards li {
+  padding-top: 1.5rem;
+  border: 1px solid #707070;
+  padding-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin-top: 1rem;
+  list-style: none;
+  border-radius: 11px;
+}
+
+.benefits-box {
+  margin-top: 1rem;
+  border-radius: 11px;
+  padding-top: 2.8rem;
+  border: 1px solid #707070;
+  padding-bottom: 1.5rem;
+  padding-left: 1.9rem;
+  padding-right: 1.5rem;
+  // top: -80px;
+  position: relative;
+}
+
+
+.accordion-body {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.benefits-box ul li {
+  margin-top: 1rem;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.benefits-box ul li:before {
+  content: '✓';
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  font-weight: 700;
+  color: #239F3C;
+}
+
+.numb-group p {
+  font-size: 2rem;
+}
+
+.numb-tab-group li p {
+  font-size: 2rem;
+}
+
+.payment-selection{
+   color: #22183d;
+}
+
+.no-padding2 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.pay-btn {
+  background: rgb(162, 21, 255);
+  background: linear-gradient(287deg, rgba(162, 21, 255, 1) 39%, rgba(95, 41, 255, 1) 100%);
+  display: block;
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: var(--fifth);
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.pay-btn:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.noti-payment {
+  margin-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.noti-payment p {
+  color: var(--seventh) !important;
+  text-align: justify;
+  font-size: 0.9rem;
+  line-height: 1.8rem;
+}
+/*.sticky {
+  padding: 2rem;
+  position: sticky !important;
+  position:-webkit-sticky !important;
+  bottom: 0;
+}*/
+.fixed-position {
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    padding-bottom: 1rem;
+    z-index: 5;
+    box-shadow: 0 0px 2.2px #bfcde275, 0 0px 5.3px #bfcde275, 0 0px 10px #bfcde275, 0 0px 17.9px #bfcde275, 0 0px 33.4px #bfcde275, 0 0px 80px #bfcde275;
+}
+a.pay-btn {
+    text-decoration: none;
+}
+
+.border-active {
+  box-shadow: 0px 0px 0px 2px rgba(109,36,255,1);
+  -webkit-box-shadow: 0px 0px 0px 2px rgba(109,36,255,1);
+  -moz-box-shadow: 0px 0px 0px 2px rgba(109,36,255,1);
+      transition: all .25s;
+}
+
+.active {
+	box-shadow: 0px 0px 0px 7px rgb(109 36 255) !important;
+    -webkit-box-shadow: 0px 0px 0px 7px rgb(109 36 255) !important;
+    -moz-box-shadow: 0px 0px 0px 7px rgba(109,36,255,1) !important;
+    transition: all .25s;
+}
+.payment {
+     cursor: pointer;
+}
+
+/* media queries */
+
+/* On screens that are 992px or less */
+@media screen and (max-width: 992px) {
+  // .purchase-title{
+  //   font-size: 1rem;
+  //   font-weight: 600;
+  //   line-height: 1rem;
+  // }
+
+  // .purchase-subtitle{
+  //   font-size: 0.6rem;
+  //   font-weight: 600;
+  //   line-height: 1rem;
+  // }
+
+  .media-title{
+    font-size: 1.3rem !important;
+  }
+
+  .media-num{
+    font-size: 40px !important;
+    position: relative;
+    left: 1rem;
+  }
+
+  .media-cards li{
+    padding-top: 1rem;
+    border: 1px solid #707070;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    // margin-left: -50px;
+  }
+
+  .media-custom-inc {
+    padding: 0.7rem !important;
+    border-radius: 30px;
+    height: 30px;
+    width: 30px !important;
+  }
+
+  .media-custom-dec {
+    padding: 0.7rem !important;
+    border-radius: 30px;
+    height: 30px;
+    width: 30px !important;
+  }
+
+  // .media-input-group{
+  //      width: 240px;
+  //      height: 50px
+  // }
+
+  .media-price{
+    font-size: 1.5rem !important;
+  }
+   .media-item{
+     width: auto;
+   }
+
+  .media-tab-content{
+    margin-left: -60px;
+  }
+
+  .media-word-devices{
+    font-size: 1rem;
+    line-height: 2.7rem;
+  }
+
+  .media-input-num{
+    height: 2.7rem !important;
+  }
+
+  // .accordion-header:after{
+  //   left: 200px !important;
+  // }
+
+  // .accordion-header.active2:after{
+  //   left: -15px !important;
+  // }
+
+  .media-fa-plus{
+    position: relative;
+    // bottom: 10px !important;
+    // right: 2px;
+  }
+
+  .media-fa-minus{
+    position: relative;
+    // bottom: 10px !important;
+    // right: 2px;
+  }
+
+  .media-card-title{
+    font-size: 0.9rem !important;
+  }
+
+  .media-img-card{
+    width: 100px;
+  }
+
+  .media-img-paypal{
+    width: 80px;
+  }
+
+  .media-img-gpay{
+    width: 50px;
+  }
+
+}
+
+/* On screens that are 600px or less */
+@media screen and (max-width: 600px) {
+  // .purchase-title{
+  //   font-size: 1rem;
+  //   font-weight: 600;
+  //   line-height: 1rem;
+  // }
+
+  // .purchase-subtitle{
+  //   font-size: 0.6rem;
+  //   font-weight: 600;
+  //   line-height: 1rem;
+  // }
+
+  .media-title{
+    font-size: 1.3rem !important;
+  }
+
+  .media-num{
+    font-size: 40px !important;
+    position: relative;
+    // left: 1rem;
+  }
+
+  .media-cards li{
+    padding-top: 1rem;
+    border: 1px solid #707070;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    // margin-left: -50px;
+  }
+
+  .media-custom-inc {
+    padding: 0.7rem !important;
+    border-radius: 30px;
+    height: 30px;
+    width: 30px !important;
+  }
+
+  .media-custom-dec {
+    padding: 0.7rem !important;
+    border-radius: 30px;
+    height: 30px;
+    width: 30px !important;
+  }
+
+  // .media-input-group{
+  //      width: 240px;
+  //      height: 50px
+  // }
+
+  .media-price{
+    font-size: 1.5rem !important;
+  }
+   .media-item{
+     width: auto;
+   }
+
+  .media-tab-content{
+    // margin-left: -60px;
+  }
+
+  .media-word-devices{
+    font-size: 1rem;
+    line-height: 2.7rem;
+  }
+
+  .media-input-num{
+    height: 2.7rem !important;
+  }
+
+
+}
+@media screen and (max-width: 414px) {
+
+  // #pricePlans #plans .plan {
+  //   float: initial !important;
+  //   margin: 0 !important;
+  // }
+  // .recommended {
+  //   z-index: 2;
+  // }
+  // .accordion button {
+  //   top: 7px;
+  // }
+
+}
