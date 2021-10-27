@@ -1,7 +1,7 @@
 import { reactive, computed, ComputedRef, watch } from "vue";
 import i18n from "@/locales/localization";
 
-import { User, LoginDetails, Me, VerifyDetails } from "@/types/User";
+import { User, Rewards, LoginDetails, Me, VerifyDetails } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
 import { DeviceId, MeDevice } from "@/types/Devices";
 import { Order } from "@/types/Orders";
@@ -169,6 +169,7 @@ export function useUser(): {
   };
   get: {
     orders: () => Promise<Order[] | boolean>;
+    rewards: () => Promise<Rewards | boolean>;
   };
 } {
   // do
@@ -382,6 +383,21 @@ export function useUser(): {
       return response.data as Order[];
     });
   };
+
+  const rewards = async () => {
+    return tryCatch(async () => {
+      const response: {
+        message: string;
+        data: any;
+      } = await api("rewards", Method.GET);
+
+      return {
+        friendsWhoBought: response.data.total_friends_referred,
+        monthsAdded: response.data.free_months_added,
+      } as Rewards;
+    });
+  };
+
   /////////////////////////////////////////////////////////////////////
   // get
 
@@ -401,6 +417,7 @@ export function useUser(): {
     },
     get: {
       orders,
+      rewards,
     },
   };
 }

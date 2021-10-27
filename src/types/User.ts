@@ -81,3 +81,8 @@ export interface VerifyDetails extends Details {
   email: string;
   verification_code: string;
 }
+
+export interface Rewards {
+  friendsWhoBought: number;
+  monthsAdded: number;
+}

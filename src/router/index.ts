@@ -124,17 +124,7 @@ const routes: Array<RouteRecordRaw> = [
       ...components2,
     },
   },
-  {
-    name: "rewards",
-    path: "/referfriend/rewards",
-    meta: {
-      activeMenu: "referfriend",
-    },
-    components: {
-      default: () => import("@/views/pages/RewardsPage.vue"),
-      ...components2,
-    },
-  },
+
   {
     name: "referrallink",
     path: "/register/referrer/:inviteCode",
