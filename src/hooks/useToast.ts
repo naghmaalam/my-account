@@ -30,7 +30,7 @@ function startPopping() {
         // console.log("clearInterval xxxxxx = ", interval);
         clearInterval(interval);
       }
-    }, 10000);
+    }, 5000);
   }
 }
 

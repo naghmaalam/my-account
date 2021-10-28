@@ -1,6 +1,94 @@
 <template>
   <div id="checkout-page">
     <!-- //////////////// -->
+
+    <nav
+      class="nav navbar navbar-expand-md navbar-dark nav inner-menu"
+      id="nav"
+    >
+      <div class="container-fluid mobile-style">
+        <a class="navbar-brand" href="../index.html">
+          <img
+            class="logo img-fluid"
+            src="assets/images/logo.png"
+            alt="SwoshsVPN"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto ml-0">
+            <li class="nav-item">
+              <a class="nav-link" href="../what-is-vpn.html">What is VPN?</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../benefits.html">Benefits</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../purchase.html">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown2"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Download
+              </a>
+              <div
+                class="dropdown-menu animate slideIn"
+                aria-labelledby="navbarDropdown2"
+              >
+                <a class="dropdown-item" href="./android.html"
+                  ><i class="fa fa-android icon" aria-hidden="true"></i
+                  >Android</a
+                >
+                <a class="dropdown-item" href="windows.html">
+                  <i class="fa fa-windows icon" aria-hidden="true"></i
+                  >Windows</a
+                >
+                <a class="dropdown-item" href="ios.html">
+                  <i class="fa fa-apple icon" aria-hidden="true"></i>iOS</a
+                >
+                <a class="dropdown-item" href="linux.html"
+                  ><i class="fa fa-linux icon" aria-hidden="true"></i>Linux</a
+                >
+                <a class="dropdown-item" href="app-download.html"
+                  ><i class="fa fa-sitemap icon" aria-hidden="true"></i>All
+                  Platform</a
+                >
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog/index.html">Blog</a>
+            </li>
+            <li class="nav-item">
+              <!-- <a class="nav-link" href="../my-account.html">My Account</a> -->
+              <router-link :to="{ name: 'home' }" class="nav-link"
+                >My Account</router-link
+              >
+            </li>
+            <li class="nav-item cta-header">
+              <a class="nav-link" href="#">Get Started</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <header class="container-fluid header-content header-purchase">
       <div class="container">
         <div class="row">
@@ -39,43 +127,7 @@
       </div>
     </section>
 
-    <section class="container-fluid content-word">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 numb-group">
-            <h4 class="numb2 media-num">02</h4>
-            <p class="media-title">Create an account</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div>
-              <form action="#" id="form">
-                <label
-                  >Enter your email that you'd like to use for Swoshs
-                  account</label
-                >
-                <div class="input-box">
-                  <input
-                    type="text"
-                    name=""
-                    id="email"
-                    placeholder="Enter Email Address"
-                    onkeydown="validation()"
-                  />
-                </div>
-              </form>
-              <p class="purchase-p">
-                We will not use share your email address with third parties, and
-                will only contact you when necessary to ensure the best
-                services.<br />
-                If you have already an account <a href="login.html">Login</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CreateAccount />
 
     <section class="container-fluid content-word">
       <div class="container">
@@ -134,7 +186,8 @@
                                 </button>
                               </span>
                               <span class="word-devices media-word-devices">
-                                {{ devices.quantity }} Devices
+                                {{ devices.allowedQuantity + devices.quantity }}
+                                Devices
                               </span>
                               <span class="input-group-btn">
                                 <button
@@ -152,9 +205,11 @@
                               </span>
                             </div>
                             <h1 class="text-center media-price mt-3">
-                              {{ devices.currency + devices.price }}
+                              {{ devices.currency + fmtCurr(devices.price) }}
                             </h1>
-                            <h6 class="mb-3">{{ devices.pricePerDevice }}</h6>
+                            <h6 class="mb-3">
+                              {{ devices.pricePerDeviceText }}
+                            </h6>
                             <!-- </div> -->
                           </div>
                         </div>
@@ -255,7 +310,7 @@
       </div>
     </section>
 
-    <section class="container-fluid content-word">
+    <section ref="paySection" class="container-fluid content-word">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -265,7 +320,9 @@
         <div class="row justify-content-center">
           <div class="col-md-6 mt-4">
             <div>
-              <a class="pay-btn" href="#">PAY $10.45</a>
+              <a class="pay-btn" href="#">
+                PAY {{ devices.currency + fmtCurr(devices.price) }}
+              </a>
             </div>
           </div>
         </div>
@@ -284,21 +341,58 @@
       </div>
     </section>
 
+    <FadeUp>
+      <section
+        v-if="showPaySection"
+        class="position-fixed"
+        style="width: 100%; bottom: 0; z-index: 5"
+      >
+        <div class="container-fluid" id="buy-btn">
+          <div
+            class="row justify-content-center align-items-center purchase-btn"
+          >
+            <div class="col-md-4 my-4 btn-fixed">
+              <div>
+                <a class="pay-btn" href="#">
+                  PAY {{ devices.currency + fmtCurr(devices.price) }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FadeUp>
+
+    <Footer />
     <!-- /////////////// -->
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref, watch } from "vue";
+import {
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  reactive,
+  ref,
+  watch,
+} from "vue";
 
 import { ComponentPlan, PlanCodes } from "@/types/Plans";
 
 import { useLoading } from "@/hooks/useLoading";
 import { statePlans, usePlans } from "@/hooks/usePlans";
 
-import { fmtCurr } from "@/modules/utils";
+import { fmtCurr, isElementInViewport } from "@/modules/utils";
+import { log } from "@/modules/debug";
+
+import { debounce } from "lodash";
 
 import Height from "@/views/components/transitions/Height.vue";
 import SubscriptionPlan from "@/views/components/checkout/SubscriptionPlan.vue";
+import CreateAccount from "@/views/components/checkout/CreateAccount.vue";
+
+import Footer from "@/views/components/checkout/Footer.vue";
+import FadeUp from "@/views/components/transitions/FadeUp.vue";
 
 type Operation = "add" | "rem";
 
@@ -306,6 +400,9 @@ export default defineComponent({
   components: {
     Height,
     SubscriptionPlan,
+    CreateAccount,
+    Footer,
+    FadeUp,
   },
   setup() {
     const plans = usePlans();
@@ -314,17 +411,26 @@ export default defineComponent({
     const devices = reactive({
       show: true,
       isQtyDynamic: false,
+      allowedQuantity: 0,
       quantity: 0,
-      pricePerDevice: "",
-      price: "",
+      pricePerAdditionalDevice: 0,
+      pricePerDeviceText: "",
+      origPrice: 0,
+      price: 0,
       currency: "",
     });
 
     const addRemDevices = (oprtn: Operation) => {
       if (oprtn === "add") {
         devices.quantity++;
+        devices.price = devices.pricePerAdditionalDevice * devices.quantity;
+        devices.price = devices.origPrice + devices.price;
       } else {
-        if (devices.quantity > 2) devices.quantity--;
+        if (devices.quantity > 0) {
+          devices.quantity--;
+          devices.price = devices.pricePerAdditionalDevice * devices.quantity;
+          devices.price = devices.origPrice + devices.price;
+        }
       }
     };
     const selectedPlan = ref<ComponentPlan>();
@@ -334,13 +440,13 @@ export default defineComponent({
         row.selected = false;
       });
       plan.selected = true;
-      console.log("selectPlan", plan);
+      log("selectPlan", plan);
     };
 
     onMounted(async () => {
       loading.do.show();
       plans.do.init();
-      const success = await plans.do.refreshStorage();
+      await plans.do.refreshStorage();
       componentPlans.value = statePlans.value.map((val) => {
         return {
           ...val,
@@ -354,16 +460,38 @@ export default defineComponent({
         }
       });
       loading.do.hide();
+
+      window.addEventListener("scroll", handleScroll);
     });
 
+    onUnmounted(() => {
+      window.removeEventListener("scroll", handleScroll);
+    });
+    const paySection = ref();
+    const showPaySection = ref(true);
+    const handleScroll = debounce(
+      (event: Event) => {
+        // log("event handleScroll", isElementInViewport(paySection.value));
+        showPaySection.value = !isElementInViewport(paySection.value);
+      },
+      100,
+      { leading: false, trailing: true }
+    );
+
     function setDevice(plan: ComponentPlan) {
-      devices.quantity = plan.allowed_device_number;
+      devices.allowedQuantity = plan.allowed_device_number;
       // for now set mon1 plan to have dynamic quantity
-      devices.isQtyDynamic = plan.id === PlanCodes.mon1;
-      devices.pricePerDevice =
+      devices.isQtyDynamic = plan.pricesArr[1].additional_device_price > 0;
+      devices.pricePerDeviceText =
         plan.pricesArr[1].symbol + plan.pricesArr[1].price_per_month_des;
-      devices.price = fmtCurr(plan.pricesArr[1].price);
+      devices.pricePerAdditionalDevice =
+        plan.pricesArr[1].additional_device_price;
+      devices.price = plan.pricesArr[1].price;
+      devices.origPrice = plan.pricesArr[1].price;
       devices.currency = plan.pricesArr[1].symbol;
+      devices.quantity = 0;
+
+      log("setDevice()", plan);
     }
 
     watch(
@@ -374,12 +502,15 @@ export default defineComponent({
     );
 
     return {
+      fmtCurr,
       devices,
       addRemDevices,
       PlanCodes,
       componentPlans,
       selectPlan,
       selectedPlan,
+      paySection,
+      showPaySection,
     };
   },
 });
@@ -443,6 +574,12 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   font-size: 3rem;
+}
+
+#buy-btn {
+  background-color: #fff;
+  box-shadow: 0 0px 2.2px #bfcde275, 0 0px 5.3px #bfcde275, 0 0px 10px #bfcde275,
+    0 0px 17.9px #bfcde275, 0 0px 33.4px #bfcde275, 0 0px 80px #bfcde275;
 }
 
 @media screen and (max-width: 768px) {

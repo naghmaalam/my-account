@@ -119,7 +119,11 @@
           </div>
           <div class="col">
             <div class="table-subtitle">
-              <button v-if="sub.action" class="my-account-btn">
+              <button
+                v-if="sub.action"
+                class="my-account-btn"
+                @click="$router.push({ name: 'checkout' })"
+              >
                 {{ sub.action }}
               </button>
             </div>

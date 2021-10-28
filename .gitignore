@@ -79,3 +79,5 @@ typings/
 # media / image files from website
 src/assets/website/images
 src/assets/website/media
+
+dist

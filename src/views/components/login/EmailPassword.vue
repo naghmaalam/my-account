@@ -6,6 +6,8 @@
     <form action="#" @submit.prevent="showPassword">
       <div class="d-flex mt-4 pl-5 pr-5">
         <input
+          ref="emailEl"
+          id="email"
           type="text"
           class="form-control pt-4 pb-4"
           :placeholder="$t('enter_email')"
@@ -51,6 +53,8 @@
       <div class="d-flex flex-row with-visiblity-btn">
         <input
           :type="isPasswordHidden ? 'password' : 'text'"
+          id="password"
+          ref="passwordEl"
           class="form-control login-pwd"
           :placeholder="$t('enter_password')"
           v-model="loginDetails.password"
@@ -114,6 +118,7 @@ import { UpdateSection, Section } from "@/types/Section";
 
 import { useToast } from "@/hooks/useToast";
 import { useUser } from "@/hooks/useUser";
+import { log } from "@/modules/debug";
 export default defineComponent({
   props: {
     email: {
@@ -137,8 +142,12 @@ export default defineComponent({
       password: "",
     });
 
+    const emailEl = ref<HTMLInputElement>();
+    const passwordEl = ref<HTMLInputElement>();
+
     onMounted(() => {
       loginDetails.email = props.email;
+      emailEl.value?.focus();
     });
 
     const showEmail = () => {
@@ -156,6 +165,9 @@ export default defineComponent({
       } else {
         isEmailShown.value = false;
         isPasswordShown.value = true;
+        setTimeout(() => {
+          passwordEl.value?.focus();
+        }, 700);
       }
     };
 
@@ -189,6 +201,8 @@ export default defineComponent({
       showPassword,
       isPasswordHidden,
       updateSection,
+      emailEl,
+      passwordEl,
     };
   },
 });
