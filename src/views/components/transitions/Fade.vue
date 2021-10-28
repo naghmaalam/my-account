@@ -18,7 +18,7 @@ export default defineComponent({
   transform: translateY(10px);
 }
 .fade-enter-active {
-  transition: all 0.3s;
+  transition: all 0.5s;
 }
 .fade-enter-to {
   opacity: 1;
@@ -30,7 +30,7 @@ export default defineComponent({
   transform: translateY(0);
 }
 .fade-leave-active {
-  transition: all 0.3s;
+  transition: all 0.5s;
 }
 .fade-leave-to {
   opacity: 0;

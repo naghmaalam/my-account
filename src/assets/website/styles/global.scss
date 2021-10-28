@@ -33,7 +33,7 @@
 
 }*/
 
-
+::v-deep() {
 
 html {
   scroll-behavior: smooth;
@@ -2434,11 +2434,11 @@ h1.post-title {
 
 #pricePlans #plans .plan {
   background: #fff;
-  float: left;
+  // float: left;
   width: 100%;
   text-align: center;
   border-radius: 20px;
-  margin: 1rem;
+  // margin: 1rem;
   box-shadow: 0 4.5px 3.6px #b2c1db5c, 0 12.5px 10px #b2c1db5c,
     0 30.1px 24.1px #b2c1db5c, 0 100px 80px #b2c1db5c;
 }
@@ -2532,45 +2532,45 @@ h1.post-title {
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  #pricePlans #plans .plan {
-    width: 49%;
-    margin: 0 2% 20px 0;
-  }
+  // #pricePlans #plans .plan {
+  //   width: 49%;
+  //   margin: 0 2% 20px 0;
+  // }
 
-  #pricePlans #plans > li:nth-child(2n) {
-    margin-right: 0;
-  }
+  // #pricePlans #plans > li:nth-child(2n) {
+  //   margin-right: 0;
+  // }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-  #pricePlans #plans .plan {
-    width: 49%;
-    margin: 0 2% 20px 0;
-  }
+  // #pricePlans #plans .plan {
+  //   width: 49%;
+  //   margin: 0 2% 20px 0;
+  // }
 
-  #pricePlans #plans > li:nth-child(2n) {
-    margin-right: 0;
-  }
+  // #pricePlans #plans > li:nth-child(2n) {
+  //   margin-right: 0;
+  // }
 }
 
 @media screen and (min-width: 1025px) {
-  #pricePlans {
-    margin: 2em auto;
-  }
+  // #pricePlans {
+  //   margin: 2em auto;
+  // }
 
   #pricePlans #plans .plan {
-    width: 30%;
+    // width: 30%;
     -webkit-transition: all 0.25s;
     -moz-transition: all 0.25s;
     -ms-transition: all 0.25s;
     -o-transition: all 0.25s;
     transition: all 0.25s;
-    margin: 1.5rem;
+    // margin: 1.5rem;
   }
 
-  #pricePlans #plans > li:last-child {
-    margin-right: 0;
-  }
+  // #pricePlans #plans > li:last-child {
+  //   margin-right: 0;
+  // }
 
   #pricePlans #plans .plan:hover {
     -webkit-transform: scale(1.04);
@@ -2965,3 +2965,4 @@ ul.numb-tab-group {
 }
 
 
+}

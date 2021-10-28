@@ -316,7 +316,6 @@ export function useUser(): {
         console.log("refreshStorage", response);
         resetUser();
         setUser(response);
-        return true;
       });
     },
   };

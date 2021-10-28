@@ -1,13 +1,6 @@
 <template>
-  <Fade v-if="isLoading">
-    <div class="page-loader d-flex justify-content-center align-items-center">
-      <div class="spinner-grow text-primary" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
-  </Fade>
   <Fade
-    v-else-if="
+    v-if="
       stateUser.authenticated ||
       $route.name === `referrallink` ||
       $route.name === `checkout`
@@ -20,6 +13,7 @@
   </Fade>
   <teleport to="body">
     <Toast />
+    <Loading />
   </teleport>
 </template>
 <script lang="ts">
@@ -27,6 +21,7 @@ import { defineComponent, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import Toast from "@/views/components/Toast.vue";
+import Loading from "@/views/components/Loading.vue";
 import Fade from "@/views/components/transitions/Fade.vue";
 
 import Login from "@/views/pages/Login.vue";
@@ -35,9 +30,11 @@ import Main from "@/views/layouts/Main.vue";
 
 import { stateUser, useUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
+import { stateLoading, useLoading } from "@/hooks/useLoading";
 export default defineComponent({
   components: {
     Toast,
+    Loading,
     Login,
     Main,
     // ReferralLinkMain,
@@ -47,7 +44,7 @@ export default defineComponent({
     const { locale } = useI18n({ useScope: "global" });
     const user = useUser();
     const settings = useSettings();
-    const isLoading = ref(false);
+    const loading = useLoading();
 
     // Initialize
     //////////////////////////////////////
@@ -78,9 +75,9 @@ export default defineComponent({
     onMounted(async () => {
       // refresh only when logged in
       if (stateUser.value.authenticated) {
-        isLoading.value = true;
+        loading.do.show();
         await user.do.account.refreshStorage();
-        isLoading.value = false;
+        loading.do.hide();
       }
     });
 
@@ -88,20 +85,8 @@ export default defineComponent({
       stateUser,
       logout,
       changeLang,
-      isLoading,
+      stateLoading,
     };
   },
 });
 </script>
-
-<style lang="scss" scoped>
-.page-loader {
-  height: 100vh;
-  width: 100vw;
-  .spinner-grow.text-primary {
-    color: var(--swoshs-color2) !important;
-    width: 5rem;
-    height: 5rem;
-  }
-}
-</style>

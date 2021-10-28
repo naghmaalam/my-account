@@ -26,116 +26,14 @@
         </div>
       </div>
 
-      <div id="pricePlans">
+      <div id="pricePlans" class="mt-5">
         <div id="plans" class="row">
-          <!--Pricing 2-->
-          <div class="col-12 col-md-4">
-            <div
-              class="plan"
-              :class="{ active: selectedPlan === '12mon' }"
-              @click="changePlan('12mon')"
-            >
-              <div class="recommended">
-                <h5>Best Deal</h5>
-              </div>
-              <div class="planContainer">
-                <div class="title">
-                  <div class="ribbon2-wrapper">
-                    <h3 class="ribbon2">
-                      <span class="ribbon2-inner">12 Month</span>
-                    </h3>
-                  </div>
-                </div>
-
-                <div class="price">
-                  <p><sup class="currency-symbol">$</sup>5.25</p>
-                  <h6 class="payment-duration">Per Month</h6>
-                </div>
-                <div class="info-plan">
-                  <p>
-                    Billed $300 every months. Additional taxes may apply
-                    depending on your jurisdiction.
-                  </p>
-                </div>
-              </div>
-              <div class="benefit-info">
-                <div class="row">
-                  <div class="col-3 text-center">
-                    <img
-                      class="img-fluid mt-2"
-                      src="@/assets/website/images/point.svg"
-                      alt=""
-                    />
-                  </div>
-                  <div class="col-9 text-left">
-                    <p>
-                      This plans includes the biggest savings and is fully
-                      refundable for 30 days.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--Pricing 3-->
-          <div class="col-12 col-md-4">
-            <div
-              class="plan"
-              :class="{ active: selectedPlan === '6mon' }"
-              @click="changePlan('6mon')"
-            >
-              <div class="planContainer">
-                <div class="title">
-                  <div class="ribbon2-wrapper">
-                    <h3 class="ribbon2">
-                      <span class="ribbon2-inner">6 Month</span>
-                    </h3>
-                  </div>
-                </div>
-
-                <div class="price">
-                  <p><sup class="currency-symbol">$</sup>5.25</p>
-                  <h6 class="payment-duration">Per Month</h6>
-                </div>
-                <div class="info-plan">
-                  <p>
-                    Billed $300 every months. Additional taxes may apply
-                    depending on your jurisdiction.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--Pricing 1-->
-          <div class="col-12 col-md-4">
-            <div
-              class="plan"
-              :class="{ active: selectedPlan === '1mon' }"
-              @click="changePlan('1mon')"
-            >
-              <div class="planContainer">
-                <div class="title">
-                  <div class="ribbon2-wrapper">
-                    <h3 class="ribbon2">
-                      <span class="ribbon2-inner">1 Month</span>
-                    </h3>
-                  </div>
-                </div>
-
-                <div class="price">
-                  <p><sup class="currency-symbol">$</sup>5.25</p>
-                  <h6 class="payment-duration">Per Month</h6>
-                </div>
-                <div class="info-plan">
-                  <p>
-                    Billed $300 every months. Additional taxes may apply
-                    depending on your jurisdiction.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div
+            v-for="plan in statePlans"
+            :key="plan"
+            class="col-12 col-md-6 col-lg-3"
+          >
+            <SubscriptionPlan :plan="plan" />
           </div>
         </div>
       </div>
@@ -384,20 +282,25 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
+
+import { PlanCodes, Plan } from "@/types/Plans";
+import { statePlans, usePlans } from "@/hooks/usePlans";
+import { useLoading } from "@/hooks/useLoading";
 
 import Height from "@/views/components/transitions/Height.vue";
+import SubscriptionPlan from "@/views/components/checkout/SubscriptionPlan.vue";
 
-type Plans = "12mon" | "6mon" | "3mon" | "1mon";
 type Operation = "add" | "rem";
 
 export default defineComponent({
   components: {
     Height,
+    SubscriptionPlan,
   },
   setup() {
-    const selectedPlan = ref<Plans>("12mon");
-    const changePlan = (plan: Plans) => {
+    const selectedPlan = ref<PlanCodes>(PlanCodes.mon12);
+    const changePlan = (plan: PlanCodes) => {
       selectedPlan.value = plan;
     };
     const devices = ref(1);
@@ -410,12 +313,26 @@ export default defineComponent({
         if (devices.value > 2) devices.value--;
       }
     };
+
+    const plans = usePlans();
+    const packagePlans = ref<Plan[]>([]);
+    const loading = useLoading();
+    onMounted(async () => {
+      loading.do.show();
+      plans.do.init();
+      const success = await plans.do.refreshStorage();
+      loading.do.hide();
+    });
+
     return {
       selectedPlan,
       changePlan,
       showDevices,
       devices,
       changeDevices,
+      packagePlans,
+      PlanCodes,
+      statePlans,
     };
   },
 });
@@ -426,16 +343,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 #checkout-page {
   background-color: #fff;
-}
-#pricePlans {
-  #plans {
-    .plan {
-      width: 100%;
-      margin: 0;
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-  }
 }
 
 .media-input-group {
