@@ -1,12 +1,15 @@
 <template>
   <div
     class="plan"
-    :class="{ active: selected, 'best-plan': plan.id === PlanCodes.mon12 }"
-    @click="changePlan(plan)"
+    :class="{
+      active: plan.selected,
+      'best-plan': plan.is_recommended === 1,
+    }"
+    @click="selectPlan"
   >
     <!-- best plan -->
     <!-- /////////////////////////////// -->
-    <div class="recommended" v-if="plan.id === PlanCodes.mon12">
+    <div class="recommended" v-if="plan.is_recommended === 1">
       <h5>Best Deal</h5>
     </div>
     <!-- /////////////////////////////// -->
@@ -24,32 +27,26 @@
       <div class="price">
         <!-- <p><sup class="currency-symbol">$</sup>5.25</p> -->
         <p>{{ price }}</p>
-        <h6 class="payment-duration">Per Month</h6>
+        <h6 class="payment-duration">for {{ plan.title }}</h6>
       </div>
       <div class="info-plan">
-        <p>
-          Billed $300 every months. Additional taxes may apply depending on your
-          jurisdiction.
-        </p>
+        <p class="mb-0">30 days money back guarantee!</p>
       </div>
     </div>
 
     <!-- best plan -->
     <!-- /////////////////////////////// -->
-    <div class="benefit-info" v-if="plan.id === PlanCodes.mon12">
+    <div class="benefit-info" v-if="plan.is_recommended === 1">
       <div class="row">
         <div class="col-3 text-center">
           <img
-            class="img-fluid mt-2"
+            class="img-fluid"
             src="@/assets/website/images/point.svg"
             alt=""
           />
         </div>
         <div class="col-9 text-left">
-          <p>
-            This plans includes the biggest savings and is fully refundable for
-            30 days.
-          </p>
+          <p>This plan is highly recommended!</p>
         </div>
       </div>
     </div>
@@ -60,25 +57,29 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { fmtCurr } from "@/modules/utils";
-import { Plan, PlanCodes } from "@/types/Plans";
+import { ComponentPlan, Plan, PlanCodes } from "@/types/Plans";
 
 export default defineComponent({
+  emits: ["select-plan"],
   props: {
-    selected: {
-      type: Boolean,
-      default: false,
-    },
     plan: {
-      type: Object as PropType<Plan>,
+      type: Object as PropType<ComponentPlan>,
+      required: true,
     },
   },
-  setup(prop) {
-    const price = prop.plan?.pricesArr[1]
-      ? prop.plan?.pricesArr[1].symbol + fmtCurr(prop.plan?.pricesArr[1].price)
+  setup(prop, context) {
+    const price = prop.plan.pricesArr[1]
+      ? prop.plan.pricesArr[1].symbol + fmtCurr(prop.plan.pricesArr[1].price)
       : "-";
+
+    const selectPlan = () => {
+      context.emit("select-plan");
+    };
+
     return {
       price,
       PlanCodes,
+      selectPlan,
     };
   },
 });
@@ -90,10 +91,38 @@ export default defineComponent({
   margin: 0;
   margin-bottom: 20px;
   cursor: pointer;
+  background: #fff;
+  // float: left;
+  width: 100%;
+  text-align: center;
+  border-radius: 20px;
+  // margin: 1rem;
+  box-shadow: 0 4.5px 3.6px #b2c1db5c, 0 12.5px 10px #b2c1db5c,
+    0 30.1px 24.1px #b2c1db5c, 0 100px 80px #b2c1db5c;
+  border: 0;
 }
+
+.plan.active {
+  box-shadow: 0px 0px 0px 7px var(--swoshs-color2);
+  border: 0px solid var(--swoshs-color2);
+
+  // box-shadow: none;
+  // border: 3px solid var(--swoshs-color2);
+  transition: all 0.25s;
+  div.benefit-info {
+    border-radius: 0 0 10px 10px;
+  }
+}
+
 .best-plan {
   .info-plan {
     border-radius: 0px;
   }
+}
+
+div.benefit-info {
+  background-image: none;
+  background-color: var(--swoshs-color2);
+  border-radius: 0 0 20px 20px;
 }
 </style>

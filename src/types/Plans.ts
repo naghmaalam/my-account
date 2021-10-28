@@ -21,6 +21,10 @@ export interface Price {
   price_per_month_des: string;
 }
 
+export interface ComponentPlan extends Plan {
+  selected: boolean;
+}
+
 export enum PlanCodes {
   mon12 = 21,
   mon6 = 18,

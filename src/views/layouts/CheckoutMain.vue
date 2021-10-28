@@ -26,14 +26,14 @@
         </div>
       </div>
 
-      <div id="pricePlans" class="mt-5">
+      <div id="pricePlans" class="mt-5 pt-3">
         <div id="plans" class="row">
           <div
-            v-for="plan in statePlans"
+            v-for="plan in componentPlans"
             :key="plan"
             class="col-12 col-md-6 col-lg-3"
           >
-            <SubscriptionPlan :plan="plan" />
+            <SubscriptionPlan @select-plan="selectPlan(plan)" :plan="plan" />
           </div>
         </div>
       </div>
@@ -91,9 +91,9 @@
                 <div class="accordion-header">
                   <div
                     class="font-awesome mb-2"
-                    @click="showDevices = !showDevices"
+                    @click="devices.show = !devices.show"
                   >
-                    <div v-if="showDevices">
+                    <div v-if="devices.show">
                       <i class="fas fa-chevron-circle-down"></i>
                     </div>
 
@@ -103,7 +103,7 @@
                   </div>
                 </div>
                 <Height>
-                  <div class="accordion-body" v-if="showDevices">
+                  <div class="accordion-body" v-if="devices.show">
                     <!-- <div class="tab-content media-tab-content"> -->
                     <div class="container">
                       <div class="row justify-content-center">
@@ -123,7 +123,9 @@
                                 <button
                                   type="button"
                                   class="btn btn-default btn-number custom-inc"
-                                  @click="changeDevices('rem')"
+                                  :class="{ disabled: !devices.isQtyDynamic }"
+                                  :disabled="!devices.isQtyDynamic"
+                                  @click="addRemDevices('rem')"
                                 >
                                   <i
                                     class="fa fa-minus media-fa-minus"
@@ -132,13 +134,15 @@
                                 </button>
                               </span>
                               <span class="word-devices media-word-devices">
-                                {{ devices }} Devices
+                                {{ devices.quantity }} Devices
                               </span>
                               <span class="input-group-btn">
                                 <button
                                   type="button"
                                   class="btn btn-default btn-number custom-inc"
-                                  @click="changeDevices('add')"
+                                  :class="{ disabled: !devices.isQtyDynamic }"
+                                  :disabled="!devices.isQtyDynamic"
+                                  @click="addRemDevices('add')"
                                 >
                                   <i
                                     class="fa fa-plus media-fa-plus"
@@ -147,8 +151,10 @@
                                 </button>
                               </span>
                             </div>
-                            <h1 class="text-center media-price mt-3">$10.50</h1>
-                            <h6 class="mb-3">$5.25 / Month / Device</h6>
+                            <h1 class="text-center media-price mt-3">
+                              {{ devices.currency + devices.price }}
+                            </h1>
+                            <h6 class="mb-3">{{ devices.pricePerDevice }}</h6>
                             <!-- </div> -->
                           </div>
                         </div>
@@ -282,11 +288,14 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, reactive, ref, watch } from "vue";
 
-import { PlanCodes, Plan } from "@/types/Plans";
-import { statePlans, usePlans } from "@/hooks/usePlans";
+import { ComponentPlan, PlanCodes } from "@/types/Plans";
+
 import { useLoading } from "@/hooks/useLoading";
+import { statePlans, usePlans } from "@/hooks/usePlans";
+
+import { fmtCurr } from "@/modules/utils";
 
 import Height from "@/views/components/transitions/Height.vue";
 import SubscriptionPlan from "@/views/components/checkout/SubscriptionPlan.vue";
@@ -299,40 +308,78 @@ export default defineComponent({
     SubscriptionPlan,
   },
   setup() {
-    const selectedPlan = ref<PlanCodes>(PlanCodes.mon12);
-    const changePlan = (plan: PlanCodes) => {
-      selectedPlan.value = plan;
-    };
-    const devices = ref(1);
-    const showDevices = ref(true);
+    const plans = usePlans();
+    const loading = useLoading();
+    const componentPlans = ref<ComponentPlan[]>([]);
+    const devices = reactive({
+      show: true,
+      isQtyDynamic: false,
+      quantity: 0,
+      pricePerDevice: "",
+      price: "",
+      currency: "",
+    });
 
-    const changeDevices = (oprtn: Operation) => {
+    const addRemDevices = (oprtn: Operation) => {
       if (oprtn === "add") {
-        devices.value++;
+        devices.quantity++;
       } else {
-        if (devices.value > 2) devices.value--;
+        if (devices.quantity > 2) devices.quantity--;
       }
     };
+    const selectedPlan = ref<ComponentPlan>();
+    const selectPlan = (plan: ComponentPlan) => {
+      selectedPlan.value = plan;
+      componentPlans.value.forEach(function (row: ComponentPlan) {
+        row.selected = false;
+      });
+      plan.selected = true;
+      console.log("selectPlan", plan);
+    };
 
-    const plans = usePlans();
-    const packagePlans = ref<Plan[]>([]);
-    const loading = useLoading();
     onMounted(async () => {
       loading.do.show();
       plans.do.init();
       const success = await plans.do.refreshStorage();
+      componentPlans.value = statePlans.value.map((val) => {
+        return {
+          ...val,
+          selected: false,
+        };
+      });
+      componentPlans.value.forEach(function (row: ComponentPlan) {
+        if (row.is_recommended === 1) {
+          row.selected = true;
+          selectedPlan.value = row;
+        }
+      });
       loading.do.hide();
     });
 
+    function setDevice(plan: ComponentPlan) {
+      devices.quantity = plan.allowed_device_number;
+      // for now set mon1 plan to have dynamic quantity
+      devices.isQtyDynamic = plan.id === PlanCodes.mon1;
+      devices.pricePerDevice =
+        plan.pricesArr[1].symbol + plan.pricesArr[1].price_per_month_des;
+      devices.price = fmtCurr(plan.pricesArr[1].price);
+      devices.currency = plan.pricesArr[1].symbol;
+    }
+
+    watch(
+      () => selectedPlan.value,
+      (nVal) => {
+        setDevice(nVal as ComponentPlan);
+      }
+    );
+
     return {
-      selectedPlan,
-      changePlan,
-      showDevices,
       devices,
-      changeDevices,
-      packagePlans,
+      addRemDevices,
       PlanCodes,
-      statePlans,
+      componentPlans,
+      selectPlan,
+      selectedPlan,
     };
   },
 });
@@ -363,6 +410,11 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  button.custom-inc.disabled {
+    opacity: 0.2;
+    box-shadow: none;
+    cursor: default;
   }
 
   .word-devices {
