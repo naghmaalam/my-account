@@ -70,7 +70,6 @@
           <div class="benefits-box">
             <h4>Your plan includes</h4>
             <ul>
-              <li>Unlimited devices</li>
               <li>Unlimited and fast content delivery</li>
               <li>No logs policy</li>
               <li>Uncompromised security and privacy</li>
@@ -140,9 +139,13 @@ import { debounce } from "lodash";
 
 import { isElementInViewport } from "@/modules/utils";
 import { fmtCurr } from "@/modules/utils";
+import { log } from "@/modules/debug";
 
 import { ComponentDevice } from "@/types/Devices";
 import { ComponentPlan } from "@/types/Plans";
+import { PaymentMethod } from "@/types/Payment";
+
+import { usePayment } from "@/hooks/usePayment";
 
 import FadeUp from "@/views/components/transitions/FadeUp.vue";
 
@@ -161,8 +164,15 @@ export default defineComponent({
     },
   },
   setup() {
+    const payment = usePayment();
+    const paymentMethods = ref<PaymentMethod[]>([]);
     onMounted(async () => {
       window.addEventListener("scroll", handleScroll);
+
+      const rspns = await payment.get.paymentMethods();
+      if (rspns !== false) {
+        paymentMethods.value = rspns;
+      }
     });
     onUnmounted(() => {
       window.removeEventListener("scroll", handleScroll);

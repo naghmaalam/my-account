@@ -168,8 +168,8 @@ export function useUser(): {
     };
   };
   get: {
-    orders: () => Promise<Order[] | boolean>;
-    rewards: () => Promise<Rewards | boolean>;
+    orders: () => Promise<Order[] | false>;
+    rewards: () => Promise<Rewards | false>;
   };
 } {
   // do
@@ -204,7 +204,7 @@ export function useUser(): {
   };
 
   const register = {
-    inviteCode: async (email: string, password: string, inviteCode: string) => {
+    inviteCode: (email: string, password: string, inviteCode: string) => {
       return tryCatchBoolean(async () => {
         const response: Me = await api("register", Method.POST, {
           username: email,
@@ -214,7 +214,7 @@ export function useUser(): {
         toast.do.show(response.message);
       });
     },
-    verifyCode: async (email: string, code: string) => {
+    verifyCode: (email: string, code: string) => {
       return tryCatchBoolean(async () => {
         const verifyDetails: VerifyDetails = {
           email,
@@ -239,14 +239,14 @@ export function useUser(): {
   };
 
   const loginWithCode = {
-    emailCode: async (email: string) => {
+    emailCode: (email: string) => {
       return tryCatchBoolean(async () => {
         await api("login/with/code", Method.POST, {
           username: email,
         });
       });
     },
-    loginCode: async (email: string, code: string) => {
+    loginCode: (email: string, code: string) => {
       return tryCatchBoolean(async () => {
         const response: Me = await api("login/with/code", Method.POST, {
           username: email,
@@ -265,14 +265,14 @@ export function useUser(): {
   };
 
   const passwordRecovery = {
-    emailCode: async (email: string) => {
+    emailCode: (email: string) => {
       return tryCatchBoolean(async () => {
         await api("send/confirm/email/code", Method.POST, {
           email,
         });
       });
     },
-    verifyCode: async (email: string, verification_code: string) => {
+    verifyCode: (email: string, verification_code: string) => {
       return tryCatchBoolean(async () => {
         await api("verify/code", Method.POST, {
           email,
@@ -280,7 +280,7 @@ export function useUser(): {
         });
       });
     },
-    resetPassword: async (
+    resetPassword: (
       email: string,
       verification_code: string,
       new_password: string
@@ -297,7 +297,7 @@ export function useUser(): {
   };
 
   const account = {
-    updatePassword: async (currentPassword: string, newPassword: string) => {
+    updatePassword: (currentPassword: string, newPassword: string) => {
       return tryCatchBoolean(async () => {
         const response: Me = await api("me/update", Method.POST, {
           update_key: "password",
@@ -310,7 +310,7 @@ export function useUser(): {
       });
     },
 
-    refreshStorage: async () => {
+    refreshStorage: () => {
       return tryCatchBoolean(async () => {
         const response: Me = await api("me", Method.GET);
         console.log("refreshStorage", response);
@@ -321,7 +321,7 @@ export function useUser(): {
   };
 
   const device = {
-    logout: async (deviceId: number) => {
+    logout: (deviceId: number) => {
       return tryCatchBoolean(async () => {
         const response: Me = await api("remove/loggedin/device", Method.POST, {
           id: deviceId,
@@ -360,7 +360,7 @@ export function useUser(): {
     i18n.global.locale = lang.toLowerCase();
   };
 
-  const referFriend = async (email: string) => {
+  const referFriend = (email: string) => {
     return tryCatchBoolean(async () => {
       const response: Me = await api("refer/friend", Method.POST, {
         email,
@@ -373,7 +373,7 @@ export function useUser(): {
 
   // get
   /////////////////////////////////////////////////////////////////////
-  const orders = async () => {
+  const orders = () => {
     return tryCatch(async () => {
       const response: {
         message: string;
@@ -383,7 +383,7 @@ export function useUser(): {
     });
   };
 
-  const rewards = async () => {
+  const rewards = () => {
     return tryCatch(async () => {
       const response: {
         message: string;

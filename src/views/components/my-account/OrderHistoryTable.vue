@@ -278,7 +278,7 @@
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
-import { useUser } from "@/hooks/useUser";
+import { stateUser, useUser } from "@/hooks/useUser";
 import { TableOrder } from "@/types/Orders";
 import { fmtCurr } from "@/modules/utils";
 
@@ -311,7 +311,8 @@ export default {
     const initOrders = async () => {
       isLoading.value = true;
       const rslt = await user.get.orders();
-      if (Array.isArray(rslt)) {
+      if (rslt !== false) {
+        // if (Array.isArray(rslt)) {
         orders.value = rslt.map((vl) => {
           let orderDate = new Date(vl.created_at as unknown as string);
           return {

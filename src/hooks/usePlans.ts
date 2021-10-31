@@ -70,7 +70,7 @@ export const usePlans = (): {
   // do
   // get
   /////////////////////////////////////////////////////////////////////
-  const plans = async () => {
+  const plans = () => {
     return tryCatch(async () => {
       const response: {
         message: string;

@@ -15,7 +15,7 @@ export async function tryCatchBoolean(handler: () => void): Promise<boolean> {
 
 export async function tryCatch<T>(
   handler: () => Promise<T>
-): Promise<T | boolean> {
+): Promise<T | false> {
   try {
     return await handler();
   } catch (error) {
