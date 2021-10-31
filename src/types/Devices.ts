@@ -14,6 +14,18 @@ export interface Device {
   fileUrl: string;
 }
 
+export interface ComponentDevice {
+  show: boolean;
+  isQtyDynamic: boolean;
+  allowedQuantity: number;
+  quantity: number;
+  pricePerAdditionalDevice: number;
+  pricePerDeviceText: string;
+  origPrice: number;
+  price: number;
+  currency: string;
+}
+
 export interface LoggedInDevice {
   id: number;
   name: string;

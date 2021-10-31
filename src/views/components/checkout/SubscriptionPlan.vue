@@ -25,8 +25,14 @@
       </div>
 
       <div class="price">
-        <!-- <p><sup class="currency-symbol">$</sup>5.25</p> -->
-        <p>{{ price }}</p>
+        <template v-if="hasDiscount">
+          <p class="orig-price">{{ price }}</p>
+          <p>{{ discountPrice }}</p>
+        </template>
+        <template v-else>
+          <p class="orig-price"></p>
+          <p>{{ price }}</p>
+        </template>
         <h6 class="payment-duration">for {{ plan.title }}</h6>
       </div>
       <div class="info-plan">
@@ -72,12 +78,26 @@ export default defineComponent({
       ? prop.plan.pricesArr[1].symbol + fmtCurr(prop.plan.pricesArr[1].price)
       : "-";
 
+    const discountPrice = prop.plan.pricesArr[1]
+      ? prop.plan.pricesArr[1].symbol +
+        fmtCurr(
+          prop.plan.pricesArr[1].price - prop.plan.pricesArr[1].discount_price
+        )
+      : "-";
+
+    const hasDiscount =
+      prop.plan.pricesArr[1] && prop.plan.pricesArr[1].discount_price > 0
+        ? true
+        : false;
+
     const selectPlan = () => {
       context.emit("select-plan");
     };
 
     return {
       price,
+      discountPrice,
+      hasDiscount,
       PlanCodes,
       selectPlan,
     };
@@ -124,5 +144,32 @@ div.benefit-info {
   background-image: none;
   background-color: var(--swoshs-color2);
   border-radius: 0 0 20px 20px;
+}
+
+.plan .planContainer {
+  .ribbon2 {
+    margin: auto;
+    margin-bottom: 0rem;
+  }
+  .price {
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 4rem;
+      line-height: 4rem;
+    }
+    p.orig-price {
+      font-size: 2rem;
+      line-height: 2rem;
+      height: 2rem;
+      text-decoration: line-through;
+      color: #f6266c !important;
+    }
+    .payment-duration {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      line-height: normal;
+    }
+  }
 }
 </style>

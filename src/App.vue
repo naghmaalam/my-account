@@ -31,6 +31,7 @@ import Main from "@/views/layouts/Main.vue";
 import { stateUser, useUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
 import { stateLoading, useLoading } from "@/hooks/useLoading";
+
 export default defineComponent({
   components: {
     Toast,
