@@ -71,10 +71,10 @@
             >
               <div class="row d-flex justify-content-center align-items-center">
                 <div class="col">
-                  <div class="rewards-num">10</div>
+                  <div class="rewards-num">{{ friendsWhoBought }}</div>
                 </div>
                 <div class="col">
-                  <div class="rewards-num">30</div>
+                  <div class="rewards-num">{{ monthsAdded }}</div>
                 </div>
               </div>
               <div class="row d-flex justify-content-center align-items-center">
@@ -94,19 +94,39 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from "vue";
+import { defineComponent, inject, onMounted, ref } from "vue";
 import { UpdateSection, SectionReferral } from "@/types/Section";
+import { useUser } from "@/hooks/useUser";
+import { Rewards } from "@/types/User";
 
 export default defineComponent({
   setup() {
     // const updateSection = inject("updateSection");
+    const user = useUser();
     const sS = inject("updateSection") as UpdateSection<SectionReferral>;
     const updateSection = (section: SectionReferral) => {
       sS(section);
     };
 
+    const friendsWhoBought = ref(0);
+    const monthsAdded = ref(0);
+
+    const init = async () => {
+      const rspns = await user.get.rewards();
+        if(typeof rspns !== "boolean") {
+          friendsWhoBought.value = rspns.friendsWhoBought,
+          monthsAdded.value = rspns.monthsAdded,
+        }
+    };
+
+    onMounted(async () => {
+      await init();
+    });
+
     return {
       updateSection,
+      friendsWhoBought,
+      monthsAdded,
     };
   },
 });
