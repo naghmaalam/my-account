@@ -23,9 +23,9 @@
 
     <Devices @update:devices="devices = $event" :selected-plan="selectedPlan" />
 
-    <CreateAccount />
+    <CreateAccount @update:email="email = $event" />
 
-    <Payment :devices="devices" :selected-plan="selectedPlan" />
+    <Payment :email="email" :devices="devices" :selected-plan="selectedPlan" />
 
     <Footer />
     <!-- /////////////// -->
@@ -81,9 +81,12 @@ export default defineComponent({
       currency: "",
     });
 
+    const email = ref("");
+
     return {
       selectedPlan,
       devices,
+      email,
     };
   },
 });

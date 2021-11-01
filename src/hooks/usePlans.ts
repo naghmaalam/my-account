@@ -31,7 +31,7 @@ export const usePlans = (): {
     refreshStorage: () => Promise<boolean>;
   };
   get: {
-    plans: () => Promise<Plan[] | boolean>;
+    plans: () => Promise<Plan[] | false>;
   };
 } => {
   // do

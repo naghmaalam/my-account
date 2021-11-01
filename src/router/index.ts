@@ -1,4 +1,9 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+  RouteRecordRaw,
+} from "vue-router";
 
 import PromoHeadline from "@/views/components/my-account/PromoHeadline.vue";
 import ReferralLinkPage from "@/views/pages/ReferralLinkPage.vue";
@@ -145,6 +150,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
+  // history: createWebHashHistory(),
   history: createWebHistory(),
   routes,
   scrollBehavior(): any {

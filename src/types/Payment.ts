@@ -9,3 +9,7 @@ export interface PaymentMethod {
   name: string;
   currency_id: string;
 }
+
+export interface ComponentPM extends PaymentMethod {
+  selected: boolean;
+}

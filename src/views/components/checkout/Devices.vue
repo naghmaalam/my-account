@@ -93,7 +93,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, reactive, watch } from "vue";
-import { log } from "@/modules/debug";
+// import { log } from "@/modules/debug";
 import { fmtCurr } from "@/modules/utils";
 
 import { ComponentPlan } from "@/types/Plans";
@@ -140,7 +140,7 @@ export default defineComponent({
       devices.currency = plan.pricesArr[1].symbol;
       devices.quantity = 0;
       context.emit("update:devices", devices);
-      log("setDevice()", plan);
+      // log("setDevice()", plan);
     }
 
     watch(

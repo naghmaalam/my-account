@@ -441,7 +441,7 @@ const cn: Locale = {
   promo_info:
     "Stay 1 step ahead of cybercrime threats like phishing and online tracking with Prime_CN",
   devices_title:
-    "Current package supports xx device to connect simultaneously_CN",
+    "Current package supports {deviceQty} device to connect simultaneously_CN",
   devices_subtitle:
     " Your privacy and Internet security can be protected when the device is connected. It is recommended to keep the connection status when browsing online._CN",
   select_os: "Select OS_CN",

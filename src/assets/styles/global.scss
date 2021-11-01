@@ -49,6 +49,9 @@ a.swoshs {
   color: var(--swoshs-color2);
 }
 
+.disabled {
+  pointer-events: none !important; 
+}
 
 
 /* Custom, iPhone Retina */

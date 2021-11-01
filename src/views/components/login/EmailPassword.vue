@@ -71,8 +71,8 @@
     </form>
 
     <div class="login-continue-btn ml-5 mr-5 mt-3">
-      <a href="#" @click="login">
-        <div class="login-btn pt-3 pb-3" :disabled="isLoggingIn">
+      <a href="#" @click="login" :class="{ disabled: isLoggingIn }">
+        <div class="login-btn pt-3 pb-3">
           <span
             v-if="isLoggingIn"
             class="spinner-border spinner-border-sm mr-2"
@@ -113,7 +113,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, inject, onMounted } from "vue";
 import { useValidation } from "@/hooks/useValidation";
-import { useI18n } from "vue-i18n";
+// import { useI18n } from "vue-i18n";
 import { UpdateSection, Section } from "@/types/Section";
 
 import { useToast } from "@/hooks/useToast";
@@ -127,7 +127,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { t } = useI18n({ useScope: "global" });
+    // const { t } = useI18n({ useScope: "global" });
     const vldt = useValidation();
     const user = useUser();
     const toast = useToast();
@@ -161,7 +161,7 @@ export default defineComponent({
         email: loginDetails.email,
       });
       if (vldt.hasErrors()) {
-        toast.do.error(t(vldt.getError()));
+        toast.do.errorTranslated(vldt.getError());
       } else {
         isEmailShown.value = false;
         isPasswordShown.value = true;
@@ -177,11 +177,15 @@ export default defineComponent({
         password: loginDetails.password,
       });
       if (vldt.hasErrors()) {
-        toast.do.error(t(vldt.getError()));
+        toast.do.errorTranslated(vldt.getError());
       } else {
         isLoggingIn.value = true;
-        await user.do.login(loginDetails.email, loginDetails.password);
-        isLoggingIn.value = false;
+        const success = await user.do.login(
+          loginDetails.email,
+          loginDetails.password
+        );
+        if (success) isLoggingIn.value = true;
+        else isLoggingIn.value = false;
       }
     };
 

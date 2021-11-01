@@ -7,64 +7,40 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <ul class="cards media-cards" id="payment-methods">
-            <li class="payment border-active">
-              <div class="row">
-                <div class="col">
-                  <h6 class="media-card-title">Credit Card</h6>
-                </div>
-                <div class="col text-right">
-                  <img
-                    class="img-fluid media-img-card"
-                    src="@/assets/website/images/payment/credit-card.png"
-                    alt=""
-                  />
-                </div>
+          <template v-if="!isLoadingPaymentMethods">
+            <ul class="cards media-cards" id="payment-methods">
+              <template v-for="pm in paymentMethods" :key="pm">
+                <li
+                  class="payment"
+                  :class="{ 'border-active': pm.selected }"
+                  @click="selectPayment(pm)"
+                >
+                  <div class="row">
+                    <div class="col d-flex align-items-center">
+                      <h6 class="media-card-title m-0">{{ pm.name }}</h6>
+                    </div>
+                    <div class="col text-right">
+                      <img class="img-fluid" :src="pm.icon" alt="" />
+                    </div>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </template>
+          <template v-else>
+            <div
+              class="
+                spinner-container
+                d-flex
+                justify-content-center
+                align-items-center
+              "
+            >
+              <div class="spinner-grow text-primary my-5" role="status">
+                <span class="sr-only">Loading...</span>
               </div>
-            </li>
-            <li class="payment">
-              <div class="row">
-                <div class="col">
-                  <h6 class="media-card-title">Paypal</h6>
-                </div>
-                <div class="col text-right">
-                  <img
-                    class="img-fluid media-img-paypal"
-                    src="@/assets/website/images/payment/paypal.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </li>
-            <li class="payment">
-              <div class="row">
-                <div class="col">
-                  <h6 class="media-card-title">Bitcoin</h6>
-                </div>
-                <div class="col text-right">
-                  <img
-                    class="img-fluid"
-                    src="@/assets/website/images/payment/bitcoin.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </li>
-            <li class="payment">
-              <div class="row">
-                <div class="col">
-                  <h6 class="media-card-title">Google Pay</h6>
-                </div>
-                <div class="col text-right">
-                  <img
-                    class="img-fluid media-img-gpay"
-                    src="@/assets/website/images/payment/GPay.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </li>
-          </ul>
+            </div>
+          </template>
         </div>
         <div class="col-md-6">
           <div class="benefits-box">
@@ -82,7 +58,7 @@
     </div>
   </section>
 
-  <section ref="paySection" class="container-fluid content-word">
+  <section ref="paySection" class="container-fluid content-word pt-0 mt-4">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -92,8 +68,19 @@
       <div class="row justify-content-center">
         <div class="col-md-6 mt-4">
           <div>
-            <a class="pay-btn" href="#">
+            <a
+              class="pay-btn d-flex justify-content-center align-items-center"
+              href="#"
+              @click.prevent="pay"
+              :class="{ disabled: isLoadingPayment }"
+            >
               PAY {{ devices.currency + fmtCurr(devices.price) }}
+              <span
+                v-if="isLoadingPayment"
+                class="spinner-border spinner-border-sm ml-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
             </a>
           </div>
         </div>
@@ -123,8 +110,19 @@
         <div class="row justify-content-center align-items-center purchase-btn">
           <div class="col-md-4 my-4 btn-fixed">
             <div>
-              <a class="pay-btn" href="#">
+              <a
+                class="pay-btn d-flex justify-content-center align-items-center"
+                href="#"
+                @click.prevent="pay"
+                :class="{ disabled: isLoadingPayment }"
+              >
                 PAY {{ devices.currency + fmtCurr(devices.price) }}
+                <span
+                  v-if="isLoadingPayment"
+                  class="spinner-border spinner-border-sm ml-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
               </a>
             </div>
           </div>
@@ -132,26 +130,35 @@
       </div>
     </section>
   </FadeUp>
+  <teleport to="body">
+    <ModalPayment v-model:open="showModalPayment" :text="modalText" />
+  </teleport>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted, PropType, ref } from "vue";
 import { debounce } from "lodash";
 
 import { isElementInViewport } from "@/modules/utils";
-import { fmtCurr } from "@/modules/utils";
 import { log } from "@/modules/debug";
+import { fmtCurr } from "@/modules/utils";
+// import { log } from "@/modules/debug";
 
 import { ComponentDevice } from "@/types/Devices";
 import { ComponentPlan } from "@/types/Plans";
-import { PaymentMethod } from "@/types/Payment";
+import { ComponentPM } from "@/types/Payment";
 
 import { usePayment } from "@/hooks/usePayment";
+import { stateUser } from "@/hooks/useUser";
+import { useValidation } from "@/hooks/useValidation";
+import { useToast } from "@/hooks/useToast";
 
 import FadeUp from "@/views/components/transitions/FadeUp.vue";
+import ModalPayment from "@/views/components/checkout/ModalPayment.vue";
 
 export default defineComponent({
   components: {
     FadeUp,
+    ModalPayment,
   },
   props: {
     selectedPlan: {
@@ -162,17 +169,34 @@ export default defineComponent({
       type: Object as PropType<ComponentDevice>,
       required: true,
     },
+    email: {
+      type: String,
+      default: "",
+    },
   },
-  setup() {
+  setup(props) {
+    const isLoadingPaymentMethods = ref(true);
+    const isLoadingPayment = ref(false);
+    const showModalPayment = ref(false);
     const payment = usePayment();
-    const paymentMethods = ref<PaymentMethod[]>([]);
+    const paymentSelected = ref<ComponentPM>();
+    const paymentMethods = ref<ComponentPM[]>([]);
     onMounted(async () => {
       window.addEventListener("scroll", handleScroll);
-
+      isLoadingPaymentMethods.value = true;
       const rspns = await payment.get.paymentMethods();
       if (rspns !== false) {
-        paymentMethods.value = rspns;
+        paymentMethods.value = rspns.map((val) => {
+          return {
+            ...val,
+            selected: false,
+          };
+        });
+        // select first element
+        paymentMethods.value[0].selected = true;
+        paymentSelected.value = paymentMethods.value[0];
       }
+      isLoadingPaymentMethods.value = false;
     });
     onUnmounted(() => {
       window.removeEventListener("scroll", handleScroll);
@@ -180,7 +204,7 @@ export default defineComponent({
     const paySection = ref();
     const showPaySection = ref(true);
     const handleScroll = debounce(
-      (event: Event) => {
+      () => {
         // log("event handleScroll", isElementInViewport(paySection.value));
         showPaySection.value = !isElementInViewport(paySection.value);
       },
@@ -188,10 +212,90 @@ export default defineComponent({
       { leading: false, trailing: true }
     );
 
+    const selectPayment = (payment: ComponentPM) => {
+      paymentMethods.value.forEach((val) => {
+        val.selected = false;
+      });
+      payment.selected = true;
+      paymentSelected.value = payment;
+    };
+    const modalText = ref("");
+    const vldt = useValidation();
+    const toast = useToast();
+    const pay = async () => {
+      // if user is premium and active
+      if (
+        stateUser.value.authenticated &&
+        stateUser.value.currentSubscription.title === "premium" &&
+        !stateUser.value.currentSubscription.isExpired
+      ) {
+        modalText.value =
+          "You are currently on an active premium subscription.";
+        showModalPayment.value = true;
+        return;
+      }
+
+      // validate email if not authenticated or is guest
+      vldt.checkErrors({
+        email: props.email,
+      });
+      if (!stateUser.value.authenticated && vldt.hasErrors()) {
+        toast.do.errorTranslated(vldt.getError());
+        return;
+      }
+
+      const paymentMethodId = paymentSelected.value?.id as number;
+      const planId = props.selectedPlan.id;
+      const amount = props.devices.price;
+      const additionalDevices = props.devices.quantity;
+
+      isLoadingPayment.value = true;
+      let rspns;
+      // if user is logged in
+      if (stateUser.value.authenticated) {
+        rspns = await payment.do.pay(
+          paymentMethodId,
+          planId,
+          amount,
+          additionalDevices
+        );
+      } else {
+        // if not authenticated
+        rspns = await payment.do.payAsGuest(
+          props.email,
+          paymentMethodId,
+          planId,
+          amount,
+          additionalDevices
+        );
+      }
+
+      if (rspns !== false) {
+        isLoadingPayment.value = true;
+        log("REDIRECTING TO: ", rspns.paymentGatewayUrl);
+        window.location.href = rspns.paymentGatewayUrl;
+      } else {
+        isLoadingPayment.value = false;
+      }
+
+      // setTimeout(() => {
+      //   log("PAYING! = ", paymentMethodId, planId, amount, additionalDevices);
+      //   isLoadingPayment.value = false;
+      // }, 1500);
+    };
+
     return {
       fmtCurr,
       paySection,
+      paymentMethods,
       showPaySection,
+      showModalPayment,
+      modalText,
+      isLoadingPaymentMethods,
+      isLoadingPayment,
+      paymentSelected,
+      selectPayment,
+      pay,
     };
   },
 });

@@ -8,6 +8,7 @@ import { Order } from "@/types/Orders";
 
 import { api, Method } from "@/modules/api";
 import { storage } from "@/modules/storage";
+import { log } from "@/modules/debug";
 import { tryCatchBoolean, tryCatch } from "@/modules/error";
 import { detectBrowser, getEncryptedPassword } from "@/modules/utils";
 
@@ -50,8 +51,8 @@ export const stateUser = computed(() => {
 });
 
 function resetUser() {
-  console.log("resetUser()");
-  // console.log(JSON.stringify(new UserDefault()));
+  log("resetUser()");
+  // log(JSON.stringify(new UserDefault()));
   state.user = new UserDefault();
   storage.removeItem("user");
   storage.setItem("user", state.user);
@@ -174,7 +175,7 @@ export function useUser(): {
 } {
   // do
   /////////////////////////////////////////////////////////////////////
-  const login = async (email: string, password: string) => {
+  const login = (email: string, password: string) => {
     return tryCatchBoolean(async () => {
       const loginDetails: LoginDetails = {
         username: email,
@@ -188,19 +189,30 @@ export function useUser(): {
       };
       const response: Me = await api("login", Method.POST, loginDetails);
       toast.do.show(response.message);
-      console.log("waits..");
+      log("waits..");
       setTimeout(() => {
         resetUser();
         setUser(response);
 
         // state.user.asd = "asd";
-        console.log("state.user = ", state.user);
+        log("state.user = ", state.user);
+        return true;
       }, 1000);
     });
   };
 
   const logout = () => {
-    resetUser();
+    return tryCatchBoolean(async () => {
+      log("logout()");
+      // this was so that resetUser() will be executed
+      try {
+        await api("logout", Method.POST);
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+      resetUser();
+    });
   };
 
   const register = {
@@ -231,7 +243,7 @@ export function useUser(): {
           verifyDetails
         );
         toast.do.show(response.message);
-        console.log("waits..");
+        log("waits..");
         resetUser();
         setUser(response);
       });
@@ -252,13 +264,13 @@ export function useUser(): {
           username: email,
           login_code: code,
         });
-        console.log("waits..");
+        log("waits..");
         setTimeout(() => {
           resetUser();
           setUser(response);
 
           // state.user.asd = "asd";
-          console.log("state.user = ", state.user);
+          log("state.user = ", state.user);
         }, 1000);
       });
     },
@@ -306,14 +318,14 @@ export function useUser(): {
         });
         resetUser();
         setUser(response);
-        console.log("updatePassword", response);
+        log("updatePassword", response);
       });
     },
 
     refreshStorage: () => {
       return tryCatchBoolean(async () => {
         const response: Me = await api("me", Method.GET);
-        console.log("refreshStorage", response);
+        log("refreshStorage", response);
         resetUser();
         setUser(response);
       });
@@ -326,7 +338,7 @@ export function useUser(): {
         const response: Me = await api("remove/loggedin/device", Method.POST, {
           id: deviceId,
         });
-        console.log("device.logout", response);
+        log("device.logout", response);
       });
     },
   };
@@ -348,7 +360,7 @@ export function useUser(): {
     watch(
       () => state.user,
       (val) => {
-        console.log("user changed");
+        log("user changed");
         storage.setItem("user", val);
       },
       { deep: true }

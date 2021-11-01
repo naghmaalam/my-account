@@ -24,10 +24,10 @@
                 <div class="input-box">
                   <input
                     type="text"
-                    name=""
+                    name="email"
                     id="email"
                     placeholder="Enter Email Address"
-                    onkeydown="validation()"
+                    v-model="email"
                   />
                 </div>
               </form>
@@ -55,14 +55,22 @@
   </section>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 import { stateUser } from "@/hooks/useUser";
 
 export default defineComponent({
-  setup() {
+  setup(_, context) {
+    const email = ref("");
+    watch(
+      () => email.value,
+      (nVal) => {
+        context.emit("update:email", nVal);
+      }
+    );
     return {
       stateUser,
+      email,
     };
   },
 });

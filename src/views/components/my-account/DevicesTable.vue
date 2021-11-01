@@ -2,7 +2,9 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-6">
-        <div class="account-info-title">{{ $t("devices") }}</div>
+        <div class="account-info-title">
+          {{ $t("devices") }}
+        </div>
       </div>
     </div>
   </div>
@@ -12,58 +14,81 @@
         <div class="d-flex flex-row justify-content-between">
           <div class="d-flex flex-column">
             <div class="devices-title pt-3 px-3">
-              {{ $t("devices_title") }}
+              {{
+                $t("devices_title", { deviceQty: stateUser.devices.allowed })
+              }}
             </div>
             <div class="devices-subtitle px-3">
               {{ $t("devices_subtitle") }}
             </div>
           </div>
-          <a href="payment">
+          <a href="#">
             <div class="add-device mt-3">
-              <button class="devices-btn pr-3 pl-3 pt-2 pb-2">
+              <button
+                class="devices-btn pr-3 pl-3 pt-2 pb-2"
+                @click="$router.push({ name: 'checkout' })"
+              >
                 {{ $t("add_device") }}
               </button>
             </div>
           </a>
         </div>
         <div class="devices-row-line mt-2"></div>
+        <template v-if="deviceList.length > 0">
+          <transition-group name="list" tag="div">
+            <template v-for="(item, i) in deviceList" :key="`i_${i}`">
+              <div class="list-item d-flex flex-column">
+                <div class="d-flex flex-row justify-content-between pt-2">
+                  <div class="devices-name d-flex flex-row">
+                    <div class="px-3 device-icon">
+                      <i :class="getIcon(item.type)"></i>
+                    </div>
 
-        <transition-group name="list" tag="div">
-          <template v-for="(item, i) in deviceList" :key="`i_${i}`">
-            <div class="list-item d-flex flex-column">
-              <div class="d-flex flex-row justify-content-between pt-2">
-                <div class="devices-name d-flex flex-row">
-                  <div class="px-3 device-icon">
-                    <i :class="getIcon(item.type)"></i>
+                    <div>{{ item.name }}</div>
                   </div>
-
-                  <div>{{ item.name }}</div>
+                  <div
+                    class="
+                      devices-logout
+                      d-flex
+                      flex-row
+                      justify-content-center
+                      align-items-center
+                      mr-1
+                    "
+                    @click="logoutDevice(item, i)"
+                  >
+                    <span
+                      v-if="isLoading[i]"
+                      class="spinner-border spinner-border-sm mr-2"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    <i class="flaticon-logout pr-2 pt-1"></i>
+                    <div>Logout</div>
+                  </div>
                 </div>
-                <div
-                  class="
-                    devices-logout
-                    d-flex
-                    flex-row
-                    justify-content-center
-                    align-items-center
-                    mr-1
-                  "
-                  @click="logoutDevice(item, i)"
-                >
-                  <span
-                    v-if="isLoading[i]"
-                    class="spinner-border spinner-border-sm mr-2"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                  <i class="flaticon-logout pr-2 pt-1"></i>
-                  <div>Logout</div>
-                </div>
+                <div class="devices-row-line mt-2"></div>
               </div>
-              <div class="devices-row-line mt-2"></div>
-            </div>
-          </template>
-        </transition-group>
+            </template>
+          </transition-group>
+        </template>
+        <template v-else>
+          <div
+            class="
+              d-flex
+              flex-column
+              justify-content-center
+              align-items-center
+              mt-5
+            "
+          >
+            <img
+              src="@/assets/images/subscription/empty.png"
+              alt="order-history-empty"
+              class="pb-3"
+            />
+          </div>
+        </template>
         <br />
       </div>
     </div>

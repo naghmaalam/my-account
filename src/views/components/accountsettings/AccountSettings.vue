@@ -51,7 +51,15 @@
           </div>
         </div>
         <div class="col-md-4 px-0">
-          <div class="account-settings-logo d-flex flex-column p-5">
+          <div
+            class="
+              account-settings-logo
+              d-flex
+              flex-column
+              align-items-center
+              p-5
+            "
+          >
             <img
               src="@/assets/images/account-settings/Swoshs-logo.png"
               class="img-fluid swoshs-logo"

@@ -14,7 +14,8 @@ const user = useUser();
 export async function api(
   endpoint: string,
   method: Method,
-  payload?: unknown
+  payload?: unknown,
+  authenticated = true
 ): Promise<any> {
   try {
     // if not logged in then add language to url query but not in /login page
@@ -29,12 +30,21 @@ export async function api(
           : `&lang=${selectedLanguage}`;
     }
 
-    const options = {
-      method: Method[method].toString(),
-      headers: {
+    let headers;
+    if (authenticated) {
+      headers = {
         Authorization: stateUser.value.accessToken,
         "Content-type": "application/json; charset=UTF-8",
-      },
+      };
+    } else {
+      headers = {
+        "Content-type": "application/json; charset=UTF-8",
+      };
+    }
+
+    const options = {
+      method: Method[method].toString(),
+      headers: headers as any,
       body: JSON.stringify(payload),
     };
 
