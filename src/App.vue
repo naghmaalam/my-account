@@ -17,7 +17,7 @@
   </teleport>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 
 import Toast from "@/views/components/Toast.vue";

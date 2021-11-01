@@ -22,12 +22,9 @@
               {{ $t("devices_subtitle") }}
             </div>
           </div>
-          <a href="#">
+          <a href="#" @click.prevent="$router.push({ name: 'checkout' })">
             <div class="add-device mt-3">
-              <button
-                class="devices-btn pr-3 pl-3 pt-2 pb-2"
-                @click="$router.push({ name: 'checkout' })"
-              >
+              <button class="devices-btn pr-3 pl-3 pt-2 pb-2">
                 {{ $t("add_device") }}
               </button>
             </div>

@@ -150,8 +150,8 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  // history: createWebHashHistory(),
-  history: createWebHistory(),
+  // history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
   scrollBehavior(): any {
     return { x: 0, y: 0 };

@@ -16,9 +16,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-// #app {
-//   background: #ecf2fb !important;
-// }
-</style>

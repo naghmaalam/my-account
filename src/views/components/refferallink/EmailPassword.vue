@@ -54,7 +54,7 @@
     <div class="rl-submit-btn ml-5 mr-5 mt-4">
       <div
         class="rl-btn mob-res-inputs ml-5 mr-5 pt-2 pb-2 mb-5"
-        :disabled="isLoading"
+        :class="{ disabled: isLoading }"
         @click="submit"
       >
         <span

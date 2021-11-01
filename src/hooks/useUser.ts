@@ -400,7 +400,7 @@ export function useUser(): {
       const response: {
         message: string;
         data: any;
-      } = await api("rewards", Method.GET);
+      } = await api("reward", Method.GET);
 
       return {
         friendsWhoBought: response.data.total_friends_referred,

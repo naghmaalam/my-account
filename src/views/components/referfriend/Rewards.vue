@@ -71,10 +71,28 @@
             >
               <div class="row d-flex justify-content-center align-items-center">
                 <div class="col">
-                  <div class="rewards-num">{{ friendsWhoBought }}</div>
+                  <div class="rewards-num" style="height: 4rem">
+                    <span
+                      v-if="isLoading"
+                      class="spinner-border spinner-border-sm mb-2"
+                      style="height: 2rem; width: 2rem"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    <span v-else>{{ friendsWhoBought }}</span>
+                  </div>
                 </div>
                 <div class="col">
-                  <div class="rewards-num">{{ monthsAdded }}</div>
+                  <div class="rewards-num" style="height: 4rem">
+                    <span
+                      v-if="isLoading"
+                      class="spinner-border spinner-border-sm mb-2"
+                      style="height: 2rem; width: 2rem"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    <span v-else>{{ monthsAdded }}</span>
+                  </div>
                 </div>
               </div>
               <div class="row d-flex justify-content-center align-items-center">
@@ -98,6 +116,7 @@ import { defineComponent, inject, onMounted, ref } from "vue";
 import { UpdateSection, SectionReferral } from "@/types/Section";
 import { useUser } from "@/hooks/useUser";
 import { Rewards } from "@/types/User";
+import { faGalacticSenate } from "@fortawesome/free-brands-svg-icons";
 
 export default defineComponent({
   setup() {
@@ -110,13 +129,16 @@ export default defineComponent({
 
     const friendsWhoBought = ref(0);
     const monthsAdded = ref(0);
+    const isLoading = ref(false);
 
     const init = async () => {
+      isLoading.value = true;
       const rspns = await user.get.rewards();
-        if(typeof rspns !== "boolean") {
-          friendsWhoBought.value = rspns.friendsWhoBought,
-          monthsAdded.value = rspns.monthsAdded,
-        }
+      if (typeof rspns !== "boolean") {
+        friendsWhoBought.value = rspns.friendsWhoBought || 0;
+        monthsAdded.value = rspns.monthsAdded || 0;
+      }
+      isLoading.value = false;
     };
 
     onMounted(async () => {
@@ -127,6 +149,7 @@ export default defineComponent({
       updateSection,
       friendsWhoBought,
       monthsAdded,
+      isLoading,
     };
   },
 });
