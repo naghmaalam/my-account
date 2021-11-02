@@ -175,6 +175,7 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
+.input-group.media-input-group,
 .media-input-group {
   width: 100%;
   max-width: 350px;
