@@ -3,6 +3,7 @@ module.exports = {
   configureWebpack: {
     devtool: "source-map",
   },
+  // publicPath: "https://swoshsvpn.com/my-account", // enable this if exported to a build
   publicPath: "", // enable this if exported to a build
   devServer: {
     port: 8085, // CHANGE YOUR PORT HERE!
