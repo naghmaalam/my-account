@@ -43,6 +43,7 @@
               align-items-center
               flex-md-row
             "
+            v-if="stateUser.devices.connected"
           >
             <div class="recently-connected d-flex flex-column m-2">
               <div class="account-subtitle py-3 p-md-3">
@@ -96,6 +97,57 @@
               {{ $t("view_more") }}
             </button>
           </div>
+
+          <!--start: when no devices connected..................... -->
+          <div v-else>
+            <div
+              class="
+                d-flex
+                flex-column
+                justify-content-between
+                align-items-center
+                flex-md-row
+              "
+            >
+              <div class="recently-connected d-flex flex-column m-2">
+                <div class="account-subtitle p-md-3">No Devices</div>
+                <div
+                  class="
+                    desktop-connected
+                    d-flex
+                    flex-row
+                    justify-content-around
+                    pt-2
+                  "
+                >
+                  <div
+                    class="
+                      d-flex
+                      flex-column
+                      align-items-start
+                      justify-content-center
+                    "
+                  >
+                    <div class="devices-info">
+                      Currently, none of your devices are protected by Swoshs.
+                      Let's connect and protect your first device — just click
+                      Install.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="vertical-line mt-3 d-none d-md-block"></div>
+              <div class="ml-2">
+                <button
+                  class="my-account-btn m-4 ml-5"
+                  @click="redirect('checkout')"
+                >
+                  Get Swoshs VPN
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- end: when no devices connected................ -->
         </div>
       </div>
 
@@ -489,6 +541,13 @@ export default defineComponent({
 
 .hide-desktop {
   display: none;
+}
+
+.devices-info {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 0.8rem;
+  line-height: 1rem;
 }
 
 @media screen and (max-width: 992px) {

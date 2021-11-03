@@ -6,7 +6,10 @@
         !stateUser.currentSubscription.isExpired
       "
     >
-      <ReferFriendPromoHeadline />
+      <div>
+        <ReferFriendPromoHeadline />
+      </div>
+
       <Fade>
         <component :is="section" />
       </Fade>

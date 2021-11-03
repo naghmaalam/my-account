@@ -17,7 +17,10 @@
               {{ $t("refer_friend_text") }}
             </div>
             <div class="headline-txt pt-2">
-              {{ $t("check_our") }} <a href="#"> {{ $t("reward_rules") }} </a>
+              {{ $t("check_our") }}
+              <span>
+                {{ $t("reward_rules") }}
+              </span>
             </div>
           </div>
         </div>
@@ -27,6 +30,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   setup() {

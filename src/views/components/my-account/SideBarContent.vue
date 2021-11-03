@@ -2,7 +2,9 @@
   <!-- <div class="sidebar-sticky"> -->
   <!-- <div class="container pl-0 pr-0"> -->
   <div class="sidebar-container">
-    <div class="row p-4 justify-content-center align-items-center">
+    <div
+      class="sidebar-header row p-4 justify-content-center align-items-center"
+    >
       <img
         src="@/assets/images/my-account/logo-swoshs.png"
         class="img-fluid swoshs-logo pt-2"
@@ -307,5 +309,10 @@ a:hover,
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.sidebar-header {
+  background: #322653;
+  margin-right: 0rem !important;
 }
 </style>
