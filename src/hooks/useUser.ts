@@ -1,14 +1,7 @@
 import { reactive, computed, ComputedRef, watch } from "vue";
 import i18n from "@/locales/localization";
 
-import {
-  User,
-  Rewards,
-  LoginDetails,
-  Me,
-  VerifyDetails,
-  Link,
-} from "@/types/User";
+import { User, Rewards, LoginDetails, Me, VerifyDetails } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
 import { DeviceId, MeDevice } from "@/types/Devices";
 import { Order } from "@/types/Orders";
