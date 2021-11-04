@@ -1,7 +1,7 @@
 <template>
   <nav class="nav navbar navbar-expand-md navbar-dark nav inner-menu" id="nav">
     <div class="container-fluid mobile-style">
-      <a class="navbar-brand" href="../index.html">
+      <a class="navbar-brand" href="index.html">
         <img
           class="logo img-fluid"
           src="@/assets/images/navigation/logo.png"
@@ -16,19 +16,20 @@
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        @click="showMenu()"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto ml-0">
           <li class="nav-item">
-            <a class="nav-link" href="../what-is-vpn.html">What is VPN?</a>
+            <a class="nav-link" href="what-is-vpn.html">What is VPN?</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../benefits.html">Benefits</a>
+            <a class="nav-link" href="benefits.html">Benefits</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../purchase.html">Pricing</a>
+            <a class="nav-link" href="purchase.html">Pricing</a>
           </li>
           <li>
             <div
@@ -40,6 +41,8 @@
               Download
             </div>
           </li>
+
+          <!-- start of drop-down -->
           <transition name="navbar">
             <div
               class="dropdown-content shadow pb-3"
@@ -47,7 +50,7 @@
               @mouseenter="showMenu"
               @mouseleave="hideMenu"
             >
-              <a class="dropdown-item" href="./android.html"
+              <a class="dropdown-item" href="android.html"
                 ><i class="flaticon-android pr-3" aria-hidden="true"></i
                 >Android</a
               >
@@ -72,15 +75,39 @@
           </li>
           <li class="nav-item">
             <!-- <a class="nav-link" href="../my-account.html">My Account</a> -->
-            <router-link :to="{ name: 'home' }" class="nav-link"
-              >My Account</router-link
-            >
+            <router-link :to="{ name: 'home' }" class="nav-link">
+              My Account
+            </router-link>
           </li>
           <li class="nav-item cta-header">
-            <a class="nav-link" href="#">Get Started</a>
+            <a class="nav-link" href="purchase.html">Get Started</a>
           </li>
         </ul>
       </div>
+    </div>
+
+    <!-- mob-responbsive drop-down -->
+    <div>
+      <transition name="navbar">
+        <div
+          class="mob-responsive-nav shadow pb-3"
+          v-if="isShown"
+          @mouseenter="showMenu"
+          @mouseleave="hideMenu"
+        >
+          <a class="dropdown-item" href="android.html">What is VPN?</a>
+
+          <a class="dropdown-item" href="windows.html">
+            <i class="flaticon-windows pr-3" aria-hidden="true"></i>Windows</a
+          >
+          <a class="dropdown-item" href="ios.html">
+            <i class="flaticon-apple pr-3" aria-hidden="true"></i>iOS</a
+          >
+          <a class="dropdown-item" href="linux.html"
+            ><i class="flaticon-linux pr-3" aria-hidden="true"></i>Linux</a
+          >
+        </div>
+      </transition>
     </div>
   </nav>
 </template>
@@ -97,10 +124,12 @@ export default defineComponent({
 
     const isShown = ref(false);
     const isMouseOn = ref(false);
+    const isMobNavShown = ref(false);
 
     const showMenu = () => {
       isMouseOn.value = true;
       isShown.value = true;
+      isMobNavShown.value = true;
       // setTimeout(() => {
       //   if (isMouseOn.value) isShown.value = true;
       // }, 300);
@@ -130,6 +159,7 @@ export default defineComponent({
       showMenu,
       hideMenu,
       toggleMenu,
+      isMobNavShown,
     };
   },
 });
@@ -192,6 +222,15 @@ export default defineComponent({
 
   a:hover {
     background-color: #f1f1f1;
+  }
+
+  .mob-responsive-nav {
+    width: 100%;
+    background-color: #6d24ff;
+    color: #ffffff;
+    position: absolute;
+    top: 10%;
+    text-align: center;
   }
 }
 </style>

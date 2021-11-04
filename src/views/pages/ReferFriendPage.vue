@@ -7,7 +7,13 @@
       "
     >
       <div>
-        <ReferFriendPromoHeadline />
+        <ReferFriendPromoHeadline @select-device="selectDevice" />
+        <teleport to="body">
+          <RewardsModal
+            v-model:open="showModalSteps"
+            :device="deviceSelected"
+          />
+        </teleport>
       </div>
 
       <Fade>
@@ -30,6 +36,9 @@ import Rewards from "@/views/components/referfriend/Rewards.vue";
 import UpgradeAccount from "@/views/components/referfriend/UpgradeAccount.vue";
 import Fade from "@/views/components/transitions/Fade.vue";
 
+import ModalSteps from "@/views/components/downloads/ModalSteps.vue";
+import RewardsModal from "@/views/modals/RewardsModal.vue";
+
 export default defineComponent({
   components: {
     ReferFriendPromoHeadline,
@@ -37,6 +46,8 @@ export default defineComponent({
     Rewards,
     UpgradeAccount,
     Fade,
+    ModalSteps,
+    RewardsModal,
   },
   setup() {
     const section = ref<SectionReferral>("ShareInvitation");
@@ -46,9 +57,16 @@ export default defineComponent({
     };
     provide("updateSection", updateSection);
 
+    const showModalSteps = ref(false);
+    const selectDevice = () => {
+      showModalSteps.value = true;
+    };
+
     return {
       stateUser,
       section,
+      selectDevice,
+      showModalSteps,
     };
   },
 });

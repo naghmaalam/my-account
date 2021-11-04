@@ -437,6 +437,13 @@ export interface Locale {
   upgrade_account_get_reward: string;
   package_not_supported: string;
   renew: string;
+  reward_modal_title: string;
+  reward_modal_subtitle: string;
+  reward_modal_title1: string;
+  reward_modal_subtitle1: string;
+  reward_modal_subtitle2: string;
+  reward_modal_subtitle3: string;
+  reward_modal_subtitle4: string;
   ////////////////////////////////////////////////////////////////
   // new
 }

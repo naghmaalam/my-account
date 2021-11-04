@@ -7,136 +7,33 @@
     <div class="modal show d-block" v-if="open">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-          <div class="modal-header d-none d-md-block">
+          <div class="modal-body pt-5 pb-5 pr-5 mob-res-padding">
             <div class="close" @click="closeModal">
               <i class="fas fa-times"></i>
             </div>
-            <div class="download-modal-header">
-              <div
-                class="
-                  circles
-                  d-flex
-                  flex-row
-                  justify-content-center
-                  align-items-center
-                "
-              >
-                <div class="circle-icon circle-check">
-                  <i class="fas fa-check"></i>
-                </div>
-                <div class="circle-title">{{ $t("select_os") }}</div>
-                <div class="circle-line"></div>
-                <div class="circle-icon circle-2">2</div>
-                <div class="circle-title">{{ $t("download") }}</div>
-                <div class="circle-line"></div>
-                <div class="circle-icon circle-3">3</div>
-                <div class="circle-title">{{ $t("install") }}</div>
-                <div class="circle-line"></div>
-                <div class="circle-icon circle-4">4</div>
-                <div class="circle-title">{{ $t("done") }}</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-body pt-5 pb-5 pr-5 mob-res-padding">
-            <div class="close d-md-none" @click="closeModal">
-              <i class="fas fa-times"></i>
-            </div>
             <div class="d-flex flex-row justify-content-around mob-reverse-col">
-              <div class="mob-res-device">
-                <div class="device-image ml-4">
-                  <div
-                    class="
-                      d-flex
-                      flex-column
-                      justify-content-center
-                      align-items-center
-                    "
-                  >
-                    <i class="downloads-icons pt-1" :class="device?.icon"></i>
-                    <div class="downloads-title pb-1">
-                      {{ device?.title }}
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div class="mt-3 pl-5 mob-res">
                 <div class="device-modal-title mob-res-center">
-                  {{ $t("download_for") }} {{ device?.title }}
+                  {{ $t("reward_modal_title") }}
                 </div>
                 <div class="device-modal-subtitle mob-res-center">
-                  * {{ $t("your_privacy") }}
+                  {{ $t("reward_modal_subtitle") }}
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="download-modal-footer pr-5 mob-res-padding">
-            <div
-              class="
-                d-flex
-                flex-row
-                justify-content-around
-                pb-4
-                ml-4
-                mob-res-margin mob-reverse-col
-              "
-            >
-              <div class="pl-3 mt-0 pt-4 pr-3 mob-res-padding-top">
-                <div
-                  class="device-modal-title mob-res-center mob-res-title-margin"
-                >
-                  {{ $t("ready_to_download") }}
+                <div class="device-modal-title mob-res-center">
+                  {{ $t("reward_modal_title1") }}
                 </div>
-                <div class="device-modal-subtitle p-1 mob-res-center">
-                  <span
-                    v-html="$t('send_link_email', { email: stateUser.email })"
-                  ></span>
+                <div class="device-modal-subtitle mob-res-center">
+                  {{ $t("reward_modal_subtitle1") }}
                 </div>
-              </div>
-              <div
-                class="
-                  device-download-btns
-                  pt-4
-                  mob-res-padding mob-res-btns-margin
-                "
-              >
-                <a
-                  :href="download"
-                  target="_blank"
-                  @click="isDownloadHereShown = true"
-                >
-                  <div
-                    class="
-                      device-download-btn
-                      pt-3
-                      pb-3
-                      pl-4
-                      pr-4
-                      mob-res-center mob-res-padding
-                    "
-                    style="text-transform: uppercase"
-                    @click="download()"
-                  >
-                    {{ $t("download") }}
-                  </div>
-                </a>
-                <a href="#">
-                  <div
-                    class="
-                      device-sendemail-btn
-                      mt-2
-                      pt-3
-                      pb-3
-                      pl-4
-                      pr-4
-                      mob-res-center mob-res-padding
-                    "
-                    style="text-transform: uppercase"
-                  >
-                    {{ $t("send_email") }}
-                  </div>
-                </a>
+                <div class="device-modal-subtitle mob-res-center pt-3">
+                  {{ $t("reward_modal_subtitle2") }}
+                </div>
+                <div class="device-modal-subtitle mob-res-center pl-3">
+                  {{ $t("reward_modal_subtitle3") }}
+                </div>
+                <div class="device-modal-subtitle mob-res-center pl-3">
+                  {{ $t("reward_modal_subtitle4") }}
+                </div>
               </div>
             </div>
           </div>
@@ -165,7 +62,6 @@ import { defineComponent, onMounted, PropType, ref } from "vue";
 import { stateUser } from "@/hooks/useUser";
 
 import { Device } from "@/types/Devices";
-import { useUser } from "@/hooks/useUser";
 
 import Fade from "@/views/components/transitions/Fade.vue";
 import SimpleFade from "@/views/components/transitions/SimpleFade.vue";
@@ -180,9 +76,6 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    device: {
-      type: Object as PropType<Device>,
-    },
   },
   setup(props, context) {
     const isDownloadHereShown = ref(false);
@@ -193,31 +86,12 @@ export default defineComponent({
 
     onMounted(() => {
       isDownloadHereShown.value = false;
-      console.log("props.device = ", props.device);
     });
-
-    const user = useUser();
-    const download = ref("");
-    const isLoading = ref(false);
-
-    // const init = async () => {
-    //   isLoading.value = true;
-    //   const rspns = await user.get.link();
-    //   if (typeof rspns !== "boolean") {
-    //     download.value = rspns.downloadLink;
-    //   }
-    //   isLoading.value = false;
-    // };
-
-    // onMounted(async () => {
-    //   await init();
-    // });
 
     return {
       stateUser,
       closeModal,
       isDownloadHereShown,
-      download,
     };
   },
 });

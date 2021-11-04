@@ -35,6 +35,12 @@
         {{ $t("forget_password") }}
       </div>
     </a>
+
+    <div class="new-to-swoshs mt-2">
+      New to Swoshs VPN?
+      <a href="#" @click.prevent="redirect('checkout')"> Get SwoshsVPN </a>
+    </div>
+
     <!-- ///////////////////////////////////////////////////////////////// -->
     <!-- email -->
   </div>
@@ -104,9 +110,9 @@
     <!-- ///////////////////////////////////////////////////////////////// -->
     <!-- password -->
 
-    <div class="login-txt text-center mt-4 pt-5 pb-4">
+    <div class="new-to-swoshs mt-2">
       New to Swoshs VPN?
-      <span class="pr-back-to-login"> Get SwoshsVPN </span>
+      <a href="#" @click.prevent="redirect('checkout')"> Get SwoshsVPN </a>
     </div>
   </div>
 </template>
@@ -119,6 +125,7 @@ import { UpdateSection, Section } from "@/types/Section";
 import { useToast } from "@/hooks/useToast";
 import { useUser } from "@/hooks/useUser";
 import { log } from "@/modules/debug";
+import { useRouter } from "vue-router";
 export default defineComponent({
   props: {
     email: {
@@ -131,11 +138,16 @@ export default defineComponent({
     const vldt = useValidation();
     const user = useUser();
     const toast = useToast();
+    const router = useRouter();
 
     const isEmailShown = ref(true);
     const isPasswordShown = ref(false);
     const isLoggingIn = ref(false);
     const isPasswordHidden = ref(true);
+
+    const redirect = (page: any) => {
+      router.push({ name: page });
+    };
 
     const loginDetails = reactive({
       email: "",
@@ -207,7 +219,21 @@ export default defineComponent({
       updateSection,
       emailEl,
       passwordEl,
+      redirect,
     };
   },
 });
 </script>
+
+<style scoped>
+.new-to-swoshs {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.new-to-swoshs a {
+  color: #6727ff;
+}
+</style>

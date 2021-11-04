@@ -31,6 +31,10 @@
         {{ $t("login_with_password") }}
       </div>
     </a>
+
+    <div class="new-to-swoshs mt-2">
+      New to Swoshs VPN? <a href="purchase.html"> Get SwoshsVPN </a>
+    </div>
   </div>
 </template>
 
@@ -163,6 +167,17 @@ export default defineComponent({
 
 .login-code-btn {
   border-radius: 5px !important;
+}
+
+.new-to-swoshs {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.new-to-swoshs a {
+  color: #6727ff;
 }
 
 /* back to login */

@@ -18,7 +18,7 @@
             </div>
             <div class="headline-txt pt-2">
               {{ $t("check_our") }}
-              <span>
+              <span class="add-pointer" @click="$emit('select-device')">
                 {{ $t("reward_rules") }}
               </span>
             </div>
@@ -33,6 +33,7 @@
 
 <script>
 export default {
+  emits: ["select-device"],
   setup() {
     return {};
   },
@@ -63,6 +64,10 @@ export default {
   font-size: 0.8rem;
   text-align: left;
   color: #5c7bf7;
+}
+
+.add-pointer {
+  cursor: pointer;
 }
 
 /* @media screen and (max-width: 992px) {
