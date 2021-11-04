@@ -510,6 +510,18 @@ const en: Locale = {
   package_not_supported:
     "Your current package is not supported on this feature",
   renew: "Renew",
+  reward_modal_title: "How much rewards time can I get via inviting friends?",
+  reward_modal_subtitle:
+    "For the promotion phase of Swoshs VPN, if your friend recharges for the first time, both you and your friend can get reward gift.",
+  reward_modal_title1: "The reward rules are as follows:",
+  reward_modal_subtitle1:
+    "1. After a friend successfully registering and becoming a VIP user via your invitation link, or inputting your invitation code and purchasing, he will get 30-day VIP membership.",
+  reward_modal_subtitle2:
+    " 2. Your rewards depend on the plan that your friend purchases when he is registering.",
+  reward_modal_subtitle3:
+    "A. If the plan purchased by your friend is less than 1 year, you will get 30-day VIP membership.",
+  reward_modal_subtitle4:
+    "B. If the plan purchased by your friend is no less than 1 year, you will get 90-day VIP membership.",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

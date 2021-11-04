@@ -206,6 +206,7 @@ export default defineComponent({
   border: 1px solid #a08beb;
   text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .devices-row-line {

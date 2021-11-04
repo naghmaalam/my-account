@@ -17,7 +17,10 @@
               {{ $t("refer_friend_text") }}
             </div>
             <div class="headline-txt pt-2">
-              {{ $t("check_our") }} <a href="#"> {{ $t("reward_rules") }} </a>
+              {{ $t("check_our") }}
+              <span class="add-pointer" @click="$emit('select-device')">
+                {{ $t("reward_rules") }}
+              </span>
             </div>
           </div>
         </div>
@@ -27,8 +30,10 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
+  emits: ["select-device"],
   setup() {
     return {};
   },
@@ -59,6 +64,10 @@ export default {
   font-size: 0.8rem;
   text-align: left;
   color: #5c7bf7;
+}
+
+.add-pointer {
+  cursor: pointer;
 }
 
 /* @media screen and (max-width: 992px) {
