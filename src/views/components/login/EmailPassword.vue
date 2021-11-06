@@ -196,7 +196,7 @@ export default defineComponent({
           loginDetails.email,
           loginDetails.password
         );
-        if (success) isLoggingIn.value = true;
+        if (success === true) isLoggingIn.value = true;
         else isLoggingIn.value = false;
       }
     };

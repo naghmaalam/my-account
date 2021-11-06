@@ -68,7 +68,7 @@ export default defineComponent({
       // await plans.do.refreshStorage();
 
       const rspns = await plans.get.plans();
-      if (rspns !== false) {
+      if (!(rspns instanceof Error)) {
         componentPlans.value = rspns.map((val) => {
           return {
             ...val,

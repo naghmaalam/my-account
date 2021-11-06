@@ -169,7 +169,7 @@ export default defineComponent({
         props.email,
         code.value.join("")
       );
-      if (success) {
+      if (success === true) {
         setTimeout(() => {
           console.log("redirect to home");
           router.push({ name: "home" });
@@ -185,7 +185,7 @@ export default defineComponent({
         props.password,
         inviteCode.value
       );
-      // if (success) {
+      // if (success === true) {
       //   toast.do.showTranslated("check_inbox");
       // }
       isLoadingResend.value = false;

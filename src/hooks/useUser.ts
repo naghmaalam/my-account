@@ -130,47 +130,47 @@ const toast = useToast();
 ///////////////////////////////////////////
 export function useUser(): {
   do: {
-    login: (email: string, password: string) => Promise<boolean>;
+    login: (email: string, password: string) => Promise<true | Error>;
     logout: () => void;
     isAuthenticated: ComputedRef<boolean>;
     init: () => void;
     changeLanguage: (a: SupportedLanguages) => void;
-    referFriend: (email: string) => Promise<boolean>;
+    referFriend: (email: string) => Promise<true | Error>;
     register: {
       inviteCode: (
         email: string,
         password: string,
         inviteCode: string
-      ) => Promise<boolean>;
-      verifyCode: (email: string, code: string) => Promise<boolean>;
+      ) => Promise<true | Error>;
+      verifyCode: (email: string, code: string) => Promise<true | Error>;
     };
     loginWithCode: {
-      emailCode: (email: string) => Promise<boolean>;
-      loginCode: (email: string, code: string) => Promise<boolean>;
+      emailCode: (email: string) => Promise<true | Error>;
+      loginCode: (email: string, code: string) => Promise<true | Error>;
     };
     passwordRecovery: {
-      emailCode: (email: string) => Promise<boolean>;
-      verifyCode: (email: string, code: string) => Promise<boolean>;
+      emailCode: (email: string) => Promise<true | Error>;
+      verifyCode: (email: string, code: string) => Promise<true | Error>;
       resetPassword: (
         email: string,
         code: string,
         new_password: string
-      ) => Promise<boolean>;
+      ) => Promise<true | Error>;
     };
     account: {
       updatePassword: (
         currentPassword: string,
         newPassword: string
-      ) => Promise<boolean>;
-      refreshStorage: () => Promise<boolean>;
+      ) => Promise<true | Error>;
+      refreshStorage: () => Promise<true | Error>;
     };
     device: {
-      logout: (deviceId: number) => Promise<boolean>;
+      logout: (deviceId: number) => Promise<true | Error>;
     };
   };
   get: {
-    orders: () => Promise<Order[] | false>;
-    rewards: () => Promise<Rewards | false>;
+    orders: () => Promise<Order[] | Error>;
+    rewards: () => Promise<Rewards | Error>;
   };
 } {
   // do

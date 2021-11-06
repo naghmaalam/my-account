@@ -85,10 +85,15 @@ export default defineComponent({
 .modal {
   .modal-header {
     position: relative;
+    border-bottom: 0;
     .close {
       position: absolute;
       right: 1rem;
     }
+  }
+
+  .modal-footer {
+    border-top: 0;
   }
 
   .swoshs-btn {

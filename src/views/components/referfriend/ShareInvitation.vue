@@ -206,7 +206,7 @@ export default defineComponent({
         isLoading.value = true;
         console.log("SUBMIT");
         const success = await user.do.referFriend(email.value);
-        if (success) {
+        if (success === true) {
           email.value = "";
         }
       }

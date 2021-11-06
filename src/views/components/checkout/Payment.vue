@@ -185,7 +185,7 @@ export default defineComponent({
       window.addEventListener("scroll", handleScroll);
       isLoadingPaymentMethods.value = true;
       const rspns = await payment.get.paymentMethods();
-      if (rspns !== false) {
+      if (!(rspns instanceof Error)) {
         paymentMethods.value = rspns.map((val) => {
           return {
             ...val,
@@ -224,16 +224,16 @@ export default defineComponent({
     const toast = useToast();
     const pay = async () => {
       // if user is premium and active
-      if (
-        stateUser.value.authenticated &&
-        stateUser.value.currentSubscription.title === "premium" &&
-        !stateUser.value.currentSubscription.isExpired
-      ) {
-        modalText.value =
-          "You are currently on an active premium subscription.";
-        showModalPayment.value = true;
-        return;
-      }
+      // if (
+      //   stateUser.value.authenticated &&
+      //   stateUser.value.currentSubscription.title === "premium" &&
+      //   !stateUser.value.currentSubscription.isExpired
+      // ) {
+      //   modalText.value =
+      //     "You are currently on an active premium subscription.";
+      //   showModalPayment.value = true;
+      //   return;
+      // }
 
       // validate email if not authenticated or is guest
       vldt.checkErrors({
@@ -250,7 +250,7 @@ export default defineComponent({
       const additionalDevices = props.devices.quantity;
 
       isLoadingPayment.value = true;
-      let rspns;
+      let rspns: Error | { orderId: number; paymentGatewayUrl: string };
       // if user is logged in
       if (stateUser.value.authenticated) {
         rspns = await payment.do.pay(
@@ -270,12 +270,14 @@ export default defineComponent({
         );
       }
 
-      if (rspns !== false) {
+      if (!(rspns instanceof Error)) {
         isLoadingPayment.value = true;
         log("REDIRECTING TO: ", rspns.paymentGatewayUrl);
         window.location.href = rspns.paymentGatewayUrl;
       } else {
         isLoadingPayment.value = false;
+        modalText.value = rspns.message;
+        showModalPayment.value = true;
       }
 
       // setTimeout(() => {

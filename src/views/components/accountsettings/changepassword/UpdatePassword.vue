@@ -213,7 +213,7 @@ export default defineComponent({
           passwordCurrent.value,
           passwordNew.value
         );
-        if (success) {
+        if (success === true) {
           passwordCurrent.value = "";
           passwordNew.value = "";
           passwordConfirm.value = "";

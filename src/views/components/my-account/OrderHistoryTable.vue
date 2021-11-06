@@ -310,10 +310,10 @@ export default {
     const user = useUser();
     const initOrders = async () => {
       isLoading.value = true;
-      const rslt = await user.get.orders();
-      if (rslt !== false) {
-        // if (Array.isArray(rslt)) {
-        orders.value = rslt.map((vl) => {
+      const rspns = await user.get.orders();
+      if (!(rspns instanceof Error)) {
+        // if (Array.isArray(rspns)) {
+        orders.value = rspns.map((vl) => {
           let orderDate = new Date(vl.created_at as unknown as string);
           return {
             orderNum: vl.order_number,

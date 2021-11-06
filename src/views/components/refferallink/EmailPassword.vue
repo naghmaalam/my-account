@@ -120,7 +120,7 @@ export default defineComponent({
           password.value,
           inviteCode.value
         );
-        if (success) {
+        if (success === true) {
           context.emit("update:email", email.value);
           context.emit("update:password", password.value);
           updateSection("VerifyCode");
