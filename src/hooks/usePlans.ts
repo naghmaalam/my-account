@@ -28,10 +28,10 @@ function setPlans(data: Plan[]) {
 export const usePlans = (): {
   do: {
     init: () => void;
-    refreshStorage: () => Promise<boolean>;
+    refreshStorage: () => Promise<true | Error>;
   };
   get: {
-    plans: () => Promise<Plan[] | false>;
+    plans: () => Promise<Plan[] | Error>;
   };
 } => {
   // do

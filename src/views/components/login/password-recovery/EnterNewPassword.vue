@@ -175,7 +175,7 @@ export default defineComponent({
           props.code,
           password.value
         );
-        if (success) {
+        if (success === true) {
           context.emit("update:email", props.email);
           updateSection("EmailPassword");
         }

@@ -114,7 +114,7 @@ export default defineComponent({
       console.log(device, i);
       isLoading.value[i] = true;
       let success = await user.do.device.logout(device.id);
-      if (success) success = await user.do.account.refreshStorage();
+      if (success === true) success = await user.do.account.refreshStorage();
       isLoading.value[i] = false;
 
       // setTimeout(() => {

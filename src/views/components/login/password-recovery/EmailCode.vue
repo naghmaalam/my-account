@@ -70,7 +70,7 @@ export default defineComponent({
         isLoading.value = true;
         const success = await user.do.passwordRecovery.emailCode(email.value);
         isLoading.value = false;
-        if (success) {
+        if (success === true) {
           context.emit("update:email", email.value);
           updateSection("PasswordRecoveryEnterCode");
         }

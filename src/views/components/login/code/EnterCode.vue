@@ -132,7 +132,7 @@ export default defineComponent({
         code.value.join("")
       );
       isLoading.value = false;
-      if (success) {
+      if (success === true) {
         console.log("SUCCESS");
         updateSection("EnterCode");
       }
@@ -142,7 +142,7 @@ export default defineComponent({
       isLoadingResend.value = true;
       const success = await user.do.loginWithCode.emailCode(props.email);
       isLoadingResend.value = false;
-      if (success) {
+      if (success === true) {
         toast.do.showTranslated("check_inbox");
       }
     };

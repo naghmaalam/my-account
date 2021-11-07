@@ -134,7 +134,7 @@ export default defineComponent({
     const init = async () => {
       isLoading.value = true;
       const rspns = await user.get.rewards();
-      if (typeof rspns !== "boolean") {
+      if (!(rspns instanceof Error)) {
         friendsWhoBought.value = rspns.friendsWhoBought || 0;
         monthsAdded.value = rspns.monthsAdded || 0;
       }

@@ -10,17 +10,17 @@ export const usePayment = (): {
       plan_id: number,
       amount: number,
       additional_devices: number
-    ) => Promise<false | { orderId: number; paymentGatewayUrl: string }>;
+    ) => Promise<Error | { orderId: number; paymentGatewayUrl: string }>;
     payAsGuest: (
       email: string,
       payment_method_id: number,
       plan_id: number,
       amount: number,
       additional_devices: number
-    ) => Promise<false | { orderId: number; paymentGatewayUrl: string }>;
+    ) => Promise<Error | { orderId: number; paymentGatewayUrl: string }>;
   };
   get: {
-    paymentMethods: () => Promise<PaymentMethod[] | false>;
+    paymentMethods: () => Promise<PaymentMethod[] | Error>;
   };
 } => {
   // do
@@ -60,7 +60,7 @@ export const usePayment = (): {
         orderId: rspns.order_id as number,
         paymentGatewayUrl: rspns.pay_url as string,
       };
-    });
+    }, false);
   };
   const payAsGuest = (
     email: string,
@@ -84,7 +84,7 @@ export const usePayment = (): {
         orderId: rspns.order_id as number,
         paymentGatewayUrl: rspns.pay_url as string,
       };
-    });
+    }, false);
   };
   /////////////////////////////////////////////
   // do

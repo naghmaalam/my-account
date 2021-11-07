@@ -274,6 +274,8 @@ import { useRouter } from "vue-router";
 import { stateUser } from "@/hooks/useUser";
 import { isDateExpired } from "@/modules/utils";
 
+import { log } from "@/modules/debug";
+
 export default {
   setup() {
     const router = useRouter();
@@ -299,7 +301,7 @@ export default {
         let action = "";
         if (!stateUser.value.currentSubscription.isExpired) {
           if (stateUser.value.currentSubscription.title === "premium") {
-            action = "";
+            action = "upgrade";
           } else {
             action = "upgrade";
           }
@@ -488,6 +490,9 @@ export default {
   line-height: 24px;
   text-align: center;
   color: #724bfe;
+
+  font-size: 0.7rem;
+  line-height: 1.5rem;
 }
 
 .user-avatar {
