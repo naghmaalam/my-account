@@ -116,7 +116,6 @@
                       mob-res-center mob-res-padding
                     "
                     style="text-transform: uppercase"
-                    @click="download()"
                   >
                     {{ $t("download") }}
                   </div>
@@ -197,7 +196,7 @@ export default defineComponent({
     });
 
     const user = useUser();
-    const download = ref("");
+    const download = ref("http://speedtest.ftp.otenet.gr/files/test1Mb.db");
     const isLoading = ref(false);
 
     // const init = async () => {

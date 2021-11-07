@@ -1,5 +1,14 @@
 <template>
-  <nav class="nav navbar navbar-expand-md navbar-dark nav inner-menu" id="nav">
+  <nav
+    class="
+      nav
+      navbar navbar-expand-md navbar-dark
+      nav
+      inner-menu
+      d-none d-md-block
+    "
+    id="nav"
+  >
     <div class="container-fluid mobile-style">
       <a class="navbar-brand" href="index.html">
         <img
@@ -16,14 +25,14 @@
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
-        @click="showMenu()"
+        @click.prevent="mobMenuShow()"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto ml-0">
           <li class="nav-item">
-            <a class="nav-link" href="what-is-vpn.html">What is VPN?</a>
+            <a class="nav-link" href="/what-is-vpn.html">What is VPN?</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="benefits.html">Benefits</a>
@@ -50,19 +59,19 @@
               @mouseenter="showMenu"
               @mouseleave="hideMenu"
             >
-              <a class="dropdown-item" href="android.html"
+              <a class="dropdown-item" href="/android.html"
                 ><i class="flaticon-android pr-3" aria-hidden="true"></i
                 >Android</a
               >
 
-              <a class="dropdown-item" href="windows.html">
+              <a class="dropdown-item" href="/windows.html">
                 <i class="flaticon-windows pr-3" aria-hidden="true"></i
                 >Windows</a
               >
-              <a class="dropdown-item" href="ios.html">
+              <a class="dropdown-item" href="/ios.html">
                 <i class="flaticon-apple pr-3" aria-hidden="true"></i>iOS</a
               >
-              <a class="dropdown-item" href="linux.html"
+              <a class="dropdown-item" href="/linux.html"
                 ><i class="flaticon-linux pr-3" aria-hidden="true"></i>Linux</a
               >
             </div>
@@ -71,7 +80,7 @@
           <!-- end of drop down -->
 
           <li class="nav-item">
-            <a class="nav-link" href="blog/index.html">Blog</a>
+            <a class="nav-link" href="/blog/index.html">Blog</a>
           </li>
           <li class="nav-item">
             <!-- <a class="nav-link" href="../my-account.html">My Account</a> -->
@@ -80,34 +89,124 @@
             </router-link>
           </li>
           <li class="nav-item cta-header">
-            <a class="nav-link" href="purchase.html">Get Started</a>
+            <a class="nav-link" href="/purchase.html">Get Started</a>
           </li>
         </ul>
       </div>
     </div>
 
     <!-- mob-responbsive drop-down -->
-    <div>
-      <transition name="navbar">
-        <div
-          class="mob-responsive-nav shadow pb-3"
-          v-if="isShown"
-          @mouseenter="showMenu"
-          @mouseleave="hideMenu"
-        >
-          <a class="dropdown-item" href="android.html">What is VPN?</a>
 
-          <a class="dropdown-item" href="windows.html">
-            <i class="flaticon-windows pr-3" aria-hidden="true"></i>Windows</a
-          >
-          <a class="dropdown-item" href="ios.html">
-            <i class="flaticon-apple pr-3" aria-hidden="true"></i>iOS</a
-          >
-          <a class="dropdown-item" href="linux.html"
-            ><i class="flaticon-linux pr-3" aria-hidden="true"></i>Linux</a
-          >
-        </div>
-      </transition>
+    <!-- <transition name="navbar" class="d-md-none">
+      <div
+        class="mob-responsive-nav shadow pb-3"
+        v-if="isMobNavShown"
+        @mouseleave="hideMenu"
+        @mouseenter="mobMenuShow"
+      >
+        <a class="dropdown-item" href="what-is-vpn.html">What is VPN?</a>
+
+        <a class="nav-link" href="benefits.html">Benefits</a>
+
+        <a class="nav-link" href="purchase.html">Pricing</a>
+
+        <a class="nav-link" href="blog/index.html">Blog</a>
+
+        <a class="nav-link" href="../my-account.html">My Account</a>
+
+        <li class="nav-item cta-header">
+          <a class="nav-link" href="#">Get Started</a>
+        </li>
+      </div>
+    </transition> -->
+  </nav>
+
+  <!-- mob res nav bar -->
+  <nav
+    class="nav navbar navbar-expand-md navbar-dark nav inner-menu d-md-none"
+    id="nav"
+  >
+    <div class="container-fluid mobile-style">
+      <a class="navbar-brand" href="../index.html">
+        <img
+          class="logo img-fluid"
+          src="@/assets/images/navigation/logo.png"
+          alt="SwoshsVPN"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        @click.prevent="mobMenuShow()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="mob-responsive-nav"
+        id="navbarSupportedContent"
+        v-if="isMobNavShown"
+        @mouseleave="hideMenu"
+        @mouseenter="mobMenuShow"
+        @click="toggleMenu"
+      >
+        <ul class="navbar-nav ml-auto ml-0">
+          <li class="nav-item">
+            <a class="nav-link" href="../what-is-vpn.html">What is VPN?</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../benefits.html">Benefits</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../purchase.html">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown2"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Download
+            </a>
+            <div
+              class="dropdown-menu animate slideIn"
+              aria-labelledby="navbarDropdown2"
+            >
+              <a class="dropdown-item" href="./android.html"
+                ><i class="fa fa-android icon" aria-hidden="true"></i>Android</a
+              >
+              <a class="dropdown-item" href="/windows.html"
+                ><i class="fa fa-windows icon" aria-hidden="true"></i>Windows</a
+              >
+              <a class="dropdown-item" href="/ios.html"
+                ><i class="fa fa-apple icon" aria-hidden="true"></i>iOS</a
+              ><a class="dropdown-item" href="/linux.html"
+                ><i class="fa fa-linux icon" aria-hidden="true"></i>Linux</a
+              ><a class="dropdown-item" href="/app-download.html"
+                ><i class="fa fa-sitemap icon" aria-hidden="true"></i>All
+                Platform</a
+              >
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/blog/index.html">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../my-account.html">My Account</a>
+          </li>
+          <li class="nav-item cta-header">
+            <a class="nav-link" href="#">Get Started</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </template>
@@ -129,10 +228,15 @@ export default defineComponent({
     const showMenu = () => {
       isMouseOn.value = true;
       isShown.value = true;
-      isMobNavShown.value = true;
+
       // setTimeout(() => {
       //   if (isMouseOn.value) isShown.value = true;
       // }, 300);
+    };
+
+    const mobMenuShow = () => {
+      isMobNavShown.value = !isMobNavShown.value;
+      isMouseOn.value = true;
     };
 
     const hideMenu = () => {
@@ -160,6 +264,7 @@ export default defineComponent({
       hideMenu,
       toggleMenu,
       isMobNavShown,
+      mobMenuShow,
     };
   },
 });
