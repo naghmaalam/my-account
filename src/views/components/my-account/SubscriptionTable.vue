@@ -301,7 +301,7 @@ export default {
         let action = "";
         if (!stateUser.value.currentSubscription.isExpired) {
           if (stateUser.value.currentSubscription.title === "premium") {
-            action = "upgrade";
+            action = "Recharge";
           } else {
             action = "upgrade";
           }

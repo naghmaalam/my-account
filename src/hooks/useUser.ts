@@ -13,6 +13,7 @@ import { tryCatchBoolean, tryCatch } from "@/modules/error";
 import { detectBrowser, getEncryptedPassword } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
+import { faAndroid } from "@fortawesome/free-brands-svg-icons";
 
 class UserDefault implements User {
   authenticated = false;
@@ -167,10 +168,19 @@ export function useUser(): {
     device: {
       logout: (deviceId: number) => Promise<true | Error>;
     };
+    // link: (
+    //   pc: string,
+    //   ios: string,
+    //   linux: string,
+    //   android: string,
+    //   macos: string
+    // ) => Promise<true | Error>;
   };
   get: {
     orders: () => Promise<Order[] | Error>;
     rewards: () => Promise<Rewards | Error>;
+    downloadlink: (a: string) => Promise<string | Error>;
+    sendEmail: (a: string) => Promise<string | Error>;
   };
 } {
   // do
@@ -180,9 +190,9 @@ export function useUser(): {
       const loginDetails: LoginDetails = {
         username: email,
         password: password,
-        device_code: "code",
+        device_code: detectBrowser(),
         device_name: detectBrowser(),
-        device_type: detectBrowser(),
+        device_type: "web",
         myaccount: true,
         lang: state.user.language.selected,
         version: "version",
@@ -410,6 +420,31 @@ export function useUser(): {
     });
   };
 
+  const downloadlink = (platform: string) => {
+    return tryCatch(async () => {
+      const payload = {
+        platform: platform,
+      };
+      const response: {
+        message: string;
+        download_link: string;
+      } = await api("get/download/link", Method.POST, payload);
+      return response.download_link;
+    });
+  };
+
+  const sendEmail = (platform: string) => {
+    return tryCatch(async () => {
+      const payload = {
+        platform: platform,
+      };
+      const response: {
+        message: string;
+      } = await api("send/download/link", Method.POST, payload);
+      return response.message;
+    });
+  };
+
   /////////////////////////////////////////////////////////////////////
   // get
 
@@ -430,6 +465,8 @@ export function useUser(): {
     get: {
       orders,
       rewards,
+      downloadlink,
+      sendEmail,
     },
   };
 }

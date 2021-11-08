@@ -49,12 +49,16 @@
     <!-- password -->
     <!-- ///////////////////////////////////////////////////////////////// -->
     <div class="login-title text-center">{{ $t("hi_there") }}</div>
-    <div
-      class="verify-account-email mt-4"
-      :data-letters="loginDetails.email.charAt(0)"
-    >
-      {{ loginDetails.email }}
+
+    <div style="overflow: hidden" class="mr-5 ml-5">
+      <div
+        class="verify-account-email mt-4"
+        :data-letters="loginDetails.email.charAt(0)"
+      >
+        {{ loginDetails.email }}
+      </div>
     </div>
+
     <form action="#" @submit.prevent="login" class="ml-5 mr-5 mt-3">
       <div class="d-flex flex-row with-visiblity-btn">
         <input
@@ -235,5 +239,10 @@ export default defineComponent({
 
 .new-to-swoshs a {
   color: #6727ff;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
 }
 </style>

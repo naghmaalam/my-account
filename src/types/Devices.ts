@@ -4,8 +4,7 @@ export type DeviceId =
   | "linux"
   | "android"
   | "macos"
-  | "ios"
-  | null;
+  | "ios";
 export interface Device {
   id: DeviceId;
   title: string;

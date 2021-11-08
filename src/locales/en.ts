@@ -185,7 +185,7 @@ const en: Locale = {
   location: "Location",
   password_recovery: "Password Recovery",
   password_reset_link:
-    "Please enter you account email and we will send you a verification code for resetting password",
+    "Please enter your account email and we will send you a verification code for resetting password",
   sign_in: "Sign in",
   check_email: "Check your email",
   check_inbox_reset_link:

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="pr-title text-center">{{ $t("verify_account") }}</div>
+    <div class="pr-title text-center">
+      {{ $t("verify_account") }}
+    </div>
     <div class="pr-subtitle text-center mt-2 mr-5 ml-5">
       {{ $t("check_inbox") }}
     </div>
@@ -8,13 +10,12 @@
     <div class="verify-account-email mt-4" :data-letters="email.charAt(0)">
       {{ email }}
     </div>
-
+    <!-- 
     <a href="#" @click.prevent="updateSection('PasswordRecovery')">
-      <!-- <div class="pr-back-to-login text-center pt-2">Use another account</div> -->
       <div class="pr-back-to-login text-center pt-2 pb-2 mt-4">
         {{ $t("use_another_account") }}
       </div>
-    </a>
+    </a> -->
 
     <form name="verify" class="mr-5">
       <div
@@ -55,6 +56,10 @@
       </div>
     </form>
 
+    <div class="rl-submit-btn ml-5 mr-5 mt-4" @click.prevent="verifyCode">
+      <div class="rl-btn ml-5 mr-5 pt-3 pb-3">Verify my email</div>
+    </div>
+
     <div class="login-txt text-center mt-2">
       Didn't get the code?
       <a href="#" @click.prevent="sendEmailAgain" :disabled="isLoadingResend">
@@ -67,11 +72,11 @@
         ></span>
       </a>
     </div>
-    <a href="#" @click.prevent="updateSection('EmailPassword')">
+    <!-- <a href="#" @click.prevent="updateSection('EmailPassword')">
       <div class="pr-back-to-login text-center pt-5 pb-5">
         {{ $t("login_with_password") }}
       </div>
-    </a>
+    </a> -->
   </div>
 </template>
 <script lang="ts">
@@ -175,6 +180,7 @@ export default defineComponent({
       isLoadingResend,
       refHandler,
       sendEmailAgain,
+      verifyCode,
     };
   },
 });

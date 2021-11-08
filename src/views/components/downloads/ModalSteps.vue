@@ -132,6 +132,7 @@
                       mob-res-center mob-res-padding
                     "
                     style="text-transform: uppercase"
+                    @click="emailLink"
                   >
                     {{ $t("send_email") }}
                   </div>
@@ -197,26 +198,42 @@ export default defineComponent({
 
     const user = useUser();
     const download = ref("http://speedtest.ftp.otenet.gr/files/test1Mb.db");
+    const email = ref();
     const isLoading = ref(false);
 
-    // const init = async () => {
-    //   isLoading.value = true;
-    //   const rspns = await user.get.link();
-    //   if (typeof rspns !== "boolean") {
-    //     download.value = rspns.downloadLink;
-    //   }
-    //   isLoading.value = false;
-    // };
+    const init = async () => {
+      isLoading.value = true;
+      if (props.device) {
+        const rspns = await user.get.downloadlink(props.device.id as string);
+        if (!(rspns instanceof Error)) {
+          download.value = rspns;
+        }
+      }
+      isLoading.value = false;
+    };
 
-    // onMounted(async () => {
-    //   await init();
-    // });
+    const emailLink = async () => {
+      isLoading.value = true;
+      if (props.device) {
+        const rspns = await user.get.sendEmail(props.device.id as string);
+        if (!(rspns instanceof Error)) {
+          email.value = rspns;
+        }
+      }
+      isLoading.value = false;
+    };
+
+    onMounted(async () => {
+      await init();
+    });
 
     return {
       stateUser,
       closeModal,
       isDownloadHereShown,
       download,
+      email,
+      emailLink,
     };
   },
 });
