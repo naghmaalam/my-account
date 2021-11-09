@@ -12,12 +12,6 @@
     </div>
     <form action="#">
       <div class="mob-res-inputs d-flex mt-4 pl-5 pr-5 ml-5 mr-5">
-        <!-- <input
-          type="text"
-          class="form-control pt-4 pb-4"
-          placeholder="Enter your email address"
-          v-model="email"
-        /> -->
         <input
           type="text"
           class="form-control pt-4 pb-4"

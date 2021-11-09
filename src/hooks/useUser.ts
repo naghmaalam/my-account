@@ -319,6 +319,15 @@ export function useUser(): {
     },
   };
 
+  function refreshStorage() {
+    return tryCatchBoolean(async () => {
+      const response: Me = await api("me", Method.GET);
+      log("refreshStorage", response);
+      resetUser();
+      setUser(response);
+    });
+  }
+
   const account = {
     updatePassword: (currentPassword: string, newPassword: string) => {
       return tryCatchBoolean(async () => {
@@ -327,20 +336,16 @@ export function useUser(): {
           update_val: getEncryptedPassword(newPassword),
           current_password: getEncryptedPassword(currentPassword),
         });
-        resetUser();
-        setUser(response);
+        // resetUser();
+        // setUser(response);
+
+        // need to update accessToken before calling /me api
+        state.user.accessToken = response.accessToken;
         log("updatePassword", response);
       });
     },
 
-    refreshStorage: () => {
-      return tryCatchBoolean(async () => {
-        const response: Me = await api("me", Method.GET);
-        log("refreshStorage", response);
-        resetUser();
-        setUser(response);
-      });
-    },
+    refreshStorage: refreshStorage,
   };
 
   const device = {

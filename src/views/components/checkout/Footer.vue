@@ -88,6 +88,9 @@
                 <a href="https://twitter.com/SwoshsV" target="new"
                   ><i class="fab fa-twitter"></i
                 ></a>
+                <a href="https://twitter.com/SwoshsV" target="new"
+                  ><i class="fab fa-pinterest"></i
+                ></a>
                 <a
                   href="https://www.youtube.com/channel/UCTUyqPGnAdBaZFO3lMG5FHw"
                   target="new"
