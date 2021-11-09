@@ -427,7 +427,7 @@ const cn: Locale = {
     "Manage and overview of your secured connected devices and details._CN",
   downloads: " Downloads_CN",
   password_info_never_reuse:
-    "Confirm A strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account._CN",
+    "Confirm A strong password has more than 6 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account._CN",
   downloads_info:
     "Get Swoshs VPN with specific platform of your choice, from Android, iOS, Windows etc._CN",
   subscription_info:
@@ -503,6 +503,12 @@ const cn: Locale = {
     "A. If the plan purchased by your friend is less than 1 year, you will get 30-day VIP membership.",
   reward_modal_subtitle4:
     "B. If the plan purchased by your friend is no less than 1 year, you will get 90-day VIP membership.",
+  ribbon: "Exclusive",
+  Hooray_friend: "Hooray! you received a gift from you friend",
+  friend_reffered:
+    "Your friend has referred you. Complete sign up to claim your extra",
+  days_free: "3 Days Free Gift ",
+  get_free_days: " Get your 3-Day free",
 
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet

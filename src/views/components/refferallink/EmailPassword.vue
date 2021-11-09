@@ -1,20 +1,27 @@
 <template>
   <div class="rl-box mt-5 col-md-6 col-sm-6">
-    <div class="rl-ribbon ribbon-top-left"><span>ribbon</span></div>
+    <div class="rl-ribbon ribbon-top-left">
+      <span>{{ $t("ribbon") }}</span>
+    </div>
     <div class="rl-title mt-5 pt-5 pl-5 ml-5 pr-5 mr-5">
-      Hooray! you received a gift from you friend
+      {{ $t("Hooray_friend") }}
     </div>
     <div class="rl-subtitle pl-5 ml-5 pr-5 mr-5 pt-3">
-      Your friend has referred you. Complete sign up to claim your extra
-      <b> 30 Days Free gift </b>
+      {{ $t("friend_reffered") }}
+      <b> {{ $t("days_free") }} </b>
     </div>
     <form action="#">
       <div class="mob-res-inputs d-flex mt-4 pl-5 pr-5 ml-5 mr-5">
-        <input
+        <!-- <input
           type="text"
           class="form-control pt-4 pb-4"
           placeholder="Enter your email address"
           v-model="email"
+        /> -->
+        <input
+          type="text"
+          class="form-control pt-4 pb-4"
+          :value="$route.query.coolest"
         />
       </div>
 
@@ -47,9 +54,7 @@
       <span :class="{ marked: passwordStrength >= 5 }"></span>
     </div>
     <div class="rl-txt mob-res-inputs pl-5 ml-5 pr-5 mr-5 pt-4">
-      A strong password has more than 8 character, containing uppercase and
-      lowercase as well as symbols. Never reuse old password as this may
-      compromise your account.
+      {{ $t("password_strength_info") }}
     </div>
     <div class="rl-submit-btn ml-5 mr-5 mt-4">
       <div
@@ -63,7 +68,7 @@
           role="status"
           aria-hidden="true"
         ></span>
-        Get your 30-Day free
+        {{ $t("get_free_days") }}
       </div>
     </div>
   </div>
@@ -75,7 +80,6 @@ import { useI18n } from "vue-i18n";
 import { useValidation } from "@/hooks/useValidation";
 import { useToast } from "@/hooks/useToast";
 import { useUser } from "@/hooks/useUser";
-
 import { UpdateSection, SectionReferralLink } from "@/types/Section";
 
 export default defineComponent({

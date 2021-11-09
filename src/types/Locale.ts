@@ -444,6 +444,11 @@ export interface Locale {
   reward_modal_subtitle2: string;
   reward_modal_subtitle3: string;
   reward_modal_subtitle4: string;
+  ribbon: string;
+  Hooray_friend: string;
+  friend_reffered: string;
+  days_free: string;
+  get_free_days: string;
   ////////////////////////////////////////////////////////////////
   // new
 }

@@ -120,7 +120,8 @@ const en: Locale = {
   get_code: "Get Code",
   login_with_password: "Login with Password",
   enter_login_code: "Enter login code",
-  check_inbox: "Check your inbox for our email we have sent it.",
+  check_inbox:
+    "Please enter your verifiction code we have sent to your e-mail.",
   use_another_account: "Use another account",
   email: "Email",
   plan: "Plan",
@@ -418,7 +419,7 @@ const en: Locale = {
   create_new_password: "Create your new password",
   confirm_password: "Confirm Password",
   password_info_never_reuse:
-    "Confirm a strong password has more than 8 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account.",
+    "Confirm a strong password has more than 6 character, containing uppercase and lowercas as well as symbols. Never reuse old password as this may compromise your account.",
   my_devices: "My Devices",
   howdy: "Howdy!",
   member_since: "Member Since",
@@ -522,6 +523,12 @@ const en: Locale = {
     "A. If the plan purchased by your friend is less than 1 year, you will get 30-day VIP membership.",
   reward_modal_subtitle4:
     "B. If the plan purchased by your friend is no less than 1 year, you will get 90-day VIP membership.",
+  ribbon: "Exclusive",
+  Hooray_friend: "Hooray! you received a gift from you friend",
+  friend_reffered:
+    "Your friend has referred you. Complete sign up to claim your extra",
+  days_free: "3 Days Free Gift ",
+  get_free_days: " Get your 3-Day free",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

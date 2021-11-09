@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row numb-group">
         <h4 class="numb2 media-num">04</h4>
-        <p class="payment-selection media-title">Payment Selection</p>
+        <p class="payment-selection media-title">Select a Payment Method</p>
       </div>
       <div class="row">
         <div class="col-md-6">
@@ -88,12 +88,10 @@
       <div class="row">
         <div class="col-md-12 noti-payment">
           <p class="pb-5">
-            * The price is valid for the first term of your subscription. After
-            the first term, your subscription will be automatically renewed for
-            an additional 1-year term annually and you will be charged at
-            then-applicable renewal price. The price is subject to change, but
-            we will always send you a notification email prior to charging.
-            Learn more
+            * Your subscription will not be automatically renewed upon
+            expiration. You must re-subscribe on the purchase page in order to
+            use the SwoshsVPN again. The price is subject to change, but we will
+            always send you a notification email prior to charging.
           </p>
         </div>
       </div>
@@ -154,6 +152,7 @@ import { useToast } from "@/hooks/useToast";
 
 import FadeUp from "@/views/components/transitions/FadeUp.vue";
 import ModalPayment from "@/views/components/checkout/ModalPayment.vue";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   components: {
@@ -175,6 +174,8 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const route = useRoute();
+    console.log("route.query xxxxxxxxxxxxxxxx ", route.query.dddd);
     const isLoadingPaymentMethods = ref(true);
     const isLoadingPayment = ref(false);
     const showModalPayment = ref(false);

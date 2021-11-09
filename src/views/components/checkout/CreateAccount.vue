@@ -3,10 +3,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12 numb-group">
-          <h4 class="numb2 media-num">02</h4>
+          <h4 class="numb2 media-num">03</h4>
           <p class="media-title">
             <template v-if="!stateUser.authenticated">
-              Create an account
+              Enter Your Email Address
             </template>
             <template v-else> Email Address</template>
           </p>

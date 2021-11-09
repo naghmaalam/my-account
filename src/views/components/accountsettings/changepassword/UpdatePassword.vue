@@ -62,14 +62,14 @@
                   </div>
                 </div>
                 <div class="mt-4 text-left">
-                  {{ $t("password") }}
+                  {{ $t("new_password") }}
                   <div class="create-new-password-input d-flex flex-row mt-1">
                     <input
                       :type="isPasswordHidden ? 'password' : 'text'"
                       class="form-control"
                       v-model="passwordNew"
                       @input="atKeyUp"
-                      :placeholder="$t('password')"
+                      :placeholder="$t('new_password')"
                     />
                     <button
                       type="button"

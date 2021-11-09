@@ -187,11 +187,12 @@ export function useUser(): {
   /////////////////////////////////////////////////////////////////////
   const login = (email: string, password: string) => {
     return tryCatchBoolean(async () => {
+      console.log(detectBrowser());
       const loginDetails: LoginDetails = {
         username: email,
         password: password,
         device_code: detectBrowser(),
-        device_name: detectBrowser(),
+        device_name: detectBrowser() + " Browser",
         device_type: "web",
         myaccount: true,
         lang: state.user.language.selected,

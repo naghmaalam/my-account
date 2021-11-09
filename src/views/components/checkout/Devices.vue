@@ -2,7 +2,7 @@
   <section class="container-fluid content-word">
     <div class="container">
       <div class="row numb-group">
-        <h4 class="numb2 media-num">03</h4>
+        <h4 class="numb2 media-num">02</h4>
         <p class="payment-selection media-title">Customize devices</p>
       </div>
       <div class="row">
