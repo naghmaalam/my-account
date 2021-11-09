@@ -175,7 +175,6 @@ export default defineComponent({
   },
   setup(props) {
     const route = useRoute();
-    console.log("route.query xxxxxxxxxxxxxxxx ", route.query.dddd);
     const isLoadingPaymentMethods = ref(true);
     const isLoadingPayment = ref(false);
     const showModalPayment = ref(false);

@@ -21,7 +21,7 @@
         <input
           type="text"
           class="form-control pt-4 pb-4"
-          :value="$route.query.coolest"
+          :value="$route.query.email"
         />
       </div>
 
