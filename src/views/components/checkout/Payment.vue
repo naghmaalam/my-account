@@ -49,7 +49,7 @@
               <li>Unlimited and fast content delivery</li>
               <li>No logs policy</li>
               <li>Uncompromised security and privacy</li>
-              <li>24/7 customer service</li>
+              <li>Dedicated customer service</li>
               <li>Enterprise-grade infrastructure and reliability.</li>
             </ul>
           </div>

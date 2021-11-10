@@ -16,23 +16,38 @@
                 <div class="device-modal-title mob-res-center">
                   {{ $t("reward_modal_title") }}
                 </div>
-                <div class="device-modal-subtitle mob-res-center">
+                <div class="device-modal-title mob-res-center">
+                  {{ $t("reward_modal_title2") }}
+                </div>
+                <div class="device-modal-subtitle mob-res-center pl-3">
                   {{ $t("reward_modal_subtitle") }}
+                </div>
+                <div class="device-modal-subtitle mob-res-center pl-3">
+                  {{ $t("reward_modal_subtitle5") }}
                 </div>
                 <div class="device-modal-title mob-res-center">
                   {{ $t("reward_modal_title1") }}
                 </div>
-                <div class="device-modal-subtitle mob-res-center">
+                <div class="device-modal-subtitle mob-res-center pl-3">
                   {{ $t("reward_modal_subtitle1") }}
                 </div>
-                <div class="device-modal-subtitle mob-res-center pt-3">
+                <div class="device-modal-subtitle mob-res-center pl-3">
                   {{ $t("reward_modal_subtitle2") }}
+                </div>
+                <div class="device-modal-title mob-res-center">
+                  {{ $t("reward_modal_title3") }}
                 </div>
                 <div class="device-modal-subtitle mob-res-center pl-3">
                   {{ $t("reward_modal_subtitle3") }}
                 </div>
+                <div class="device-modal-title mob-res-center">
+                  {{ $t("reward_modal_title4") }}
+                </div>
                 <div class="device-modal-subtitle mob-res-center pl-3">
                   {{ $t("reward_modal_subtitle4") }}
+                </div>
+                <div class="device-modal-subtitle mob-res-center pl-3">
+                  {{ $t("reward_modal_subtitle5") }}
                 </div>
               </div>
             </div>

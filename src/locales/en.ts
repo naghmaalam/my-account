@@ -511,18 +511,25 @@ const en: Locale = {
   package_not_supported:
     "Your current package is not supported on this feature",
   renew: "Renew",
-  reward_modal_title: "How much rewards time can I get via inviting friends?",
+  reward_modal_title:
+    "Collect more than a year’s worth of free SwoshsVPN subscription by gifting X days to people you invite. ",
+  reward_modal_title2: "How does it work?",
   reward_modal_subtitle:
-    "For the promotion phase of Swoshs VPN, if your friend recharges for the first time, both you and your friend can get reward gift.",
-  reward_modal_title1: "The reward rules are as follows:",
+    "- When purchasing a subscription with SwoshsVPN, you’re automatically converted into a premium user regardless of the package you subscribe to.",
+  reward_modal_subtitle5:
+    "- You’re then given a Refer a Friend (REF) code which you can send to an unlimited number of people. ",
+  reward_modal_title1: "Reward rules",
   reward_modal_subtitle1:
-    "1. After a friend successfully registering and becoming a VIP user via your invitation link, or inputting your invitation code and purchasing, he will get 30-day VIP membership.",
+    "- After a friend successfully registering and becoming a VIP user via your invitation link, or inputting your invitation code and purchasing, he will get 30-day VIP membership.",
   reward_modal_subtitle2:
-    " 2. Your rewards depend on the plan that your friend purchases when he is registering.",
+    "- Your rewards depend on the plan that your friend purchases when he is registering.",
+  reward_modal_title3: "You can",
   reward_modal_subtitle3:
-    "A. If the plan purchased by your friend is less than 1 year, you will get 30-day VIP membership.",
+    "-	Send the REF code to as many people as you want. If you sent the code to 12 different people, and if they all become registered users, then you’ll get an additional 365 days added to your subscription. But each of your 12 friends you sent the REF code to will get 30 days added to the subscription they purchased. ",
+  reward_modal_title4: " You can't",
   reward_modal_subtitle4:
-    "B. If the plan purchased by your friend is no less than 1 year, you will get 90-day VIP membership.",
+    "- Take part in the REF program unless BOTH parties have a paid subscription. A 3-day free trial does not count as a premium user. If you or the referred friend do not have an account, then you will have to register paid users. ",
+  reward_modal_title5: "-	Avail the REF reward system with an expired account. ",
   ribbon: "Exclusive",
   Hooray_friend: "Hooray! you received a gift from you friend",
   friend_reffered:

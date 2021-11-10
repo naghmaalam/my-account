@@ -449,6 +449,12 @@ export interface Locale {
   friend_reffered: string;
   days_free: string;
   get_free_days: string;
+  reward_modal_title2: string;
+  reward_modal_subtitle5: string;
+  reward_modal_title3: string;
+  reward_modal_title4: string;
+  reward_modal_title5: string;
+
   ////////////////////////////////////////////////////////////////
   // new
 }

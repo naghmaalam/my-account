@@ -293,11 +293,18 @@ export default {
     };
 
     const subscriptions = computed(() => {
-      return stateUser.value.subscription.plans.map((vl) => {
+      return stateUser.value.subscription.plans.map((vl, i) => {
         const expire = new Date(vl.end_date as unknown as string);
-        const status = isDateExpired(vl.end_date as unknown as string)
-          ? "inactive"
-          : "active";
+
+        // latest subscription should be the active regardless of date expiry
+        // const status = isDateExpired(vl.end_date as unknown as string)
+        //   ? "inactive"
+        //   : "active";
+        const status =
+          i == 0 && !isDateExpired(vl.end_date as unknown as string)
+            ? "active"
+            : "inactive";
+
         let action = "";
         if (!stateUser.value.currentSubscription.isExpired) {
           if (stateUser.value.currentSubscription.title === "premium") {

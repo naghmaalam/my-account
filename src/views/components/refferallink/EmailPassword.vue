@@ -15,7 +15,8 @@
         <input
           type="text"
           class="form-control pt-4 pb-4"
-          :value="$route.query.email"
+          :placeholder="$t('email')"
+          v-model="email"
         />
       </div>
 
@@ -68,7 +69,14 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, ComputedRef, defineComponent, inject, ref } from "vue";
+import {
+  computed,
+  onMounted,
+  ComputedRef,
+  defineComponent,
+  inject,
+  ref,
+} from "vue";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useValidation } from "@/hooks/useValidation";
@@ -91,6 +99,12 @@ export default defineComponent({
     const isPasswordHidden = ref(true);
     const inviteCode: ComputedRef<string> = computed(() => {
       return route.params.inviteCode as string;
+    });
+
+    onMounted(() => {
+      if (typeof route.query.email !== "undefined")
+        email.value = route.query.email + "";
+      else email.value = "";
     });
 
     const sS = inject("updateSection") as UpdateSection<SectionReferralLink>;

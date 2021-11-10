@@ -1,4 +1,10 @@
 <template>
+  <div class="noti-head">
+    <p>
+      Your IP: 87.200.180.92 - ISP: Emirates Integrated Telecommunications
+      Company PJSC
+    </p>
+  </div>
   <nav
     class="
       nav
@@ -26,9 +32,7 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
         @click.prevent="mobMenuShow()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      ></button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto ml-0">
           <li class="nav-item">
@@ -336,6 +340,17 @@ export default defineComponent({
     position: absolute;
     top: 10%;
     text-align: center;
+  }
+
+  .noti-head {
+    background-color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    color: white;
+    font-size: 13px;
+    position: relative;
+    z-index: 20;
   }
 }
 </style>
