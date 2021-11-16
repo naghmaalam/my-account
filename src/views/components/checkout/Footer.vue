@@ -1,111 +1,245 @@
 <template>
   <footer id="as-footer" class="footer__inner">
-    <div class="container-fluid">
+    <div class="container-fluid map-image">
       <div class="container">
         <div class="row">
           <div class="col">
             <div class="as-footer-box">
-              <h3 class="mt-3">Swoshs VPN</h3>
+              <h3 class="mt-3">{{ $t("vpn_name") }}</h3>
               <ul class="list-unstyled">
-                <li><a href="android.html">About Us</a></li>
-                <li><a href="ios.html"> Benefits </a></li>
-                <li><a href="windows.html">Free Trial</a></li>
-                <li><a href="mac.html">VPN Tutorials</a></li>
-                <li><a href="mac.html">Reviews</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="as-footer-box">
-              <h3 class="mt-3">Product</h3>
-              <ul class="list-unstyled">
-                <li><a href="android.html">VPN for Android</a></li>
-                <li><a href="ios.html">VPN for iOS</a></li>
-                <li><a href="windows.html">VPN for Windows</a></li>
-                <li><a href="mac.html">VPN for Mac</a></li>
-                <li><a href="mac.html">VPN for Linux</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="as-footer-box">
-              <h3 class="mt-3">Programs</h3>
-              <ul class="list-unstyled">
-                <li><a href="#">Refer a friend</a></li>
-                <li><a href="#">Affiliates</a></li>
-                <li><a href="#">Influencer</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col">
-            <div class="as-footer-box">
-              <h3 class="mt-3">Information</h3>
-              <ul class="list-unstyled">
-                <li><a href="#">pricing</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="privacy-policy.html">Privacy Policy</a></li>
                 <li>
-                  <a href="terms-and-conditions.html">Terms & Conditions</a>
+                  <a href="https://swoshsvpn.com/about-swoshs">{{
+                    $t("about_us")
+                  }}</a>
                 </li>
-                <li><a href="about-swoshs.html">Contact Us</a></li>
+                <li>
+                  <a href="https://swoshsvpn.com/benefits">
+                    {{ $t("benefits") }}
+                  </a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/free-trial">{{
+                    $t("free_trial_trial")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/tutorials">{{
+                    $t("vpn_tutorial")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/review">{{ $t("reviews") }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="as-footer-box">
+              <h3 class="mt-3">{{ $t("product") }}</h3>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="https://swoshsvpn.com/download-vpn-for-android">{{
+                    $t("vpn_for_android")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/download-vpn-for-ios">{{
+                    $t("vpn_for_ios")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/download-vpn-for-windows">{{
+                    $t("vpn_for_windows")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/download-vpn-for-mac">{{
+                    $t("vpn_for_mac")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/download-vpn-for-linux">{{
+                    $t("vpn_for_linux")
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="as-footer-box">
+              <h3 class="mt-3">{{ $t("programs") }}</h3>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="https://swoshsvpn.com/refer-a-friend">{{
+                    $t("refer_a_friend")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/coming-soon">{{
+                    $t("affiliates")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/coming-soon">{{
+                    $t("influencer")
+                  }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="as-footer-box">
+              <h3 class="mt-3">{{ $t("information") }}</h3>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="https://swoshsvpn.com/my-account/#/purchase">{{
+                    $t("pricing")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/blog">{{ $t("blog") }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/privacy-policy">{{
+                    $t("privacy_policy")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/terms-and-conditions">{{
+                    $t("terms_and_conditiond")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/contact-us">{{
+                    $t("contact")
+                  }}</a>
+                </li>
               </ul>
             </div>
           </div>
           <div class="col-sm-12 col-md-2">
             <div class="as-footer-box">
-              <h3 class="mt-3">Help</h3>
+              <h3 class="mt-3">{{ $t("help") }}</h3>
               <ul class="list-unstyled">
-                <li><a href="faqs.html">FAQs</a></li>
-                <li><a href="#">Support Center</a></li>
-                <li><a href="#">Money back guarantee</a></li>
+                <li>
+                  <a href="https://swoshsvpn.com/faq">{{ $t("faqs") }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/support">{{
+                    $t("support_center")
+                  }}</a>
+                </li>
+                <li>
+                  <a href="https://swoshsvpn.com/money-back-guarantee">{{
+                    $t("money_back_guarantee")
+                  }}</a>
+                </li>
               </ul>
-            </div>
-          </div>
-        </div>
-        <div class="row as_copy">
-          <div class="col">
-            <div class="text-left mt-4">
-              <p>
-                <a href="https://swoshsvpn.com">Swoshs VPN</a> &copy;
-                {{ new Date().getFullYear() }}
-                | All right Reversed.
-              </p>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="mt-4">
-              <div class="row social_icons text-right">
-                <p class="mr-3">Connect With Us</p>
-                <a href="https://www.facebook.com/swoshsvpn/"
-                  ><i class="fab fa-facebook"></i
-                ></a>
-                <a href="https://www.instagram.com/swoshsvpn/" target="new"
-                  ><i class="fab fa-instagram"></i
-                ></a>
-                <a href="https://twitter.com/SwoshsV" target="new"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a href="https://twitter.com/SwoshsV" target="new"
-                  ><i class="fab fa-pinterest"></i
-                ></a>
-                <a
-                  href="https://www.youtube.com/channel/UCTUyqPGnAdBaZFO3lMG5FHw"
-                  target="new"
-                  ><i class="fab fa-youtube"></i
-                ></a>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </footer>
+
+  <div class="conatiner-fluid row as_copy copyright">
+    <div class="col">
+      <div class="text-center mt-4">
+        <p class="swoshs-link">
+          &copy; <a href="https://swoshsvpn.com">{{ $t("vpn_name") }}</a>
+          {{ new Date().getFullYear() }}
+          | {{ $t("all_right_reserved") }}
+        </p>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="mt-4">
+        <div class="row social_icons text-right">
+          <p class="swoshs-link mr-3">{{ $t("connect_with_us") }}</p>
+          <div class="icons">
+            <a href="https://twitter.com/SwoshsV" target="new"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
+          <div class="icons">
+            <a href="https://www.facebook.com/swoshsvpn/">
+              <i class="fab fa-facebook"></i
+            ></a>
+          </div>
+          <div class="icons text-center">
+            <a href="https://www.instagram.com/swoshsvpn/" target="new"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+          <div class="icons">
+            <a href="https://twitter.com/SwoshsV" target="new"
+              ><i class="fab fa-pinterest"></i
+            ></a>
+          </div>
+          <div class="icons">
+            <a
+              href="https://www.youtube.com/channel/UCTUyqPGnAdBaZFO3lMG5FHw"
+              target="new"
+              ><i class="fab fa-youtube"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+
 <style lang="scss" scoped>
 .social_icons * + * {
-  margin-right: 2rem;
+  margin-right: 1rem;
+}
+
+.icons {
+  background-color: #22183d !important;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding-top: 4px;
+  border-radius: 100px;
+}
+
+.copyright {
+  background-color: #110a23;
+  display: flex;
+  justify-content: space-around;
+}
+
+.map-image {
+  background-image: url("~@/assets/images/payment/map.png");
+  background-repeat: no-repeat;
+  // background-position: center center;
+  background-position: center top;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.icons a {
+  text-decoration: none !important;
+  color: #ffffff !important;
+}
+
+.swoshs-link {
+  color: #b2b9c1 !important;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.swoshs-link a {
+  text-decoration: none !important;
+  color: #b2b9c1 !important;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.swoshs-link a:hover {
+  color: #ffffff !important;
 }
 </style>

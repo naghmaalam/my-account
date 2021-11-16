@@ -3,7 +3,9 @@
     <div class="container">
       <div class="row numb-group">
         <h4 class="numb2 media-num">04</h4>
-        <p class="payment-selection media-title">Select a Payment Method</p>
+        <p class="payment-selection media-title">
+          {{ $t("select_payment_method") }}
+        </p>
       </div>
       <div class="row">
         <div class="col-md-6">
@@ -37,20 +39,20 @@
               "
             >
               <div class="spinner-grow text-primary my-5" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">{{ $t("loading_dots") }}</span>
               </div>
             </div>
           </template>
         </div>
         <div class="col-md-6">
           <div class="benefits-box">
-            <h4>Your plan includes</h4>
+            <h4>{{ $t("your_plan_includes") }}</h4>
             <ul>
-              <li>Unlimited and fast content delivery</li>
-              <li>No logs policy</li>
-              <li>Uncompromised security and privacy</li>
-              <li>Dedicated customer service</li>
-              <li>Enterprise-grade infrastructure and reliability.</li>
+              <li>{{ $t("unlimited_fast_delivery") }}</li>
+              <li>{{ $t("no_logs_policy") }}</li>
+              <li>{{ $t("uncompromised_security") }}</li>
+              <li>{{ $t("dedicated_customer_service") }}</li>
+              <li>{{ $t("enterprise_grade") }}</li>
             </ul>
           </div>
         </div>
@@ -88,10 +90,7 @@
       <div class="row">
         <div class="col-md-12 noti-payment">
           <p class="pb-5">
-            * Your subscription will not be automatically renewed upon
-            expiration. You must re-subscribe on the purchase page in order to
-            use the SwoshsVPN again. The price is subject to change, but we will
-            always send you a notification email prior to charging.
+            {{ $t("subscription_information") }}
           </p>
         </div>
       </div>

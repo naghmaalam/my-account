@@ -183,3 +183,29 @@ export function isElementInViewport(el: HTMLElement) {
     rect.top < (window.innerHeight || document.documentElement.clientHeight)
   );
 }
+
+export async function getIPLocation(): Promise<
+  { loc: string; ip: string } | false
+> {
+  try {
+    const rspns = await fetch("https://www.cloudflare.com/cdn-cgi/trace");
+    if (rspns.ok) {
+      const text = await rspns.text();
+      const data = text
+        .split(/\r?\n/)
+        .map((val) => {
+          const splitted = val.split("=");
+          const retVal: any = {};
+          retVal[splitted[0]?.trim()] = splitted[1]?.trim();
+          return retVal;
+        })
+        .reduce((prevVal, currVal) => {
+          return { ...prevVal, ...currVal };
+        });
+      return { loc: data.loc, ip: data.ip };
+    } else throw new Error("getting IP & Location failed!");
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}

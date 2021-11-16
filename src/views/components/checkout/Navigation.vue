@@ -1,8 +1,8 @@
 <template>
   <div class="noti-head">
     <p>
-      Your IP: 87.200.180.92 - ISP: Emirates Integrated Telecommunications
-      Company PJSC
+      {{ $t("your") }} IP: {{ ip }} - ISP: {{ location }}
+      {{ $t("emirates") }}
     </p>
   </div>
   <nav
@@ -16,7 +16,7 @@
     id="nav"
   >
     <div class="container-fluid mobile-style">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="https://swoshsvpn.com/">
         <img
           class="logo img-fluid"
           src="@/assets/images/navigation/logo.png"
@@ -36,22 +36,35 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto ml-0">
           <li class="nav-item">
-            <a class="nav-link" href="/what-is-vpn.html">What is VPN?</a>
+            <a class="nav-link" href="https://swoshsvpn.com/what-is-vpn">{{
+              $t("what_is_vpn")
+            }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="benefits.html">Benefits</a>
+            <a class="nav-link" href="https://swoshsvpn.com/benefits">{{
+              $t("benefits")
+            }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="purchase.html">Pricing</a>
+            <a
+              class="nav-link"
+              href="https://swoshsvpn.com/my-account/#/purchase"
+              >{{ $t("pricing") }}</a
+            >
           </li>
           <li>
             <div
-              class="nav-link"
+              class="nav-link dropdown-toggle"
               @mouseenter="showMenu"
               @mouseleave="hideMenu"
               @click="toggleMenu"
+              id="navbarDropdown2"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
             >
-              Download
+              {{ $t("download") }}
             </div>
           </li>
 
@@ -63,20 +76,45 @@
               @mouseenter="showMenu"
               @mouseleave="hideMenu"
             >
-              <a class="dropdown-item" href="/android.html"
+              <a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/download-vpn-for-android"
                 ><i class="flaticon-android pr-3" aria-hidden="true"></i
-                >Android</a
+                >{{ $t("android") }}</a
               >
 
-              <a class="dropdown-item" href="/windows.html">
+              <a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/download-vpn-for-ios"
+              >
+                <i class="flaticon-apple pr-3" aria-hidden="true"></i
+                >{{ $t("ios") }}</a
+              >
+
+              <a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/download-vpn-for-windows"
+              >
                 <i class="flaticon-windows pr-3" aria-hidden="true"></i
-                >Windows</a
+                >{{ $t("windows") }}</a
               >
-              <a class="dropdown-item" href="/ios.html">
-                <i class="flaticon-apple pr-3" aria-hidden="true"></i>iOS</a
+
+              <a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/download-vpn-for-mac"
               >
-              <a class="dropdown-item" href="/linux.html"
-                ><i class="flaticon-linux pr-3" aria-hidden="true"></i>Linux</a
+                <i class="flaticon-macos pr-3" aria-hidden="true"></i
+                >{{ $t("mac_os") }}</a
+              >
+              <a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/download-vpn-for-linux"
+                ><i class="flaticon-linux pr-3" aria-hidden="true"></i
+                >{{ $t("linux") }}</a
+              >
+              <a class="dropdown-item" href="https://swoshsvpn.com/app-download"
+                ><i class="flaticon-responsive pr-3" aria-hidden="true"></i>
+                {{ $t("all_platform") }}</a
               >
             </div>
           </transition>
@@ -84,45 +122,26 @@
           <!-- end of drop down -->
 
           <li class="nav-item">
-            <a class="nav-link" href="/blog/index.html">Blog</a>
+            <a class="nav-link" href="https://swoshsvpn.com/blog">{{
+              $t("blog")
+            }}</a>
           </li>
           <li class="nav-item">
             <!-- <a class="nav-link" href="../my-account.html">My Account</a> -->
             <router-link :to="{ name: 'home' }" class="nav-link">
-              My Account
+              {{ $t("my_account") }}
             </router-link>
           </li>
           <li class="nav-item cta-header">
-            <a class="nav-link" href="/purchase.html">Get Started</a>
+            <a
+              class="nav-link"
+              href="https://swoshsvpn.com/my-account/#/purchase"
+              >{{ $t("get_strated") }}</a
+            >
           </li>
         </ul>
       </div>
     </div>
-
-    <!-- mob-responbsive drop-down -->
-
-    <!-- <transition name="navbar" class="d-md-none">
-      <div
-        class="mob-responsive-nav shadow pb-3"
-        v-if="isMobNavShown"
-        @mouseleave="hideMenu"
-        @mouseenter="mobMenuShow"
-      >
-        <a class="dropdown-item" href="what-is-vpn.html">What is VPN?</a>
-
-        <a class="nav-link" href="benefits.html">Benefits</a>
-
-        <a class="nav-link" href="purchase.html">Pricing</a>
-
-        <a class="nav-link" href="blog/index.html">Blog</a>
-
-        <a class="nav-link" href="../my-account.html">My Account</a>
-
-        <li class="nav-item cta-header">
-          <a class="nav-link" href="#">Get Started</a>
-        </li>
-      </div>
-    </transition> -->
   </nav>
 
   <!-- mob res nav bar -->
@@ -131,7 +150,7 @@
     id="nav"
   >
     <div class="container-fluid mobile-style">
-      <a class="navbar-brand" href="../index.html">
+      <a class="navbar-brand" href="https://swoshsvpn.com/">
         <img
           class="logo img-fluid"
           src="@/assets/images/navigation/logo.png"
@@ -160,13 +179,21 @@
       >
         <ul class="navbar-nav ml-auto ml-0">
           <li class="nav-item">
-            <a class="nav-link" href="../what-is-vpn.html">What is VPN?</a>
+            <a class="nav-link" href="https://swoshsvpn.com/what-is-vpn">{{
+              $t("what_is_vpn")
+            }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../benefits.html">Benefits</a>
+            <a class="nav-link" href="https://swoshsvpn.com/benefits">{{
+              $t("benefits")
+            }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../purchase.html">Pricing</a>
+            <a
+              class="nav-link"
+              href="https://swoshsvpn.com/my-account/#/purchase"
+              >{{ $t("pricing") }}</a
+            >
           </li>
           <li class="nav-item dropdown">
             <a
@@ -178,36 +205,53 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Download
+              {{ $t("download") }}
             </a>
             <div
               class="dropdown-menu animate slideIn"
               aria-labelledby="navbarDropdown2"
             >
-              <a class="dropdown-item" href="./android.html"
-                ><i class="fa fa-android icon" aria-hidden="true"></i>Android</a
+              <a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/download-vpn-for-android"
+                ><i class="fa fa-android icon" aria-hidden="true"></i
+                >{{ $t("android") }}</a
               >
-              <a class="dropdown-item" href="/windows.html"
-                ><i class="fa fa-windows icon" aria-hidden="true"></i>Windows</a
+              <a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/download-vpn-for-ios"
+                ><i class="fa fa-apple icon" aria-hidden="true"></i
+                >{{ $t("iOS") }}</a
               >
-              <a class="dropdown-item" href="/ios.html"
-                ><i class="fa fa-apple icon" aria-hidden="true"></i>iOS</a
-              ><a class="dropdown-item" href="/linux.html"
-                ><i class="fa fa-linux icon" aria-hidden="true"></i>Linux</a
-              ><a class="dropdown-item" href="/app-download.html"
-                ><i class="fa fa-sitemap icon" aria-hidden="true"></i>All
-                Platform</a
+              <a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/download-vpn-for-windows"
+                ><i class="fa fa-windows icon" aria-hidden="true"></i
+                >{{ $t("windows") }}</a
+              >
+              <a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/download-vpn-for-linux"
+                ><i class="fa fa-linux icon" aria-hidden="true"></i
+                >{{ $t("linux") }}</a
+              ><a
+                class="dropdown-item"
+                href="https://swoshsvpn.com/app-download"
+                ><i class="fa fa-sitemap icon" aria-hidden="true"></i
+                >{{ $t("all_platform") }}</a
               >
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/blog/index.html">Blog</a>
+            <a class="nav-link" href="/blog/index.html">{{ $t("blog") }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../my-account.html">My Account</a>
+            <a class="nav-link" href="../my-account.html">{{
+              $t("my_account")
+            }}</a>
           </li>
           <li class="nav-item cta-header">
-            <a class="nav-link" href="#">Get Started</a>
+            <a class="nav-link" href="#">{{ $t("get_strated") }}</a>
           </li>
         </ul>
       </div>
@@ -216,15 +260,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { stateUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
 import { useRouter } from "vue-router";
+import { getIPLocation } from "@/modules/utils";
 
 export default defineComponent({
   setup() {
     const router = useRouter();
 
+    const ip = ref();
+    const location = ref();
     const isShown = ref(false);
     const isMouseOn = ref(false);
     const isMobNavShown = ref(false);
@@ -259,6 +306,14 @@ export default defineComponent({
       router.push({ name: page });
     };
 
+    onMounted(async () => {
+      const rspns = await getIPLocation();
+      if (rspns !== false) {
+        ip.value = rspns.ip;
+        location.value = rspns.loc;
+      }
+    });
+
     return {
       stateUser,
       showSideMenu: useSettings().do.sideMenu.show,
@@ -269,6 +324,8 @@ export default defineComponent({
       toggleMenu,
       isMobNavShown,
       mobMenuShow,
+      ip,
+      location,
     };
   },
 });
@@ -313,6 +370,7 @@ export default defineComponent({
   border-radius: 0px 0px 5px 5px;
   background: #1c1431;
   opacity: 0.9;
+  z-index: -999;
   // border: 1px solid red;
   > div {
     cursor: pointer;
@@ -352,5 +410,41 @@ export default defineComponent({
     position: relative;
     z-index: 20;
   }
+}
+
+// .navbar {
+//   position: absolute;
+//   // transform: translate(-3rem);
+//   transition: all 0.3s ease 0s, visibility 0s linear 0.3s;
+// }
+
+.nav {
+  z-index: 999;
+  transition: translate(-3rem);
+  transition: linear 0.3s ease-in-out, all ease-in 0.4s;
+}
+
+.navbar-enter-from {
+  // opacity: 0;
+  transform: translateY(-100%);
+}
+.navbar-enter-active {
+  transition: all 0.4s;
+}
+.navbar-enter-to {
+  // opacity: 1;
+  transform: translateY(0%);
+}
+
+.navbar-leave-from {
+  // opacity: 1;
+  transform: translateY(0%);
+}
+.navbar-leave-active {
+  transition: all 0.4s;
+}
+.navbar-leave-to {
+  // opacity: 0;
+  transform: translateY(-100%);
 }
 </style>

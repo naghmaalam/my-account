@@ -6,7 +6,7 @@
           <h4 class="numb2 media-num">03</h4>
           <p class="media-title">
             <template v-if="!stateUser.authenticated">
-              Enter Your Email Address
+              Create an account
             </template>
             <template v-else> Email Address</template>
           </p>
@@ -48,6 +48,10 @@
                 <router-link to="/">Login</router-link>
               </template>
             </p>
+            <!-- <p>
+              We will send you an email confirmation with a temporary password
+              and username.
+            </p> -->
           </div>
         </div>
       </div>
