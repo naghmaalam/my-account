@@ -492,23 +492,25 @@ const cn: Locale = {
     "Your current package is not supported on this feature_CN",
   renew: "Renew_CN",
   reward_modal_title:
-    "Collect more than a year’s worth of free SwoshsVPN subscription by gifting X days to people you invite. ",
+    "Collect more than a year’s worth of free SwoshsVPN subscription by gifting 30 days to people you invite. ",
   reward_modal_title2: "How does it work?",
   reward_modal_subtitle:
     "- When purchasing a subscription with SwoshsVPN, you’re automatically converted into a premium user regardless of the package you subscribe to.",
   reward_modal_subtitle5:
-    "- You’re then given a Refer a Friend (REF) code which you can send to an unlimited number of people. ",
+    "- You’re then provided a Refer a Friend (REF) link which you can send to an unlimited number of people. ",
   reward_modal_title1: "Reward rules",
   reward_modal_subtitle1:
-    "-	After sending the REF code to your friend, that person will have to enter the code and register as a premium user regardless of the package price. ",
+    "- After sending the REF link to your friend, that person will have to click the link and register as a premium user to any package they choose.  ",
   reward_modal_subtitle2:
-    " -	After that person registers and enters the REF code, you’ll both automatically get an additional 30 days in each of your subscriptions. ",
+    " -	Once your friend clicks on the link and subscribed to any package, both of you will automatically get a top-up of additional 30 days in each of your subscriptions.  ",
   reward_modal_title3: "You can",
   reward_modal_subtitle3:
-    "-	Send the REF code to as many people as you want. If you sent the code to 12 different people, and if they all become registered users, then you’ll get an additional 365 days added to your subscription. But each of your 12 friends you sent the REF code to will get 30 days added to the subscription they purchased. ",
+    "- -	Send the REF link to as many people as you want. If you sent the link to 12 different people, and if they all become premium users, then you’ll get an additional 365 days added to your subscription. But each of your 12 friends you sent the REF link to will get 30 days added to the subscription they purchased.  ",
   reward_modal_title4: " You can't",
   reward_modal_subtitle4:
-    "-	Take part in the REF program unless BOTH parties have a paid subscription. A 3-day free trial does not count as a premium user. If you or the referred friend do not have an account, then you will have to register paid users. ",
+    "- Take part in the REF program unless BOTH parties have a paid subscription. A 3-day free trial does not count as a premium user. ",
+  reward_modal_subtitle6:
+    "- Avail of the REF reward program with an expired account.",
   reward_modal_title5: "-	Avail the REF reward system with an expired account. ",
   ribbon: "Exclusive",
   Hooray_friend: "Hooray! you received a gift from you friend",
@@ -516,7 +518,52 @@ const cn: Locale = {
     "Your friend has referred you. Complete sign up to claim your extra",
   days_free: "3 Days Free Gift ",
   get_free_days: " Get your 3-Day free",
-
+  reward_modal_subtitle7:
+    "- Avail of the REF reward program while you are under a free trial. ",
+  your: "Your",
+  emirates: "Emirates Integrated Telecommunications Company PJSC",
+  what_is_vpn: "What is VPN?",
+  benefits: "Benefits",
+  pricing: "Pricing",
+  ios: "ios",
+  windows: "Windows",
+  mac_os: "Mac OS",
+  linux: "Linux",
+  all_platform: "All Platform",
+  blog: "Blog",
+  get_strated: "My Account",
+  about_us: "About Us",
+  free_trial_trial: "Free Trial",
+  vpn_tutorial: "VPN Tutorials",
+  reviews: "Reviews",
+  product: "Product",
+  vpn_for_android: "VPN for Android",
+  vpn_for_ios: "VPN for ios",
+  vpn_for_windows: "VPN for Windows",
+  vpn_for_mac: "VPN for Mac",
+  vpn_for_linux: "VPN for Linux",
+  programs: "Programs",
+  affiliates: "Affiliates",
+  influencer: "Influencer",
+  terms_and_conditiond: "Terms & Conditions",
+  contact: "Contact US",
+  help: "Help",
+  faqs: "FAQs",
+  support_center: "Support Center",
+  money_back_guarantee: "Money back guarantee",
+  all_right_reserved: "All right Reversed.",
+  connect_with_us: "Connect With Us",
+  select_payment_method: "Select a Payment Method",
+  loading_dots: "Loading...",
+  your_plan_includes: "Your plan includes",
+  unlimited_fast_delivery: "Unlimited and fast content delivery",
+  no_logs_policy: "No logs policy",
+  uncompromised_security: "Uncompromised security and privacy",
+  dedicated_customer_service: "Dedicated customer service",
+  enterprise_grade: "Enterprise-grade infrastructure and reliability.",
+  subscription_information:
+    " * Your subscription will not be automatically renewed upon expiration. You must re-subscribe on the purchase page in order to use the SwoshsVPN again. The price is subject to change, but we will always send you a notification email prior to charging.",
+  /////////////////////////////
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

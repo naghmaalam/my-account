@@ -354,7 +354,6 @@ export interface Locale {
   pay_processing_message: string;
   edit_account: string;
   about_swoshs: string;
-
   // new
   /////////////////////////////////////////////////////////////////////////////////////////
   hi_there: string;
@@ -444,6 +443,7 @@ export interface Locale {
   reward_modal_subtitle2: string;
   reward_modal_subtitle3: string;
   reward_modal_subtitle4: string;
+  reward_modal_subtitle6: string;
   ribbon: string;
   Hooray_friend: string;
   friend_reffered: string;
@@ -454,7 +454,49 @@ export interface Locale {
   reward_modal_title3: string;
   reward_modal_title4: string;
   reward_modal_title5: string;
-
+  reward_modal_subtitle7: string;
+  your: string;
+  emirates: string;
+  what_is_vpn: string;
+  benefits: string;
+  pricing: string;
+  ios: string;
+  windows: string;
+  mac_os: string;
+  linux: string;
+  all_platform: string;
+  blog: string;
+  get_strated: string;
+  about_us: string;
+  free_trial_trial: string;
+  vpn_tutorial: string;
+  reviews: string;
+  product: string;
+  vpn_for_android: string;
+  vpn_for_ios: string;
+  vpn_for_windows: string;
+  vpn_for_mac: string;
+  vpn_for_linux: string;
+  programs: string;
+  affiliates: string;
+  influencer: string;
+  terms_and_conditiond: string;
+  contact: string;
+  help: string;
+  faqs: string;
+  support_center: string;
+  money_back_guarantee: string;
+  all_right_reserved: string;
+  connect_with_us: string;
+  select_payment_method: string;
+  loading_dots: string;
+  your_plan_includes: string;
+  unlimited_fast_delivery: string;
+  no_logs_policy: string;
+  uncompromised_security: string;
+  dedicated_customer_service: string;
+  enterprise_grade: string;
+  subscription_information: string;
   ////////////////////////////////////////////////////////////////
   // new
 }

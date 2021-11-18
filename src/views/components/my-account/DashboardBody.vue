@@ -312,7 +312,10 @@
                         justify-content-center justify-content-md-start
                       "
                     >
-                      <button class="my-account-btn">
+                      <button
+                        class="my-account-btn"
+                        @click.prevent="contactSupport()"
+                      >
                         {{ $t("contact_support") }}
                       </button>
                     </div>
@@ -364,6 +367,10 @@ export default defineComponent({
       router.push({ name: page });
     };
 
+    const contactSupport = () => {
+      window.location.href = "https://swoshsvpn.com/contact-us";
+    };
+
     return {
       stateUser,
       memberDate,
@@ -372,6 +379,7 @@ export default defineComponent({
       lastSignin: "---",
       getIcon,
       recentOs,
+      contactSupport,
     };
   },
 });

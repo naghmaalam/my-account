@@ -50,9 +50,10 @@
     <!-- ///////////////////////////////////////////////////////////////// -->
     <div class="login-title text-center">{{ $t("hi_there") }}</div>
 
-    <div style="overflow: hidden" class="mr-5 ml-5">
+    <div class="mr-5 ml-5">
       <div
         class="verify-account-email mt-4"
+        style="max-width: 250px; overflow-wrap: anywhere"
         :data-letters="loginDetails.email.charAt(0)"
       >
         {{ loginDetails.email }}
@@ -244,5 +245,60 @@ export default defineComponent({
 input::-ms-reveal,
 input::-ms-clear {
   display: none;
+}
+
+.register-account-main-email {
+  font-family: Poppins;
+  font-weight: normal;
+  font-size: 3vw;
+  color: var(--home-node-lists-title-txt-color);
+  text-align: center;
+  background: #7683f71f;
+  border-radius: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+  width: max-content;
+
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 0.7rem 0 0;
+}
+.register-account-main-email > span {
+  /* max-width: 60vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;   */
+
+  max-width: 60vw;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  white-space: pre-wrap;
+  align-items: center;
+  word-break: break-word;
+  text-align: left;
+  padding: 3px 5px;
+  color: var(--text-color);
+}
+
+[data-letters]:before {
+  content: attr(data-letters);
+  font-family: Poppins;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 1em;
+  width: 2.5em;
+  height: 2.5em;
+  line-height: 2.5em;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--login-alphabet-highlight-bg-color);
+  vertical-align: middle;
+  margin-right: 1em;
+  color: #fff;
 }
 </style>

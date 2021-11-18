@@ -47,7 +47,10 @@
                   {{ $t("reward_modal_subtitle4") }}
                 </div>
                 <div class="device-modal-subtitle mob-res-center pl-3">
-                  {{ $t("reward_modal_subtitle5") }}
+                  {{ $t("reward_modal_subtitle6") }}
+                </div>
+                <div class="device-modal-subtitle mob-res-center pl-3">
+                  {{ $t("reward_modal_subtitle7") }}
                 </div>
               </div>
             </div>
