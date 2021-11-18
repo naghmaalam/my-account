@@ -11,7 +11,7 @@ import {
 } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
 import { DeviceId, MeDevice } from "@/types/Devices";
-import { Order } from "@/types/Orders";
+import { Order, Subscription } from "@/types/Orders";
 
 import { api, Method } from "@/modules/api";
 import { storage } from "@/modules/storage";
@@ -205,6 +205,7 @@ export function useUser(): {
   };
   get: {
     orders: () => Promise<Order[] | Error>;
+    subscriptions: () => Promise<Subscription[] | Error>;
     rewards: () => Promise<Rewards | Error>;
     downloadlink: (a: string) => Promise<string | Error>;
     sendEmail: (a: string) => Promise<string | Error>;
@@ -439,6 +440,15 @@ export function useUser(): {
       return response.data;
     });
   };
+  const subscriptions = () => {
+    return tryCatch(async () => {
+      const response: {
+        message: string;
+        data: Order[];
+      } = await api("user/plans", Method.GET);
+      return response.data;
+    });
+  };
 
   const rewards = () => {
     return tryCatch(async () => {
@@ -515,6 +525,7 @@ export function useUser(): {
     },
     get: {
       orders,
+      subscriptions,
       rewards,
       downloadlink,
       sendEmail,

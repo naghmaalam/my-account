@@ -278,7 +278,7 @@
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
-import { stateUser, useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
 import { TableOrder } from "@/types/Orders";
 import { fmtCurr } from "@/modules/utils";
 

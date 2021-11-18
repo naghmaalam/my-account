@@ -164,28 +164,37 @@
         </div>
       </div>
       <div
-        v-if="subscriptions.length <= 0"
+        v-if="isLoading || subscriptions.length <= 0"
         class="container table-content mt-3 py-3"
       >
         <div class="row d-dlex justify-content-center align-items-center">
           <div class="col">
-            <div
-              class="
-                d-flex
-                flex-column
-                justify-content-center
-                align-items-center
-                p-5
-                text-center
-              "
-            >
-              <img
-                src="@/assets/images/subscription/empty.png"
-                alt="order-history-empty"
-                class="pb-3"
-              />
-              {{ $t("no_information") }}
-            </div>
+            <Fade>
+              <template v-if="isLoading">
+                <div class="spinner-grow text-primary my-5" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </template>
+              <template v-else>
+                <div
+                  class="
+                    d-flex
+                    flex-column
+                    justify-content-center
+                    align-items-center
+                    p-5
+                    text-center
+                  "
+                >
+                  <img
+                    src="@/assets/images/subscription/empty.png"
+                    alt="order-history-empty"
+                    class="pb-3"
+                  />
+                  {{ $t("no_information") }}
+                </div>
+              </template>
+            </Fade>
           </div>
         </div>
       </div>
@@ -269,12 +278,16 @@
 </template>
 
 <script lang="ts">
-import { computed } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { stateUser } from "@/hooks/useUser";
+
+import { stateUser, useUser } from "@/hooks/useUser";
+import { TableSubscription } from "@/types/Orders";
+
 import { isDateExpired } from "@/modules/utils";
 
 import { log } from "@/modules/debug";
+import { fmtCurr } from "@/modules/utils";
 
 export default {
   setup() {
@@ -282,6 +295,8 @@ export default {
     const redirect = (page: string) => {
       router.push({ name: page });
     };
+
+    const isLoading = ref(true);
 
     const headingTitle = {
       refNum: "Refence Number",
@@ -292,54 +307,81 @@ export default {
       action: "Action",
     };
 
-    const subscriptions = computed(() => {
-      return stateUser.value.subscription.plans.map((vl, i) => {
-        const expire = new Date(vl.end_date as unknown as string);
+    // const subscriptions = computed(() => {
+    //   return stateUser.value.subscription.plans.map((vl, i) => {
+    //     const expire = new Date(vl.end_date as unknown as string);
 
-        // latest subscription should be the active regardless of date expiry
-        // const status = isDateExpired(vl.end_date as unknown as string)
-        //   ? "inactive"
-        //   : "active";
-        const status =
-          i == 0 && !isDateExpired(vl.end_date as unknown as string)
-            ? "active"
-            : "inactive";
+    //     // latest subscription should be the active regardless of date expiry
+    //     // const status = isDateExpired(vl.end_date as unknown as string)
+    //     //   ? "inactive"
+    //     //   : "active";
+    //     const status =
+    //       i == 0 && !isDateExpired(vl.end_date as unknown as string)
+    //         ? "active"
+    //         : "inactive";
 
-        let action = "";
-        if (!stateUser.value.currentSubscription.isExpired) {
-          if (stateUser.value.currentSubscription.title === "premium") {
-            action = "Recharge";
-          } else {
-            action = "upgrade";
-          }
-        } else {
-          if (stateUser.value.currentSubscription.title === "premium") {
-            action = "renew";
-          } else {
-            action = "upgrade";
-          }
-        }
+    //     let action = "";
+    //     if (!stateUser.value.currentSubscription.isExpired) {
+    //       if (stateUser.value.currentSubscription.title === "premium") {
+    //         action = "Recharge";
+    //       } else {
+    //         action = "upgrade";
+    //       }
+    //     } else {
+    //       if (stateUser.value.currentSubscription.title === "premium") {
+    //         action = "renew";
+    //       } else {
+    //         action = "upgrade";
+    //       }
+    //     }
 
-        return {
-          refNum: vl.id,
-          expires:
-            expire.getMonth() +
-            "/" +
-            expire.getDate() +
-            "/" +
-            expire.getFullYear(),
-          subscription: vl.title,
-          status,
-          paymentProvider: "-",
-          action,
-        };
-      });
+    //     return {
+    //       refNum: vl.id,
+    //       expires:
+    //         expire.getMonth() +
+    //         "/" +
+    //         expire.getDate() +
+    //         "/" +
+    //         expire.getFullYear(),
+    //       subscription: vl.title,
+    //       status,
+    //       paymentProvider: "-",
+    //       action,
+    //     };
+    //   });
+    // });
+
+    const subscriptions = ref<TableSubscription[]>([]);
+    const user = useUser();
+    const initSubscriptions = async () => {
+      isLoading.value = true;
+      const rspns = await user.get.subscriptions();
+      if (!(rspns instanceof Error)) {
+        // if (Array.isArray(rspns)) {
+        subscriptions.value = rspns.map((vl) => {
+          let orderDate = new Date(vl.created_at as unknown as string);
+          return {
+            orderNum: vl.order_number,
+            subscription: vl.plan_name,
+            orderStatus: "-",
+            paymentProvider: vl.payment_method_name,
+            orderAmount: vl.currency_symbol + "" + fmtCurr(vl.amount),
+            orderDate: `${orderDate.getDate()}/${orderDate.getMonth()}/${orderDate.getFullYear()}`,
+          };
+        });
+      }
+      isLoading.value = false;
+    };
+
+    onMounted(() => {
+      // initSubscriptions
     });
 
     return {
       redirect,
       headingTitle,
       subscriptions,
+      isLoading,
     };
   },
 };
