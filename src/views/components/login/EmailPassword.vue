@@ -52,11 +52,20 @@
 
     <div class="mr-5 ml-5">
       <div
-        class="verify-account-email mt-4"
-        style="max-width: 250px; overflow-wrap: anywhere"
+        class="verify-account-email mt-4 pr-3"
+        style="
+          max-width: 80%;
+          min-width: 250px;
+          padding: 0px 0px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
         :data-letters="loginDetails.email.charAt(0)"
       >
-        {{ loginDetails.email }}
+        <div style="overflow-wrap: anywhere; text-align: left">
+          {{ loginDetails.email }}
+        </div>
       </div>
     </div>
 

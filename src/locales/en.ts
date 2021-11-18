@@ -583,6 +583,11 @@ const en: Locale = {
   enterprise_grade: "Enterprise-grade infrastructure and reliability.",
   subscription_information:
     " * Your subscription will not be automatically renewed upon expiration. You must re-subscribe on the purchase page in order to use the SwoshsVPN again. The price is subject to change, but we will always send you a notification email prior to charging.",
+  very_weak_password: "Very weak password",
+  weak_password: "Weak password",
+  good_password: "Good password",
+  very_good_password: "Very good password",
+  excellent_password: "Excellent password",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

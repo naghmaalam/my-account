@@ -566,6 +566,12 @@ const cn: Locale = {
   /////////////////////////////
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
+
+  very_weak_password: "Very weak password",
+  weak_password: "Weak password",
+  good_password: "Good password",
+  very_good_password: "Very good password",
+  excellent_password: "Excellent password",
 };
 
 export default cn;

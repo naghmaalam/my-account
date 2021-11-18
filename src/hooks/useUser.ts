@@ -22,6 +22,11 @@ import { detectBrowser, getEncryptedPassword } from "@/modules/utils";
 import { useToast } from "@/hooks/useToast";
 import { faAndroid } from "@fortawesome/free-brands-svg-icons";
 
+import { useCookies } from "vue3-cookies";
+
+const toast = useToast();
+const { cookies } = useCookies();
+
 class UserDefault implements User {
   authenticated = false;
   dateRegistered = null;
@@ -64,6 +69,7 @@ function resetUser() {
   state.user = new UserDefault();
   storage.removeItem("user");
   storage.setItem("user", state.user);
+  clearCookies();
 }
 
 // will set User store according to response
@@ -116,6 +122,22 @@ function setUser(response: Me) {
   });
   state.user.devices.allowed = +response.total_allowed_devices;
   state.user.devices.connected = +response.userDevicesArrTotal;
+
+  // so that laravel pages can access the token and langauges
+  insertToCookie();
+}
+
+// so that laravel pages can access the token and langauges
+function insertToCookie() {
+  const accessToken = state.user.accessToken;
+  const language = state.user.language;
+
+  cookies.set("accessToken", accessToken, 60 * 60 * 3);
+  cookies.set("language", language.selected, 60 * 60 * 3);
+}
+function clearCookies() {
+  cookies.set("accessToken", "");
+  cookies.set("language", "");
 }
 
 function getSubscription(response: Me) {
@@ -131,8 +153,6 @@ function getSubscription(response: Me) {
     return "premium";
   else return null;
 }
-
-const toast = useToast();
 
 // useUser()
 ///////////////////////////////////////////

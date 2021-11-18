@@ -497,6 +497,11 @@ export interface Locale {
   dedicated_customer_service: string;
   enterprise_grade: string;
   subscription_information: string;
+  very_weak_password: string;
+  weak_password: string;
+  good_password: string;
+  very_good_password: string;
+  excellent_password: string;
   ////////////////////////////////////////////////////////////////
   // new
 }
