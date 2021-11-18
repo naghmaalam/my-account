@@ -1,7 +1,14 @@
 import { reactive, computed, ComputedRef, watch } from "vue";
 import i18n from "@/locales/localization";
 
-import { User, Rewards, LoginDetails, Me, VerifyDetails } from "@/types/User";
+import {
+  User,
+  Rewards,
+  LoginDetails,
+  Me,
+  VerifyDetails,
+  GeoLocation,
+} from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
 import { DeviceId, MeDevice } from "@/types/Devices";
 import { Order } from "@/types/Orders";
@@ -181,6 +188,7 @@ export function useUser(): {
     rewards: () => Promise<Rewards | Error>;
     downloadlink: (a: string) => Promise<string | Error>;
     sendEmail: (a: string) => Promise<string | Error>;
+    getIpLocation: () => Promise<GeoLocation | Error>;
   };
 } {
   // do
@@ -408,7 +416,7 @@ export function useUser(): {
         message: string;
         data: Order[];
       } = await api("orders", Method.GET);
-      return response.data as Order[];
+      return response.data;
     });
   };
 
@@ -422,7 +430,7 @@ export function useUser(): {
       return {
         friendsWhoBought: response.data.total_friends_referred,
         monthsAdded: response.data.free_months_added,
-      } as Rewards;
+      };
     });
   };
 
@@ -451,6 +459,23 @@ export function useUser(): {
     });
   };
 
+  const getIpLocation = () => {
+    return tryCatch(async () => {
+      const response: {
+        message: string;
+        data: any;
+      } = await api("ip/vpn/connection/detail", Method.GET);
+
+      return {
+        ipAddress: response.data.ip,
+        location: response.data.country,
+        place: response.data.city,
+        status: response.data.status,
+        isp: response.data.isp,
+      };
+    });
+  };
+
   /////////////////////////////////////////////////////////////////////
   // get
 
@@ -473,6 +498,7 @@ export function useUser(): {
       rewards,
       downloadlink,
       sendEmail,
+      getIpLocation,
     },
   };
 }

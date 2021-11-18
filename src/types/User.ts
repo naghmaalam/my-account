@@ -86,3 +86,11 @@ export interface Rewards {
   friendsWhoBought: number;
   monthsAdded: number;
 }
+
+export interface GeoLocation {
+  ipAddress: string;
+  location: string;
+  place: string;
+  status: string;
+  isp: string;
+}

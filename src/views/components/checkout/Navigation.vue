@@ -1,8 +1,9 @@
 <template>
   <div class="noti-head">
     <p>
-      {{ $t("your") }} IP: {{ ip }} - ISP: {{ location }}
-      {{ $t("emirates") }}
+      {{ $t("your") }} IP: {{ ip }} - ISP: {{ location }}, {{ place }}, status:
+      {{ status }}
+      {{ isp }}
     </p>
   </div>
   <nav
@@ -264,14 +265,19 @@ import { defineComponent, onMounted, ref } from "vue";
 import { stateUser } from "@/hooks/useUser";
 import { useSettings } from "@/hooks/useSettings";
 import { useRouter } from "vue-router";
-import { getIPLocation } from "@/modules/utils";
+// import { getIPLocation } from "@/modules/utils";
+import { useUser } from "@/hooks/useUser";
 
 export default defineComponent({
   setup() {
     const router = useRouter();
+    const user = useUser();
 
     const ip = ref();
     const location = ref();
+    const place = ref();
+    const status = ref();
+    const isp = ref();
     const isShown = ref(false);
     const isMouseOn = ref(false);
     const isMobNavShown = ref(false);
@@ -307,10 +313,13 @@ export default defineComponent({
     };
 
     onMounted(async () => {
-      const rspns = await getIPLocation();
-      if (rspns !== false) {
-        ip.value = rspns.ip;
-        location.value = rspns.loc;
+      const rspns = await user.get.getIpLocation();
+      if (!(rspns instanceof Error)) {
+        ip.value = rspns.ipAddress || "-";
+        location.value = rspns.location || "-";
+        place.value = rspns.place || "-";
+        status.value = rspns.status || "-";
+        isp.value = rspns.isp || "-";
       }
     });
 
@@ -326,6 +335,9 @@ export default defineComponent({
       mobMenuShow,
       ip,
       location,
+      place,
+      status,
+      isp,
     };
   },
 });
