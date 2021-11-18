@@ -3,7 +3,9 @@
     <div class="container">
       <div class="row numb-group">
         <h4 class="numb2 media-num">02</h4>
-        <p class="payment-selection media-title">Customize devices</p>
+        <p class="payment-selection media-title">
+          {{ $t("customize_devices") }}
+        </p>
       </div>
       <div class="row">
         <div class="container">
@@ -36,7 +38,7 @@
                           "
                         >
                           <h6 class="mb-3">
-                            Number of devices connect at same time
+                            {{ $t("number_of_devices_connect") }}
                           </h6>
                           <div class="input-group media-input-group">
                             <span class="input-group-btn">
@@ -55,7 +57,7 @@
                             </span>
                             <span class="word-devices media-word-devices">
                               {{ devices.allowedQuantity + devices.quantity }}
-                              Devices
+                              {{ $t("devices") }}
                             </span>
                             <span class="input-group-btn">
                               <button

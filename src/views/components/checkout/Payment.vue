@@ -76,7 +76,7 @@
               @click.prevent="pay"
               :class="{ disabled: isLoadingPayment }"
             >
-              PAY {{ devices.currency + fmtCurr(devices.price) }}
+              {{ $t("pay") }} {{ devices.currency + fmtCurr(devices.price) }}
               <span
                 v-if="isLoadingPayment"
                 class="spinner-border spinner-border-sm ml-2"
@@ -113,7 +113,7 @@
                 @click.prevent="pay"
                 :class="{ disabled: isLoadingPayment }"
               >
-                PAY {{ devices.currency + fmtCurr(devices.price) }}
+                {{ $t("pay") }} {{ devices.currency + fmtCurr(devices.price) }}
                 <span
                   v-if="isLoadingPayment"
                   class="spinner-border spinner-border-sm ml-2"

@@ -497,6 +497,28 @@ export interface Locale {
   dedicated_customer_service: string;
   enterprise_grade: string;
   subscription_information: string;
+  enter_your_email: string;
+  email_adress: string;
+  purchase_info: string;
+  already_have_account: string;
+  customize_devices: string;
+  number_of_devices_connect: string;
+  close: string;
+  pay: string;
+  choose_a_plan: string;
+  highly_recommended_plan: string;
+  click_to_install: string;
+  order_status: string;
+  payment_provider: string;
+  order_amount: string;
+  date_of_order: string;
+  reference_number: string;
+  status: string;
+  renewal_fee: string;
+  action: string;
+  no_devices: string;
+  no_devices_info: string;
+  get_swoshs_vpn: string;
   ////////////////////////////////////////////////////////////////
   // new
 }

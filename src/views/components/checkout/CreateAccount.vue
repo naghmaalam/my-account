@@ -6,9 +6,9 @@
           <h4 class="numb2 media-num">03</h4>
           <p class="media-title">
             <template v-if="!stateUser.authenticated">
-              Create an account
+              {{ $t("create_account") }}
             </template>
-            <template v-else> Email Address</template>
+            <template v-else> {{ $t("email_adress") }} </template>
           </p>
         </div>
       </div>
@@ -17,10 +17,7 @@
           <div>
             <template v-if="!stateUser.authenticated">
               <form action="#" id="form">
-                <label
-                  >Enter your email that you'd like to use for Swoshs
-                  account</label
-                >
+                <label>{{ $t("enter_your_email") }}</label>
                 <div class="input-box">
                   <input
                     type="text"
@@ -39,12 +36,10 @@
             </template>
 
             <p class="purchase-p">
-              We will not use share your email address with third parties, and
-              will only contact you when necessary to ensure the best
-              services.<br />
+              {{ $t("purchase_info") }}<br />
 
               <template v-if="!stateUser.authenticated">
-                If you have already an account
+                {{ $t("already_have_account") }}
                 <router-link to="/">Login</router-link>
               </template>
             </p>

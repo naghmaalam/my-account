@@ -33,7 +33,7 @@
           </div>
           <div class="devices-logout d-flex flex-row">
             <i class="flaticon-logout pr-2 pt-1"></i>
-            <div>Logout</div>
+            <div>{{ $t("logout") }}t</div>
           </div>
         </div>
       </div>

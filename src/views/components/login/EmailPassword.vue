@@ -126,7 +126,6 @@ import { defineComponent, reactive, ref, inject, onMounted } from "vue";
 import { useValidation } from "@/hooks/useValidation";
 // import { useI18n } from "vue-i18n";
 import { UpdateSection, Section } from "@/types/Section";
-
 import { useToast } from "@/hooks/useToast";
 import { useUser } from "@/hooks/useUser";
 import { log } from "@/modules/debug";

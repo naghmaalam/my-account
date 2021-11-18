@@ -28,22 +28,22 @@
       <div class="container mt-3 mob-res-hide">
         <div class="row">
           <div class="col">
-            <div class="table-title">Order Number</div>
+            <div class="table-title">{{ $t("order_number") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Subscription</div>
+            <div class="table-title">{{ $t("subscription") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Order Status</div>
+            <div class="table-title">{{ $t("order_status") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Payment Provider</div>
+            <div class="table-title">{{ $t("payment_provider") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Order Amount</div>
+            <div class="table-title">{{ $t("order_amount") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Date of Order</div>
+            <div class="table-title">{{ $t("date_of_order") }}r</div>
           </div>
         </div>
       </div>

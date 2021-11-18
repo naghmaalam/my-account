@@ -149,7 +149,9 @@
       <div class="dtp-arrow">
         <div class="dtp-arrow-header"></div>
         <div class="dtp-arrow-body">
-          <p>Click this file to start installing <strong>Swoshs VPN</strong></p>
+          <p>
+            {{ $t("click_to_install") }} <strong>{{ $t("vpn_name") }}</strong>
+          </p>
         </div>
         <div class="dtp-arrow-footer">
           <i class="fas fa-angle-double-down"></i>

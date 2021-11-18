@@ -110,7 +110,9 @@
               "
             >
               <div class="recently-connected d-flex flex-column m-2">
-                <div class="account-subtitle p-md-3">No Devices</div>
+                <div class="account-subtitle p-md-3">
+                  {{ $t("no_devices") }}
+                </div>
                 <div
                   class="
                     desktop-connected
@@ -129,9 +131,7 @@
                     "
                   >
                     <div class="devices-info">
-                      Currently, none of your devices are protected by Swoshs.
-                      Let's connect and protect your first device — just click
-                      Install.
+                      {{ $t("no_devices_info") }}
                     </div>
                   </div>
                 </div>
@@ -142,7 +142,7 @@
                   class="my-account-btn m-4 ml-5"
                   @click="redirect('checkout')"
                 >
-                  Get Swoshs VPN
+                  {{ $t("get_swoshs_vpn") }}
                 </button>
               </div>
             </div>

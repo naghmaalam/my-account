@@ -35,7 +35,7 @@
               data-dismiss="modal"
               @click="closeModal"
             >
-              Close
+              {{ $t("close") }}
             </button>
           </div>
         </div>

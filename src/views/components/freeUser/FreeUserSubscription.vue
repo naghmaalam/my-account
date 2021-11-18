@@ -29,25 +29,25 @@
       <div class="container mt-3">
         <div class="row">
           <div class="col">
-            <div class="table-title">Refence Number</div>
+            <div class="table-title">{{ $t("reference_number") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Expires</div>
+            <div class="table-title">{{ $t("expires") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Subscription</div>
+            <div class="table-title">{{ $t("subscription") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Status</div>
+            <div class="table-title">{{ $t("status") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Payment Provider</div>
+            <div class="table-title">{{ $t("payment_provider") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Renewal Fee</div>
+            <div class="table-title">{{ $t("renewal_fee") }}</div>
           </div>
           <div class="col">
-            <div class="table-title">Action</div>
+            <div class="table-title">{{ $t("action") }}</div>
           </div>
         </div>
       </div>

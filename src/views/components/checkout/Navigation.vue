@@ -1,9 +1,8 @@
 <template>
   <div class="noti-head">
     <p>
-      {{ $t("your") }} IP: {{ ip }} - ISP: {{ location }}, {{ place }}, status:
-      {{ status }}
-      {{ isp }}
+      {{ $t("your") }} IP:{{ ip }} - ISP: {{ isp }} , location: {{ location }},
+      city: {{ place }}, status: {{ status }}
     </p>
   </div>
   <nav

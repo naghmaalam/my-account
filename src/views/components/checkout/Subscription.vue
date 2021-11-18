@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col numb-group">
           <h4 class="numb media-num">01</h4>
-          <p class="media-title">Choose a plan</p>
+          <p class="media-title">{{ $t("choose_a_plan") }}</p>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
         "
       >
         <div class="spinner-grow text-primary my-5" role="status">
-          <span class="sr-only">Loading...</span>
+          <span class="sr-only">{{ $t("loading_dots") }}</span>
         </div>
       </div>
     </SimpleFade>

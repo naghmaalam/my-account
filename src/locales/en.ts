@@ -152,7 +152,7 @@ const en: Locale = {
   high_speed_browsing: "For high-speed browsing and streaming.",
   unlock_adv_feature: "Unlock advance security features",
   nodes_countries: "Nodes in 40+ Countries & Region",
-  money_back: "30-Day Money Back Guarantee",
+  money_back: "30-Day Money Back Guarantee!",
   technical_support_24: "Dedicated Technical Support",
   custom_multiple_device: "Customize multiple devices",
   choose_plan: "Choose Plan",
@@ -583,6 +583,31 @@ const en: Locale = {
   enterprise_grade: "Enterprise-grade infrastructure and reliability.",
   subscription_information:
     " * Your subscription will not be automatically renewed upon expiration. You must re-subscribe on the purchase page in order to use the SwoshsVPN again. The price is subject to change, but we will always send you a notification email prior to charging.",
+  email_adress: "Email Address",
+  enter_your_email:
+    " Enter your email that you'd like to use for Swoshs account",
+  purchase_info:
+    "We will not use share your email address with third parties, and will only contact you when necessary to ensure the best services.",
+  already_have_account: "If you have already an account",
+  customize_devices: "Customize devices",
+  number_of_devices_connect: "Number of devices connect at same time",
+  close: "Close",
+  pay: "PAY",
+  choose_a_plan: "Choose a Plan",
+  highly_recommended_plan: "This plan is highly recommended!",
+  click_to_install: "Click this file to start installing",
+  order_status: "Order Status",
+  payment_provider: "Payment Provider",
+  order_amount: "Order amount",
+  date_of_order: "Date of Order",
+  reference_number: " Reference Number",
+  status: "Status",
+  renewal_fee: "Renewal Fee",
+  action: "Action",
+  no_devices: "No Devices",
+  no_devices_info:
+    " Currently, none of your devices are protected by Swoshs. Let's connect and protect your first device — just click Install.",
+  get_swoshs_vpn: "Get Swoshs VPN",
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

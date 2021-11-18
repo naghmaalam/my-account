@@ -10,7 +10,7 @@
     <!-- best plan -->
     <!-- /////////////////////////////// -->
     <div class="recommended" v-if="plan.is_recommended === 1">
-      <h5>Best Deal</h5>
+      <h5>{{ $t("best_deal") }}</h5>
     </div>
     <!-- /////////////////////////////// -->
     <!-- best plan -->
@@ -36,7 +36,7 @@
         <h6 class="payment-duration">for {{ plan.title }}</h6>
       </div>
       <div class="info-plan">
-        <p class="mb-0">30 days money back guarantee!</p>
+        <p class="mb-0">{{ $t("money_back") }}</p>
       </div>
     </div>
 
@@ -52,7 +52,7 @@
           />
         </div>
         <div class="col-9 text-left">
-          <p>This plan is highly recommended!</p>
+          <p>{{ $t("highly_recommended_plan") }}</p>
         </div>
       </div>
     </div>
