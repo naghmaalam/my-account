@@ -111,12 +111,70 @@
               </form>
 
               <div class="ml-5 mr-5">
+                <div class="mt-4 ml-5 mr-5 password-indicator-level">
+                  <span
+                    :class="[passwordIndicatorLevel()]"
+                    v-if="passwordStrength == 1"
+                    >{{ $t("very_weak_password") }}</span
+                  >
+                  <span
+                    :class="[passwordIndicatorLevel()]"
+                    v-else-if="passwordStrength == 2"
+                    >{{ $t("weak_password") }}</span
+                  >
+                  <span
+                    :class="[passwordIndicatorLevel()]"
+                    v-else-if="passwordStrength == 3"
+                    >{{ $t("good_password") }}</span
+                  >
+                  <span
+                    :class="[passwordIndicatorLevel()]"
+                    v-else-if="passwordStrength == 4"
+                    >{{ $t("very_good_password") }}</span
+                  >
+                  <span
+                    :class="[passwordIndicatorLevel()]"
+                    v-else-if="passwordStrength == 5"
+                    >{{ $t("excellent_password") }}</span
+                  >
+                  <span :class="[passwordIndicatorLevel()]" v-else>&nbsp;</span>
+                </div>
                 <div class="indicator text-center mt-4 ml-5 mr-5">
-                  <span :class="{ marked: passwordStrength >= 1 }"></span>
-                  <span :class="{ marked: passwordStrength >= 2 }"></span>
-                  <span :class="{ marked: passwordStrength >= 3 }"></span>
-                  <span :class="{ marked: passwordStrength >= 4 }"></span>
-                  <span :class="{ marked: passwordStrength >= 5 }"></span>
+                  <span
+                    :class="[
+                      { marked: passwordStrength >= 1 },
+                      passwordIndicatorLevel(),
+                    ]"
+                    class="red"
+                  ></span>
+                  <span
+                    :class="[
+                      { marked: passwordStrength >= 2 },
+                      passwordIndicatorLevel(),
+                    ]"
+                    class="orange"
+                  ></span>
+                  <span
+                    :class="[
+                      { marked: passwordStrength >= 3 },
+                      passwordIndicatorLevel(),
+                    ]"
+                    class="blue"
+                  ></span>
+                  <span
+                    :class="[
+                      { marked: passwordStrength >= 4 },
+                      passwordIndicatorLevel(),
+                    ]"
+                    class="violet"
+                  ></span>
+                  <span
+                    :class="[
+                      { marked: passwordStrength >= 5 },
+                      passwordIndicatorLevel(),
+                    ]"
+                    class="green"
+                  ></span>
                 </div>
               </div>
 
@@ -226,7 +284,29 @@ export default defineComponent({
         isLoading.value = false;
       }
     };
-
+    const passwordIndicatorLevel = () => {
+      let retVal = "";
+      switch (passwordStrength.value) {
+        case 1:
+          retVal = "red";
+          break;
+        case 2:
+          retVal = "orange";
+          break;
+        case 3:
+          retVal = "blue";
+          break;
+        case 4:
+          retVal = "violet";
+          break;
+        case 5:
+          retVal = "green";
+          break;
+        default:
+          break;
+      }
+      return retVal;
+    };
     return {
       close,
       isLoading,
@@ -237,6 +317,7 @@ export default defineComponent({
       isPasswordHidden,
       isPasswordConfirmHidden,
       passwordStrength,
+      passwordIndicatorLevel,
       atKeyUp,
       submit,
     };
@@ -276,6 +357,37 @@ export default defineComponent({
 
 .indicator span.marked {
   opacity: 1;
+}
+.indicator span.marked.red {
+  background-color: red;
+}
+.indicator span.marked.orange {
+  background-color: orange;
+}
+.indicator span.marked.blue {
+  background-color: blue;
+}
+.indicator span.marked.violet {
+  background-color: #a900a9;
+}
+.indicator span.marked.green {
+  background-color: green;
+}
+
+.password-indicator-level span.red {
+  color: red;
+}
+.password-indicator-level span.orange {
+  color: orange;
+}
+.password-indicator-level span.blue {
+  color: blue;
+}
+.password-indicator-level span.violet {
+  color: #a900a9;
+}
+.password-indicator-level span.green {
+  color: green;
 }
 
 .indicator span:before {

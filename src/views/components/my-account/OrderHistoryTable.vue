@@ -31,22 +31,22 @@
       <div class="container mt-3">
         <div class="row">
           <div class="col">
-            <div class="table-title">{{ headingTitles.orderNum }}</div>
+            <div class="table-title">{{ $t(headingTitles.orderNum) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitles.subs }}</div>
+            <div class="table-title">{{ $t(headingTitles.subs) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitles.status }}</div>
+            <div class="table-title">{{ $t(headingTitles.status) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitles.payment }}</div>
+            <div class="table-title">{{ $t(headingTitles.payment) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitles.amount }}</div>
+            <div class="table-title">{{ $t(headingTitles.amount) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitles.date }}</div>
+            <div class="table-title">{{ $t(headingTitles.date) }}</div>
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@
                       'inactive-btn': or.orderStatus === 'unpaid',
                     }"
                   >
-                    {{ or.orderStatus }}
+                    {{ $t(or.orderStatus) }}
                   </div>
                 </div>
               </div>
@@ -127,6 +127,13 @@
                 <div class="table-subtitle">{{ or.orderDate }}</div>
               </div>
             </div>
+          </div>
+          <div class="d-flex justify-content-center p-3">
+            <Pagination
+              :total="totalRecords"
+              :current-page="currentPage"
+              @goto-page="gotoPage($event)"
+            />
           </div>
         </div>
       </Fade>
@@ -205,7 +212,7 @@
               <div class="col">
                 <div class="table-title">
                   <span class="mob-line-height">
-                    {{ headingTitles.orderNum }}
+                    {{ $t(headingTitles.orderNum) }}
                   </span>
                 </div>
               </div>
@@ -216,7 +223,7 @@
 
             <div class="row">
               <div class="col">
-                <div class="table-title">{{ headingTitles.subs }}</div>
+                <div class="table-title">{{ $t(headingTitles.subs) }}</div>
               </div>
               <div class="col">
                 <div class="table-subtitle table-subtitle-bold">
@@ -227,12 +234,12 @@
 
             <div class="row">
               <div class="col">
-                <div class="table-title">{{ headingTitles.status }}</div>
+                <div class="table-title">{{ $t(headingTitles.status) }}</div>
               </div>
               <div class="col">
                 <div class="table-subtitle">
                   <div class="subscription-active-btn pt-1 pb-1">
-                    {{ or.orderStatus }}
+                    {{ $t(or.orderStatus) }}
                   </div>
                 </div>
               </div>
@@ -240,7 +247,7 @@
 
             <div class="row">
               <div class="col">
-                <div class="table-title">{{ headingTitles.payment }}</div>
+                <div class="table-title">{{ $t(headingTitles.payment) }}</div>
               </div>
               <div class="col">
                 <div class="table-subtitle">{{ or.paymentProvider }}</div>
@@ -249,7 +256,7 @@
 
             <div class="row">
               <div class="col">
-                <div class="table-title">{{ headingTitles.amount }}</div>
+                <div class="table-title">{{ $t(headingTitles.amount) }}</div>
               </div>
               <div class="col">
                 <div class="table-subtitle">{{ or.orderAmount }}</div>
@@ -258,7 +265,7 @@
 
             <div class="row">
               <div class="col">
-                <div class="table-title">{{ headingTitles.date }}</div>
+                <div class="table-title">{{ $t(headingTitles.date) }}</div>
               </div>
               <div class="col">
                 <div class="table-subtitle text-center">
@@ -278,15 +285,17 @@
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
-import { stateUser, useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/useUser";
 import { TableOrder } from "@/types/Orders";
 import { fmtCurr } from "@/modules/utils";
 
 import Fade from "@/views/components/transitions/Fade.vue";
+import Pagination from "@/views/components/Pagination.vue";
 
 export default {
   components: {
     Fade,
+    Pagination,
   },
   setup() {
     const router = useRouter();
@@ -298,30 +307,59 @@ export default {
     const isLoading = ref(true);
 
     const headingTitles = {
-      orderNum: "Order Number",
-      subs: "Subscription",
-      status: " Order Status",
-      payment: "Payment Provider",
-      amount: "Order Amount",
-      date: " Date Of Order",
+      orderNum: "order_number",
+      subs: "subscription",
+      status: "order_status",
+      payment: "payment_provider",
+      amount: "order_amount",
+      date: "order_date",
     };
 
+    const totalRecords = ref(0);
     const orders = ref<TableOrder[]>([]);
     const user = useUser();
-    const initOrders = async () => {
+    const initOrders = async (page = 1) => {
       isLoading.value = true;
-      const rspns = await user.get.orders();
+      const rspns = await user.get.orders(page);
       if (!(rspns instanceof Error)) {
-        // if (Array.isArray(rspns)) {
-        orders.value = rspns.map((vl) => {
+        totalRecords.value = rspns.totalRecords;
+
+        orders.value = rspns.orders.map((vl) => {
           let orderDate = new Date(vl.created_at as unknown as string);
+          let orderStatus = "";
+          switch (vl.status) {
+            case 0:
+              orderStatus = "unpaid";
+              break;
+            case 1:
+              orderStatus = "paid";
+              break;
+            case 2:
+              orderStatus = "pending";
+              break;
+            case 3:
+              orderStatus = "cancelled";
+              break;
+            case 4:
+              orderStatus = "rejected";
+              break;
+            case 5:
+              orderStatus = "refund";
+              break;
+            default:
+              orderStatus = "default";
+              break;
+          }
           return {
             orderNum: vl.order_number,
             subscription: vl.plan_name,
-            orderStatus: "-",
+            orderStatus,
             paymentProvider: vl.payment_method_name,
             orderAmount: vl.currency_symbol + "" + fmtCurr(vl.amount),
-            orderDate: `${orderDate.getDate()}/${orderDate.getMonth()}/${orderDate.getFullYear()}`,
+            // orderDate: `${orderDate.getDate()}/${orderDate.getMonth()}/${orderDate.getFullYear()}`,
+            orderDate: `${orderDate.toLocaleString("default", {
+              month: "short",
+            })} ${orderDate.getDate()}, ${orderDate.getFullYear()}`,
           };
         });
       }
@@ -330,6 +368,13 @@ export default {
     onMounted(() => {
       initOrders();
     });
+
+    const currentPage = ref(1);
+    const gotoPage = (page: number) => {
+      console.log("page = ", page);
+      currentPage.value = page;
+      initOrders(page);
+    };
 
     // {
     //   orderNum: 5432178943,
@@ -344,7 +389,10 @@ export default {
       redirect,
       headingTitles,
       orders,
+      totalRecords,
       isLoading,
+      gotoPage,
+      currentPage,
     };
   },
 };

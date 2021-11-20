@@ -1,7 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import i18n from "@/locales/localization";
 
@@ -23,4 +22,4 @@ dom.watch();
 const app = createApp(App);
 
 // .component("font-awesome-icon", FontAwesomeIcon)
-app.use(store).use(router).use(i18n).mount("#app");
+app.use(router).use(i18n).mount("#app");

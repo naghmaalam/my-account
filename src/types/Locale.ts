@@ -135,7 +135,6 @@ export interface Locale {
   email: string;
   plan: string;
   recharge: string;
-  expires: string;
   change_password: string;
   gift_reward: string;
   hot: string;
@@ -276,7 +275,6 @@ export interface Locale {
   reach_us: string;
   thank_you: string;
   purchase_successfull: string;
-  order_number: string;
   purchased_date: string;
   expiry_date: string;
   purchased_package: string;
@@ -378,10 +376,10 @@ export interface Locale {
   recently_connected: string;
   last_signin: string;
   view_more: string;
-  subscription: string;
   premium_package: string;
   one_month_subscription: string;
   active: string;
+  inactive: string;
   view_details: string;
   your_account: string;
   account_section: string;
@@ -416,7 +414,6 @@ export interface Locale {
   check_our: string;
   reward_rules: string;
   share: string;
-  rewards: string;
   send_invitation_email: string;
   share_it: string;
   share_social_media: string;

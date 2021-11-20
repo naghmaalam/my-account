@@ -11,7 +11,7 @@ import {
 } from "@/types/User";
 import { SupportedLanguages } from "@/types/Locale";
 import { DeviceId, MeDevice } from "@/types/Devices";
-import { Order } from "@/types/Orders";
+import { Order, Subscription } from "@/types/Orders";
 
 import { api, Method } from "@/modules/api";
 import { storage } from "@/modules/storage";
@@ -20,7 +20,15 @@ import { tryCatchBoolean, tryCatch } from "@/modules/error";
 import { detectBrowser, getEncryptedPassword } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
-import { faAndroid } from "@fortawesome/free-brands-svg-icons";
+// import { faAndroid } from "@fortawesome/free-brands-svg-icons";
+
+import { useCookies } from "vue3-cookies";
+
+import { itemsPerPage } from "@/config/Tables";
+// export const itemsPerPage = 5;
+
+const toast = useToast();
+const { cookies } = useCookies();
 
 class UserDefault implements User {
   authenticated = false;
@@ -64,6 +72,7 @@ function resetUser() {
   state.user = new UserDefault();
   storage.removeItem("user");
   storage.setItem("user", state.user);
+  clearCookies();
 }
 
 // will set User store according to response
@@ -116,6 +125,22 @@ function setUser(response: Me) {
   });
   state.user.devices.allowed = +response.total_allowed_devices;
   state.user.devices.connected = +response.userDevicesArrTotal;
+
+  // so that laravel pages can access the token and langauges
+  insertToCookie();
+}
+
+// so that laravel pages can access the token and langauges
+function insertToCookie() {
+  const accessToken = state.user.accessToken;
+  const language = state.user.language;
+
+  cookies.set("accessToken", accessToken, 60 * 60 * 3);
+  cookies.set("language", language.selected, 60 * 60 * 3);
+}
+function clearCookies() {
+  cookies.set("accessToken", "");
+  cookies.set("language", "");
 }
 
 function getSubscription(response: Me) {
@@ -131,8 +156,6 @@ function getSubscription(response: Me) {
     return "premium";
   else return null;
 }
-
-const toast = useToast();
 
 // useUser()
 ///////////////////////////////////////////
@@ -184,7 +207,26 @@ export function useUser(): {
     // ) => Promise<true | Error>;
   };
   get: {
-    orders: () => Promise<Order[] | Error>;
+    orders: (
+      pageNum?: number,
+      maxItems?: number
+    ) => Promise<
+      | {
+          orders: Order[];
+          totalRecords: number;
+        }
+      | Error
+    >;
+    subscriptions: (
+      pageNum?: number,
+      maxItems?: number
+    ) => Promise<
+      | {
+          subscriptions: Subscription[];
+          totalRecords: number;
+        }
+      | Error
+    >;
     rewards: () => Promise<Rewards | Error>;
     downloadlink: (a: string) => Promise<string | Error>;
     sendEmail: (a: string) => Promise<string | Error>;
@@ -410,13 +452,38 @@ export function useUser(): {
 
   // get
   /////////////////////////////////////////////////////////////////////
-  const orders = () => {
+  const orders = (pageNum = 1, maxItems = itemsPerPage) => {
     return tryCatch(async () => {
+      const perPage = `perPage=${maxItems}&`;
+      const page = `page=${pageNum}`;
+
+      const urlQuery = `?${perPage}${page}`;
       const response: {
         message: string;
         data: Order[];
-      } = await api("orders", Method.GET);
-      return response.data;
+        totalRecords: { total: number };
+      } = await api("orders" + urlQuery, Method.GET);
+      return {
+        orders: response.data,
+        totalRecords: response.totalRecords.total,
+      };
+    });
+  };
+  const subscriptions = (pageNum = 1, maxItems = itemsPerPage) => {
+    return tryCatch(async () => {
+      const perPage = `perPage=${maxItems}&`;
+      const page = `page=${pageNum}`;
+
+      const urlQuery = `?${perPage}${page}`;
+      const response: {
+        message: string;
+        data: Subscription[];
+        totalRecords: number;
+      } = await api("user/plans" + urlQuery, Method.GET);
+      return {
+        subscriptions: response.data,
+        totalRecords: response.totalRecords,
+      };
     });
   };
 
@@ -495,6 +562,7 @@ export function useUser(): {
     },
     get: {
       orders,
+      subscriptions,
       rewards,
       downloadlink,
       sendEmail,

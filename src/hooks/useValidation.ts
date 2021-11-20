@@ -121,8 +121,8 @@ export function useValidation(): {
     if (password.match(/[A-Z]+/)) strength += 1;
     if (password.match(/[0-9]+/)) strength += 1;
     if (password.match(/[$@#&!]+/)) strength += 1;
-    if (password.length > 12) strength += 1;
-    if (password.length < 6) strength = 0;
+    if (password.length >= 6) strength += 1;
+    // if (password.length < 6) strength = 0;
 
     return strength;
   };
