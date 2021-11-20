@@ -30,106 +30,126 @@
       <div class="container mt-3">
         <div class="row">
           <div class="col">
-            <div class="table-title">{{ headingTitle.refNum }}</div>
+            <div class="table-title">{{ $t(headingTitle.reference) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitle.expires }}</div>
+            <div class="table-title">{{ $t(headingTitle.expires) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitle.subscription }}</div>
+            <div class="table-title">{{ $t(headingTitle.subscription) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitle.status }}</div>
+            <div class="table-title">{{ $t(headingTitle.status) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitle.payment }}</div>
+            <div class="table-title">{{ $t(headingTitle.billed) }}</div>
           </div>
           <div class="col">
-            <div class="table-title">{{ headingTitle.action }}</div>
+            <div class="table-title">{{ $t(headingTitle.action) }}</div>
           </div>
         </div>
       </div>
 
       <!-- content -->
-
-      <div
-        v-if="subscriptions.length <= 0"
-        class="container table-content mt-3 py-3"
-      >
-        <div class="row d-dlex justify-content-center align-items-center">
-          <div class="col">
-            <div
-              class="
-                d-flex
-                flex-column
-                justify-content-center
-                align-items-center
-                p-5
-                text-center
-              "
-            >
-              <img
-                src="@/assets/images/subscription/empty.png"
-                alt="order-history-empty"
-                class="pb-3"
-              />
-              {{ $t("no_information") }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        v-else
-        class="container table-content mt-3 py-3"
-        v-for="(sub, i) in subscriptions"
-        :key="'d_' + i"
-      >
-        <div class="row d-dlex justify-content-center align-items-center">
-          <div class="col">
-            <div class="table-subtitle">
-              {{ sub.refNum }}
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              {{ sub.expires }}
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle table-subtitle-bold text-center">
-              {{ sub.subscription }}
-            </div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <div
-                class="pt-1 pb-1 ml-5"
-                :class="{
-                  'subscription-active-btn': sub.status === 'active',
-                  'inactive-btn': sub.status === 'inactive',
-                }"
-              >
-                {{ sub.status }}
+      <Fade>
+        <div
+          v-if="isLoading || subscriptions.length <= 0"
+          class="container table-content mt-3 py-3"
+        >
+          <div class="row d-dlex justify-content-center align-items-center">
+            <div class="col">
+              <div class="p-5 text-center">
+                <Fade>
+                  <template v-if="isLoading">
+                    <div class="spinner-grow text-primary my-5" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </template>
+                  <template v-else>
+                    <div
+                      class="
+                        d-flex
+                        flex-column
+                        justify-content-center
+                        align-items-center
+                        p-5
+                        text-center
+                      "
+                    >
+                      <img
+                        src="@/assets/images/subscription/empty.png"
+                        alt="order-history-empty"
+                        class="pb-3"
+                      />
+                      {{ $t("no_information") }}
+                    </div>
+                  </template>
+                </Fade>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="table-subtitle">{{ sub.paymentProvider }}</div>
-          </div>
-          <div class="col">
-            <div class="table-subtitle">
-              <button
-                v-if="sub.action"
-                class="my-account-btn"
-                @click="$router.push({ name: 'checkout' })"
-              >
-                {{ sub.action }}
-              </button>
+        </div>
+
+        <div v-else>
+          <div
+            class="container table-content mt-3 py-3"
+            v-for="(sub, i) in subscriptions"
+            :key="'d_' + i"
+          >
+            <div class="row d-dlex justify-content-center align-items-center">
+              <div class="col">
+                <div class="table-subtitle">
+                  {{ sub.reference }}
+                </div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">
+                  {{ sub.expiryDate }}
+                </div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle table-subtitle-bold text-center">
+                  {{ sub.subscription }}
+                </div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle text-center">
+                  <div
+                    class="pt-1 pb-1 margin-auto"
+                    :class="{
+                      'subscription-active-btn': sub.status === 'active',
+                      'inactive-btn': sub.status === 'inactive',
+                    }"
+                  >
+                    {{ $t(sub.status) }}
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">{{ $t(sub.billed) }}</div>
+              </div>
+              <div class="col">
+                <div class="table-subtitle">
+                  <button
+                    v-if="sub.action"
+                    class="my-account-btn"
+                    @click="$router.push({ name: 'checkout' })"
+                  >
+                    {{ sub.action }}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="d-flex justify-content-center p-3">
+            <Pagination
+              :total="totalRecords"
+              :current-page="currentPage"
+              @goto-page="gotoPage($event)"
+            />
+          </div>
         </div>
-      </div>
+      </Fade>
     </div>
   </div>
 
@@ -209,27 +229,27 @@
           <div class="col">
             <div class="table-title">
               <span class="mob-line-height">
-                {{ headingTitle.refNum }}
+                {{ $t(headingTitle.reference) }}
               </span>
             </div>
           </div>
           <div class="col">
-            <div class="table-subtitle">{{ sub.refNum }}</div>
+            <div class="table-subtitle">{{ sub.reference }}</div>
           </div>
         </div>
 
         <div class="row">
           <div class="col">
-            <div class="table-title">{{ headingTitle.expires }}</div>
+            <div class="table-title">{{ $t(headingTitle.expires) }}</div>
           </div>
           <div class="col">
-            <div class="table-subtitle text-center">{{ sub.expires }}</div>
+            <div class="table-subtitle text-center">{{ sub.expiryDate }}</div>
           </div>
         </div>
 
         <div class="row">
           <div class="col">
-            <div class="table-title">{{ headingTitle.subscription }}</div>
+            <div class="table-title">{{ $t(headingTitle.subscription) }}</div>
           </div>
           <div class="col">
             <div class="table-subtitle table-subtitle-bold">
@@ -240,7 +260,7 @@
 
         <div class="row">
           <div class="col">
-            <div class="table-title">{{ headingTitle.status }}</div>
+            <div class="table-title">{{ $t(headingTitle.status) }}</div>
           </div>
           <div class="col">
             <div class="table-subtitle">
@@ -251,16 +271,16 @@
 
         <div class="row">
           <div class="col">
-            <div class="table-title">{{ headingTitle.payment }}</div>
+            <div class="table-title">{{ $t(headingTitle.billed) }}</div>
           </div>
           <div class="col">
-            <div class="table-subtitle">{{ sub.paymentProvider }}</div>
+            <div class="table-subtitle">{{ $t(sub.billed) }}</div>
           </div>
         </div>
 
         <div class="row">
           <div class="col">
-            <div class="table-title">{{ headingTitle.action }}</div>
+            <div class="table-title">{{ $t(headingTitle.action) }}</div>
           </div>
           <div class="col">
             <div class="table-subtitle">
@@ -289,7 +309,14 @@ import { isDateExpired } from "@/modules/utils";
 import { log } from "@/modules/debug";
 import { fmtCurr } from "@/modules/utils";
 
+import Fade from "@/views/components/transitions/Fade.vue";
+import Pagination from "@/views/components/Pagination.vue";
+
 export default {
+  components: {
+    Fade,
+    Pagination,
+  },
   setup() {
     const router = useRouter();
     const redirect = (page: string) => {
@@ -299,74 +326,69 @@ export default {
     const isLoading = ref(true);
 
     const headingTitle = {
-      refNum: "Refence Number",
-      expires: "Expires",
-      subscription: "Subscription",
-      status: "Status",
-      payment: "Payment Provider",
-      action: "Action",
+      reference: "reference_number",
+      expires: "expires",
+      subscription: "subscription",
+      status: "status",
+      billed: "billed",
+      action: "action",
     };
 
-    // const subscriptions = computed(() => {
-    //   return stateUser.value.subscription.plans.map((vl, i) => {
-    //     const expire = new Date(vl.end_date as unknown as string);
-
-    //     // latest subscription should be the active regardless of date expiry
-    //     // const status = isDateExpired(vl.end_date as unknown as string)
-    //     //   ? "inactive"
-    //     //   : "active";
-    //     const status =
-    //       i == 0 && !isDateExpired(vl.end_date as unknown as string)
-    //         ? "active"
-    //         : "inactive";
-
-    //     let action = "";
-    //     if (!stateUser.value.currentSubscription.isExpired) {
-    //       if (stateUser.value.currentSubscription.title === "premium") {
-    //         action = "Recharge";
-    //       } else {
-    //         action = "upgrade";
-    //       }
-    //     } else {
-    //       if (stateUser.value.currentSubscription.title === "premium") {
-    //         action = "renew";
-    //       } else {
-    //         action = "upgrade";
-    //       }
-    //     }
-
-    //     return {
-    //       refNum: vl.id,
-    //       expires:
-    //         expire.getMonth() +
-    //         "/" +
-    //         expire.getDate() +
-    //         "/" +
-    //         expire.getFullYear(),
-    //       subscription: vl.title,
-    //       status,
-    //       paymentProvider: "-",
-    //       action,
-    //     };
-    //   });
-    // });
-
+    const totalRecords = ref(0);
     const subscriptions = ref<TableSubscription[]>([]);
     const user = useUser();
-    const initSubscriptions = async () => {
+    const initSubscriptions = async (page = 1) => {
       isLoading.value = true;
-      const rspns = await user.get.subscriptions();
+      const rspns = await user.get.subscriptions(page);
       if (!(rspns instanceof Error)) {
-        // if (Array.isArray(rspns)) {
-        subscriptions.value = rspns.map((vl) => {
-          let orderDate = new Date(vl.created_at as unknown as string);
+        totalRecords.value = rspns.totalRecords;
+        subscriptions.value = rspns.subscriptions.map((vl) => {
+          let expiryDate = new Date(vl.end_date as unknown as string);
+          let action = "";
+          if (!stateUser.value.currentSubscription.isExpired) {
+            if (stateUser.value.currentSubscription.title === "premium") {
+              action = "Recharge";
+            } else {
+              action = "upgrade";
+            }
+          } else {
+            if (stateUser.value.currentSubscription.title === "premium") {
+              action = "renew";
+            } else {
+              action = "upgrade";
+            }
+          }
+          let billed = "";
+          switch (vl.billed) {
+            case 1:
+              billed = "monthly";
+              break;
+            case 2:
+              billed = "yearly";
+              break;
+            case 3:
+              billed = "manually";
+              break;
+            case 4:
+              billed = "trial";
+              break;
+            case 5:
+              billed = "rewards";
+              break;
+            default:
+              billed = "default";
+              break;
+          }
+
           return {
-            orderNum: vl.order_number,
-            subscription: vl.plan_name,
-            orderStatus: "-",
-            paymentProvider: vl.payment_method_name,
-            orderAmount: vl.currency_symbol + "" + fmtCurr(vl.amount),
-            orderDate: `${orderDate.getDate()}/${orderDate.getMonth()}/${orderDate.getFullYear()}`,
+            reference: vl.id,
+            subscription: vl.title,
+            status: vl.is_deleted === 0 ? "active" : "inactive",
+            billed: billed,
+            expiryDate: `${expiryDate.toLocaleString("default", {
+              month: "short",
+            })} ${expiryDate.getDate()}, ${expiryDate.getFullYear()}`,
+            action,
           };
         });
       }
@@ -374,14 +396,24 @@ export default {
     };
 
     onMounted(() => {
-      // initSubscriptions
+      initSubscriptions();
     });
+
+    const currentPage = ref(1);
+    const gotoPage = (page: number) => {
+      console.log("page = ", page);
+      currentPage.value = page;
+      initSubscriptions(page);
+    };
 
     return {
       redirect,
       headingTitle,
       subscriptions,
       isLoading,
+      totalRecords,
+      gotoPage,
+      currentPage,
     };
   },
 };
@@ -394,6 +426,9 @@ export default {
   }
 }
 
+.spinner-grow.text-primary {
+  color: var(--swoshs-color2) !important;
+}
 /////////////////////////////////////////////////
 
 .account-subscription {

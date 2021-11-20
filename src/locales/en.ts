@@ -126,7 +126,6 @@ const en: Locale = {
   email: "Email",
   plan: "Plan",
   recharge: "Recharge",
-  expires: "Expires",
   change_password: "Change Password",
   gift_reward: "Gift Reward",
   hot: "Hot",
@@ -294,7 +293,6 @@ const en: Locale = {
   thank_you: "Thank you",
   purchase_successfull:
     "Your purchase is successful. Details of transaction are included below.",
-  order_number: "Order Number",
   purchased_date: "Date of Purchased",
   expiry_date: "Expiry Date",
   purchased_package: "Purchased Package",
@@ -426,10 +424,10 @@ const en: Locale = {
   recently_connected: "Recently Connected",
   last_signin: "Last Signin",
   view_more: "view more",
-  subscription: "Subscription",
   premium_package: " Premium Package",
   one_month_subscription: "1 Month Subscription",
   active: "Active",
+  inactive: "Inactive",
   view_details: " View Details",
   your_account: "Your Account",
   account_section: "Account Section",
@@ -487,7 +485,6 @@ const en: Locale = {
   check_our: "Check Our",
   reward_rules: "Reward Rules",
   share: "Share",
-  rewards: "Rewards",
   send_invitation_email: "Send Invitation Email",
   share_it: "Share It",
   share_social_media: "Or Share it directly in social media",
@@ -588,6 +585,35 @@ const en: Locale = {
   good_password: "Good password",
   very_good_password: "Very good password",
   excellent_password: "Excellent password",
+
+  monthly: "Monthly",
+  yearly: "Yearly",
+  manually: "Manually",
+  trial: "Trial",
+  rewards: "Rewards",
+
+  default: "-",
+
+  reference_number: "Reference Number",
+  expires: "Expires",
+  subscription: "Subscription",
+  status: "Status",
+  billed: "Billed",
+  action: "Action",
+
+  order_number: "Order Number",
+  order_status: "Order Status",
+  order_amount: "Order Amount",
+  order_date: "Date of Order",
+  payment_provider: "Payment Provider",
+
+  unpaid: "Unpaid",
+  paid: "Paid",
+  pending: "Pending",
+  cancelled: "Cancelled",
+  rejected: "Rejected",
+  refund: "Refund",
+
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

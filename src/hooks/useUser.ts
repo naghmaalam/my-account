@@ -20,9 +20,12 @@ import { tryCatchBoolean, tryCatch } from "@/modules/error";
 import { detectBrowser, getEncryptedPassword } from "@/modules/utils";
 
 import { useToast } from "@/hooks/useToast";
-import { faAndroid } from "@fortawesome/free-brands-svg-icons";
+// import { faAndroid } from "@fortawesome/free-brands-svg-icons";
 
 import { useCookies } from "vue3-cookies";
+
+import { itemsPerPage } from "@/config/Tables";
+// export const itemsPerPage = 5;
 
 const toast = useToast();
 const { cookies } = useCookies();
@@ -204,8 +207,26 @@ export function useUser(): {
     // ) => Promise<true | Error>;
   };
   get: {
-    orders: () => Promise<Order[] | Error>;
-    subscriptions: () => Promise<Subscription[] | Error>;
+    orders: (
+      pageNum?: number,
+      maxItems?: number
+    ) => Promise<
+      | {
+          orders: Order[];
+          totalRecords: number;
+        }
+      | Error
+    >;
+    subscriptions: (
+      pageNum?: number,
+      maxItems?: number
+    ) => Promise<
+      | {
+          subscriptions: Subscription[];
+          totalRecords: number;
+        }
+      | Error
+    >;
     rewards: () => Promise<Rewards | Error>;
     downloadlink: (a: string) => Promise<string | Error>;
     sendEmail: (a: string) => Promise<string | Error>;
@@ -431,22 +452,38 @@ export function useUser(): {
 
   // get
   /////////////////////////////////////////////////////////////////////
-  const orders = () => {
+  const orders = (pageNum = 1, maxItems = itemsPerPage) => {
     return tryCatch(async () => {
+      const perPage = `perPage=${maxItems}&`;
+      const page = `page=${pageNum}`;
+
+      const urlQuery = `?${perPage}${page}`;
       const response: {
         message: string;
         data: Order[];
-      } = await api("orders", Method.GET);
-      return response.data;
+        totalRecords: { total: number };
+      } = await api("orders" + urlQuery, Method.GET);
+      return {
+        orders: response.data,
+        totalRecords: response.totalRecords.total,
+      };
     });
   };
-  const subscriptions = () => {
+  const subscriptions = (pageNum = 1, maxItems = itemsPerPage) => {
     return tryCatch(async () => {
+      const perPage = `perPage=${maxItems}&`;
+      const page = `page=${pageNum}`;
+
+      const urlQuery = `?${perPage}${page}`;
       const response: {
         message: string;
-        data: Order[];
-      } = await api("user/plans", Method.GET);
-      return response.data;
+        data: Subscription[];
+        totalRecords: number;
+      } = await api("user/plans" + urlQuery, Method.GET);
+      return {
+        subscriptions: response.data,
+        totalRecords: response.totalRecords,
+      };
     });
   };
 
