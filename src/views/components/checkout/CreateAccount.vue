@@ -40,7 +40,8 @@
 
               <template v-if="!stateUser.authenticated">
                 {{ $t("already_have_account") }}
-                <router-link to="/">Login</router-link>
+                <router-link to="/">Login</router-link> <br />
+                {{ $t("purchase_info2") }}
               </template>
             </p>
             <!-- <p>

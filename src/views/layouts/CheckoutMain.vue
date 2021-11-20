@@ -9,10 +9,10 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <h1 class="purchase-title">
-              Secure your digital life effortlessly
+              {{ $t("secure_digital_life") }}
             </h1>
             <p class="purchase-subtitle">
-              100% moneyback guarantee for your first 30 days of period.
+              {{ $t("moneyback_guarantee") }}
             </p>
           </div>
         </div>

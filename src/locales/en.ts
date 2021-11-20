@@ -279,7 +279,7 @@ const en: Locale = {
     "Please wait while your payment is on process. To check the status of your payment you can go to MyAccount section",
   device_limit_title: "You have exceeded device usage limit",
   device_limit_message:
-    " Disconnect a device or purchase an additional in this subscription",
+    "Disconnect a device or purchase an additional in this subscription",
   select_all: "Select All",
   logout: "logout",
   welcome: "Welcome",
@@ -471,8 +471,8 @@ const en: Locale = {
   your_privacy:
     "Your privacy and Internet security can be protected when the device is connected. It is recommended to keep the connection status.",
   ready_to_download: "Swoshs VPN is ready to download",
-  send_link_email:
-    "You can also send a link to your address <strong>{email}</strong> where you can download the Swoshs VPN.",
+  send_link_email: "You can also send a link to your address ",
+  send_link_email2: "where you can download the Swoshs VPN.",
   send_email: "Send Email",
   add_device: "Add Device",
   select_os_type: "Select Os Type",
@@ -582,7 +582,7 @@ const en: Locale = {
   dedicated_customer_service: "Dedicated customer service",
   enterprise_grade: "Enterprise-grade infrastructure and reliability.",
   subscription_information:
-    " * Your subscription will not be automatically renewed upon expiration. You must re-subscribe on the purchase page in order to use the SwoshsVPN again. The price is subject to change, but we will always send you a notification email prior to charging.",
+    " * Your subscription will not be automatically renewed upon expiration. You must re-subscribe on the purchase page in order to use the SwoshsVPN again.",
   email_adress: "Email Address",
   enter_your_email:
     " Enter your email that you'd like to use for Swoshs account",
@@ -606,8 +606,23 @@ const en: Locale = {
   action: "Action",
   no_devices: "No Devices",
   no_devices_info:
-    " Currently, none of your devices are protected by Swoshs. Let's connect and protect your first device — just click Install.",
+    "Currently, none of your devices are protected by Swoshs. Let's connect and protect your first device — just click Install.",
   get_swoshs_vpn: "Get Swoshs VPN",
+  dont_get_the_code: "Didn't get the code?",
+  send_again: "Send again",
+  secure_digital_life: "Secure your digital life effortlessly",
+  moneyback_guarantee:
+    "100% moneyback guarantee for your first 30 days of period.",
+  click_file_installing: "Click this file to start installing",
+  download_swoshs_for_windows: "Download SwoshVPN for Windows",
+  windows_modal_info:
+    "*Your privacy and Internet security can be protected when the device is connected. It is recommended to keep the connection status",
+  first_free_month: "Want to earn your first free month?",
+  reward_one_month_gift:
+    "Your friend rewarded you a 30-Day gift, Your buddy knows you value online privacy and security.",
+  purchase_info2:
+    "We will send you an email confirmation with a temporary password and username.",
+
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet
 };

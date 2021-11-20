@@ -63,7 +63,7 @@
                 <Fade>
                   <template v-if="isLoading">
                     <div class="spinner-grow text-primary my-5" role="status">
-                      <span class="sr-only">Loading...</span>
+                      <span class="sr-only">{{ $t("loading_dots") }}</span>
                     </div>
                   </template>
                   <template v-else>
@@ -180,7 +180,7 @@
               >
                 <template v-if="isLoading">
                   <div class="spinner-grow text-primary my-5" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <span class="sr-only">{{ $t("loading_dots") }}</span>
                   </div>
                 </template>
                 <template v-else>

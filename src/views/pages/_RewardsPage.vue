@@ -46,8 +46,8 @@
                 alt=""
               />
               <div class="reward-title text-center pt-4">
-                <div>Want to earn your first free month?</div>
-                <div>Invite a friend!</div>
+                <div>{{ $t("first_free_month") }}</div>
+                <div>{{ $t("invite_friend") }}</div>
               </div>
             </div>
           </div>
@@ -79,10 +79,10 @@
               </div>
               <div class="row d-flex justify-content-center align-items-center">
                 <div class="col">
-                  <div class="rewards-txt">Friend(s) who bought</div>
+                  <div class="rewards-txt">{{ $t("friends_bought") }}</div>
                 </div>
                 <div class="col">
-                  <div class="rewards-txt">FREE months added</div>
+                  <div class="rewards-txt">{{ $t("free_months_added") }}</div>
                 </div>
               </div>
             </div>

@@ -78,9 +78,9 @@
     </form>
 
     <div class="login-txt text-center mt-2">
-      Didn't get the code?
+      {{ $t("dont_get_the_code") }}
       <a href="#" @click.prevent="sendEmailAgain" :disabled="isLoadingResend">
-        <span class="pr-back-to-login"> Send again </span>
+        <span class="pr-back-to-login"> {{ $t("send_again") }} </span>
         <span
           v-if="isLoadingResend"
           class="spinner-border spinner-border-sm ml-2"

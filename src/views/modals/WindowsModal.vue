@@ -17,16 +17,16 @@
           <div class="circle-check">
             <i class="checked-icon flaticon-checked"></i>
           </div>
-          <div class="circle-title">Select OS</div>
+          <div class="circle-title">{{ $t("select_os") }}</div>
           <div class="circle-line"></div>
           <div class="circle-2">2</div>
-          <div class="circle-title">Download</div>
+          <div class="circle-title">{{ $t("download") }}</div>
           <div class="circle-line"></div>
           <div class="circle-3">3</div>
-          <div class="circle-title">Install</div>
+          <div class="circle-title">{{ $t("install") }}</div>
           <div class="circle-line"></div>
           <div class="circle-4">4</div>
-          <div class="circle-title">Done</div>
+          <div class="circle-title">{{ $t("done") }}</div>
         </div>
       </div>
       <div class="modal-body pt-5 pb-5 pr-5">
@@ -42,16 +42,16 @@
                 "
               >
                 <i class="flaticon-windows downloads-icons pt-4"></i>
-                <div class="downloads-title pb-1">Windows</div>
+                <div class="downloads-title pb-1">{{ $t("windows") }}</div>
               </div>
             </div>
           </div>
           <div class="mt-3 pl-5">
-            <div class="windows-modal-title">Download SwoshVPN for Windows</div>
+            <div class="windows-modal-title">
+              {{ $t("download_swoshs_for_windows") }}
+            </div>
             <div class="windows-modal-subtitle">
-              *Your privacy and Internet security can be protected when the
-              device is connected. It is recommended to keep the connection
-              status
+              {{ $t("windows_modal_info") }}
             </div>
           </div>
         </div>
@@ -60,17 +60,19 @@
         <div class="d-flex flex-row justify-content-around pb-4 ml-4">
           <div class="pl-3 mt-0 pt-4">
             <div class="windows-modal-title">
-              Swoshs VPN is ready to download
+              {{ $t("ready_to_download") }}
             </div>
             <div class="windows-modal-subtitle pt-3">
-              You can also send a link to your address
-              <b> user@domain.com </b> where you can download the Swoshs VPN.
+              {{ $t("send_link_email") }}
+              <b> user@domain.com </b> {{ $t("send_link_email2") }}
             </div>
           </div>
           <div class="windows-download-btns pt-4">
-            <div class="windows-download-btn pt-3 pb-3 pl-4 pr-4">download</div>
+            <div class="windows-download-btn pt-3 pb-3 pl-4 pr-4">
+              {{ $t("download") }}
+            </div>
             <div class="windows-sendemail-btn mt-2 pt-3 pb-3 pl-4 pr-4">
-              Send Email
+              {{ $t("send_email") }}
             </div>
           </div>
         </div>

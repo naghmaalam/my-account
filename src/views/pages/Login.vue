@@ -33,8 +33,8 @@
     <div class="container login-footer pt-5 mt-5 text-center">
       <div class="row mob-res-footer pt-5 mt-5">
         <div class="col-md-4">support@swoshsvpn.com</div>
-        <div class="col-md-4">Terms of Service</div>
-        <div class="col-md-4">Privacy Policy</div>
+        <div class="col-md-4">{{ $t("terms_of_service") }}</div>
+        <div class="col-md-4">{{ $t("privacy_policy") }}</div>
       </div>
     </div>
   </main>

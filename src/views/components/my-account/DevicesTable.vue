@@ -61,7 +61,7 @@
                       aria-hidden="true"
                     ></span>
                     <i class="flaticon-logout pr-2 pt-1"></i>
-                    <div>Logout</div>
+                    <div>{{ $t("logout") }}</div>
                   </div>
                 </div>
                 <div class="devices-row-line mt-2"></div>

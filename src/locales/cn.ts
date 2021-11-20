@@ -451,8 +451,7 @@ const cn: Locale = {
   your_privacy:
     "Your privacy and Internet security can be protected when the device is connected. It is recommended to keep the connection status._CN",
   ready_to_download: "Swoshs VPN is ready to download_CN",
-  send_link_email:
-    "You can also send a link to your address <strong>{email}</strong> where you can download the Swoshs VPN._CN",
+  send_link_email: "You can also send a link to your address ",
   send_email: "Send Email_CN",
   add_device: "Add Device_CN",
   select_os_type: "Select Os Type_CN",
@@ -513,11 +512,11 @@ const cn: Locale = {
     "- Avail of the REF reward program with an expired account.",
   reward_modal_title5: "-	Avail the REF reward system with an expired account. ",
   ribbon: "Exclusive",
-  Hooray_friend: "Hooray! you received a gift from you friend",
+  Hooray_friend: "Hooray! you received a gift from your friend",
   friend_reffered:
     "Your friend has referred you. Complete sign up to claim your extra",
-  days_free: "3 Days Free Gift ",
-  get_free_days: " Get your 3-Day free",
+  days_free: "30 Days Free Gift ",
+  get_free_days: " Get your 30-Days free",
   reward_modal_subtitle7:
     "- Avail of the REF reward program while you are under a free trial. ",
   your: "Your",
@@ -562,7 +561,7 @@ const cn: Locale = {
   dedicated_customer_service: "Dedicated customer service",
   enterprise_grade: "Enterprise-grade infrastructure and reliability.",
   subscription_information:
-    " * Your subscription will not be automatically renewed upon expiration. You must re-subscribe on the purchase page in order to use the SwoshsVPN again. The price is subject to change, but we will always send you a notification email prior to charging.",
+    " * Your subscription will not be automatically renewed upon expiration. You must re-subscribe on the purchase page in order to use the SwoshsVPN again.",
   email_adress: "Email Address",
   enter_your_email:
     " Enter your email that you'd like to use for Swoshs account",
@@ -588,7 +587,21 @@ const cn: Locale = {
   no_devices_info:
     " Currently, none of your devices are protected by Swoshs. Let's connect and protect your first device — just click Install.",
   get_swoshs_vpn: "Get Swoshs VPN",
-
+  dont_get_the_code: "Didn't get the code?",
+  send_again: "Send again",
+  secure_digital_life: "Secure your digital life effortlessly",
+  moneyback_guarantee:
+    "100% moneyback guarantee for your first 30 days of period.",
+  click_file_installing: "Click this file to start installing",
+  download_swoshs_for_windows: "Download SwoshVPN for Windows",
+  windows_modal_info:
+    "*Your privacy and Internet security can be protected when the device is connected. It is recommended to keep the connection status",
+  send_link_email2: "where you can download the Swoshs VPN.",
+  first_free_month: "Want to earn your first free month?",
+  reward_one_month_gift:
+    "Your friend rewarded you a 30-Day gift, Your buddy knows you value online privacy and security.",
+  purchase_info2:
+    "We will send you an email confirmation with a temporary password and username.",
   /////////////////////////////
   ///////////////////////////////////////////////////////////
   // No Chinese translation yet

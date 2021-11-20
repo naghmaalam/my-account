@@ -21,8 +21,7 @@
       </div>
       <div>
         <p class="mob-res-font pt-3 pl-3">
-          Your friend rewarded you a 30-Day gift, Your buddy knows you value
-          online privacy and security.
+          {{ $t("reward_one_month_gift") }}
         </p>
       </div>
     </div>

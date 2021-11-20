@@ -39,7 +39,7 @@
       </div>
     </form>
     <div class="pass-strength mob-res-inputs mt-3 pl-5 ml-5">
-      Password Strength
+      {{ $t("password_strength") }}
     </div>
     <div class="indicator mob-res-inputs mt-3 pl-5 pr-5 ml-5 mr-5">
       <span :class="{ marked: passwordStrength >= 1 }"></span>

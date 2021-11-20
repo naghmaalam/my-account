@@ -5,7 +5,7 @@
       class="page-loader d-flex justify-content-center align-items-center"
     >
       <div class="spinner-grow text-primary" role="status">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only">{{ $t("loading_dots") }}</span>
       </div>
     </div>
   </transition>

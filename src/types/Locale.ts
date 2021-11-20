@@ -369,6 +369,7 @@ export interface Locale {
   your_privacy: string;
   ready_to_download: string;
   send_link_email: string;
+  send_link_email2: string;
   send_email: string;
   /////////////////////////////////////////////////////////////////////////////////////////
   my_devices: string;
@@ -519,6 +520,16 @@ export interface Locale {
   no_devices: string;
   no_devices_info: string;
   get_swoshs_vpn: string;
+  dont_get_the_code: string;
+  send_again: string;
+  secure_digital_life: string;
+  moneyback_guarantee: string;
+  click_file_installing: string;
+  download_swoshs_for_windows: string;
+  windows_modal_info: string;
+  first_free_month: string;
+  reward_one_month_gift: string;
+  purchase_info2: string;
   ////////////////////////////////////////////////////////////////
   // new
 }

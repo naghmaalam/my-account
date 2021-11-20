@@ -144,47 +144,51 @@
     </div>
   </footer>
 
-  <div class="conatiner-fluid row as_copy copyright">
-    <div class="col">
-      <div class="text-center mt-4">
-        <p class="swoshs-link">
-          &copy; <a href="https://swoshsvpn.com">{{ $t("vpn_name") }}</a>
-          {{ new Date().getFullYear() }}
-          | {{ $t("all_right_reserved") }}
-        </p>
+  <div class="container-fluid row as_copy copyright m-0">
+    <div
+      class="container copyright_link d-flex justify-content-between pt-2 pb-3"
+    >
+      <div class="col d-flex justify-content-start">
+        <div class="text-center mt-4">
+          <p class="swoshs-link">
+            &copy; <a href="https://swoshsvpn.com">{{ $t("vpn_name") }}</a>
+            {{ new Date().getFullYear() }}
+            | {{ $t("all_right_reserved") }}
+          </p>
+        </div>
       </div>
-    </div>
 
-    <div class="col">
-      <div class="mt-4">
-        <div class="row social_icons text-right">
-          <p class="swoshs-link mr-3">{{ $t("connect_with_us") }}</p>
-          <div class="icons">
-            <a href="https://twitter.com/SwoshsV" target="new"
-              ><i class="fab fa-twitter"></i
-            ></a>
-          </div>
-          <div class="icons">
-            <a href="https://www.facebook.com/swoshsvpn/">
-              <i class="fab fa-facebook"></i
-            ></a>
-          </div>
-          <div class="icons text-center">
-            <a href="https://www.instagram.com/swoshsvpn/" target="new"
-              ><i class="fab fa-instagram"></i
-            ></a>
-          </div>
-          <div class="icons">
-            <a href="https://twitter.com/SwoshsV" target="new"
-              ><i class="fab fa-pinterest"></i
-            ></a>
-          </div>
-          <div class="icons">
-            <a
-              href="https://www.youtube.com/channel/UCTUyqPGnAdBaZFO3lMG5FHw"
-              target="new"
-              ><i class="fab fa-youtube"></i
-            ></a>
+      <div class="col d-flex justify-content-end">
+        <div class="mt-4">
+          <div class="row social_icons">
+            <p class="swoshs-link mr-3">{{ $t("connect_with_us") }}</p>
+            <div class="icons">
+              <a href="https://twitter.com/SwoshsV" target="new"
+                ><i class="fab fa-twitter"></i
+              ></a>
+            </div>
+            <div class="icons">
+              <a href="https://www.facebook.com/swoshsvpn/">
+                <i class="fab fa-facebook"></i
+              ></a>
+            </div>
+            <div class="icons text-center">
+              <a href="https://www.instagram.com/swoshsvpn/" target="new"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+            <div class="icons">
+              <a href="https://twitter.com/SwoshsV" target="new"
+                ><i class="fab fa-pinterest"></i
+              ></a>
+            </div>
+            <div class="icons">
+              <a
+                href="https://www.youtube.com/channel/UCTUyqPGnAdBaZFO3lMG5FHw"
+                target="new"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
           </div>
         </div>
       </div>
@@ -194,7 +198,7 @@
 
 <style lang="scss" scoped>
 .social_icons * + * {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 .icons {
@@ -223,7 +227,7 @@
 
 .icons a {
   text-decoration: none !important;
-  color: #ffffff !important;
+  color: #b2b9c1 !important;
 }
 
 .swoshs-link {
@@ -242,4 +246,14 @@
 .swoshs-link a:hover {
   color: #ffffff !important;
 }
+
+.list-unstyled li a {
+  white-space: nowrap;
+}
+
+// .copyright_link {
+//   display: flex;
+//   justify-content: space-around;
+
+// }
 </style>
